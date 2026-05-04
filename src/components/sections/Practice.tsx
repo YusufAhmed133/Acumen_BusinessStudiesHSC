@@ -44,7 +44,7 @@ const QUIZ_BANK: Question[] = [
     stem: "A retailer sells new sunglasses at a significantly higher price for the first month they are sold. What pricing strategy is being used?",
     options: ["Price skimming", "Price penetration", "Price discrimination", "Price and quality interaction"],
     answer: 0,
-    explain: "Price skimming sets a high initial price to capture less price-sensitive customers, then reduces it over time. Penetration pricing is the reverse — entering at a low price to capture market share.",
+    explain: "Price skimming sets a high initial price to capture less price-sensitive customers, then reduces it over time. Penetration pricing is the reverse: entering at a low price to capture market share.",
   },
   {
     id: "q4", topic: "operations", type: "short", marks: 3,
@@ -60,7 +60,7 @@ const QUIZ_BANK: Question[] = [
   {
     id: "q5", topic: "hr", type: "extended", marks: 20,
     src: "2024 HSC · Section III · Q25",
-    stem: "Hans-Made Watches is a family-run business with autocratic leadership that has seen declining sales. The owner is retiring; his children want to improve performance. An expression of interest for Assistant Manager has been distributed only to family and friends — award wages, no experience required. Write a business report: (a) product differentiation strategy, (b) critique of the current acquisition process, (c) recommended HR strategies.",
+    stem: "Hans-Made Watches is a family-run business with autocratic leadership that has seen declining sales. The owner is retiring; his children want to improve performance. An expression of interest for Assistant Manager has been distributed only to family and friends (award wages, no experience required). Write a business report: (a) product differentiation strategy, (b) critique of the current acquisition process, (c) recommended HR strategies.",
     criteria: [
       "Describes a product differentiation strategy specific to this watch business",
       "Discusses the acquisition process and its limitations (family/friends only, no criteria)",
@@ -68,7 +68,7 @@ const QUIZ_BANK: Question[] = [
       "Uses stimulus material (lifetime warranty, autocratic style, family-run)",
       "Presents response in business-report format with relevant terminology",
     ],
-    sample: "Hans-Made Watches can differentiate by leaning into its craftsmanship narrative — hand-made, lifetime warranty — positioning the range as luxury with premium packaging and bespoke engraving. The current acquisition process is a closed expression of interest to family and friends with no criteria. This narrows the talent pool, risks nepotism, and is unlikely to deliver the digital retail skills the business needs. Recommended HR strategies: (1) shift from autocratic to participative leadership to retain skilled employees and capture their input; (2) invest in training so employees can grow the brand online; (3) introduce performance-based rewards to retain key staff through the ownership transition.",
+    sample: "Hans-Made Watches can differentiate by leaning into its craftsmanship narrative (hand-made, lifetime warranty), positioning the range as luxury with premium packaging and bespoke engraving. The current acquisition process is a closed expression of interest to family and friends with no criteria. This narrows the talent pool, risks nepotism, and is unlikely to deliver the digital retail skills the business needs. Recommended HR strategies: (1) shift from autocratic to participative leadership to retain skilled employees and capture their input; (2) invest in training so employees can grow the brand online; (3) introduce performance-based rewards to retain key staff through the ownership transition.",
   },
 ];
 

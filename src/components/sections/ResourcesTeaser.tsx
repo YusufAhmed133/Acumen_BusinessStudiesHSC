@@ -2,11 +2,11 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const PREVIEWS = [
   { topic: "Operations", kind: "Notes", title: "Lean production + global operations", tint: "#CFEAD9", accent: "#1F6B40" },
-  { topic: "Marketing",  kind: "Past paper bank", title: "Section II — all marketing responses 2010–2025", tint: "#FBE6BD", accent: "#A66E12" },
-  { topic: "Finance",    kind: "Notes", title: "Ratio analysis — full worked examples", tint: "#CFDFF4", accent: "#2A4F94" },
+  { topic: "Marketing",  kind: "Past paper bank", title: "Section II: all marketing responses 2010-2025", tint: "#FBE6BD", accent: "#A66E12" },
+  { topic: "Finance",    kind: "Notes", title: "Ratio analysis: full worked examples", tint: "#CFDFF4", accent: "#2A4F94" },
   { topic: "HR",         kind: "Scaffold", title: "Section III HR essay scaffold", tint: "#F4CFCF", accent: "#923333" },
-  { topic: "Operations", kind: "Past paper bank", title: "Section III — all operations essays 2010–2025", tint: "#CFEAD9", accent: "#1F6B40" },
-  { topic: "Finance",    kind: "Practice questions", title: "Working capital — 40 calculation drills", tint: "#CFDFF4", accent: "#2A4F94" },
+  { topic: "Operations", kind: "Past paper bank", title: "Section III: all operations essays 2010-2025", tint: "#CFEAD9", accent: "#1F6B40" },
+  { topic: "Finance",    kind: "Practice questions", title: "Working capital: 40 calculation drills", tint: "#CFDFF4", accent: "#2A4F94" },
 ];
 
 export function ResourcesTeaser() {
@@ -23,7 +23,7 @@ export function ResourcesTeaser() {
               lineHeight: 1.02, letterSpacing: "-0.04em",
               margin: 0, color: "#0A0A0A", maxWidth: 860,
             }}>
-              Notes, past papers, and scaffolds — locked to enrolled students.
+              Notes, past papers, and scaffolds. Locked to enrolled students.
             </h2>
             <p style={{ fontSize: 17, color: "#1A1A1A", maxWidth: 600, margin: "16px 0 0", lineHeight: 1.5 }}>
               Every resource stays on-site. Nothing is downloadable. Enrolled students get a private login.

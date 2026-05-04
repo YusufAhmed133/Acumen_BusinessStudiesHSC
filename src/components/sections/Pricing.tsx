@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 
 const INCLUSIONS = [
@@ -13,8 +12,6 @@ const INCLUSIONS = [
 ];
 
 export function Pricing() {
-  const [mode, setMode] = useState<"casual" | "term">("term");
-
   return (
     <section id="pricing" style={{ background: "#CFDFF4", padding: "100px 0 110px" }}>
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 28px" }}>
@@ -31,7 +28,7 @@ export function Pricing() {
               One price. Everything included.
             </h2>
             <p style={{ fontSize: 17, color: "#1A1A1A", maxWidth: 580, margin: "16px 0 0", lineHeight: 1.5 }}>
-              Pay per lesson or lock in a full term. First trial lesson is free — no card required.
+              Pay per lesson or lock in a full term. First trial lesson is free. No card required.
             </p>
           </div>
         </Reveal>
@@ -39,107 +36,79 @@ export function Pricing() {
         <div style={{ marginTop: 56, display: "grid", gridTemplateColumns: "minmax(300px, 1fr) 1.6fr", gap: 36, alignItems: "start" }} className="pricing-grid">
           <Reveal>
             <div style={{
-              borderRadius: 28, padding: "40px 36px",
+              borderRadius: 28,
               background: "#FFFCF4",
               boxShadow: "0 30px 70px rgba(20,40,80,0.14)",
               border: "1px solid rgba(10,10,10,0.06)",
+              overflow: "hidden",
               position: "sticky",
               top: 90,
             }}>
-              {/* Toggle */}
-              <div style={{
-                display: "inline-flex",
-                border: "1px solid rgba(10,10,10,0.14)",
-                borderRadius: 999,
-                padding: 4,
-                gap: 4,
-                marginBottom: 28,
-                background: "#F4F0E8",
-              }}>
-                {(["casual", "term"] as const).map((m) => (
-                  <button key={m} onClick={() => setMode(m)} style={{
-                    padding: "8px 16px",
-                    borderRadius: 999,
-                    border: "none",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    background: mode === m ? "#0A0A0A" : "transparent",
-                    color: mode === m ? "#FFFCF4" : "#5C5C5C",
-                    transition: "all 220ms ease",
-                  }}>
-                    {m === "casual" ? "Per lesson" : "Per term"}
-                  </button>
-                ))}
-              </div>
-
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#2A4F94" }}>
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#2A4F94", padding: "28px 32px 0" }}>
                 Year 11 · Year 12
               </div>
 
-              <div style={{
-                fontWeight: 600,
-                fontSize: "clamp(90px, 11vw, 160px)",
-                lineHeight: 0.9,
-                letterSpacing: "-0.06em",
-                color: "#0A0A0A",
-                marginTop: 10,
-              }}>
-                {mode === "casual" ? "$110" : "$950"}
+              {/* Per lesson */}
+              <div style={{ padding: "20px 32px 20px", borderBottom: "1px solid rgba(10,10,10,0.08)" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                  <span style={{ fontWeight: 600, fontSize: "clamp(56px, 7vw, 80px)", lineHeight: 0.95, letterSpacing: "-0.05em", color: "#0A0A0A" }}>
+                    $110
+                  </span>
+                  <span style={{ fontSize: 15, fontWeight: 500, color: "#3A3A3A" }}>per lesson</span>
+                </div>
+                <div style={{ marginTop: 8, fontSize: 13, fontWeight: 500, color: "#5C5C5C" }}>
+                  No lock-in. Book and cancel anytime.
+                </div>
               </div>
 
-              <div style={{ fontSize: 15, fontWeight: 500, color: "#1A1A1A", marginTop: 6 }}>
-                {mode === "casual" ? "per 1.5-hour lesson" : "per 10-week term"}
+              {/* Per term — highlighted */}
+              <div style={{ padding: "20px 32px 24px", background: "#F4F0E8" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                      <span style={{ fontWeight: 600, fontSize: "clamp(56px, 7vw, 80px)", lineHeight: 0.95, letterSpacing: "-0.05em", color: "#0A0A0A" }}>
+                        $950
+                      </span>
+                      <span style={{ fontSize: 15, fontWeight: 500, color: "#3A3A3A" }}>per term</span>
+                    </div>
+                    <div style={{ marginTop: 8, fontSize: 13, fontWeight: 500, color: "#3A3A3A" }}>
+                      10-week term. Most students choose this.
+                    </div>
+                  </div>
+                  <div style={{
+                    padding: "7px 13px",
+                    background: "#CFEAD9",
+                    borderRadius: 999,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: "#1F6B40",
+                    whiteSpace: "nowrap",
+                    alignSelf: "flex-start",
+                    marginTop: 4,
+                  }}>
+                    Save $150
+                  </div>
+                </div>
               </div>
 
-              {mode === "term" && (
-                <div style={{
-                  marginTop: 14,
-                  padding: "10px 14px",
-                  display: "inline-block",
-                  background: "#CFEAD9",
+              <div style={{ padding: "20px 32px 28px" }}>
+                <a href="#enquire" style={{
+                  display: "block",
+                  textAlign: "center",
+                  padding: "15px 18px",
                   borderRadius: 999,
-                  fontSize: 13,
+                  background: "#0A0A0A",
+                  color: "#FFFCF4",
+                  textDecoration: "none",
+                  fontSize: 15,
                   fontWeight: 600,
-                  color: "#1F6B40",
+                  letterSpacing: "-0.01em",
                 }}>
-                  Save $150 vs casual rate
+                  Book free trial lesson →
+                </a>
+                <div style={{ marginTop: 12, fontSize: 12, fontWeight: 500, color: "#5C5C5C", textAlign: "center" }}>
+                  Same price online or in-person.
                 </div>
-              )}
-
-              {mode === "casual" && (
-                <div style={{
-                  marginTop: 14,
-                  padding: "10px 14px",
-                  display: "inline-block",
-                  background: "#F4F0E8",
-                  borderRadius: 999,
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color: "#5C5C5C",
-                }}>
-                  No lock-in · book and cancel anytime
-                </div>
-              )}
-
-              <a href="#enquire" style={{
-                display: "block",
-                textAlign: "center",
-                padding: "15px 18px",
-                marginTop: 24,
-                borderRadius: 999,
-                background: "#0A0A0A",
-                color: "#FFFCF4",
-                textDecoration: "none",
-                fontSize: 15,
-                fontWeight: 600,
-                letterSpacing: "-0.01em",
-              }}>
-                Book free trial lesson →
-              </a>
-
-              <div style={{ marginTop: 14, fontSize: 12, fontWeight: 500, color: "#5C5C5C", textAlign: "center" }}>
-                Same price online or in-person.
               </div>
             </div>
           </Reveal>
@@ -158,7 +127,6 @@ export function Pricing() {
                     borderBottom: i < INCLUSIONS.length - 1 ? "1px solid rgba(10,10,10,0.1)" : "none",
                     alignItems: "flex-start",
                   }}>
-                    {/* Checkmark */}
                     <span style={{
                       width: 22, height: 22, borderRadius: 999,
                       background: "#CFEAD9",

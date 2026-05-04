@@ -90,15 +90,16 @@ button { font-family: inherit; }
 }
 .skip-link:focus { top: 0; }
 
-/* ── Reveal fade-up ──────────────────────────────────────── */
+/* ── Reveal fade-up + 3D entrance ────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
+  transform: perspective(1100px) translateY(32px) rotateX(5deg);
+  transform-origin: center top;
+  transition: opacity 680ms cubic-bezier(.2,.7,.2,1), transform 680ms cubic-bezier(.2,.7,.2,1);
 }
 .reveal.shown {
   opacity: 1;
-  transform: translateY(0);
+  transform: perspective(1100px) translateY(0) rotateX(0deg);
 }
 
 /* ── Focus ───────────────────────────────────────────────── */
@@ -106,6 +107,6 @@ button { font-family: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .ticker-track { animation: none !important; }
-  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .reveal { opacity: 1 !important; transform: perspective(1100px) translateY(0) rotateX(0deg) !important; transition: none !important; }
   * { transition: none !important; }
 }

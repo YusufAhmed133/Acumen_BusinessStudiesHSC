@@ -24,7 +24,7 @@ const TOPICS = [
     ink: "#5A3F0A",
     detail: [
       "Marketing process, influences, approaches",
-      "Marketing strategies — the 7 Ps in full",
+      "Marketing strategies: the 7 Ps in full",
       "Consumer behaviour, e-marketing, ethics",
       "Heavy in Section II 8-mark responses",
     ],
@@ -52,7 +52,7 @@ const TOPICS = [
       "Role, influences, processes",
       "Acquisition, development, maintenance + separation",
       "Employment relations + effectiveness measures",
-      "Case-study favourite in Section III–IV",
+      "Case-study favourite in Section III and IV",
     ],
   },
 ] as const;
@@ -129,7 +129,7 @@ export function Topics() {
                       letterSpacing: "0.18em", textTransform: "uppercase",
                       color: t.ink, opacity: 0.7,
                     }}>
-                      0{i + 1} · ~25%
+                      0{i + 1}
                     </div>
                     <div style={{
                       width: 30, height: 30, borderRadius: 8,

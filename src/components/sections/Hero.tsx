@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
 
@@ -22,18 +22,65 @@ function useCountdown(target: Date) {
 
 export function Hero() {
   const c = useCountdown(HSC_DATE);
+  const bgLetterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = bgLetterRef.current;
+    if (!el) return;
+    let rafId: number;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        el.style.transform = `translate3d(0, ${-window.scrollY * 0.35}px, 0)`;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   return (
-    <section id="top" style={{ background: "#FFFCF4", overflowX: "hidden" }}>
-      <div style={{
-        maxWidth: 1320,
-        margin: "0 auto",
-        padding: "80px 28px",
-        display: "grid",
-        gridTemplateColumns: "1.05fr 1fr",
-        gap: 48,
-        alignItems: "start",
-      }}
+    <section
+      id="top"
+      style={{ background: "#FBE6BD", overflowX: "hidden", overflowY: "hidden", position: "relative" }}
+    >
+      {/* Decorative oversized letterform — parallax background layer */}
+      <div
+        ref={bgLetterRef}
+        aria-hidden
+        style={{
+          position: "absolute",
+          right: "-2%",
+          top: "50%",
+          transform: "translate3d(0, -50%, 0)",
+          fontSize: "clamp(380px, 42vw, 680px)",
+          fontWeight: 800,
+          lineHeight: 1,
+          letterSpacing: "-0.06em",
+          color: "rgba(10,10,10,0.07)",
+          userSelect: "none",
+          pointerEvents: "none",
+          zIndex: 0,
+          willChange: "transform",
+        }}
+      >
+        A
+      </div>
+
+      <div
+        style={{
+          maxWidth: 1320,
+          margin: "0 auto",
+          padding: "80px 28px",
+          display: "grid",
+          gridTemplateColumns: "1.05fr 1fr",
+          gap: 48,
+          alignItems: "start",
+          position: "relative",
+          zIndex: 1,
+        }}
         className="hero-grid"
       >
         <Reveal>
@@ -44,7 +91,7 @@ export function Hero() {
               alignItems: "center",
               gap: 10,
               padding: "7px 13px",
-              background: "#F4F0E8",
+              background: "rgba(255,252,244,0.7)",
               border: "1px solid rgba(10,10,10,0.1)",
               borderRadius: 999,
               fontSize: 12.5,
@@ -70,16 +117,9 @@ export function Hero() {
               margin: "22px 0 0",
               color: "#0A0A0A",
             }}>
-              The HSC Business<br />
-              tutoring built by<br />
-              <span style={{
-                background: "linear-gradient(120deg, #1F6B40 0%, #2A4F94 50%, #923333 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-                99.95+ graduates.
-              </span>
+              Sydney&apos;s HSC<br />
+              Business Studies<br />
+              specialist.
             </h1>
 
             <p style={{
@@ -89,7 +129,7 @@ export function Hero() {
               lineHeight: 1.55,
               color: "#1A1A1A",
             }}>
-              Weekly small-group classes for Year 11 and Year 12. A marked essay every week, a 24-hour question line, and the full past-paper bank. First lesson on us.
+              Run by 99.95+ graduates. Weekly small-group classes for Year 11 and Year 12. Live marking, a 24-hour question line, and the full past-paper bank. First lesson free.
             </p>
 
             {/* Countdown pill */}
