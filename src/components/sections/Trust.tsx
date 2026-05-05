@@ -20,7 +20,7 @@ const ITEMS = [...SCHOOLS, ...SCHOOLS];
 
 export function Trust() {
   return (
-    <section style={{ background: "#0A0A0A", padding: "42px 0", overflow: "hidden" }}>
+    <section style={{ background: "radial-gradient(ellipse at 25% 50%, rgba(31,107,64,0.18) 0%, transparent 55%), radial-gradient(ellipse at 80% 50%, rgba(42,79,148,0.12) 0%, transparent 55%), #0D0D0D", padding: "42px 0", overflow: "hidden" }}>
       <div style={{
         maxWidth: 1320,
         margin: "0 auto",

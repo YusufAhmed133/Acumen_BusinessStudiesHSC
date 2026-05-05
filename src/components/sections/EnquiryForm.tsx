@@ -7,11 +7,9 @@ type Fields = {
   email: string;
   phone: string;
   year: "Year 11" | "Year 12";
-  avail: string[];
+  avail: string;
   concern: string;
 };
-
-const TIMES = ["Weekday afternoons", "Weekday evenings", "Saturday", "Sunday"];
 
 const inp: React.CSSProperties = {
   width: "100%",
@@ -45,7 +43,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 export function EnquiryForm() {
   const [f, setF] = useState<Fields>({
     parent: "", student: "", email: "", phone: "",
-    year: "Year 12", avail: [], concern: "",
+    year: "Year 12", avail: "", concern: "",
   });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -54,12 +52,6 @@ export function EnquiryForm() {
   const set = <K extends keyof Fields>(k: K, v: Fields[K]) =>
     setF((s) => ({ ...s, [k]: v }));
 
-  const toggleAvail = (a: string) =>
-    setF((s) => ({
-      ...s,
-      avail: s.avail.includes(a) ? s.avail.filter((x) => x !== a) : [...s.avail, a],
-    }));
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -67,7 +59,7 @@ export function EnquiryForm() {
     try {
       const message = [
         f.student ? `Student: ${f.student}` : "",
-        f.avail.length ? `Availability: ${f.avail.join(", ")}` : "",
+        f.avail ? `Availability: ${f.avail}` : "",
         f.concern ? `Concern: ${f.concern}` : "",
       ].filter(Boolean).join("\n");
 
@@ -86,7 +78,7 @@ export function EnquiryForm() {
       if (!res.ok) throw new Error("Failed to submit");
       setSent(true);
     } catch {
-      setError("Something went wrong — please email hello@acumenhsc.com.au");
+      setError("Something went wrong. Please email hello@acumenhsc.com.au");
     } finally {
       setLoading(false);
     }
@@ -100,7 +92,7 @@ export function EnquiryForm() {
         background: "#CFEAD9",
         boxShadow: "0 24px 60px rgba(10,30,20,0.1)",
         border: "1px solid rgba(10,10,10,0.06)",
-        minHeight: 480,
+        minHeight: 560,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -130,12 +122,12 @@ export function EnquiryForm() {
   return (
     <form onSubmit={handleSubmit} style={{
       borderRadius: 22,
-      padding: "24px 22px",
+      padding: "28px 26px",
       background: "#FFFCF4",
       boxShadow: "0 24px 60px rgba(10,30,20,0.1)",
       border: "1px solid rgba(10,10,10,0.08)",
       display: "grid",
-      gap: 12,
+      gap: 14,
     }}>
       <div style={{
         fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
@@ -169,8 +161,8 @@ export function EnquiryForm() {
               key={y} type="button" onClick={() => set("year", y)}
               style={{
                 flex: 1, padding: "11px 12px", borderRadius: 12, cursor: "pointer",
-                border: `1px solid ${f.year === y ? "#0A0A0A" : "rgba(10,10,10,0.18)"}`,
-                background: f.year === y ? "#0A0A0A" : "#FFFCF4",
+                border: `1px solid ${f.year === y ? "#1F6B40" : "rgba(10,10,10,0.18)"}`,
+                background: f.year === y ? "#1F6B40" : "#FFFCF4",
                 color: f.year === y ? "#FFFCF4" : "#0A0A0A",
                 fontSize: 14, fontWeight: 500,
               }}
@@ -182,33 +174,19 @@ export function EnquiryForm() {
       </Field>
 
       <Field label="Preferred times">
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-          {TIMES.map((a) => {
-            const on = f.avail.includes(a);
-            return (
-              <button
-                key={a} type="button" onClick={() => toggleAvail(a)}
-                style={{
-                  padding: "8px 13px", borderRadius: 999, cursor: "pointer",
-                  border: `1px solid ${on ? "#0A0A0A" : "rgba(10,10,10,0.18)"}`,
-                  background: on ? "#0A0A0A" : "#FFFCF4",
-                  color: on ? "#FFFCF4" : "#0A0A0A",
-                  fontSize: 13, fontWeight: 500,
-                }}
-              >
-                {a}
-              </button>
-            );
-          })}
-        </div>
+        <input
+          type="text"
+          value={f.avail}
+          onChange={(e) => set("avail", e.target.value)}
+          style={inp}
+        />
       </Field>
 
       <Field label="Specific concern or goal (optional)">
         <textarea
           value={f.concern}
           onChange={(e) => set("concern", e.target.value)}
-          placeholder="e.g. Currently 72 in trials, struggling with finance ratios."
-          style={{ ...inp, minHeight: 80, resize: "vertical" }}
+          style={{ ...inp, minHeight: 88, resize: "vertical" }}
         />
       </Field>
 
@@ -222,12 +200,12 @@ export function EnquiryForm() {
         style={{
           fontWeight: 600, fontSize: 15, letterSpacing: "-0.01em",
           padding: "14px 18px", borderRadius: 999,
-          background: loading ? "#5C5C5C" : "#0A0A0A",
+          background: loading ? "#5C5C5C" : "#1F6B40",
           color: "#FFFCF4", border: "none", cursor: loading ? "wait" : "pointer",
           textAlign: "center",
         }}
       >
-        {loading ? "Sending…" : "Request trial lesson →"}
+        {loading ? "Sending..." : "Request trial lesson →"}
       </button>
     </form>
   );

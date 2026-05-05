@@ -127,7 +127,7 @@ export function Practice() {
   };
 
   return (
-    <section id="practice" style={{ background: "#0A0A0A", padding: "100px 0 110px", position: "relative", overflow: "hidden" }}>
+    <section id="practice" style={{ background: "radial-gradient(ellipse at 15% 30%, rgba(31,107,64,0.16) 0%, transparent 50%), radial-gradient(ellipse at 85% 70%, rgba(251,230,189,0.10) 0%, transparent 50%), #0D0D0D", padding: "100px 0 110px", position: "relative", overflow: "hidden" }}>
       {/* Faint pastel orbs */}
       <div style={{
         position: "absolute", width: 600, height: 600, borderRadius: "50%",

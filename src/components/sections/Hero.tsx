@@ -31,7 +31,8 @@ export function Hero() {
     const onScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        el.style.transform = `translate3d(0, ${-window.scrollY * 0.35}px, 0)`;
+        // Parallax: moves up at 0.35x the scroll rate — appears to recede
+        el.style.transform = `translate3d(-50%, calc(-50% + ${-window.scrollY * 0.35}px), 0)`;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -44,22 +45,27 @@ export function Hero() {
   return (
     <section
       id="top"
-      style={{ background: "#FBE6BD", overflowX: "hidden", overflowY: "hidden", position: "relative" }}
+      style={{
+        background: "radial-gradient(ellipse at 65% 40%, #FFE8BE, #FBE6BD 70%)",
+        overflowX: "hidden",
+        overflowY: "hidden",
+        position: "relative",
+      }}
     >
-      {/* Decorative oversized letterform — parallax background layer */}
+      {/* Decorative A — centered in hero, parallax layered behind content */}
       <div
         ref={bgLetterRef}
         aria-hidden
         style={{
           position: "absolute",
-          right: "-2%",
+          left: "54%",
           top: "50%",
-          transform: "translate3d(0, -50%, 0)",
-          fontSize: "clamp(380px, 42vw, 680px)",
+          transform: "translate3d(-50%, -50%, 0)",
+          fontSize: "clamp(520px, 58vw, 980px)",
           fontWeight: 800,
           lineHeight: 1,
           letterSpacing: "-0.06em",
-          color: "rgba(10,10,10,0.07)",
+          color: "rgba(10,10,10,0.065)",
           userSelect: "none",
           pointerEvents: "none",
           zIndex: 0,
@@ -85,7 +91,6 @@ export function Hero() {
       >
         <Reveal>
           <div>
-            {/* Location badge */}
             <div style={{
               display: "inline-flex",
               alignItems: "center",
@@ -108,7 +113,6 @@ export function Hero() {
               HSC Business Studies · Sydney, NSW
             </div>
 
-            {/* Headline */}
             <h1 style={{
               fontWeight: 600,
               fontSize: "clamp(42px, 5.8vw, 88px)",
@@ -132,7 +136,6 @@ export function Hero() {
               Run by 99.95+ graduates. Weekly small-group classes for Year 11 and Year 12. Live marking, a 24-hour question line, and the full past-paper bank. First lesson free.
             </p>
 
-            {/* Countdown pill */}
             <div style={{
               marginTop: 32,
               display: "inline-flex",
@@ -140,7 +143,7 @@ export function Hero() {
               gap: 18,
               padding: "14px 22px",
               borderRadius: 999,
-              background: "#0A0A0A",
+              background: "#1A1A1A",
               color: "#FFFCF4",
               boxShadow: "0 18px 50px rgba(0,0,0,0.16)",
             }}>

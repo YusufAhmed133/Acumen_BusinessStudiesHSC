@@ -61,7 +61,7 @@ export function Topics() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <section id="syllabus" style={{ background: "#FFFCF4", padding: "100px 0 110px" }}>
+    <section id="syllabus" style={{ background: "radial-gradient(ellipse at 90% 10%, rgba(207,234,217,0.45) 0%, transparent 50%), radial-gradient(ellipse at 10% 90%, rgba(251,230,189,0.35) 0%, transparent 50%), #FFFCF4", padding: "100px 0 110px" }}>
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 28px" }}>
         <Reveal>
           <div style={{ marginBottom: 14 }}>
