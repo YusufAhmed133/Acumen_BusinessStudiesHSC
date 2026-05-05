@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MarkBug } from "@/components/ui/MarkBug";
 
 const LINKS = [
@@ -27,22 +27,32 @@ const pill: React.CSSProperties = {
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header style={{
       position: "sticky",
       top: 0,
       zIndex: 50,
-      background: "rgba(255,252,244,0.88)",
+      background: scrolled ? "rgba(248,247,244,0.95)" : "rgba(248,247,244,0.88)",
       backdropFilter: "saturate(160%) blur(14px)",
       WebkitBackdropFilter: "saturate(160%) blur(14px)",
       borderBottom: "1px solid rgba(10,10,10,0.08)",
+      transition: "background 300ms ease, box-shadow 300ms ease",
+      boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.06)" : "none",
     }}>
       <div style={{
         maxWidth: 1320,
         margin: "0 auto",
-        padding: "14px 28px",
+        padding: scrolled ? "10px 28px" : "14px 28px",
         display: "flex",
+        transition: "padding 300ms ease",
         alignItems: "center",
         justifyContent: "space-between",
         gap: 24,

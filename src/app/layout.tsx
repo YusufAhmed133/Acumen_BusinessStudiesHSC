@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 export const metadata: Metadata = {
   title: {
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.variable}>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
+        <ScrollProgress />
         <a href="#main" className="skip-link">Skip to content</a>
         <Nav />
         <main id="main" style={{ flex: 1 }}>

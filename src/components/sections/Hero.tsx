@@ -31,7 +31,6 @@ export function Hero() {
     const onScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        // Parallax: moves up at 0.35x the scroll rate — appears to recede
         el.style.transform = `translate3d(-50%, calc(-50% + ${-window.scrollY * 0.35}px), 0)`;
       });
     };
@@ -46,13 +45,18 @@ export function Hero() {
     <section
       id="top"
       style={{
-        background: "radial-gradient(ellipse at 65% 40%, #FFE8BE, #FBE6BD 70%)",
+        background: [
+          "radial-gradient(ellipse at 75% 20%, rgba(207,234,217,0.28) 0%, transparent 45%)",
+          "radial-gradient(ellipse at 15% 80%, rgba(207,223,244,0.22) 0%, transparent 45%)",
+          "radial-gradient(ellipse at 50% 55%, rgba(251,230,189,0.18) 0%, transparent 55%)",
+          "#F8F7F4",
+        ].join(", "),
         overflowX: "hidden",
         overflowY: "hidden",
         position: "relative",
       }}
     >
-      {/* Decorative A — centered in hero, parallax layered behind content */}
+      {/* Decorative A — centred, slow parallax */}
       <div
         ref={bgLetterRef}
         aria-hidden
@@ -65,7 +69,7 @@ export function Hero() {
           fontWeight: 800,
           lineHeight: 1,
           letterSpacing: "-0.06em",
-          color: "rgba(10,10,10,0.065)",
+          color: "rgba(10,10,10,0.055)",
           userSelect: "none",
           pointerEvents: "none",
           zIndex: 0,
@@ -96,8 +100,8 @@ export function Hero() {
               alignItems: "center",
               gap: 10,
               padding: "7px 13px",
-              background: "rgba(255,252,244,0.7)",
-              border: "1px solid rgba(10,10,10,0.1)",
+              background: "rgba(255,255,255,0.8)",
+              border: "1px solid rgba(10,10,10,0.09)",
               borderRadius: 999,
               fontSize: 12.5,
               fontWeight: 500,
@@ -113,17 +117,17 @@ export function Hero() {
               HSC Business Studies · Sydney, NSW
             </div>
 
+            {/* Three-line headline, each line a different topic accent */}
             <h1 style={{
               fontWeight: 600,
               fontSize: "clamp(42px, 5.8vw, 88px)",
               lineHeight: 0.98,
               letterSpacing: "-0.045em",
               margin: "22px 0 0",
-              color: "#0A0A0A",
             }}>
-              Sydney&apos;s HSC<br />
-              Business Studies<br />
-              specialist.
+              <span style={{ color: "#1F6B40", display: "block" }}>Sydney&apos;s HSC</span>
+              <span style={{ color: "#A66E12", display: "block" }}>Business Studies</span>
+              <span style={{ color: "#2A4F94", display: "block" }}>specialist.</span>
             </h1>
 
             <p style={{
@@ -131,9 +135,9 @@ export function Hero() {
               maxWidth: 520,
               fontSize: 17.5,
               lineHeight: 1.55,
-              color: "#1A1A1A",
+              color: "#3A3A3A",
             }}>
-              Run by 99.95+ graduates. Weekly small-group classes for Year 11 and Year 12. Live marking, a 24-hour question line, and the full past-paper bank. First lesson free.
+              Run by a 99.95+ ATAR graduate. Weekly small-group classes for Year 11 and Year 12. Live marking, a 24-hour question line, and every HSC paper from 2010 to 2024, indexed by dot point. First lesson free.
             </p>
 
             <div style={{
@@ -145,18 +149,18 @@ export function Hero() {
               borderRadius: 999,
               background: "#1A1A1A",
               color: "#FFFCF4",
-              boxShadow: "0 18px 50px rgba(0,0,0,0.16)",
+              boxShadow: "0 14px 40px rgba(0,0,0,0.12)",
             }}>
               <span style={{
                 fontSize: 11,
                 fontWeight: 500,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#FBE6BD",
+                color: "#CFEAD9",
               }}>
                 HSC 2026
               </span>
-              <span style={{ width: 1, height: 18, background: "rgba(255,252,244,0.25)", display: "inline-block" }} />
+              <span style={{ width: 1, height: 18, background: "rgba(255,252,244,0.2)", display: "inline-block" }} />
               {[
                 { n: c.days, l: "d" },
                 { n: c.hrs,  l: "h" },
@@ -170,7 +174,7 @@ export function Hero() {
                   letterSpacing: "-0.02em",
                 }}>
                   {String(n).padStart(2, "0")}
-                  <span style={{ color: "#FBE6BD", fontWeight: 400, marginLeft: 2 }}>{l}</span>
+                  <span style={{ color: "#CFEAD9", fontWeight: 400, marginLeft: 2 }}>{l}</span>
                 </span>
               ))}
             </div>

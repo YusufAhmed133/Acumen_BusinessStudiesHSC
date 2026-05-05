@@ -25,8 +25,8 @@ export function ResourcesTeaser() {
             }}>
               Notes, past papers, and scaffolds. Locked to enrolled students.
             </h2>
-            <p style={{ fontSize: 17, color: "#1A1A1A", maxWidth: 600, margin: "16px 0 0", lineHeight: 1.5 }}>
-              Every resource stays on-site. Nothing is downloadable. Enrolled students get a private login.
+            <p style={{ fontSize: 17, color: "#3A3A3A", maxWidth: 600, margin: "16px 0 0", lineHeight: 1.5 }}>
+              Available on-demand through your student dashboard. Indexed by syllabus dot point so you can find what you need before any exam.
             </p>
           </div>
         </Reveal>

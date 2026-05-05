@@ -5,7 +5,7 @@ const INCLUSIONS = [
   { t: "1.5-hour weekly lesson", d: "Small group, capped at 6. Live syllabus walkthrough plus timed practice every session." },
   { t: "Marked essay every week", d: "You write one extended response per week. A tutor returns it within 48 hours, marked against NESA criteria." },
   { t: "24-hour question line", d: "Stuck at 11pm? Send a question. A tutor responds within 24 hours, every day of the week." },
-  { t: "Band 6 notes", d: "Topic notes written by 99.95+ Business Studies graduates. Updated each year for syllabus changes." },
+  { t: "Band 6 notes", d: "Topic notes written by a 99.95+ ATAR Business Studies graduate. Written for the current NESA syllabus." },
   { t: "Past-paper bank", d: "Every Section I, II, III and IV question from 2010 onward, indexed by syllabus dot point." },
   { t: "Mock exam + report", d: "Full timed mock before each major school exam, marked and returned with a personalised improvement plan." },
   { t: "Lesson recordings", d: "Full recordings of every session available within 24 hours for revision on demand." },

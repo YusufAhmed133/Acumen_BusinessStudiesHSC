@@ -344,7 +344,7 @@ export function Practice() {
                     {revealed && (
                       <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px dashed rgba(10,10,10,0.18)", fontSize: 13.5, lineHeight: 1.65, color: "#1A1A1A" }}>
                         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 10 }}>
-                          Sample response · NESA marking guide
+                          Sample response · based on NESA marking criteria
                         </div>
                         {(q as ShortQuestion).sample}
                       </div>
