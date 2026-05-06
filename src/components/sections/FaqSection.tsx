@@ -7,31 +7,31 @@ const FAQ_TINTS = ["#A8E8BE", "#FADA88", "#A8C8FC", "#F8BCBC", "#A8E8BE", "#FADA
 const FAQS = [
   {
     q: "Is the trial really free?",
-    a: "Yes. One full lesson at no cost, with no credit card required at any point. If it does not work out, there is no obligation and we will not follow up. We would rather earn a student back on the strength of the lesson than keep them through inertia.",
+    a: "One full lesson at no cost, no credit card required, and if it is not the right fit there is no obligation and we will not follow up.",
   },
   {
     q: "What's included in the price?",
-    a: "The $950 term rate covers every lesson across the school term, which is approximately 10 sessions, along with access to all HSC past papers from 2010 to 2025 annotated by syllabus dot point, weekly essay feedback, and the full online question bank. The $110 casual rate covers a single session. Nothing is added on top of either rate.",
+    a: "The $950 term rate covers every lesson across the school term (approximately 10 sessions), all HSC past papers from 2010 to 2025 annotated by syllabus dot point, weekly essay feedback, and the full online question bank, while the $110 casual rate covers a single one-hour session.",
   },
   {
     q: "Who teaches the lessons?",
-    a: "Band 6 graduates from UNSW, USYD, UTS, and Macquarie. Every tutor has sat the HSC Business Studies exam and scored in the top band, which means they know exactly what markers look for and how to close the gap between a student's current mark and where they need to be.",
+    a: "All tutors are Band 6 graduates from UNSW, USYD, UTS, and Macquarie who have sat the HSC Business Studies exam and scored in the top band, so they know exactly what markers look for and how to close the gap between where a student is and where they need to be.",
   },
   {
     q: "What if my child has a question outside of class?",
-    a: "We run a 24-hour question line by message. Students can send through any concept, essay paragraph, or past paper question and will receive a proper written response rather than a pointer back to the textbook.",
+    a: "We run a 24-hour question line by message where students can send through any concept, essay paragraph, or past paper question and receive a proper written response rather than a pointer back to the textbook.",
   },
   {
     q: "Can a group of school friends join together?",
-    a: "Yes. If two to four students from the same school want to learn together, we can arrange a dedicated session at a time that suits the group. Contact us and we will work out the details.",
+    a: "If two to four students from the same school want to learn together, we can arrange a dedicated session at a time that suits the group, so get in touch and we will sort out the details.",
   },
   {
     q: "What happens if my child misses a lesson?",
-    a: "Cancellations with more than 24 hours notice are fully refunded or credited to the next session. Cancellations inside 24 hours, for any reason, are charged in full. Every student who misses a lesson receives the full notes and worked solutions so they do not fall behind.",
+    a: "Cancellations with more than 24 hours notice are fully refunded or credited toward the next session, while cancellations inside 24 hours are charged in full, and every student who misses receives the full notes and worked solutions so they do not fall behind.",
   },
   {
     q: "Do your prices include GST?",
-    a: "Yes. All prices shown on this site are inclusive of GST.",
+    a: "Yes, all prices shown on this site are inclusive of GST.",
   },
 ];
 

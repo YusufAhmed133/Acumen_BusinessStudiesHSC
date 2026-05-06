@@ -10,7 +10,7 @@ export default function TermsPage() {
       <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink-700">
         <p>
           By booking and attending lessons with Acumen HSC Tutoring, you agree to pay
-          the applicable lesson fee ($110 per 1.5-hour lesson at current rates).
+          the applicable lesson fee ($110 per 1-hour lesson at current rates).
         </p>
         <p>
           Lessons may be rescheduled with 24 hours notice. Missed lessons without
