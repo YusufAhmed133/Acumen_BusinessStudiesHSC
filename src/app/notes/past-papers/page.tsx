@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "Free HSC Business Studies past papers from 2014 to 2025 with links to NESA. All sections: MCQ, short answer, extended response.",
   alternates: { canonical: "/notes/past-papers" },
+  robots: { index: false, follow: false },
 };
 
 const NESA_URL =

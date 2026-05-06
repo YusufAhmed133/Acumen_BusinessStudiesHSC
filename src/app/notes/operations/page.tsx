@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "Free HSC Business Studies Operations notes covering role of operations, influences, processes, contemporary issues. Band 6 aligned.",
   alternates: { canonical: "/notes/operations" },
+  robots: { index: false, follow: false },
 };
 
 export default function OperationsNotesPage() {
