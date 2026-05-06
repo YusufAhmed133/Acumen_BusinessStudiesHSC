@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
 
 export function Footer() {
@@ -50,14 +51,14 @@ export function Footer() {
           alignItems: "center",
         }}>
           {[
-            { href: "/#syllabus", label: "Syllabus" },
-            { href: "/#practice", label: "Practice" },
-            { href: "/#pricing",  label: "Pricing" },
-            { href: "/#enquire",  label: "Enquire" },
+            { href: "/hsc-business-studies-tutor-sydney", label: "Sydney Tutoring" },
+            { href: "/pricing",                           label: "Pricing" },
+            { href: "/about",                             label: "About" },
+            { href: "/contact",                           label: "Contact" },
           ].map(({ href, label }) => (
-            <a key={href} href={href} style={{ color: "inherit", textDecoration: "none" }}>
+            <Link key={href} href={href} style={{ color: "inherit", textDecoration: "none" }}>
               {label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -78,8 +79,8 @@ export function Footer() {
       }}>
         <span>© Acumen HSC · Sydney NSW</span>
         <span style={{ display: "flex", gap: 20 }}>
-          <a href="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</a>
-          <a href="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</a>
+          <Link href="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
           <a href="tel:0470665141" style={{ color: "inherit", textDecoration: "none" }}>0470 665 141</a>
         </span>
       </div>

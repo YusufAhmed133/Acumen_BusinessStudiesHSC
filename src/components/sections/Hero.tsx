@@ -90,7 +90,7 @@ export function Hero() {
               maxWidth: 520,
             }}
           >
-            Sydney&apos;s No.1 Business Studies HSC Specialist
+            HSC Business Studies Tutoring — Sydney&apos;s Band 6 Specialists
           </h1>
 
           <p

@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   description:
     "HSC Business Studies tutoring from $110 per lesson or $950 per term. Small groups, essay marking, 24-hour question line. First lesson free.",
   alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Pricing — HSC Business Studies Tutoring Sydney",
+    description: "HSC Business Studies tutoring from $110 per lesson or $950 per term. Small groups, essay marking, 24-hour question line. First lesson free.",
+    url: "https://acumenhsc.com.au/pricing",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const included = [

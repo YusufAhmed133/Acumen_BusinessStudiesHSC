@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   description:
     "Free HSC Business Studies notes, essay templates, past paper analyses, and practice questions written by Band 6 graduates. Download instantly.",
   alternates: { canonical: "/resources" },
+  openGraph: {
+    title: "Free HSC Business Studies Resources — Notes, Essays & Past Papers",
+    description: "Free HSC Business Studies notes, essay templates, past paper analyses, and practice questions written by Band 6 graduates. Download instantly.",
+    url: "https://acumenhsc.com.au/resources",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const resources = [

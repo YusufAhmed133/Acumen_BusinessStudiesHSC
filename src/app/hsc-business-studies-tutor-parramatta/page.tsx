@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "HSC Business Studies tutoring in Parramatta and Western Sydney. Small groups, Band 6 tutors, essay marking. First lesson free.",
   alternates: { canonical: "/hsc-business-studies-tutor-parramatta" },
+  robots: { index: false, follow: false },
 };
 
 const FEATURES = [

@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   description:
     "Step-by-step guide to writing a Band 6 HSC Business Studies essay. Structure, marking criteria, integration tips, worked examples.",
   alternates: { canonical: "/notes/band-6-essay" },
-  robots: { index: false, follow: false },
+  openGraph: {
+    title: "How to Write a Band 6 HSC Business Studies Essay | Acumen HSC",
+    description: "Step-by-step guide to writing a Band 6 HSC Business Studies essay. Structure, marking criteria, integration tips, worked examples.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function Band6EssayPage() {

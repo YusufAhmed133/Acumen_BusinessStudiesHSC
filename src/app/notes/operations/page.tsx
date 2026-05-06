@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   description:
     "Free HSC Business Studies Operations notes covering role of operations, influences, processes, contemporary issues. Band 6 aligned.",
   alternates: { canonical: "/notes/operations" },
-  robots: { index: false, follow: false },
+  openGraph: {
+    title: "HSC Business Studies Operations Notes | Band 6 | Acumen HSC",
+    description: "Free HSC Business Studies Operations notes covering role of operations, influences, processes, contemporary issues. Band 6 aligned.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function OperationsNotesPage() {
