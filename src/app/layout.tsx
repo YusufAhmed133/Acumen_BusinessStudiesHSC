@@ -5,24 +5,46 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
+const SITE_URL = "https://acumenhsc.com.au";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Acumen | HSC Business Studies Tutoring Sydney",
-    template: "%s | Acumen",
+    default: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
+    template: "%s | Acumen HSC",
   },
   description:
-    "HSC Business Studies tutoring in Sydney. Small-group classes for Year 11 and Year 12. Live marking, 24-hour question line. First lesson free.",
+    "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
   keywords: [
+    "HSC Business Studies tutor Sydney",
     "HSC Business Studies tutoring",
-    "HSC Business tutoring Sydney",
-    "Business Studies Band 6",
+    "Band 6 Business Studies HSC",
     "HSC tutoring Sydney",
     "Year 12 Business Studies",
+    "Business Studies Band 6 Sydney",
+    "HSC Business Studies classes",
+    "small group HSC tutoring Sydney",
   ],
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   openGraph: {
     type: "website",
     locale: "en_AU",
     siteName: "Acumen HSC",
+    url: SITE_URL,
+    title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
+    description:
+      "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
+    description:
+      "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
   },
   other: {
     "geo.region": "AU-NSW",

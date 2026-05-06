@@ -79,16 +79,21 @@ async function sendEmail(data: {
 }
 
 async function notifyWebhook(data: {
-  name: string; email: string; phone: string;
-  year_group: string; message?: string; submitted_at: string;
+  name: string; email: string; phone: string; year_group: string;
+  message?: string; submitted_at: string; id: string | null; source: string;
 }): Promise<void> {
   const url = process.env.NOTIFY_WEBHOOK_URL;
   if (!url) return;
+  const secret = process.env.NOTIFY_WEBHOOK_SECRET;
   try {
     await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        type: "new_lead",
+        ...data,
+        ...(secret ? { webhook_secret: secret } : {}),
+      }),
     });
   } catch (err) {
     console.error("[leads] webhook failed:", err);
@@ -144,8 +149,8 @@ export async function POST(request: NextRequest) {
   // Send email notification (the minimum viable integration)
   const emailSent = await sendEmail({ name, email: payload.email, phone, year_group, message });
 
-  // Fire-and-forget webhook (Zapier/Make → Google Sheets)
-  void notifyWebhook({ name, email: payload.email, phone, year_group, message, submitted_at: new Date().toISOString() });
+  // Fire-and-forget webhook → Google Sheets (two-way sync needs the Supabase id)
+  void notifyWebhook({ name, email: payload.email, phone, year_group, message, submitted_at: new Date().toISOString(), id: leadId, source: payload.source });
 
   // Succeed if email was sent OR Supabase stored it OR we're in dev
   const ok = emailSent || leadId !== null || process.env.NODE_ENV === "development";
