@@ -65,7 +65,7 @@ export const QUIZ_BANK: Question[] = [
 
   { id: "22m12", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC · Section I · Q12",
     stem: "Which of the following is an example of service differentiation?",
-    options: ["A car manufacturer supplies cars with premium tinted windows", "A chemist issues a patient with medication in exchange for a script", "A shoe store assistant spends varying amounts of time with customers", "A salesperson provides a receipt to a customer who has purchased a bed"],
+    options: ["A car manufacturer supplies cars with premium tinted windows.", "A chemist issues a patient with medication in exchange for a script.", "A shoe store assistant spends varying amounts of time with customers.", "A salesperson provides a receipt to a customer who has purchased a bed."],
     answer: 2, explain: "Service differentiation means varying the service experience. Spending varying time with different customers adapts the service to individual needs. The other options are standard goods transactions." },
 
   { id: "22m13", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC · Section I · Q13",
@@ -74,7 +74,7 @@ export const QUIZ_BANK: Question[] = [
     answer: 2, explain: "An improved economic outlook boosts consumer spending (demand for exports) and low interest rates reduce borrowing costs for expansion — both conditions support global expansion." },
 
   { id: "22m14", topic: "finance", type: "mcq", marks: 1, src: "2022 HSC · Section I · Q14",
-    stem: "A private investment company accepts money from clients. The owner illegally uses this money for their own personal use. Which government body would take legal action against the owner?",
+    stem: "A private investment company accepts money from clients. The owner illegally uses this money for their own personal use. Which government body would take legal action against the owner of this company?",
     options: ["Australian Taxation Office", "Australian Securities Exchange", "Australian Prudential Regulation Authority", "Australian Securities and Investments Commission"],
     answer: 3, explain: "ASIC regulates investment companies and enforces laws against financial fraud such as misappropriation of client funds. APRA regulates banks/insurance; ASX operates the stock exchange." },
 
@@ -146,24 +146,24 @@ export const QUIZ_BANK: Question[] = [
     sample: "The induction process introduces new employees to the workplace. Induction can enhance employee understanding of workplace culture, policies and procedures, allowing them to make a significant contribution to the business from the outset of their employment enhancing employee competence, providing a positive attitude to the job and the business." },
 
   { id: "22s23a", topic: "finance", type: "short", marks: 1, src: "2022 HSC · Section II · Q23(a)",
-    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery. They have provided the following financial information: Operating income $1,500,000 / Gross profit $1,100,000 / Expenses $600,000 / Total liabilities $2,000,000 / Net profit $500,000 / Owner's equity $1,800,000. Calculate the efficiency (total expenses ÷ total sales) of this business.",
+    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery. They have provided the following financial information: Operating income (revenue) $1 500 000 / Gross profit $1 100 000 / Expenses $600 000 / Total liabilities $2 000 000 / Net profit $500 000 / Owner's equity $1 800 000. Calculate the efficiency (total expenses ÷ total sales) of this business.",
     criteria: ["Calculates efficiency correctly and shows working"],
-    sample: "Total expenses ÷ total sales = $600,000 ÷ $1,500,000 = 40% (or 0.4 : 1)" },
+    sample: "Total expenses ÷ total sales = $600 000 ÷ $1 500 000 = 40% (or 0.4 : 1)" },
 
   { id: "22s23b", topic: "finance", type: "short", marks: 3, src: "2022 HSC · Section II · Q23(b)",
-    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery (Expenses $600,000 / Sales $1,500,000). Explain how the expense ratio can help this business determine their efficiency.",
+    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery (Expenses $600 000 / Sales $1 500 000). Explain how the expense ratio can help this business determine their efficiency.",
     criteria: ["Provides detailed explanation of how expense ratio determines efficiency for this business", "Provides some explanation linking expense ratio to efficiency", "Makes a relevant statement about expense ratio or efficiency"],
     sample: "Efficiency is a measure of the ability of a business to use its resources effectively. The gifts and homewares business are currently spending $0.40 in expenses for every $1 of sales. The lower this expense ratio is, the more efficient the business is. If this business can reduce their indirect costs and maintain or increase sales, they demonstrate that they are able to use resources effectively and improve their profitability." },
 
   { id: "22s23c", topic: "finance", type: "short", marks: 3, src: "2022 HSC · Section II · Q23(c)",
-    stem: "A gifts and homewares business (Net profit $500,000 / Owner's equity $1,800,000 / Total liabilities $2,000,000). The family-owned business is considering expansion by opening two new stores. Their bank has given approval to borrow $3 000 000 at 4% interest to finance their expansion. Why is the level of gearing an important consideration for the lender to this business?",
+    stem: "A gifts and homewares business (Net profit $500 000 / Owner's equity $1 800 000 / Total liabilities $2 000 000). The family-owned business is considering expansion by opening two new stores. Their bank has given approval to borrow $3 000 000 at 4% interest to finance their expansion. Why is the level of gearing an important consideration for the lender to this business?",
     criteria: ["Provides detailed explanation of why gearing is important for the lender", "Provides some explanation of gearing and its relationship to lending risk", "Makes a relevant statement about gearing"],
     sample: "Gearing refers to the ability of a business to meet its financial obligations in the longer term. It can help the lender to this business understand their risk and determine the ability of the business to meet its loan repayments, helping them decide whether to lend the business money, or not. In this case the business gearing would indicate they can repay their debt." },
 
   { id: "22s23d", topic: "finance", type: "short", marks: 4, src: "2022 HSC · Section II · Q23(d)",
-    stem: "A gifts and homewares business (Net profit $500,000 / Owner's equity $1,800,000 / Total liabilities $2,000,000). The family-owned business is considering expansion by opening two new stores, borrowing $3 000 000 at 4% interest. Using the financial information provided, explain why the business should use debt finance to acquire the two new stores.",
+    stem: "A gifts and homewares business (Net profit $500 000 / Owner's equity $1 800 000 / Total liabilities $2 000 000). The family-owned business is considering expansion by opening two new stores, borrowing $3 000 000 at 4% interest. Using the financial information provided, explain why the business should use debt finance to acquire the two new stores.",
     criteria: ["Provides detailed explanation referencing data from the financial information", "Provides some explanation of why debt finance is appropriate for this business", "Makes a relevant statement about debt finance", "Provides some relevant information"],
-    sample: "The gifts and homewares business should use debt finance to purchase their new stores because of the relatively low interest rate of 4% they can access. Currently with a $500,000 net profit and potential for this to increase due to the new stores they will be able to meet their increased debt obligations. Debt finance also allows the business to access the money relatively quickly and as the borrowed money is forecast to create increased profits, it seems like an appropriate decision. Additionally, there is no loss of ownership in the family-owned business." },
+    sample: "The gifts and homewares business should use debt finance to purchase their new stores because of the relatively low interest rate of 4% they can access. Currently with a $500 000 net profit and potential for this to increase due to the new stores they will be able to meet their increased debt obligations. Debt finance also allows the business to access the money relatively quickly and as the borrowed money is forecast to create increased profits, it seems like an appropriate decision. Additionally, there is no loss of ownership in the family-owned business." },
 
   { id: "22s24a", topic: "marketing", type: "short", marks: 2, src: "2022 HSC · Section II · Q24(a)",
     stem: "A business wishes to introduce new products into the market. Outline ONE promotion strategy this business could use to launch the new product range.",
@@ -183,7 +183,7 @@ export const QUIZ_BANK: Question[] = [
 // ─── 2022 Section III/IV ──────────────────────────────────────────────────────
 
   { id: "22e25", topic: "marketing", type: "extended", marks: 20, src: "2022 HSC · Section III · Q25",
-    stem: "Bee Sticky Pty Ltd is an established Australian manufacturing business that produces a wide range of high quality and premium organic honey. It is expanding into global markets. It will lease warehouses in Malaysia and the USA. SWOT: Strengths — High quality, premium and organic honey; Approved for consumption and medical uses; Made by honeybees from Australian flora. Weaknesses — Frequent breakage of product during transportation; Lack of experience in foreign payment systems. Opportunities — Expanding market for high quality honey overseas; Falling bee populations overseas; Potential collaborations with up-market restaurants/chefs. Threats — Established competition in foreign markets; Fluctuations in the Australian dollar. You have been hired as a consultant by Bee Sticky Pty Ltd to write a business report. In your report: describe branding and product strategies the business could use to expand into global markets / recommend a channel choice that would suit this business's expansion / analyse the global financial management strategies required for a successful expansion.",
+    stem: "Bee Sticky Pty Ltd is an established Australian manufacturing business that produces a wide range of high quality and premium organic honey products. It is expanding into global markets. It will lease warehouses in Malaysia and the USA. SWOT: Strengths — High quality, premium and organic honey products; Approved for consumption and medical uses; Made by honeybees from Australian flora. Weaknesses — Frequent breakage of product during transportation; Lack of experience in foreign payment systems. Opportunities — Expanding market for high quality honey products in countries overseas; Falling bee populations in countries overseas; Potential collaborations with up-market restaurants/chefs. Threats — Established competition in foreign markets; Fluctuations in the Australian dollar. You have been hired as a consultant by Bee Sticky Pty Ltd to write a business report. In your report: describe branding and product strategies the business could use to expand into global markets / recommend a channel choice that would suit this business's expansion / analyse the global financial management strategies required for a successful expansion.",
     criteria: ["Describes branding and product strategies appropriate to global expansion (e.g. packaging for transport, global branding)", "Recommends a suitable channel choice with justification (e.g. agent/distributor given lack of foreign experience)", "Analyses global financial management strategies (exchange rates, hedging, derivatives, methods of payment)", "Makes effective use of the SWOT stimulus material", "Presents a sustained, logical and cohesive business report using relevant terminology"],
     sample: "Bee Sticky should develop strong global branding that emphasises its premium Australian origin and organic credentials, with redesigned packaging to reduce breakage during international transport. A channel using agents or distributors in Malaysia and the USA is recommended, as this mitigates the weakness of limited experience in foreign markets — agents understand local regulations and payment systems. For financial management, the business should hedge against AUD fluctuations using forward contracts or derivatives to lock in exchange rates and protect revenue. Payment in advance or letters of credit should be used until foreign buyer relationships are established, given the weakness identified in unfamiliar foreign payment systems." },
 
@@ -255,13 +255,13 @@ export const QUIZ_BANK: Question[] = [
     answer: 0, explain: "The Fair Work Commission is Australia's national workplace tribunal that approves enterprise agreements and resolves disputes. AHRC handles human rights/discrimination; ASIC regulates financial services." },
 
   { id: "23m12", topic: "finance", type: "mcq", marks: 1, src: "2023 HSC · Section I · Q12",
-    stem: "An Australian theme park wants to implement a new point-of-sale system that allows improved tracking of stock levels. The system will cost $185,000 to establish. Which long-term source of finance would be most appropriate for this system?",
+    stem: "An Australian theme park wants to implement a new point-of-sale system that allows improved tracking of stock levels. The system will cost $185 000 to establish. Which long-term source of finance would be most appropriate for this system?",
     options: ["Derivatives", "Hedging", "Leasing", "Overdraft"],
-    answer: 2, explain: "Leasing allows the business to use the equipment without a large upfront capital outlay. Derivatives and hedging are risk management tools, not sources of finance. An overdraft is short-term and unsuitable for $185,000 capital investment." },
+    answer: 2, explain: "Leasing allows the business to use the equipment without a large upfront capital outlay. Derivatives and hedging are risk management tools, not sources of finance. An overdraft is short-term and unsuitable for $185 000 capital investment." },
 
   { id: "23m13", topic: "marketing", type: "mcq", marks: 1, src: "2023 HSC · Section I · Q13",
     stem: "A customer returns a recently purchased 5G mobile phone to the place of purchase as the phone was faulty. Under consumer law, why must the business refund the customer the cost of the mobile phone?",
-    options: ["It is ethical to replace defective goods", "It is within the implied conditions of the contract", "It is important to meet corporate social responsibility", "It can be considered deceptive and misleading advertising"],
+    options: ["It is ethical to replace defective goods.", "It is within the implied conditions of the contract.", "It is important to meet corporate social responsibility.", "It can be considered deceptive and misleading advertising."],
     answer: 1, explain: "Consumer law implies that goods must be of acceptable quality. A faulty phone breaches this implied condition, entitling the buyer to a remedy — a legal obligation, not merely ethical." },
 
   { id: "23m14", topic: "finance", type: "mcq", marks: 1, src: "2023 HSC · Section I · Q14",
@@ -297,7 +297,7 @@ export const QUIZ_BANK: Question[] = [
 // ─── 2023 Section II ──────────────────────────────────────────────────────────
 
   { id: "23s21a", topic: "operations", type: "short", marks: 2, src: "2023 HSC · Section II · Q21(a)",
-    stem: "An Australian tyre manufacturer is expanding. Rubber will be sourced from the global market to reduce operating costs and increase sales and profit. The business wants to maintain quality outputs and achieve economies of scale. Outline ONE potential issue this business could face in relation to both cost and quality of outputs.",
+    stem: "An Australian tyre manufacturer is expanding its business. In order to reduce operating costs and increase sales and profit, rubber will be sourced from the global market. The business wants to maintain quality outputs and achieve economies of scale. Outline ONE potential issue this business could face in relation to both cost and quality of outputs.",
     criteria: ["Outlines a potential issue relating to both cost and quality of outputs", "Makes a relevant statement about cost and/or quality"],
     sample: "The business can reduce the costs of inputs when they source globally, cheaper inputs such as rubber, may result in lower quality tyres." },
 
@@ -327,12 +327,12 @@ export const QUIZ_BANK: Question[] = [
     sample: "As shown in the table, the labour participation rate for females has significantly increased from 44% in 1981 to 62% in 2021 compared to the participation rate for males which has decreased from 78% in 1981 to 71% in 2021. This is due to a number of reasons such as changing gender roles, eg changes in society which supports the increasing participation of women in the workforce and an increase in the acceptance/participation of males in child-rearing duties. This change in social norms has also normalised the completion of higher education for females which has subsequently led to increased employment opportunities." },
 
   { id: "23s23a", topic: "marketing", type: "short", marks: 2, src: "2023 HSC · Section II · Q23(a)",
-    stem: "A cereal manufacturer has decided to change the packaging of its product in an attempt to reverse a drop in sales and remain competitive. It is also considering growing its target market by catering for health-conscious consumers. Outline the current product life cycle stage of this cereal.",
+    stem: "A cereal manufacturer has decided to change the packaging of its product in an attempt to reverse a drop in sales and remain competitive with existing businesses. It is also considering growing its target market by catering for health-conscious consumers in Australia and eventually expanding into the global market. Outline the current product life cycle stage of this cereal.",
     criteria: ["Correctly identifies the product life cycle stage (decline) with justification", "Makes a relevant statement about the product life cycle"],
     sample: "The cereal manufacturer is in the decline stage of the product life cycle. This is the result of dropping sales and the manufacturer is hoping to renew consumer interest by changing the packaging of its product." },
 
   { id: "23s23b", topic: "marketing", type: "short", marks: 3, src: "2023 HSC · Section II · Q23(b)",
-    stem: "A cereal manufacturer in decline is considering catering for health-conscious consumers. How could a niche market approach increase sales for this cereal manufacturer?",
+    stem: "A cereal manufacturer in decline is considering catering for health-conscious consumers in Australia and eventually expanding into the global market. How could a niche market approach increase sales for this cereal manufacturer?",
     criteria: ["Explains how a niche market approach could increase sales for this business", "Demonstrates some understanding of niche market and its effect on sales", "Makes a relevant statement about niche market"],
     sample: "A niche market approach would allow the manufacturer to meet the needs of health-conscious customers by offering them a healthy range of cereals such as low sugar or sugar-free cereals. This targeted approach would allow the manufacturer to increase their sales by differentiating their product against competitors, achieve repeat sales and create customer loyalty." },
 
@@ -421,9 +421,9 @@ export const QUIZ_BANK: Question[] = [
     answer: 0, explain: "The core role of an operations manager is to maximise efficiency and minimise waste in the transformation process, improving the ratio of outputs to inputs." },
 
   { id: "24m10", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC · Section I · Q10",
-    stem: "A business has: Sales $800,000 / COGS $200,000 / Gross profit $600,000 / Net profit $250,000. Expense ratio = total expenses ÷ sales. What is the expense ratio for this business?",
+    stem: "A business has: Sales $800 000 / COGS $200 000 / Gross profit $600 000 / Net profit $250 000. Expense ratio = total expenses ÷ sales. What is the expense ratio for this business?",
     options: ["25%", "31%", "35%", "44%"],
-    answer: 3, explain: "Total expenses = Gross profit − Net profit = $600,000 − $250,000 = $350,000. Expense ratio = $350,000 ÷ $800,000 = 43.75% ≈ 44%." },
+    answer: 3, explain: "Total expenses = Gross profit − Net profit = $600 000 − $250 000 = $350 000. Expense ratio = $350 000 ÷ $800 000 = 43.75% ≈ 44%." },
 
   { id: "24m11", topic: "marketing", type: "mcq", marks: 1, src: "2024 HSC · Section I · Q11",
     stem: "A distributor of a new mop surveys people in a shopping centre about their cleaning habits. The distributor then uses persuasive selling techniques to try and convince the shoppers surveyed to buy their mop. This is an example of which selling technique?",
@@ -441,9 +441,9 @@ export const QUIZ_BANK: Question[] = [
     answer: 3, explain: "Brand perception is a psychological factor influencing customer choice. Customers' subjective judgement based on the brand name is psychological, not financial, environmental, or legally implied." },
 
   { id: "24m14", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC · Section I · Q14",
-    stem: "The table shows the cash flow information for a business. Opening balance (Jul): $40,000. Cash in: Jul $30,000 / Aug $10,000 / Sep $22,000. Cash out: Jul $20,000 / Aug $13,000 / Sep $15,000. What is the closing cash balance for September?",
-    options: ["$7000", "$47,000", "$54,000", "$150,000"],
-    answer: 2, explain: "Jul closing = 40+30−20 = $50,000. Aug closing = 50+10−13 = $47,000. Sep closing = 47+22−15 = $54,000." },
+    stem: "The table shows the cash flow information for a business. Opening balance (Jul): $40 000. Cash in: Jul $30 000 / Aug $10 000 / Sep $22 000. Cash out: Jul $20 000 / Aug $13 000 / Sep $15 000. What is the closing cash balance for September?",
+    options: ["$7 000", "$47 000", "$54 000", "$150 000"],
+    answer: 2, explain: "Jul closing = 40+30−20 = $50 000. Aug closing = 50+10−13 = $47 000. Sep closing = 47+22−15 = $54 000." },
 
   { id: "24m15", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC · Section I · Q15",
     stem: "Which organisation functions as the market operator for companies wanting to raise public finance?",
@@ -513,7 +513,7 @@ export const QUIZ_BANK: Question[] = [
     sample: "For this piano-teaching business to advertise and market itself as having highly skilled staff it will need to rely on the human resources department to hire teachers quickly, who are knowledgeable with the required skills." },
 
   { id: "24s23b", topic: "marketing", type: "short", marks: 4, src: "2024 HSC · Section II · Q23(b)",
-    stem: "A piano teaching business which guarantees highly qualified and experienced teachers is rapidly expanding. How may economic factors influence customers choosing this business?",
+    stem: "A piano teaching business which guarantees highly qualified and experienced teachers is rapidly expanding across all states of Australia. How may economic factors influence customers choosing this business?",
     criteria: ["Demonstrates a thorough understanding of how economic factors influence customers choosing this business", "Demonstrates a sound understanding of how economic factors influence customers choosing this business", "Demonstrates some understanding of economic factors and/or customer choice", "Provides some relevant information"],
     sample: "Economic forces will influence a customer's willingness and ability to spend. An economic downturn will reduce disposable income and customers may not choose piano lessons or elect a cheaper alternative. In a downturn, consumers will forego spending on non-essential goods/services and spend their income on essential items such as food and housing. A booming economy may see consumer optimism, more job security and/or rising incomes allowing them to seek quality options." },
 
@@ -523,12 +523,12 @@ export const QUIZ_BANK: Question[] = [
     sample: "This business could divide the total market into smaller segments so it can target its service to them more effectively and increase sales. For example, it could divide by demographics and advertise and tailor the service and price to a particular income level and social class. It could also segment by psychographic characteristics and appeal to aspirational pianists who may want to increase their skills and satisfy their personal interest." },
 
   { id: "24s24ai", topic: "finance", type: "short", marks: 2, src: "2024 HSC · Section II · Q24(a)(i)",
-    stem: "The following is an extract from a business balance sheet. Assets: Cash at bank $5,000 / Accounts receivable $20,000 / Inventory $5,000 / Office equipment $70,000 / Motor vehicles $80,000. Liabilities: Overdraft $9,000 / Accounts payable $11,000 / Long-term loan $90,000. Owners' equity: Capital $55,000 / Retained profits $15,000. Calculate the current ratio for this business. Show all working. (Current ratio = current assets ÷ current liabilities)",
+    stem: "The following is an extract from a business balance sheet. Assets: Cash at bank $5 000 / Accounts receivable $20 000 / Inventory $5 000 / Office equipment $70 000 / Motor vehicles $80 000. Liabilities: Overdraft $9 000 / Accounts payable $11 000 / Long-term loan $90 000. Owners' equity: Capital $55 000 / Retained profits $15 000. Calculate the current ratio for this business. Show all working. (Current ratio = current assets ÷ current liabilities)",
     criteria: ["Calculates the correct current ratio and shows working", "Provides some relevant information"],
-    sample: "Current assets = (Cash at bank + accounts receivable + inventory) ÷ (Overdraft + Accounts payable) = ($5,000 + $20,000 + $5,000) ÷ ($9,000 + $11,000) = $30,000 ÷ $20,000 = 1.5 = 1.5 : 1" },
+    sample: "Current assets = (Cash at bank + accounts receivable + inventory) ÷ (Overdraft + Accounts payable) = ($5 000 + $20 000 + $5 000) ÷ ($9 000 + $11 000) = $30 000 ÷ $20 000 = 1.5 = 1.5 : 1" },
 
   { id: "24s24aii", topic: "finance", type: "short", marks: 4, src: "2024 HSC · Section II · Q24(a)(ii)",
-    stem: "A business has a current ratio of 1.5:1. Overdraft $9,000 / Accounts payable $11,000 / Long-term loan $90,000 / Capital $55,000 / Retained profits $15,000. Explain the influence of ONE financial institution on the financial management of this business.",
+    stem: "A business has a current ratio of 1.5:1. Overdraft $9 000 / Accounts payable $11 000 / Long-term loan $90 000 / Capital $55 000 / Retained profits $15 000. Explain the influence of ONE financial institution on the financial management of this business.",
     criteria: ["Provides a thorough explanation of the influence of ONE financial institution on the financial management of this business", "Provides a sound explanation of the influence of ONE financial institution on financial management", "Demonstrates some understanding of the influence on financial management", "Provides some relevant information"],
     sample: "This business is highly geared and a financial institution, such as a bank, may not be willing to lend additional finance because they pose a risk, which restricts the business's ability to achieve growth. Banks may increase interest rates, which will increase the business's financial commitments and affect its liquidity and capacity to repay existing debt." },
 
@@ -627,13 +627,18 @@ export const QUIZ_BANK: Question[] = [
     answer: 2, explain: "A new gym should use price penetration — offering an introductory discount attracts price-sensitive customers and builds membership base. A high price deters new customers; below-cost lifetime memberships are financially unsustainable." },
 
   { id: "25m15", topic: "hr", type: "mcq", marks: 1, src: "2025 HSC · Section I · Q15",
-    stem: "A graph of employee data is shown. Performance/Stress levels/Absenteeism lines from Month 1–5. After month 3: stress rises, performance falls, absenteeism rises. What would be the most likely cause of the change in data after month 3?",
+    stem: "A graph of employee data is shown. What would be the most likely cause of the change in data after month 3?",
     options: ["Staff completed a productivity course.", "Employees were given a monetary bonus.", "There was a change in senior management.", "Improvements in work health and safety were made."],
     answer: 2, explain: "A change in senior management (e.g. to an autocratic style) is the most likely cause of simultaneous increases in stress and absenteeism alongside falling performance. Courses, bonuses, and WH&S improvements would produce opposite effects." },
 
+  { id: "25m16", topic: "finance", type: "mcq", marks: 1, src: "2025 HSC · Section I · Q16",
+    stem: "An extract from a business document is shown. Opening balance July $2 000. Cash in: July $5 000 / Aug $3 000 / Sept $5 000 / Oct $8 000 / Nov $8 000 / Dec $4 000. Cash out: July $5 000 / Aug $5 000 / Sept $7 000 / Oct $3 000 / Nov $10 000 / Dec $2 000. In which month should this business have adopted cash flow management strategies?",
+    options: ["August", "September", "November", "December"],
+    answer: 0, explain: "Calculating closing balances: July = $2 000 + $5 000 − $5 000 = $2 000; August = $2 000 + $3 000 − $5 000 = $0; September = $0 + $5 000 − $7 000 = −$2 000. The balance hits $0 in August and turns negative in September. Cash flow management strategies should have been adopted in August to prevent the deficit." },
+
   { id: "25m17", topic: "hr", type: "mcq", marks: 1, src: "2025 HSC · Section I · Q17",
     stem: "A chef's finger has been cut off during a workplace accident. Which of the following steps should the employer take? [Step one / Step two / Step three]",
-    options: ["Injury management plan is created → Work site assessed for safety → Employee is assigned suitable duties", "Employee is assigned suitable duties → Work site assessed for safety → Injury management plan is created", "Work site assessed for safety → Injury management plan is created → Employee is assigned suitable duties", "Work site assessed for safety → Employee is assigned suitable duties → Injury management plan is created"],
+    options: ["Work site is assessed for safety → Employee takes annual leave → Injury management plan is created", "Injury management plan is created → Employee returns to work → Employee takes annual leave", "Work site is assessed for safety → Injury management plan is created → Employee is assigned suitable duties", "Modified work hours are organised → Injury management plan is created → Employee returns to work"],
     answer: 2, explain: "The correct WH&S response sequence: (1) assess the work site for safety to prevent further injury, (2) create an injury management plan for the affected employee, (3) assign suitable duties during recovery." },
 
   { id: "25m18", topic: "finance", type: "mcq", marks: 1, src: "2025 HSC · Section I · Q18",
@@ -689,9 +694,9 @@ export const QUIZ_BANK: Question[] = [
     sample: "Monitoring and controlling the marketing strategy is essential to keep this business informed regarding customer complaints about the bottles leaking. Managers need to look at whether or not the objective of gaining a competitive advantage is being met and what actions can be taken. By comparing actual and planned results the business can plan effectively for the future and ensure the marketing strategies are being met." },
 
   { id: "25s23a", topic: "finance", type: "short", marks: 2, src: "2025 HSC · Section II · Q23(a)",
-    stem: "A travel agency is focused on expanding its sales in several countries. The business provided the following financial information: Sales 2023=$600,000 / 2024=$700,000. Total expenses 2023=$140,000 / 2024=$210,000. Net profit 2023=$160,000 / 2024=$170,000. Expense ratio formula: total expenses ÷ sales × 100. Industry average expense ratio 2024=20%. What does the expense ratio for 2024 indicate for this business?",
+    stem: "A travel agency is focused on expanding its sales in several countries. The business provided the following financial information: Sales 2023=$600 000 / 2024=$700 000. Total expenses 2023=$140 000 / 2024=$210 000. Net profit 2023=$160 000 / 2024=$170 000. Expense ratio formula: total expenses ÷ sales × 100. Industry average expense ratio 2024=20%. What does the expense ratio for 2024 indicate for this business?",
     criteria: ["Calculates the expense ratio for 2024 correctly (30%) and explains what it indicates", "Calculates the expense ratio correctly", "Makes a relevant statement about the expense ratio"],
-    sample: "The expense ratio is 210,000 ÷ 700,000 × 100 = 30%. The efficiency of the business is a concern as the expense ratio is higher than 2023 and the industry average." },
+    sample: "The expense ratio is 210 000 ÷ 700 000 × 100 = 30%. The efficiency of the business is a concern as the expense ratio is higher than 2023 and the industry average." },
 
   { id: "25s23b", topic: "finance", type: "short", marks: 4, src: "2025 HSC · Section II · Q23(b)",
     stem: "A travel agency is focused on expanding its sales in several countries. The business's comparative ratio analysis: Expense ratio 2023=23.3% / 2024=30% (industry average 20%); Debt to equity 2023=0.6:1 / 2024=1:1 (industry average 0.6:1); ROE 2023=8% / 2024=8.5% (industry average 12%). How can undertaking a comparative ratio analysis improve this business's financial outcome?",
