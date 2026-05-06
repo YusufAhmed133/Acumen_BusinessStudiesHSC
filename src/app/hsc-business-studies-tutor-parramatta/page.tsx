@@ -72,7 +72,7 @@ export default function ParramattaLandingPage() {
             and Western Sydney. Small groups, weekly essay marking, free first lesson.
           </p>
           <a
-            href="/#enquire"
+            href="#enquire"
             style={{
               display: "inline-block",
               background: "#C9EFD3",
@@ -154,7 +154,7 @@ export default function ParramattaLandingPage() {
       </section>
 
       {/* CTA / Form */}
-      <section style={{ background: "#ffffff", padding: "80px 0 96px", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+      <section id="enquire" style={{ background: "#ffffff", padding: "80px 0 96px", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
         <div style={{ maxWidth: 560, margin: "0 auto", padding: "0 28px" }}>
           <h2 style={{
             fontWeight: 700,

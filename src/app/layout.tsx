@@ -182,11 +182,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={GeistSans.variable}>
+    <html lang="en-AU" className={GeistSans.variable}>
       <head>
-        {/* JSON-LD: static structured data, no user input */}
+        {/* JSON-LD: static site data, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON }} />
       </head>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
         <ScrollProgress />

@@ -3,7 +3,7 @@ import { LeadForm } from "@/components/sections/LeadForm";
 import { MapPin, Clock, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact — Book a Free Trial HSC Business Studies Lesson",
+  title: "Contact Acumen HSC — Book a Free Trial Lesson",
   description:
     "Book your free HSC Business Studies trial lesson. Get a response within 4 business hours. Call 0470 665 141 or fill in the form.",
   alternates: { canonical: "/contact" },

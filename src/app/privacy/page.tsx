@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "How Acumen HSC collects, uses, and protects your personal information in accordance with Australian privacy law.",
+  alternates: { canonical: "/privacy" },
+};
 
 const S = {
   page:    { maxWidth: 720, margin: "0 auto", padding: "72px 28px 96px" } as React.CSSProperties,
@@ -40,7 +44,7 @@ export default function PrivacyPage() {
       <h2 style={S.h2}>3. Who We Share It With</h2>
       <p style={S.p}>
         We do not sell, rent, or trade your personal information to third parties. We use reputable third-party service
-        providers to operate this website — including for hosting, database storage, and email delivery. These providers
+        providers to operate this website, including hosting, database storage, and email delivery. These providers
         process data only as necessary to deliver their services and are bound by appropriate data processing obligations.
       </p>
 

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Terms of Service" };
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Terms and conditions for HSC Business Studies tutoring services provided by Acumen HSC in Sydney.",
+  alternates: { canonical: "/terms" },
+};
 
 const S = {
   page:    { maxWidth: 720, margin: "0 auto", padding: "72px 28px 96px" } as React.CSSProperties,
