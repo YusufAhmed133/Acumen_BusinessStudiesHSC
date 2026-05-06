@@ -6,32 +6,32 @@ const FAQ_TINTS = ["#A8E8BE", "#FADA88", "#A8C8FC", "#F8BCBC", "#A8E8BE", "#FADA
 
 const FAQS = [
   {
-    q: "How big are the groups?",
-    a: "Capped at 6 students. Most run 3 or 4, which means there is genuine back-and-forth in every session rather than a lecture you could have watched at home.",
+    q: "Is the trial really free?",
+    a: "Yes — one full session at no cost, no card required. If we're not the right fit, there's no obligation and you won't hear from us again. We'd rather you come back because the lesson was genuinely useful.",
   },
   {
-    q: "Online or in-person?",
-    a: "Both. Online sessions run live on Zoom with shared screen and annotations. In-person groups are on the lower north shore. Contact us for the current venue.",
-  },
-  {
-    q: "What if my child misses a lesson?",
-    a: "The full recording, annotated notes, and worked solutions go out within 24 hours. We do not charge for the missed lesson.",
+    q: "What's included in the price?",
+    a: "The $950 term rate covers every lesson for the school term (approximately 10 sessions), access to all HSC past papers from 2010 to 2025 annotated by syllabus dot point, weekly essay feedback, and the full online question bank. The $110 casual rate is a single session. Nothing is added on top.",
   },
   {
     q: "Who teaches the lessons?",
-    a: "Band 6 graduates from top institutions such as UNSW, USYD, UTS and Macquarie.",
+    a: "Band 6 graduates from UNSW, USYD, UTS, and Macquarie. Every tutor has sat the HSC Business Studies exam and scored in the top band — they know exactly what markers are looking for, and how to close the gap between a student's current mark and where they need to be.",
   },
   {
-    q: "Is the trial lesson actually free?",
-    a: "Yes. One full 90-minute session, no card required. If it is not the right fit, there is no follow-up and no obligation.",
+    q: "What if my child has a question outside of class?",
+    a: "We run a 24-hour question line via message. Students can send through any concept, essay paragraph, or past paper question and receive a proper written response — not just a pointer to the textbook.",
   },
   {
-    q: "What is included in the $950 term price?",
-    a: "All lessons across the school term (roughly 10 sessions), every past paper from 2010 to 2024 annotated by syllabus dot point, weekly essay feedback, and access to the full question bank. Casual rate is $110 per lesson.",
+    q: "Can a group of school friends join together?",
+    a: "Yes. If you have two to four students from the same school who want to learn together, we can arrange a dedicated session at a time that suits the group. Get in touch and we'll work out the details.",
   },
   {
-    q: "When is the HSC Business Studies exam?",
-    a: "Thursday 29 October 2026.",
+    q: "What happens if my child misses a lesson?",
+    a: "Cancellations with more than 24 hours' notice are fully refunded or credited to the next session. Cancellations within 24 hours — for any reason — are charged in full. Every student who misses receives the full notes and worked solutions so they stay on track.",
+  },
+  {
+    q: "Do your prices include GST?",
+    a: "Yes. All prices shown on this site are inclusive of GST.",
   },
 ];
 

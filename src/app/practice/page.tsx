@@ -244,7 +244,7 @@ function QuestionCard({ q }: { q: Question }) {
               </div>
             ) : (
               <p style={{ fontSize: 14, lineHeight: 1.6, color: "#5C5C5C", margin: 0 }}>
-                Pick an option and check your answer. We explain the marker&apos;s reasoning, not just the letter.
+                Pick an option and check your answer.
               </p>
             )
           ) : (
