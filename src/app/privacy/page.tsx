@@ -2,30 +2,85 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Privacy Policy" };
 
+const S = {
+  page:    { maxWidth: 720, margin: "0 auto", padding: "72px 28px 96px" } as React.CSSProperties,
+  h1:      { fontWeight: 700, fontSize: "clamp(28px,4vw,40px)", letterSpacing: "-0.03em", color: "#111", margin: "0 0 8px" } as React.CSSProperties,
+  date:    { fontSize: 12, color: "#9a9a9a", fontWeight: 500, letterSpacing: "0.04em", marginBottom: 48, display: "block" } as React.CSSProperties,
+  h2:      { fontWeight: 700, fontSize: 16, color: "#111", margin: "40px 0 10px", letterSpacing: "-0.01em" } as React.CSSProperties,
+  p:       { fontSize: 14.5, lineHeight: 1.75, color: "#444", margin: "0 0 12px" } as React.CSSProperties,
+  divider: { border: "none", borderTop: "1px solid #f0f0f0", margin: "40px 0 0" } as React.CSSProperties,
+};
+
 export default function PrivacyPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="font-display text-3xl font-bold text-ink-900">Privacy Policy</h1>
-      <p className="mt-3 text-sm text-ink-500">Last updated: May 2026</p>
-      <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink-700">
-        <p>
-          Acumen HSC Tutoring (&ldquo;Acumen&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects personal
-          information you provide when you submit an enquiry form or contact us. This
-          includes your name, email address, phone number, and year group.
-        </p>
-        <p>
-          We use this information to respond to your enquiry, provide tutoring services,
-          and send relevant communications. We do not sell your data to third parties.
-        </p>
-        <p>
-          Data is stored in Supabase (Australia region) and processed by Resend for
-          transactional emails. For enquiries about your data, email{" "}
-          <a href="mailto:hello@acumenhsc.com.au" className="text-brand-800 hover:underline">
-            hello@acumenhsc.com.au
-          </a>
-          .
-        </p>
-      </div>
+    <div style={S.page}>
+      <h1 style={S.h1}>Privacy Policy</h1>
+      <span style={S.date}>Last updated: May 2026</span>
+
+      <p style={S.p}>
+        Acumen HSC (&ldquo;Acumen&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is committed to protecting your personal information
+        in accordance with the Australian Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs).
+        This policy explains what we collect, why we collect it, and how it is handled.
+      </p>
+
+      <h2 style={S.h2}>1. What We Collect</h2>
+      <p style={S.p}>
+        When you submit an enquiry form on this website, we collect your name, email address, phone number, year group,
+        and any message you choose to include. We also collect standard technical data such as your IP address (stored as
+        a one-way hash), browser type, and referral source for security and analytics purposes.
+      </p>
+
+      <h2 style={S.h2}>2. Why We Collect It</h2>
+      <p style={S.p}>
+        We use your information solely to respond to your enquiry, provide and administer tutoring services, send invoices
+        and relevant service communications, and comply with our legal obligations. We do not use your data for any purpose
+        unrelated to Acumen HSC.
+      </p>
+
+      <h2 style={S.h2}>3. Who We Share It With</h2>
+      <p style={S.p}>
+        We do not sell, rent, or trade your personal information to third parties. We use the following services to operate
+        the site, each of which processes data only as required to deliver the service:
+      </p>
+      <p style={S.p}>
+        <strong>Supabase</strong> — stores enquiry data in a managed PostgreSQL database (data hosted in Australia).{" "}
+        <strong>Resend</strong> — sends transactional email notifications.{" "}
+        <strong>Vercel</strong> — hosts the website and serverless functions (servers in the United States; standard data
+        processing agreement in place).
+      </p>
+
+      <h2 style={S.h2}>4. Data Retention</h2>
+      <p style={S.p}>
+        Enquiry records are retained for as long as the business relationship is active and for a reasonable period afterwards
+        for administrative and legal purposes. You may request deletion of your data at any time.
+      </p>
+
+      <h2 style={S.h2}>5. Your Rights</h2>
+      <p style={S.p}>
+        Under the Australian Privacy Principles, you have the right to access the personal information we hold about you,
+        request corrections to inaccurate information, and request that we delete your information. To exercise any of these
+        rights, contact us using the details below and we will respond within a reasonable timeframe.
+      </p>
+
+      <h2 style={S.h2}>6. Security</h2>
+      <p style={S.p}>
+        We take reasonable steps to protect your personal information from misuse, interference, loss, and unauthorised
+        access. All data is transmitted over HTTPS and access to the database is restricted to authorised personnel only.
+      </p>
+
+      <h2 style={S.h2}>7. Cookies and Analytics</h2>
+      <p style={S.p}>
+        This website does not use advertising cookies or third-party tracking pixels. Standard server logs are collected
+        by Vercel for operational and security purposes.
+      </p>
+
+      <hr style={S.divider} />
+      <p style={{ ...S.p, marginTop: 32, color: "#9a9a9a", fontSize: 13 }}>
+        Privacy enquiries: call{" "}
+        <a href="tel:0470665141" style={{ color: "#9a9a9a" }}>0470 665 141</a>{" "}
+        or email{" "}
+        <a href="mailto:hello@acumenhsc.com.au" style={{ color: "#9a9a9a" }}>hello@acumenhsc.com.au</a>.
+      </p>
     </div>
   );
 }

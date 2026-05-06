@@ -76,11 +76,11 @@ export function Footer() {
         flexWrap: "wrap",
         gap: 12,
       }}>
-        <span>© Acumen HSC · Independent of NESA · Sydney NSW</span>
+        <span>© Acumen HSC · Sydney NSW</span>
         <span style={{ display: "flex", gap: 20 }}>
           <a href="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</a>
           <a href="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</a>
-          <a href="mailto:hello@acumenhsc.com.au" style={{ color: "inherit", textDecoration: "none" }}>hello@acumenhsc.com.au</a>
+          <a href="tel:0470665141" style={{ color: "inherit", textDecoration: "none" }}>0470 665 141</a>
         </span>
       </div>
     </footer>
