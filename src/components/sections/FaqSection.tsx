@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "What if my child has a question outside of class?",
-    a: "We run a 24-hour question line by message where students can send through any concept, essay paragraph, or past paper question and receive a proper written response rather than a pointer back to the textbook.",
+    a: "We run a 24-hour question line by message where students can send through any concept, essay paragraph, or past paper question and receive a proper written response.",
   },
   {
     q: "Can a group of school friends join together?",
