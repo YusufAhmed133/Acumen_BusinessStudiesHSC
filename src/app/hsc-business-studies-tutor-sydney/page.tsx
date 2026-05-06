@@ -6,6 +6,18 @@ export const metadata: Metadata = {
   description:
     "Expert HSC Business Studies tutoring in Sydney. Small groups of 6, Band 6-trained tutors, essay marking with 48-hour turnaround. First lesson free.",
   alternates: { canonical: "/hsc-business-studies-tutor-sydney" },
+  openGraph: {
+    title: "HSC Business Studies Tutor Sydney | Band 6 | Acumen HSC",
+    description: "Expert HSC Business Studies tutoring in Sydney. Small groups of 6, Band 6-trained tutors, essay marking with 48-hour turnaround. First lesson free.",
+    url: "https://acumenhsc.com.au/hsc-business-studies-tutor-sydney",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HSC Business Studies Tutor Sydney | Band 6 | Acumen HSC",
+    description: "Expert HSC Business Studies tutoring in Sydney. Small groups of 6, Band 6-trained tutors, essay marking with 48-hour turnaround. First lesson free.",
+    images: ["/og-image.png"],
+  },
 };
 
 const FEATURES = [

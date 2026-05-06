@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   description:
     "Book your free HSC Business Studies trial lesson. Get a response within 4 business hours. Call 0470 665 141 or fill in the form.",
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact Acumen HSC — Book a Free Trial Lesson",
+    description: "Book your free HSC Business Studies trial lesson. Get a response within 4 business hours. Call 0470 665 141 or fill in the form.",
+    url: "https://acumenhsc.com.au/contact",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const contactDetails = [

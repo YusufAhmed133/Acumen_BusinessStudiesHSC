@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   description:
     "Free HSC Business Studies past papers from 2014 to 2025 with links to NESA. All sections: MCQ, short answer, extended response.",
   alternates: { canonical: "/notes/past-papers" },
-  robots: { index: false, follow: false },
+  openGraph: {
+    title: "HSC Business Studies Past Papers 2014–2025 | Free | Acumen HSC",
+    description: "Free HSC Business Studies past papers from 2014 to 2025 with links to NESA. All sections: MCQ, short answer, extended response.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const NESA_URL =

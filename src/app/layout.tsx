@@ -60,6 +60,9 @@ export const metadata: Metadata = {
       "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
     images: ["/og-image.png"],
   },
+  verification: {
+    google: "NNwEcsPOnzZDGjaIH2HQnFfjV7wo-WeUZokoNyT-vrs",
+  },
   other: {
     "geo.region": "AU-NSW",
     "geo.placename": "Sydney",
@@ -114,9 +117,10 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "HSC Business Studies Tutoring",
-          description:
-            "Small-group Year 11 and Year 12 Business Studies tutoring in Sydney, targeting Band 5-6 results.",
+          name: "HSC Business Studies Tutoring Sydney",
+          description: "Small-group Year 11 and Year 12 Business Studies tutoring in Sydney CBD, targeting Band 5-6 results.",
+          areaServed: { "@type": "City", name: "Sydney" },
+          url: `${SITE_URL}/hsc-business-studies-tutor-sydney`,
         },
       },
     ],

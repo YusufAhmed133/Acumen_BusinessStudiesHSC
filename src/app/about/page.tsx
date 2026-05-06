@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   description:
     "Meet the Acumen HSC team. Our tutors are Band 6 Business Studies graduates who know exactly what markers look for — because they've been there.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About — Band 6 HSC Business Studies Tutors Sydney",
+    description: "Meet the Acumen HSC team. Our tutors are Band 6 Business Studies graduates who know exactly what markers look for — because they've been there.",
+    url: "https://acumenhsc.com.au/about",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const differentiators = [

@@ -4,8 +4,14 @@ import { CourseCard } from "@/components/sections/CourseCard";
 export const metadata: Metadata = {
   title: "HSC Business Studies — All 4 Topics",
   description:
-    "Expert HSC Business Studies tutoring across all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Band 6-aligned, Sydney.",
+    "Expert HSC Business Studies tutoring across all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Band 6 results, Sydney.",
   alternates: { canonical: "/courses" },
+  openGraph: {
+    title: "HSC Business Studies — All 4 Topics",
+    description: "Expert HSC Business Studies tutoring across all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Band 6 results, Sydney.",
+    url: "https://acumenhsc.com.au/courses",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const courses = [

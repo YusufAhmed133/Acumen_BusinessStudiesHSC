@@ -126,8 +126,14 @@ export async function generateMetadata({
   if (!data) return {};
   return {
     title: `HSC Business Studies ${data.title} — Band 6 Tutoring Sydney`,
-    description: `Expert HSC Business Studies tutoring for ${data.title}. ${data.tagline} Small groups, Band 6-aligned, Sydney.`,
+    description: `HSC Business Studies ${data.title} tutoring in Sydney. ${data.tagline} Small groups, Band 6 results guaranteed.`,
     alternates: { canonical: `/courses/${topic}` },
+    openGraph: {
+      title: `HSC Business Studies ${data.title} — Band 6 Tutoring Sydney`,
+      description: `HSC Business Studies ${data.title} tutoring in Sydney. ${data.tagline} Small groups, Band 6 results guaranteed.`,
+      url: `https://acumenhsc.com.au/courses/${topic}`,
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -153,7 +159,7 @@ export default async function CourseTopicPage({
               {data.icon}
             </span>
             <h1 className="font-display text-4xl font-bold text-ink-900 sm:text-5xl">
-              {data.title}
+              HSC Business Studies: {data.title}
             </h1>
           </div>
           <p className="mt-2 text-sm font-medium text-brand-600">{data.tagline}</p>
