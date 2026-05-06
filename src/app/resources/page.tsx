@@ -101,7 +101,7 @@ export default function ResourcesPage() {
             Free resources
           </p>
           <h1 className="mt-3 font-display text-4xl font-bold text-ink-900 sm:text-5xl">
-            Free HSC Business notes.
+            Free HSC Business Studies notes.
             <br />
             Email required, no spam.
           </h1>

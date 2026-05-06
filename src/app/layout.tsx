@@ -27,7 +27,10 @@ export const metadata: Metadata = {
     "Year 11 Business Studies tutor",
     "HSC Band 6 essay marking",
   ],
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: { "en-AU": "/" },
+  },
   robots: {
     index: true,
     follow: true,
@@ -41,12 +44,21 @@ export const metadata: Metadata = {
     title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
     description:
       "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Acumen HSC — Band 6 Business Studies Tutoring Sydney",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
     description:
       "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
+    images: ["/og-image.png"],
   },
   other: {
     "geo.region": "AU-NSW",
