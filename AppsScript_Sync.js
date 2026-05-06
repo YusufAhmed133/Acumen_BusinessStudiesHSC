@@ -1,96 +1,97 @@
 // =============================================================================
-// Acumen HSC — Google Apps Script: Bi-directional Supabase ↔ Sheets sync
+// Acumen HSC — Google Apps Script v2
+// Bi-directional Supabase ↔ Sheets sync with full colour coding + admin tools
 // =============================================================================
-// SETUP (one-time):
-//   1. Script Properties  (Extensions → Apps Script → Project settings → Script properties):
-//        SUPABASE_URL        = https://<ref>.supabase.co
-//        SUPABASE_SERVICE_KEY = <service_role_key>   (NOT the anon key — must bypass RLS)
-//        WEBHOOK_SECRET       = <any random string>  (same value used in next two steps)
-//   2. Run  setupSheets()   once (Acumen menu → "Set up sheets")
-//   3. Run  installTriggers() once (Acumen menu → "Install triggers")
-//   4. Deploy as a web app:
-//        Execute as: Me    |   Who has access: Anyone
-//        Copy the web app URL → paste into Vercel env NOTIFY_WEBHOOK_URL
-//        Append  ?secret=<WEBHOOK_SECRET>  to the URL
-//   5. In Supabase dashboard → Database → Webhooks, create ONE webhook:
-//        Table: leads   |   Events: UPDATE, DELETE
-//        URL: <web app URL>?secret=<WEBHOOK_SECRET>
+//
+// SETUP (run in this order):
+//   1. Extensions → Apps Script → Project settings → Script properties — add:
+//        SUPABASE_URL         = https://<ref>.supabase.co
+//        SUPABASE_SERVICE_KEY = <service_role_key>  ← NOT the anon key
+//        WEBHOOK_SECRET       = <any random string, e.g. openssl rand -hex 20>
+//
+//   2. Deploy as web app:
+//        Execute as: Me  |  Who has access: Anyone
+//        Copy the URL → this is your NOTIFY_WEBHOOK_URL
+//        Append  ?secret=<WEBHOOK_SECRET>  to the URL before saving to Vercel
+//
+//   3. Vercel env vars to set:
+//        NOTIFY_WEBHOOK_URL      = <web app URL>?secret=<secret>
+//        NOTIFY_WEBHOOK_SECRET   = <same secret>
+//
+//   4. In Supabase dashboard → Database → Webhooks → New webhook:
+//        Table: leads  |  Events: UPDATE, DELETE
+//        URL: <same web app URL>?secret=<secret>
 //        Headers: Content-Type: application/json
+//
+//   5. Open the Google Sheet → Acumen menu → "Set up sheets"
+//   6. Acumen menu → "Install triggers"
+//
 // =============================================================================
 
 const SS_ID        = '1g70ENNhQwcQ222qdNIsWT9uNjrzNpLOUGghsM2w--_s';
 const LEADS_TAB    = 'Leads';
 const STUDENTS_TAB = 'Active Students';
 const ERRORS_TAB   = 'Errors';
+const STATS_TAB    = 'Stats';
 
-// Column indices (1-based) — update setupSheets() too if you change these
+// Column indices (1-based)
 const C = {
-  TIMESTAMP:   1,
-  NAME:        2,
-  EMAIL:       3,
-  PHONE:       4,
-  YEAR:        5,
-  MESSAGE:     6,
-  STATUS:      7,
-  NOTES:       8,
-  SUPABASE_ID: 9,
-  SOURCE:      10,
-  TOTAL:       10,
+  TIMESTAMP:    1,
+  NAME:         2,
+  EMAIL:        3,
+  PHONE:        4,
+  YEAR:         5,
+  MESSAGE:      6,
+  STATUS:       7,
+  NOTES:        8,
+  SUPABASE_ID:  9,
+  SOURCE:       10,
+  CONTACTED_AT: 11,  // hidden — stores ISO timestamp of when status → contacted
 };
+const TOTAL_COLS = 11;
 
 const STATUSES = ['new', 'contacted', 'converted', 'disqualified'];
 
-const COLOURS = {
+// Row background + font per status
+const STATUS_COLOURS = {
   new:          { bg: '#ffffff', font: '#1a1a1a' },
   contacted:    { bg: '#fff8e1', font: '#7b5800' },
   converted:    { bg: '#e6f4ea', font: '#1f6b40' },
-  disqualified: { bg: '#f28b82', font: '#5c0000' },
+  disqualified: { bg: '#fce8e6', font: '#c0392b' },
+};
+
+// Source cell background (column J only — row colour stays status-driven)
+const SOURCE_COLOURS = {
+  hero_form:     '#e3f2fd',   // blue tint
+  contact_form:  '#f3e5f5',   // purple tint
+  resource_gate: '#fff3e0',   // amber tint
+  footer_form:   '#e8f5e9',   // green tint
+  other:         '#f5f5f5',   // grey
 };
 
 // =============================================================================
-// doPost — entry point for all inbound HTTP events
+// doPost — single entry point for all inbound events
 // =============================================================================
 function doPost(e) {
   try {
-    // Validate secret (embedded as ?secret= query param)
-    const expectedSecret = PropertiesService.getScriptProperties().getProperty('WEBHOOK_SECRET');
-    if (expectedSecret) {
-      const incoming = e.parameter && e.parameter.secret;
-      if (incoming !== expectedSecret) {
-        return jsonResp_({ ok: false, error: 'Unauthorized' });
-      }
+    // Validate shared secret (sent as ?secret= query param from both Next.js and Supabase)
+    const expected = PropertiesService.getScriptProperties().getProperty('WEBHOOK_SECRET');
+    if (expected) {
+      const received = e.parameter && e.parameter.secret;
+      if (received !== expected) return jsonResp_({ ok: false, error: 'Unauthorized' });
     }
 
     const raw = JSON.parse(e.postData.contents);
     const ss  = SpreadsheetApp.openById(SS_ID);
 
-    // ── A. Form submission from Next.js ──────────────────────────────────────
-    // Payload shape: { type: 'new_lead', name, email, phone, year_group,
-    //                  source, message, submitted_at, id: <supabase_uuid> }
-    if (raw.type === 'new_lead') {
-      return handleNewLead_(ss, raw);
-    }
-
-    // ── B. Supabase database webhook (UPDATE) ────────────────────────────────
-    // Payload shape: { type: 'UPDATE', table: 'leads', record: {...}, old_record: {...} }
-    if (raw.type === 'UPDATE' && raw.table === 'leads') {
-      return handleSupabaseUpdate_(ss, raw.record, raw.old_record);
-    }
-
-    // ── C. Supabase database webhook (DELETE) ────────────────────────────────
-    if (raw.type === 'DELETE' && raw.table === 'leads') {
-      return handleSupabaseDelete_(ss, raw.old_record);
-    }
-
-    // ── D. Legacy bare payload (no type field) — backwards compat ────────────
-    if (raw.name && raw.email && !raw.type) {
-      return handleNewLead_(ss, { type: 'new_lead', id: null, ...raw });
-    }
+    if (raw.type === 'new_lead')                              return handleNewLead_(ss, raw);
+    if (raw.type === 'UPDATE' && raw.table === 'leads')       return handleSupabaseUpdate_(ss, raw.record, raw.old_record);
+    if (raw.type === 'DELETE' && raw.table === 'leads')       return handleSupabaseDelete_(ss, raw.old_record);
+    if (raw.name && raw.email && !raw.type)                   return handleNewLead_(ss, { type: 'new_lead', id: null, ...raw });
 
     return jsonResp_({ ok: true, skipped: true });
-
   } catch (err) {
-    logError_('doPost', err.message, String(e.postData && e.postData.contents).slice(0, 300));
+    logError_('doPost', err.message, String((e.postData && e.postData.contents) || '').slice(0, 300));
     return jsonResp_({ ok: false, error: err.message });
   }
 }
@@ -104,19 +105,11 @@ function handleNewLead_(ss, data) {
   if (!lock.tryLock(8000)) return jsonResp_({ ok: false, error: 'Lock timeout' });
 
   try {
-    // Idempotency: skip if this Supabase id is already present
-    if (data.id && findRowById_(sheet, data.id) > 1) {
-      return jsonResp_({ ok: true, skipped: 'duplicate_id' });
-    }
-    // Also skip duplicate emails when no id provided (legacy path)
-    if (!data.id && emailExists_(sheet, data.email)) {
-      return jsonResp_({ ok: true, skipped: 'duplicate_email' });
-    }
+    if (data.id && findRowById_(sheet, data.id) > 1)    return jsonResp_({ ok: true, skipped: 'duplicate_id' });
+    if (!data.id && emailExists_(sheet, data.email))     return jsonResp_({ ok: true, skipped: 'duplicate_email' });
 
     const ts = Utilities.formatDate(
-      new Date(data.submitted_at || new Date()),
-      'Australia/Sydney',
-      'dd/MM/yyyy HH:mm'
+      new Date(data.submitted_at || new Date()), 'Australia/Sydney', 'dd/MM/yyyy HH:mm'
     );
 
     sheet.appendRow([
@@ -127,32 +120,31 @@ function handleNewLead_(ss, data) {
       data.year_group   || '',
       truncate_(data.message || '', 300),
       'new',
-      '',                                 // Notes — empty on arrival
-      data.id           || '',            // SupabaseID
+      '',                          // Notes
+      data.id           || '',     // SupabaseID
       data.source        || 'hero_form',
+      '',                          // contacted_at (hidden)
     ]);
 
-    const newRow = sheet.getLastRow();
-    applyDropdown_(sheet, newRow);
-    applyStyle_(sheet, newRow, 'new');
+    const r = sheet.getLastRow();
+    applyDropdown_(sheet, r);
+    applyRowStyle_(sheet, r, 'new');
+    applySourceColour_(sheet, r, data.source || 'hero_form');
     SpreadsheetApp.flush();
-
   } finally {
     lock.releaseLock();
   }
-
   return jsonResp_({ ok: true });
 }
 
 // =============================================================================
-// B. Supabase status/notes update → reflect in Sheets
+// B. Supabase UPDATE → reflect in Sheets
 // =============================================================================
 function handleSupabaseUpdate_(ss, record, oldRecord) {
   const sheet = ss.getSheetByName(LEADS_TAB);
   const row   = findRowById_(sheet, record.id);
 
   if (row <= 1) {
-    // Not in Sheets yet — synthesise as a new lead
     if (record.name && record.email) {
       return handleNewLead_(ss, { type: 'new_lead', ...record, submitted_at: record.created_at });
     }
@@ -163,54 +155,57 @@ function handleSupabaseUpdate_(ss, record, oldRecord) {
   if (!lock.tryLock(8000)) return jsonResp_({ ok: false, error: 'Lock timeout' });
 
   try {
-    const current = sheet.getRange(row, 1, 1, C.TOTAL).getValues()[0];
+    // Set flag so onLeadEdit knows this write came from Supabase, not a human
+    setSyncing_();
 
-    // Only write cells that actually changed — prevents spurious onLeadEdit fires
-    // (Apps Script does NOT fire onEdit when a cell is set to its current value programmatically)
-    if (record.status && current[C.STATUS - 1] !== record.status) {
+    const current = sheet.getRange(row, 1, 1, TOTAL_COLS).getValues()[0];
+    const oldStatus = current[C.STATUS - 1];
+
+    if (record.status && oldStatus !== record.status) {
       sheet.getRange(row, C.STATUS).setValue(record.status);
-      applyStyle_(sheet, row, record.status);
-      if (record.status === 'converted') copyToStudents_(sheet, row);
+      applyRowStyle_(sheet, row, record.status);
+
+      if (record.status === 'converted')                              copyToStudents_(sheet, row);
+      if (oldStatus === 'converted' && record.status !== 'converted') removeStudentByEmail_(ss, record.email);
+
+      if (record.status === 'contacted' && !current[C.CONTACTED_AT - 1]) {
+        sheet.getRange(row, C.CONTACTED_AT).setValue(new Date().toISOString());
+      }
     }
 
     const newNotes = record.notes ?? '';
-    if (newNotes !== (current[C.NOTES - 1] ?? '')) {
+    if (newNotes !== String(current[C.NOTES - 1] ?? '')) {
       sheet.getRange(row, C.NOTES).setValue(newNotes);
     }
 
     SpreadsheetApp.flush();
   } finally {
+    clearSyncing_();
     lock.releaseLock();
   }
-
   return jsonResp_({ ok: true });
 }
 
 // =============================================================================
-// C. Supabase DELETE → remove row from Sheets (and Students tab if converted)
+// C. Supabase DELETE → remove from Sheets (and Students tab)
 // =============================================================================
 function handleSupabaseDelete_(ss, oldRecord) {
   const sheet = ss.getSheetByName(LEADS_TAB);
   const row   = findRowById_(sheet, oldRecord.id);
 
-  if (row > 1) {
-    sheet.deleteRow(row);
-    SpreadsheetApp.flush();
-  }
-
-  if (oldRecord.email) {
-    removeStudentByEmail_(ss, oldRecord.email);
-  }
+  if (row > 1) { sheet.deleteRow(row); SpreadsheetApp.flush(); }
+  if (oldRecord.email) removeStudentByEmail_(ss, oldRecord.email);
 
   return jsonResp_({ ok: true });
 }
 
 // =============================================================================
-// onLeadEdit — installable trigger: Sheets edit → Supabase PATCH
+// onLeadEdit — installable trigger: human Sheets edit → Supabase PATCH
 // =============================================================================
-// Note: this is an INSTALLABLE trigger (not simple trigger) so UrlFetchApp works.
-// Named differently from "onEdit" to avoid conflict with the built-in simple trigger.
 function onLeadEdit(e) {
+  // Skip if this edit was made programmatically by this script (loop prevention)
+  if (isSyncing_()) return;
+
   const sheet = e.range.getSheet();
   if (sheet.getName() !== LEADS_TAB) return;
 
@@ -218,135 +213,174 @@ function onLeadEdit(e) {
   const row = e.range.getRow();
   if (row <= 1) return;
 
-  const isStatus = (col === C.STATUS);
-  const isNotes  = (col === C.NOTES);
+  const isStatus = col === C.STATUS;
+  const isNotes  = col === C.NOTES;
   if (!isStatus && !isNotes) return;
 
-  // Apply visual style immediately — no API call needed
+  // Apply visual changes immediately — no API round-trip needed
   if (isStatus) {
-    const status = String(e.value || '').toLowerCase().trim();
-    applyStyle_(sheet, row, status);
-    if (status === 'converted') copyToStudents_(sheet, row);
+    const newStatus  = String(e.value || '').toLowerCase().trim();
+    const oldStatus  = String(e.oldValue || '').toLowerCase().trim();
+
+    applyRowStyle_(sheet, row, newStatus);
+
+    if (newStatus === 'converted')                              copyToStudents_(sheet, row);
+    if (oldStatus === 'converted' && newStatus !== 'converted') {
+      const email = sheet.getRange(row, C.EMAIL).getValue();
+      removeStudentByEmail_(SpreadsheetApp.openById(SS_ID), email);
+    }
+
+    // Timestamp when first moved to contacted
+    if (newStatus === 'contacted') {
+      const existing = sheet.getRange(row, C.CONTACTED_AT).getValue();
+      if (!existing) sheet.getRange(row, C.CONTACTED_AT).setValue(new Date().toISOString());
+    }
   }
 
-  // Sync back to Supabase
   const sid = sheet.getRange(row, C.SUPABASE_ID).getValue();
-  if (!sid) return; // Legacy row — no Supabase id, skip
+  if (!sid) return;
 
   const patch = {};
-  if (isStatus) patch.status = String(e.value || '').toLowerCase().trim();
-  if (isNotes)  patch.notes  = String(e.value || '');
+  if (isStatus) {
+    patch.status = String(e.value || '').toLowerCase().trim();
+    if (patch.status === 'contacted') patch.contacted_at = new Date().toISOString();
+  }
+  if (isNotes) patch.notes = String(e.value || '');
 
-  patchLead_(sid, patch);
+  const resp = patchLead_(sid, patch);
+
+  // Toast the admin if the PATCH failed (e.g. bad service key, network issue)
+  if (!resp || resp.getResponseCode() >= 400) {
+    SpreadsheetApp.getActiveSpreadsheet().toast(
+      'Supabase sync failed — change saved locally. Will retry in 10 min.',
+      'Sync warning', 8
+    );
+  }
 }
 
 // =============================================================================
-// syncFromSupabase — time-driven trigger every 10 min — full reconciliation
+// syncFromSupabase — time-driven: full reconciliation every 10 min
+// Handles: remote deletes, remote status edits, missed webhooks, pagination
 // =============================================================================
-// Catches any drift: manual Supabase edits/deletes that didn't fire a webhook,
-// or cases where the webhook fired but doPost had a transient error.
 function syncFromSupabase() {
   const props   = PropertiesService.getScriptProperties();
   const baseUrl = props.getProperty('SUPABASE_URL');
   const svcKey  = props.getProperty('SUPABASE_SERVICE_KEY');
   if (!baseUrl || !svcKey) return;
 
-  let leads;
-  try {
-    const resp = UrlFetchApp.fetch(
-      `${baseUrl}/rest/v1/leads?select=id,created_at,name,email,phone,year_group,source,message,status,notes&order=created_at.desc&limit=500`,
-      {
-        headers: { apikey: svcKey, Authorization: `Bearer ${svcKey}` },
-        muteHttpExceptions: true,
-      }
-    );
+  // Paginated fetch — 500 per page
+  const allLeads = [];
+  let offset     = 0;
+  const pageSize = 500;
+
+  while (true) {
+    let resp;
+    try {
+      resp = UrlFetchApp.fetch(
+        `${baseUrl}/rest/v1/leads?select=id,created_at,name,email,phone,year_group,source,message,status,notes,contacted_at&order=created_at.desc&limit=${pageSize}&offset=${offset}`,
+        { headers: { apikey: svcKey, Authorization: `Bearer ${svcKey}` }, muteHttpExceptions: true }
+      );
+    } catch (err) {
+      logError_('syncFromSupabase', err.message, `offset=${offset}`);
+      break;
+    }
+
     if (resp.getResponseCode() !== 200) {
       logError_('syncFromSupabase', `HTTP ${resp.getResponseCode()}`, resp.getContentText().slice(0, 200));
-      return;
+      break;
     }
-    leads = JSON.parse(resp.getContentText());
-  } catch (err) {
-    logError_('syncFromSupabase', err.message, '');
-    return;
+
+    const page = JSON.parse(resp.getContentText());
+    allLeads.push(...page);
+    if (page.length < pageSize) break;
+    offset += pageSize;
   }
+
+  if (!allLeads.length) return;
 
   const ss    = SpreadsheetApp.openById(SS_ID);
   const sheet = ss.getSheetByName(LEADS_TAB);
   const lock  = LockService.getScriptLock();
-  if (!lock.tryLock(25000)) return; // Skip this cycle if another sync is still running
+  if (!lock.tryLock(30000)) return;
 
   try {
+    setSyncing_();
     const lastRow = sheet.getLastRow();
-
-    // Build  supabase_id → row  index from current Sheets data
     const idToRow = {};
+
     if (lastRow > 1) {
       sheet.getRange(2, C.SUPABASE_ID, lastRow - 1, 1).getValues()
         .forEach((r, i) => { if (r[0]) idToRow[r[0]] = i + 2; });
     }
 
-    const liveIds = new Set(leads.map(l => l.id));
+    const liveIds = new Set(allLeads.map(l => l.id));
 
-    // 1. Remove Sheets rows that no longer exist in Supabase (deleted remotely)
-    for (let r = lastRow; r >= 2; r--) {
+    // Delete rows whose Supabase record no longer exists
+    for (let r = sheet.getLastRow(); r >= 2; r--) {
       const sid = sheet.getRange(r, C.SUPABASE_ID).getValue();
       if (sid && !liveIds.has(sid)) {
         sheet.deleteRow(r);
-        // After deletion, rows below shift up — rebuild index for remaining leads
         for (const k in idToRow) { if (idToRow[k] > r) idToRow[k]--; }
       }
     }
 
-    // 2. For each Supabase lead: update stale data OR append if missing
-    for (const lead of leads) {
+    // Reconcile or append each Supabase lead
+    for (const lead of allLeads) {
       const row = idToRow[lead.id];
-
       if (row) {
-        // Row exists — reconcile status and notes
-        const vals = sheet.getRange(row, 1, 1, C.TOTAL).getValues()[0];
+        const vals = sheet.getRange(row, 1, 1, TOTAL_COLS).getValues()[0];
+
         if (vals[C.STATUS - 1] !== lead.status) {
+          const oldStatus = String(vals[C.STATUS - 1]);
           sheet.getRange(row, C.STATUS).setValue(lead.status);
-          applyStyle_(sheet, row, lead.status);
+          applyRowStyle_(sheet, row, lead.status);
+          if (lead.status === 'converted')                         copyToStudents_(sheet, row);
+          if (oldStatus === 'converted' && lead.status !== 'converted') removeStudentByEmail_(ss, lead.email);
         }
-        const sheetNotes = String(vals[C.NOTES - 1] ?? '');
-        const remNotes   = String(lead.notes ?? '');
-        if (sheetNotes !== remNotes) {
+
+        const remNotes = String(lead.notes ?? '');
+        if (String(vals[C.NOTES - 1] ?? '') !== remNotes) {
           sheet.getRange(row, C.NOTES).setValue(remNotes);
         }
+
+        if (lead.contacted_at && !vals[C.CONTACTED_AT - 1]) {
+          sheet.getRange(row, C.CONTACTED_AT).setValue(lead.contacted_at);
+        }
       } else {
-        // Missing from Sheets — add it
         const ts = Utilities.formatDate(new Date(lead.created_at), 'Australia/Sydney', 'dd/MM/yyyy HH:mm');
         sheet.appendRow([
           ts, lead.name, lead.email, lead.phone || '', lead.year_group || '',
           truncate_(lead.message || '', 300), lead.status,
           lead.notes || '', lead.id, lead.source || '',
+          lead.contacted_at || '',
         ]);
         const newRow = sheet.getLastRow();
         applyDropdown_(sheet, newRow);
-        applyStyle_(sheet, newRow, lead.status);
-        idToRow[lead.id] = newRow; // Keep index current for this loop
+        applyRowStyle_(sheet, newRow, lead.status);
+        applySourceColour_(sheet, newRow, lead.source || 'other');
+        idToRow[lead.id] = newRow;
       }
     }
 
+    refreshStats_(ss);
     SpreadsheetApp.flush();
   } finally {
+    clearSyncing_();
     lock.releaseLock();
   }
 }
 
 // =============================================================================
-// deleteFocusedLead — custom menu: deletes from Supabase + Sheets atomically
+// deleteFocusedLead — Acumen menu: deletes from Supabase AND Sheets atomically
 // =============================================================================
-// Use this instead of pressing Delete on a row — it syncs both sides.
 function deleteFocusedLead() {
   const ss    = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getActiveSheet();
   if (sheet.getName() !== LEADS_TAB) {
-    SpreadsheetApp.getUi().alert('Switch to the Leads tab first.');
-    return;
+    SpreadsheetApp.getUi().alert('Switch to the Leads tab first.'); return;
   }
 
-  const row  = sheet.getActiveRange().getRow();
+  const row   = sheet.getActiveRange().getRow();
   if (row <= 1) return;
 
   const sid   = sheet.getRange(row, C.SUPABASE_ID).getValue();
@@ -354,45 +388,51 @@ function deleteFocusedLead() {
   const email = sheet.getRange(row, C.EMAIL).getValue();
   const ui    = SpreadsheetApp.getUi();
 
-  const res = ui.alert(
-    `Delete lead "${name}"?`,
-    'Removes from Supabase and this sheet. Cannot be undone.',
-    ui.ButtonSet.YES_NO
-  );
-  if (res !== ui.Button.YES) return;
+  if (ui.alert(`Delete "${name}"?`, 'Removes from Supabase and this sheet. Cannot be undone.', ui.ButtonSet.YES_NO) !== ui.Button.YES) return;
 
-  // Delete from Supabase first
   if (sid) {
-    const props   = PropertiesService.getScriptProperties();
-    const baseUrl = props.getProperty('SUPABASE_URL');
-    const svcKey  = props.getProperty('SUPABASE_SERVICE_KEY');
-    if (baseUrl && svcKey) {
-      try {
-        const resp = UrlFetchApp.fetch(`${baseUrl}/rest/v1/leads?id=eq.${sid}`, {
-          method: 'DELETE',
-          headers: { apikey: svcKey, Authorization: `Bearer ${svcKey}`, Prefer: 'return=minimal' },
-          muteHttpExceptions: true,
-        });
-        if (resp.getResponseCode() >= 400) {
-          logError_('deleteFocusedLead', `Supabase DELETE failed HTTP ${resp.getResponseCode()}`, sid);
-        }
-      } catch (err) {
-        logError_('deleteFocusedLead', err.message, sid);
-      }
+    const resp = supabaseRequest_('DELETE', `/rest/v1/leads?id=eq.${sid}`, null);
+    if (!resp || resp.getResponseCode() >= 400) {
+      ss.toast('Supabase delete failed — lead not removed from database.', 'Error', 8); return;
     }
   }
 
-  // Delete from Sheets (Supabase webhook will also fire → handleSupabaseDelete_ → idempotent)
   sheet.deleteRow(row);
-  removeStudentByEmail_(SpreadsheetApp.openById(SS_ID), email);
+  removeStudentByEmail_(ss, email);
   SpreadsheetApp.flush();
+  ss.toast(`"${name}" deleted from Supabase and Sheets.`, 'Done', 4);
+}
+
+// =============================================================================
+// refreshStats_ — writes summary counts to the Stats tab
+// =============================================================================
+function refreshStats_(ss) {
+  try {
+    let stats = ss.getSheetByName(STATS_TAB);
+    if (!stats) return; // Only runs if setupSheets() created the tab
+
+    const sheet   = ss.getSheetByName(LEADS_TAB);
+    const lastRow = sheet.getLastRow();
+    if (lastRow < 2) { stats.getRange('B2:B5').clearContent(); return; }
+
+    const statuses = sheet.getRange(2, C.STATUS, lastRow - 1, 1).getValues().flat();
+    const counts   = { new: 0, contacted: 0, converted: 0, disqualified: 0 };
+    statuses.forEach(s => { if (counts[s] !== undefined) counts[s]++; });
+
+    stats.getRange('B2').setValue(counts.new);
+    stats.getRange('B3').setValue(counts.contacted);
+    stats.getRange('B4').setValue(counts.converted);
+    stats.getRange('B5').setValue(counts.disqualified);
+    stats.getRange('B6').setValue(lastRow - 1);
+    stats.getRange('B7').setValue(Utilities.formatDate(new Date(), 'Australia/Sydney', 'dd/MM/yyyy HH:mm'));
+  } catch (_) {}
 }
 
 // =============================================================================
 // Supabase REST helpers
 // =============================================================================
 function patchLead_(id, patch) {
-  supabaseRequest_('PATCH', `/rest/v1/leads?id=eq.${id}`, patch);
+  return supabaseRequest_('PATCH', `/rest/v1/leads?id=eq.${id}`, patch);
 }
 
 function supabaseRequest_(method, path, body) {
@@ -402,7 +442,7 @@ function supabaseRequest_(method, path, body) {
   if (!baseUrl || !svcKey) return null;
 
   try {
-    const resp = UrlFetchApp.fetch(`${baseUrl}${path}`, {
+    const opts = {
       method,
       headers: {
         apikey: svcKey,
@@ -410,9 +450,10 @@ function supabaseRequest_(method, path, body) {
         'Content-Type': 'application/json',
         Prefer: 'return=minimal',
       },
-      payload: body ? JSON.stringify(body) : undefined,
       muteHttpExceptions: true,
-    });
+    };
+    if (body) opts.payload = JSON.stringify(body);
+    const resp = UrlFetchApp.fetch(`${baseUrl}${path}`, opts);
     if (resp.getResponseCode() >= 400) {
       logError_('supabaseRequest_', `${method} ${path} → HTTP ${resp.getResponseCode()}`, resp.getContentText().slice(0, 200));
     }
@@ -421,6 +462,21 @@ function supabaseRequest_(method, path, body) {
     logError_('supabaseRequest_', err.message, `${method} ${path}`);
     return null;
   }
+}
+
+// =============================================================================
+// Loop prevention — 10-second SYNCING flag in Script Properties
+// Prevents onLeadEdit from PATCHing Supabase when a programmatic write triggered the edit event
+// =============================================================================
+function setSyncing_() {
+  PropertiesService.getScriptProperties().setProperty('SYNCING_TS', String(Date.now()));
+}
+function clearSyncing_() {
+  PropertiesService.getScriptProperties().deleteProperty('SYNCING_TS');
+}
+function isSyncing_() {
+  const ts = PropertiesService.getScriptProperties().getProperty('SYNCING_TS');
+  return ts && (Date.now() - Number(ts)) < 10000;
 }
 
 // =============================================================================
@@ -438,17 +494,17 @@ function findRowById_(sheet, id) {
 function emailExists_(sheet, email) {
   const last = sheet.getLastRow();
   if (last < 2) return false;
-  const emails = sheet.getRange(2, C.EMAIL, last - 1, 1).getValues().flat();
-  return emails.map(String).map(s => s.toLowerCase()).includes(String(email).toLowerCase());
+  return sheet.getRange(2, C.EMAIL, last - 1, 1).getValues().flat()
+    .map(String).map(s => s.toLowerCase())
+    .includes(String(email).toLowerCase());
 }
 
 function copyToStudents_(leadsSheet, row) {
   const ss       = SpreadsheetApp.openById(SS_ID);
   const students = ss.getSheetByName(STUDENTS_TAB);
-  const vals     = leadsSheet.getRange(row, 1, 1, C.TOTAL).getValues()[0];
+  const vals     = leadsSheet.getRange(row, 1, 1, TOTAL_COLS).getValues()[0];
   const email    = String(vals[C.EMAIL - 1]).toLowerCase();
 
-  // Idempotent — skip if email already in Students
   if (students.getLastRow() > 1) {
     const existing = students.getRange(2, 2, students.getLastRow() - 1, 1).getValues().flat()
       .map(s => String(s).toLowerCase());
@@ -456,15 +512,8 @@ function copyToStudents_(leadsSheet, row) {
   }
 
   students.appendRow([
-    vals[C.NAME - 1],      // Name
-    email,                 // Email
-    vals[C.PHONE - 1],     // Phone
-    vals[C.YEAR - 1],      // Year
-    vals[C.TIMESTAMP - 1], // Enquiry Date
-    '',                    // First Class Date (enter manually)
-    '',                    // Notes
-    '',                    // spare
-    vals[C.SUPABASE_ID - 1], // SupabaseID for reference
+    vals[C.NAME - 1], email, vals[C.PHONE - 1], vals[C.YEAR - 1],
+    vals[C.TIMESTAMP - 1], '', '', '', vals[C.SUPABASE_ID - 1],
   ]);
   const r = students.getLastRow();
   students.getRange(r, 1, 1, 9).setBackground('#e6f4ea').setFontColor('#1f6b40');
@@ -475,9 +524,7 @@ function removeStudentByEmail_(ss, email) {
   if (!students || students.getLastRow() < 2) return;
   const emails = students.getRange(2, 2, students.getLastRow() - 1, 1).getValues().flat();
   for (let i = emails.length - 1; i >= 0; i--) {
-    if (String(emails[i]).toLowerCase() === String(email).toLowerCase()) {
-      students.deleteRow(i + 2);
-    }
+    if (String(emails[i]).toLowerCase() === String(email).toLowerCase()) students.deleteRow(i + 2);
   }
 }
 
@@ -487,18 +534,34 @@ function applyDropdown_(sheet, row) {
   );
 }
 
-function applyStyle_(sheet, row, status) {
-  const c = COLOURS[status] || COLOURS.new;
-  const r = sheet.getRange(row, 1, 1, C.TOTAL);
+function applyRowStyle_(sheet, row, status) {
+  const c = STATUS_COLOURS[status] || STATUS_COLOURS.new;
+  const r = sheet.getRange(row, 1, 1, TOTAL_COLS);
   r.setBackground(c.bg).setFontColor(c.font).setFontStyle('normal').setFontWeight('normal');
+
+  // Bold name for unactioned new leads — draws the eye
+  sheet.getRange(row, C.NAME).setFontWeight(status === 'new' ? 'bold' : 'normal');
+
+  // Strikethrough name for disqualified leads
+  const nameCell  = sheet.getRange(row, C.NAME);
+  const textStyle = SpreadsheetApp.newTextStyle()
+    .setStrikethrough(status === 'disqualified')
+    .build();
+  nameCell.setTextStyle(textStyle);
+
   if (status === 'disqualified') {
     r.setFontStyle('italic');
     sheet.getRange(row, C.STATUS).setFontWeight('bold');
   }
 }
 
+function applySourceColour_(sheet, row, source) {
+  const bg = SOURCE_COLOURS[source] || SOURCE_COLOURS.other;
+  sheet.getRange(row, C.SOURCE).setBackground(bg);
+}
+
 function truncate_(s, n) {
-  return s.length <= n ? s : s.slice(0, n) + '…';
+  return String(s).length <= n ? s : String(s).slice(0, n) + '…';
 }
 
 function jsonResp_(obj) {
@@ -506,7 +569,7 @@ function jsonResp_(obj) {
 }
 
 // =============================================================================
-// Error log — appends to Errors tab so you can see what broke
+// Error log — red Errors tab for debugging
 // =============================================================================
 function logError_(fn, message, context) {
   try {
@@ -517,80 +580,111 @@ function logError_(fn, message, context) {
       Utilities.formatDate(new Date(), 'Australia/Sydney', 'dd/MM/yyyy HH:mm:ss'),
       fn, message, context,
     ]);
-  } catch (_) {
-    Logger.log(`[ERROR] ${fn}: ${message}`);
-  }
+  } catch (_) { Logger.log(`[ERROR] ${fn}: ${message}`); }
 }
 
 // =============================================================================
-// installTriggers — run once from the Acumen menu
+// installTriggers — run once from Acumen menu
 // =============================================================================
 function installTriggers() {
-  // Remove all existing project triggers first to avoid duplicates
   ScriptApp.getProjectTriggers().forEach(t => ScriptApp.deleteTrigger(t));
 
-  // Installable onEdit — runs as you, so UrlFetchApp works (unlike simple trigger)
   ScriptApp.newTrigger('onLeadEdit')
-    .forSpreadsheet(SS_ID)
-    .onEdit()
-    .create();
+    .forSpreadsheet(SS_ID).onEdit().create();
 
-  // Full reconciliation every 10 minutes — catches any sync drift
   ScriptApp.newTrigger('syncFromSupabase')
-    .timeBased()
-    .everyMinutes(10)
-    .create();
+    .timeBased().everyMinutes(10).create();
 
-  Logger.log('Triggers installed: onLeadEdit (onEdit) + syncFromSupabase (every 10 min)');
+  Logger.log('Triggers installed.');
 }
 
 // =============================================================================
-// setupSheets — run once from the Acumen menu
+// setupSheets — run once from Acumen menu
+// Creates/repairs all tabs with correct headers, widths, freezes, and formatting
 // =============================================================================
 function setupSheets() {
   const ss = SpreadsheetApp.openById(SS_ID);
 
   // ── Leads ──────────────────────────────────────────────────────────────────
   let leads = ss.getSheetByName(LEADS_TAB) || ss.insertSheet(LEADS_TAB);
-  if (leads.getLastRow() === 0) {
-    leads.appendRow(['Timestamp','Name','Email','Phone','Year','Message','Status','Notes','SupabaseID','Source']);
-  } else {
-    leads.getRange(1, 1, 1, C.TOTAL).setValues([['Timestamp','Name','Email','Phone','Year','Message','Status','Notes','SupabaseID','Source']]);
-  }
-  leads.getRange(1, 1, 1, C.TOTAL).setFontWeight('bold').setBackground('#0a0a0a').setFontColor('#ffffff');
+  const headers = ['Timestamp','Name','Email','Phone','Year','Message','Status','Notes','SupabaseID','Source','contacted_at'];
+  if (leads.getLastRow() === 0) leads.appendRow(headers);
+  else leads.getRange(1, 1, 1, TOTAL_COLS).setValues([headers]);
+
+  leads.getRange(1, 1, 1, TOTAL_COLS)
+    .setFontWeight('bold').setBackground('#0a0a0a').setFontColor('#ffffff');
   leads.setFrozenRows(1);
-  leads.setColumnWidth(C.TIMESTAMP,   130);
-  leads.setColumnWidth(C.MESSAGE,     260);
-  leads.setColumnWidth(C.STATUS,      120);
-  leads.setColumnWidth(C.NOTES,       220);
-  leads.setColumnWidth(C.SUPABASE_ID,  80);
-  leads.setColumnWidth(C.SOURCE,      110);
+  leads.setFrozenColumns(3);                                  // Pin Timestamp + Name + Email
+
+  leads.setColumnWidth(C.TIMESTAMP,    130);
+  leads.setColumnWidth(C.NAME,         140);
+  leads.setColumnWidth(C.EMAIL,        190);
+  leads.setColumnWidth(C.PHONE,        120);
+  leads.setColumnWidth(C.YEAR,          80);
+  leads.setColumnWidth(C.MESSAGE,      260);
+  leads.setColumnWidth(C.STATUS,       120);
+  leads.setColumnWidth(C.NOTES,        220);
+  leads.setColumnWidth(C.SUPABASE_ID,   80);
+  leads.setColumnWidth(C.SOURCE,       110);
+  leads.setColumnWidth(C.CONTACTED_AT, 140);
+  leads.hideColumns(C.SUPABASE_ID);                           // Hidden — accessible via formula/script, not cluttering view
+  leads.hideColumns(C.CONTACTED_AT);                          // Hidden — surfaced via "Contacted today" conditional format
+
+  // Conditional format: amber left border on rows contacted today
+  // (reads hidden contacted_at col K — today's date check via DATEVALUE)
+  const todayRule = SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied(`=AND(K2<>"",INT(DATEVALUE(TEXT(K2,"yyyy-mm-dd")))=INT(TODAY()))`)
+    .setBackground('#fffde7')
+    .setBold(true)
+    .setRanges([leads.getRange('B2:B1000')])
+    .build();
+  leads.setConditionalFormatRules([todayRule]);
 
   // ── Active Students ────────────────────────────────────────────────────────
   let students = ss.getSheetByName(STUDENTS_TAB) || ss.insertSheet(STUDENTS_TAB);
   if (students.getLastRow() === 0) {
     students.appendRow(['Name','Email','Phone','Year','Enquiry Date','First Class Date','Notes','','SupabaseID']);
   }
-  students.getRange(1, 1, 1, 9).setFontWeight('bold').setBackground('#1f6b40').setFontColor('#ffffff');
+  students.getRange(1,1,1,9).setFontWeight('bold').setBackground('#1f6b40').setFontColor('#ffffff');
   students.setFrozenRows(1);
-  students.setColumnWidth(5, 130);
-  students.setColumnWidth(6, 140);
-  students.setColumnWidth(7, 220);
-  students.setColumnWidth(9, 80);
+  students.setColumnWidth(5,130); students.setColumnWidth(6,140);
+  students.setColumnWidth(7,220); students.setColumnWidth(9,80);
+  students.hideColumns(9);
+
+  // ── Stats ──────────────────────────────────────────────────────────────────
+  let statsSheet = ss.getSheetByName(STATS_TAB) || ss.insertSheet(STATS_TAB);
+  statsSheet.clearContents(); statsSheet.clearFormats();
+  const statsData = [
+    ['Acumen HSC — Lead Stats', ''],
+    ['New',          0],
+    ['Contacted',    0],
+    ['Converted',    0],
+    ['Disqualified', 0],
+    ['Total',        0],
+    ['Last synced',  ''],
+  ];
+  statsSheet.getRange(1, 1, statsData.length, 2).setValues(statsData);
+  statsSheet.getRange(1, 1).setFontWeight('bold').setFontSize(13).setBackground('#0a0a0a').setFontColor('#ffffff');
+  statsSheet.getRange(2,1).setFontColor('#1a1a1a');
+  statsSheet.getRange(3,1).setFontColor('#7b5800').setBackground('#fff8e1');
+  statsSheet.getRange(4,1).setFontColor('#1f6b40').setBackground('#e6f4ea');
+  statsSheet.getRange(5,1).setFontColor('#c0392b').setBackground('#fce8e6');
+  statsSheet.getRange(2,1,4,1).setFontWeight('bold');
+  statsSheet.setColumnWidth(1, 130); statsSheet.setColumnWidth(2, 80);
 
   // ── Errors ─────────────────────────────────────────────────────────────────
   let errors = ss.getSheetByName(ERRORS_TAB) || ss.insertSheet(ERRORS_TAB);
   if (errors.getLastRow() === 0) {
     errors.appendRow(['Timestamp','Function','Message','Context']);
-    errors.getRange(1, 1, 1, 4).setFontWeight('bold').setBackground('#d32f2f').setFontColor('#ffffff');
+    errors.getRange(1,1,1,4).setFontWeight('bold').setBackground('#c62828').setFontColor('#ffffff');
   }
 
   SpreadsheetApp.flush();
-  Logger.log('Sheet setup complete.');
+  SpreadsheetApp.getActiveSpreadsheet().toast('Setup complete. Now run "Install triggers".', 'Acumen', 6);
 }
 
 // =============================================================================
-// onOpen — adds the Acumen menu to the spreadsheet toolbar
+// onOpen — custom menu
 // =============================================================================
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Acumen')
@@ -599,5 +693,11 @@ function onOpen() {
     .addItem('Sync from Supabase now',   'syncFromSupabase')
     .addSeparator()
     .addItem('Delete focused lead',      'deleteFocusedLead')
+    .addItem('Show SupabaseID column',   'showSupabaseIdColumn_')
     .addToUi();
+}
+
+function showSupabaseIdColumn_() {
+  const sheet = SpreadsheetApp.openById(SS_ID).getSheetByName(LEADS_TAB);
+  if (sheet) sheet.showColumns(C.SUPABASE_ID);
 }
