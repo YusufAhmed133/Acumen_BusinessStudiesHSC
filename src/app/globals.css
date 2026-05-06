@@ -42,8 +42,8 @@
 html {
   /* GeistSans.variable class on <html> sets --font-geist-sans at runtime */
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  background: #FFFCF4;
-  color: #0A0A0A;
+  background: #ffffff;
+  color: #111111;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -58,7 +58,7 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 50;
+  z-index: 1;
   opacity: 0.038;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 220px 220px;
@@ -79,7 +79,7 @@ button { font-family: inherit; }
   display: inline-flex;
   gap: 48px;
   white-space: nowrap;
-  animation: ticker-scroll 90s linear infinite;
+  animation: ticker-scroll 38s linear infinite;
   will-change: transform;
 }
 .ticker:hover .ticker-track { animation-play-state: paused; }
@@ -131,7 +131,11 @@ button { font-family: inherit; }
 :focus-visible { outline: 2px solid #0A0A0A; outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track { animation: none !important; }
-  .reveal { opacity: 1 !important; transform: perspective(1100px) translateY(0) rotateX(0deg) !important; transition: none !important; }
-  * { transition: none !important; }
+  .ticker-track,
+  .review-track { animation: none !important; }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

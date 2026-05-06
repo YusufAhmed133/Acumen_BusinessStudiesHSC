@@ -6,238 +6,291 @@ const TOPICS = [
   {
     key: "operations",
     label: "Operations",
-    tint: "#CFEAD9",
-    accent: "#1F6B40",
-    ink: "#0E3A1C",
+    num: "01",
+    tint: "#A8E8BE",
+    accent: "#1B6038",
+    ink: "#0D3020",
     detail: [
-      "Section III Operations essay appeared in 2022, 2023, and 2024 — it is your most likely 20-mark question.",
-      "Performance objectives: examiners expect at least two integrated objectives, not a single-objective list.",
-      "Lean production distinguishes itself from traditional production through waste reduction across all inputs — know the difference precisely.",
-      "Offshoring vs outsourcing: a common Section II trap; students who confuse them lose marks across 4–8 mark responses.",
+      "The Section III Operations essay appeared in 2022, 2023 and 2024. It is your highest-probability 20-mark topic.",
+      "Performance objectives: examiners want at least two integrated objectives. A single-objective list will not reach Band 5.",
+      "Lean vs traditional production: the distinction is the treatment of waste across all inputs, not just stock.",
+      "Offshoring vs outsourcing is the most common Section II trap. Students who conflate the two lose marks on 4 to 8 mark questions.",
     ],
   },
   {
     key: "marketing",
     label: "Marketing",
-    tint: "#FBE6BD",
-    accent: "#A66E12",
-    ink: "#5A3F0A",
+    num: "02",
+    tint: "#FADA88",
+    accent: "#9A6300",
+    ink: "#5C3B00",
     detail: [
-      "Section II allocates 8–10 marks to marketing most years — often the single highest-mark question on the paper.",
-      "Marketing mix: product, price, promotion, place. For services marketing, extend with people, process, and physical evidence.",
-      "Price strategies (skimming vs penetration) appeared as a Section I MCQ in both 2023 and 2024 — know the definitions cold.",
-      "Ethical marketing and e-marketing are near-guaranteed Section II targets, commonly worth 4–6 marks.",
+      "Section II allocates 8 to 10 marks to marketing most years, often the highest single-topic block on the paper.",
+      "Marketing mix: product, price, promotion, place. For services add people, process, and physical evidence.",
+      "Price skimming vs penetration appeared as a Section I MCQ in 2023 and 2024. Know the definitions cold.",
+      "Ethical marketing and e-marketing are near-guaranteed Section II targets, typically 4 to 6 marks.",
     ],
   },
   {
     key: "finance",
     label: "Finance",
-    tint: "#CFDFF4",
-    accent: "#2A4F94",
-    ink: "#0F2E5C",
+    num: "03",
+    tint: "#A8C8FC",
+    accent: "#1E4B99",
+    ink: "#0B2A5E",
     detail: [
-      "Ratio analysis is tested across Sections I, II, and III — it is the most reliably examined Finance skill.",
-      "GPM, NPM, ROE, current ratio, gearing: know each formula and what a deteriorating trend signals for the business.",
-      "Working capital calculation is straightforward; Band 6 responses explain when to act and which strategy fits the situation.",
-      "Global finance: exchange rate impact on imports and exports, and hedging strategies for Section III essays.",
+      "Ratio analysis is tested across Sections I, II and III. It is the most reliably examined Finance skill.",
+      "GPM, NPM, ROE, current ratio, gearing: know each formula and what a worsening trend signals.",
+      "Working capital is straightforward to calculate. Band 6 answers explain when to act and which strategy fits.",
+      "Global finance: know how exchange rates affect import and export costs, and what hedging achieves.",
     ],
   },
   {
     key: "hr",
     label: "Human Resources",
-    tint: "#F4CFCF",
-    accent: "#923333",
-    ink: "#5C1818",
+    num: "04",
+    tint: "#F8BCBC",
+    accent: "#8B2929",
+    ink: "#501515",
     detail: [
-      "Section III was an HR case study in 2024 — the 20-mark response where most students leave marks on the table.",
-      "Full employment cycle: acquisition through separation, with specific strategies at each stage.",
-      "Employment relations: modern awards, enterprise agreements, and individual contracts — know them side-by-side.",
-      "Effectiveness measures (benchmarking and KPIs) must appear in every extended HR response to reach Band 5–6.",
+      "Section III was an HR case study in 2024. It is the 20-mark question where most students leave marks on the table.",
+      "Full employment cycle: acquisition, development, maintenance, separation. Know specific strategies at each stage.",
+      "Employment relations: modern awards, enterprise agreements, individual contracts. Know them side by side.",
+      "Effectiveness measures such as benchmarking and KPIs must appear in every extended HR response to reach Band 5 or 6.",
     ],
   },
 ] as const;
 
-export function Topics() {
-  const [open, setOpen] = useState<string | null>(null);
+function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
+  const [open, setOpen] = useState(false);
 
+  return (
+    <Reveal delay={i * 80}>
+      <div
+        style={{
+          background: t.tint,
+          borderRadius: 20,
+          overflow: "hidden",
+          transform: open ? "translateY(-4px)" : "none",
+          transition: "transform 400ms cubic-bezier(.2,.8,.2,1), box-shadow 400ms cubic-bezier(.2,.8,.2,1)",
+          boxShadow: open
+            ? "0 20px 48px rgba(0,0,0,0.12)"
+            : "0 2px 8px rgba(0,0,0,0.06)",
+        }}
+      >
+        <button
+          onClick={() => setOpen((v) => !v)}
+          style={{
+            width: "100%",
+            textAlign: "left",
+            cursor: "pointer",
+            border: "none",
+            background: "transparent",
+            padding: "32px 28px 24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 0,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "flex-start",
+              marginBottom: 24,
+            }}
+          >
+            <span
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+                background: t.accent,
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#ffffff",
+                fontSize: 18,
+                lineHeight: 1,
+                transition: "transform 360ms cubic-bezier(.2,.8,.2,1)",
+                transform: open ? "rotate(45deg)" : "rotate(0deg)",
+                flexShrink: 0,
+              }}
+            >
+              +
+            </span>
+          </div>
+
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: "clamp(60px, 5vw, 84px)",
+              lineHeight: 0.88,
+              letterSpacing: "-0.05em",
+              color: t.ink,
+              marginBottom: 12,
+            }}
+          >
+            {t.num}
+          </div>
+
+          <div
+            style={{
+              fontWeight: 600,
+              fontSize: 22,
+              letterSpacing: "-0.02em",
+              color: t.ink,
+              marginBottom: 18,
+            }}
+          >
+            {t.label}
+          </div>
+
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: t.accent,
+              letterSpacing: "0.04em",
+            }}
+          >
+            {open ? "Close" : "Exam breakdown →"}
+          </div>
+        </button>
+
+        <div
+          style={{
+            overflow: "hidden",
+            maxHeight: open ? 480 : 0,
+            transition: "max-height 480ms cubic-bezier(.2,.8,.2,1)",
+          }}
+        >
+          <div style={{ padding: "0 28px 28px" }}>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "grid",
+                gap: 10,
+              }}
+            >
+              {t.detail.map((p) => (
+                <li
+                  key={p}
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    alignItems: "flex-start",
+                    fontSize: 14,
+                    lineHeight: 1.55,
+                    color: t.ink,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      marginTop: 8,
+                      borderRadius: 999,
+                      background: t.accent,
+                      flexShrink: 0,
+                      display: "inline-block",
+                    }}
+                  />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="/#practice"
+              style={{
+                display: "inline-block",
+                marginTop: 20,
+                padding: "10px 18px",
+                borderRadius: 999,
+                background: t.accent,
+                color: "#ffffff",
+                textDecoration: "none",
+                fontSize: 13,
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Practice questions →
+            </a>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+export function Topics() {
   return (
     <section
       id="syllabus"
       style={{
-        background: [
-          "radial-gradient(ellipse at 90% 10%, rgba(207,234,217,0.4) 0%, transparent 50%)",
-          "radial-gradient(ellipse at 10% 90%, rgba(251,230,189,0.3) 0%, transparent 50%)",
-          "#F8F7F4",
-        ].join(", "),
-        padding: "100px 0 110px",
+        background: "#ffffff",
+        padding: "96px 0 104px",
+        borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 28px" }}>
         <Reveal>
-          <div style={{ marginBottom: 14 }}>
-            <div style={{
-              fontSize: 11, fontWeight: 600, letterSpacing: "0.22em",
-              textTransform: "uppercase", color: "#1F6B40", marginBottom: 18,
-            }}>
-              The syllabus
-            </div>
-            <h2 style={{
-              fontWeight: 600,
-              fontSize: "clamp(34px, 4.2vw, 62px)",
-              lineHeight: 1.02,
+          <h2
+            style={{
+              fontWeight: 700,
+              fontSize: "clamp(28px, 3.4vw, 50px)",
+              lineHeight: 1.08,
               letterSpacing: "-0.04em",
-              margin: 0,
-              color: "#0A0A0A",
-              maxWidth: 860,
-            }}>
-              Four topics. Equal weighting. Every dot point covered.
-            </h2>
-            <p style={{
-              fontSize: 17, color: "#3A3A3A", maxWidth: 600,
-              margin: "16px 0 0", lineHeight: 1.5,
-            }}>
-              Click any topic to see the exam patterns that separate Band 5 from Band 6.
-            </p>
-          </div>
+              margin: "0 0 48px",
+              color: "#111111",
+              maxWidth: 700,
+            }}
+          >
+            The 4 topics in the Business Studies HSC Syllabus
+          </h2>
         </Reveal>
 
-        <div style={{
-          marginTop: 48,
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 16,
-        }} className="topics-grid">
-          {TOPICS.map((t, i) => {
-            const isOpen = open === t.key;
-            return (
-              <Reveal key={t.key} delay={i * 80}>
-                <div
-                  style={{
-                    width: "100%",
-                    background: t.tint,
-                    borderRadius: 22,
-                    overflow: "hidden",
-                    boxShadow: isOpen
-                      ? "0 30px 60px rgba(10,30,20,0.14), inset 0 1px 0 rgba(255,255,255,0.5)"
-                      : "0 12px 28px rgba(10,30,20,0.08), inset 0 1px 0 rgba(255,255,255,0.5)",
-                    transform: isOpen ? "translateY(-6px)" : "translateY(0)",
-                    transition: "all 460ms cubic-bezier(.2,.7,.2,1)",
-                  }}
-                >
-                  <button
-                    onClick={() => setOpen(isOpen ? null : t.key)}
-                    style={{
-                      width: "100%",
-                      textAlign: "left",
-                      cursor: "pointer",
-                      border: "none",
-                      background: "transparent",
-                      padding: "24px 22px 22px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 14,
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div style={{
-                        fontSize: 11, fontWeight: 600,
-                        letterSpacing: "0.18em", textTransform: "uppercase",
-                        color: t.ink, opacity: 0.7,
-                      }}>
-                        0{i + 1}
-                      </div>
-                      <div style={{
-                        width: 30, height: 30, borderRadius: 8,
-                        background: t.accent,
-                        boxShadow: `0 8px 16px ${t.accent}55, inset 0 -3px 0 rgba(0,0,0,0.18)`,
-                      }} />
-                    </div>
-
-                    <div>
-                      <div style={{
-                        fontWeight: 600,
-                        fontSize: "clamp(64px, 5vw, 90px)",
-                        lineHeight: 0.85,
-                        letterSpacing: "-0.05em",
-                        color: t.ink,
-                        marginBottom: 8,
-                      }}>
-                        {String(i + 1).padStart(2, "0")}
-                      </div>
-                      <div style={{
-                        fontWeight: 600, fontSize: 22,
-                        letterSpacing: "-0.02em", color: t.ink,
-                      }}>
-                        {t.label}
-                      </div>
-                    </div>
-
-                    <div style={{
-                      fontSize: 12.5, fontWeight: 600, color: t.ink,
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
-                    }}>
-                      <span>{isOpen ? "Close" : "Exam breakdown"}</span>
-                      <span style={{
-                        display: "inline-block",
-                        transition: "transform 360ms cubic-bezier(.2,.7,.2,1)",
-                        transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                        fontSize: 18,
-                      }}>+</span>
-                    </div>
-                  </button>
-
-                  {/* Expanded content — outside the button */}
-                  <div style={{
-                    overflow: "hidden",
-                    maxHeight: isOpen ? 400 : 0,
-                    transition: "max-height 460ms cubic-bezier(.2,.7,.2,1)",
-                  }}>
-                    <div style={{ padding: "0 22px 22px" }}>
-                      <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 10 }}>
-                        {t.detail.map((p) => (
-                          <li key={p} style={{
-                            display: "flex", gap: 10, alignItems: "flex-start",
-                            fontSize: 13.5, lineHeight: 1.45, color: t.ink,
-                          }}>
-                            <span style={{
-                              width: 5, height: 5, marginTop: 7, borderRadius: 999,
-                              background: t.accent, flexShrink: 0, display: "inline-block",
-                            }} />
-                            {p}
-                          </li>
-                        ))}
-                      </ul>
-                      <a
-                        href="#practice"
-                        style={{
-                          display: "inline-block",
-                          marginTop: 18,
-                          padding: "10px 16px",
-                          borderRadius: 999,
-                          background: t.accent,
-                          color: "#FFFCF4",
-                          textDecoration: "none",
-                          fontSize: 13,
-                          fontWeight: 600,
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
-                        Practice {t.label} questions →
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: 16,
+          }}
+          className="topics-grid"
+        >
+          {TOPICS.map((t, i) => (
+            <Card key={t.key} t={t} i={i} />
+          ))}
         </div>
+
+        <Reveal delay={300}>
+          <div style={{ marginTop: 36, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 15, color: "#3A3A3A" }}>
+              Try real exam questions from each topic.
+            </span>
+            <a
+              href="/#practice"
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#111111",
+                textDecoration: "none",
+                letterSpacing: "-0.01em",
+                borderBottom: "1.5px solid #111111",
+                paddingBottom: 1,
+              }}
+            >
+              Practice now →
+            </a>
+          </div>
+        </Reveal>
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .topics-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 600px) {
+        @media (max-width: 560px) {
           .topics-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>

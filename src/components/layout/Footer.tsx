@@ -8,30 +8,30 @@ export function Footer() {
         margin: "0 auto",
         padding: "0 28px",
         display: "flex",
-        alignItems: "flex-end",
+        alignItems: "center",
         justifyContent: "space-between",
         gap: 32,
         flexWrap: "wrap",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <MarkBug size={48} />
+          <MarkBug size={44} />
           <div>
             <span style={{
-              fontWeight: 600,
-              fontSize: 26,
+              fontWeight: 700,
+              fontSize: 24,
               letterSpacing: "-0.04em",
-              color: "#FFFCF4",
+              color: "#ffffff",
               lineHeight: 1,
               display: "block",
             }}>
-              acumen<span style={{ color: "#1F6B40" }}>.</span>
+              acumen
             </span>
             <span style={{
-              fontSize: 11,
-              fontWeight: 500,
+              fontSize: 10,
+              fontWeight: 600,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#FBE6BD",
+              color: "#6B6B6B",
               marginTop: 6,
               display: "block",
             }}>
@@ -43,7 +43,7 @@ export function Footer() {
         <div style={{
           fontSize: 13,
           fontWeight: 500,
-          color: "#CFEAD9",
+          color: "#9A9A9A",
           display: "flex",
           gap: 28,
           flexWrap: "wrap",
@@ -76,7 +76,7 @@ export function Footer() {
         flexWrap: "wrap",
         gap: 12,
       }}>
-        <span>© Acumen HSC · Independent of NESA · Sydney, NSW</span>
+        <span>© Acumen HSC · Independent of NESA · Sydney NSW</span>
         <span style={{ display: "flex", gap: 20 }}>
           <a href="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</a>
           <a href="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</a>

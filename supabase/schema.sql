@@ -163,3 +163,16 @@ create policy storage_resources_no_client_read
   on storage.objects for select
   to anon, authenticated
   using (false);
+
+-- ─── PRACTICE WHITELIST ───────────────────────────────────────────────────
+-- Founder adds emails here via Supabase dashboard to grant practice bank access.
+-- API route /api/gate checks this table with service-role key (no client access).
+create table if not exists public.whitelist (
+  id         uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  email      citext not null unique check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
+  note       text
+);
+
+alter table public.whitelist enable row level security;
+revoke all on public.whitelist from anon, authenticated;

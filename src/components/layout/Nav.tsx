@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { MarkBug } from "@/components/ui/MarkBug";
 
 const LINKS = [
-  { href: "#syllabus",  label: "Syllabus" },
-  { href: "#practice",  label: "Practice" },
-  { href: "#resources", label: "Resources" },
-  { href: "#pricing",   label: "Pricing" },
-  { href: "#faq",       label: "FAQ" },
+  { href: "/#syllabus",  label: "Syllabus" },
+  { href: "/#practice",  label: "Practice" },
+  { href: "/#resources", label: "Resources" },
+  { href: "/#pricing",   label: "Pricing" },
+  { href: "/#faq",       label: "FAQ" },
 ];
 
 const pill: React.CSSProperties = {
@@ -15,11 +15,11 @@ const pill: React.CSSProperties = {
   fontSize: 14,
   letterSpacing: "-0.01em",
   padding: "10px 18px",
-  borderRadius: 999,
-  background: "#1F6B40",
-  color: "#FFFCF4",
+  borderRadius: 10,
+  background: "#C9EFD3",
+  color: "#0A2E1A",
   textDecoration: "none",
-  border: "1px solid #1F6B40",
+  border: "1px solid #C9EFD3",
   display: "inline-block",
   cursor: "pointer",
   whiteSpace: "nowrap",
@@ -40,10 +40,10 @@ export function Nav() {
       position: "sticky",
       top: 0,
       zIndex: 50,
-      background: scrolled ? "rgba(248,247,244,0.95)" : "rgba(248,247,244,0.88)",
-      backdropFilter: "saturate(160%) blur(14px)",
-      WebkitBackdropFilter: "saturate(160%) blur(14px)",
-      borderBottom: "1px solid rgba(10,10,10,0.08)",
+      background: scrolled ? "rgba(255,255,255,0.96)" : "rgba(255,255,255,0.9)",
+      backdropFilter: "saturate(160%) blur(16px)",
+      WebkitBackdropFilter: "saturate(160%) blur(16px)",
+      borderBottom: "1px solid rgba(0,0,0,0.07)",
       transition: "background 300ms ease, box-shadow 300ms ease",
       boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.06)" : "none",
     }}>
@@ -58,24 +58,24 @@ export function Nav() {
         gap: 24,
       }}>
         {/* Wordmark */}
-        <a href="#top" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <MarkBug size={28} />
-          <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+          <MarkBug size={30} />
+          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <span style={{
-              fontWeight: 600,
-              fontSize: 20,
-              letterSpacing: "-0.04em",
-              color: "#0A0A0A",
+              fontWeight: 700,
+              fontSize: 18,
+              letterSpacing: "-0.03em",
+              color: "#111111",
               lineHeight: 1,
             }}>
-              acumen<span style={{ color: "#1F6B40" }}>.</span>
+              acumen
             </span>
             <span style={{
-              fontSize: 10,
-              fontWeight: 500,
-              letterSpacing: "0.12em",
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: "#5C5C5C",
+              color: "#9A9A9A",
               lineHeight: 1,
             }}>
               HSC Business Studies
@@ -100,7 +100,7 @@ export function Nav() {
 
         {/* CTA + mobile toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <a href="#enquire" style={pill} className="hidden-mobile">
+          <a href="/#enquire" style={pill} className="hidden-mobile">
             Book a free trial lesson →
           </a>
 
@@ -140,8 +140,8 @@ export function Nav() {
       {open && (
         <nav
           style={{
-            borderTop: "1px solid rgba(10,10,10,0.08)",
-            background: "#FFFCF4",
+            borderTop: "1px solid rgba(0,0,0,0.07)",
+            background: "#ffffff",
             padding: "16px 28px 20px",
           }}
           aria-label="Mobile navigation"
@@ -163,7 +163,7 @@ export function Nav() {
               </li>
             ))}
             <li style={{ marginTop: 12 }}>
-              <a href="#enquire" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
+              <a href="/#enquire" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
                 Book a free trial lesson →
               </a>
             </li>

@@ -14,12 +14,12 @@ type Fields = {
 const inp: React.CSSProperties = {
   width: "100%",
   padding: "12px 13px",
-  borderRadius: 11,
-  border: "1px solid rgba(10,10,10,0.14)",
+  borderRadius: 10,
+  border: "1px solid rgba(0,0,0,0.12)",
   fontSize: 14,
-  background: "#FFFCF4",
+  background: "#F9F9F7",
   outline: "none",
-  color: "#0A0A0A",
+  color: "#111111",
   boxSizing: "border-box",
 };
 
@@ -45,6 +45,7 @@ export function EnquiryForm() {
     parent: "", student: "", email: "", phone: "",
     year: "Year 12", avail: "", concern: "",
   });
+  const [refId] = useState(() => Math.random().toString(36).slice(2, 7).toUpperCase());
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -59,7 +60,7 @@ export function EnquiryForm() {
     try {
       const message = [
         f.student ? `Student: ${f.student}` : "",
-        f.avail ? `Availability: ${f.avail}` : "",
+        f.avail ? `Preferred times: ${f.avail}` : "",
         f.concern ? `Concern: ${f.concern}` : "",
       ].filter(Boolean).join("\n");
 
@@ -113,7 +114,7 @@ export function EnquiryForm() {
           {f.student ? ` for ${f.student}` : ""} and a short call to discuss goals.
         </p>
         <p style={{ marginTop: 18, fontSize: 12, color: "#5C5C5C", letterSpacing: "0.06em" }}>
-          Reference · ACU-{Math.random().toString(36).slice(2, 7).toUpperCase()}
+          Reference · ACU-{refId}
         </p>
       </div>
     );
@@ -121,11 +122,11 @@ export function EnquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{
-      borderRadius: 22,
+      borderRadius: 20,
       padding: "28px 26px",
-      background: "#FFFCF4",
-      boxShadow: "0 24px 60px rgba(10,30,20,0.1)",
-      border: "1px solid rgba(10,10,10,0.08)",
+      background: "#ffffff",
+      boxShadow: "0 4px 32px rgba(0,0,0,0.08)",
+      border: "1px solid rgba(0,0,0,0.08)",
       display: "grid",
       gap: 14,
     }}>
@@ -161,9 +162,9 @@ export function EnquiryForm() {
               key={y} type="button" onClick={() => set("year", y)}
               style={{
                 flex: 1, padding: "11px 12px", borderRadius: 12, cursor: "pointer",
-                border: `1px solid ${f.year === y ? "#1F6B40" : "rgba(10,10,10,0.18)"}`,
-                background: f.year === y ? "#1F6B40" : "#FFFCF4",
-                color: f.year === y ? "#FFFCF4" : "#0A0A0A",
+                border: `1px solid ${f.year === y ? "#111111" : "rgba(0,0,0,0.14)"}`,
+                background: f.year === y ? "#111111" : "#ffffff",
+                color: f.year === y ? "#ffffff" : "#111111",
                 fontSize: 14, fontWeight: 500,
               }}
             >
@@ -175,17 +176,18 @@ export function EnquiryForm() {
 
       <Field label="Preferred times">
         <input
-          type="text"
           value={f.avail}
           onChange={(e) => set("avail", e.target.value)}
+          placeholder="e.g. Weekday evenings, Saturday mornings"
           style={inp}
         />
       </Field>
 
-      <Field label="Specific concern or goal (optional)">
+      <Field label="What are you working on? (optional)">
         <textarea
           value={f.concern}
           onChange={(e) => set("concern", e.target.value)}
+          placeholder="e.g. Currently 72 in trials, struggling with finance ratios."
           style={{ ...inp, minHeight: 88, resize: "vertical" }}
         />
       </Field>
@@ -200,12 +202,12 @@ export function EnquiryForm() {
         style={{
           fontWeight: 600, fontSize: 15, letterSpacing: "-0.01em",
           padding: "14px 18px", borderRadius: 999,
-          background: loading ? "#5C5C5C" : "#1F6B40",
-          color: "#FFFCF4", border: "none", cursor: loading ? "wait" : "pointer",
+          background: loading ? "#6B6B6B" : "#C9EFD3",
+          color: loading ? "#ffffff" : "#0A2E1A", border: "none", cursor: loading ? "wait" : "pointer",
           textAlign: "center",
         }}
       >
-        {loading ? "Sending..." : "Request trial lesson →"}
+        {loading ? "Sending..." : "Book a free trial lesson →"}
       </button>
     </form>
   );

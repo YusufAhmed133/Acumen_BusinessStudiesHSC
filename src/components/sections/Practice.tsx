@@ -1,76 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
+import { QUIZ_BANK, TOPICS_MAP, type McqQuestion, type ShortQuestion } from "@/lib/quiz-bank";
 
-const TOPICS_MAP = {
-  operations: { label: "Operations", accent: "#1F6B40", tint: "#CFEAD9" },
-  marketing:  { label: "Marketing",  accent: "#A66E12", tint: "#FBE6BD" },
-  finance:    { label: "Finance",    accent: "#2A4F94", tint: "#CFDFF4" },
-  hr:         { label: "Human Resources", accent: "#923333", tint: "#F4CFCF" },
-} as const;
-
-type TopicKey = keyof typeof TOPICS_MAP;
-
-type McqQuestion = {
-  id: string; topic: TopicKey; type: "mcq"; marks: number; src: string;
-  stem: string; options: string[]; answer: number; explain: string;
-};
-type ShortQuestion = {
-  id: string; topic: TopicKey; type: "short" | "extended"; marks: number; src: string;
-  stem: string; criteria: string[]; sample: string;
-};
-type Question = McqQuestion | ShortQuestion;
-
-const QUIZ_BANK: Question[] = [
-  {
-    id: "q1", topic: "hr", type: "mcq", marks: 1,
-    src: "2024 HSC · Section I · Q1",
-    stem: "Who is most likely to represent employees for an increase in wages?",
-    options: ["A trade union", "Fair Work Australia", "An employer association", "Federal Court of Australia"],
-    answer: 0,
-    explain: "A trade union is formed to represent employees in wage negotiations. Fair Work Australia (now the Fair Work Commission) and the Federal Court are dispute-resolution bodies; an employer association represents the employer side.",
-  },
-  {
-    id: "q2", topic: "finance", type: "mcq", marks: 1,
-    src: "2024 HSC · Section I · Q10",
-    stem: "A business has: Sales $800,000 · COGS $200,000 · Gross profit $600,000 · Net profit $250,000. Expense ratio = total expenses ÷ sales. What is the expense ratio?",
-    options: ["25%", "31%", "35%", "44%"],
-    answer: 3,
-    explain: "Total expenses = Gross profit − Net profit = $600,000 − $250,000 = $350,000. Expense ratio = $350,000 ÷ $800,000 = 43.75% ≈ 44%.",
-  },
-  {
-    id: "q3", topic: "marketing", type: "mcq", marks: 1,
-    src: "2024 HSC · Section I · Q4",
-    stem: "A retailer sells new sunglasses at a significantly higher price for the first month they are sold. What pricing strategy is being used?",
-    options: ["Price skimming", "Price penetration", "Price discrimination", "Price and quality interaction"],
-    answer: 0,
-    explain: "Price skimming sets a high initial price to capture less price-sensitive customers, then reduces it over time. Penetration pricing is the reverse: entering at a low price to capture market share.",
-  },
-  {
-    id: "q4", topic: "operations", type: "short", marks: 3,
-    src: "2024 HSC · Section II · Q21(a)",
-    stem: "A manufacturer of flags has seen a steady increase in sales coinciding with a major sporting event. The operations manager increased working hours to meet demand. Explain the interdependence between operations and ONE other key business function.",
-    criteria: [
-      "Identifies one other key business function (Finance / HR / Marketing)",
-      "Explains how operations depends on that function in this scenario",
-      "Explains how that function depends on operations in this scenario",
-    ],
-    sample: "Operations is dependent on finance, which provides the funds to pay for increased overtime and higher variable costs. Finance in turn relies on operations' demand forecasts to budget for those variable costs during the sporting event period.",
-  },
-  {
-    id: "q5", topic: "hr", type: "extended", marks: 20,
-    src: "2024 HSC · Section III · Q25",
-    stem: "Hans-Made Watches is a family-run business with autocratic leadership that has seen declining sales. The owner is retiring; his children want to improve performance. An expression of interest for Assistant Manager has been distributed only to family and friends (award wages, no experience required). Write a business report: (a) product differentiation strategy, (b) critique of the current acquisition process, (c) recommended HR strategies.",
-    criteria: [
-      "Describes a product differentiation strategy specific to this watch business",
-      "Discusses the acquisition process and its limitations (family/friends only, no criteria)",
-      "Recommends at least two HR strategies (e.g. leadership style, training, rewards)",
-      "Uses stimulus material (lifetime warranty, autocratic style, family-run)",
-      "Presents response in business-report format with relevant terminology",
-    ],
-    sample: "Hans-Made Watches can differentiate by leaning into its craftsmanship narrative (hand-made, lifetime warranty), positioning the range as luxury with premium packaging and bespoke engraving. The current acquisition process is a closed expression of interest to family and friends with no criteria. This narrows the talent pool, risks nepotism, and is unlikely to deliver the digital retail skills the business needs. Recommended HR strategies: (1) shift from autocratic to participative leadership to retain skilled employees and capture their input; (2) invest in training so employees can grow the brand online; (3) introduce performance-based rewards to retain key staff through the ownership transition.",
-  },
-];
+const TEASER = QUIZ_BANK.slice(0, 5);
 
 export function Practice() {
   const [idx, setIdx] = useState(0);
@@ -87,28 +20,14 @@ export function Practice() {
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    const el = paperRef.current;
-    if (!el) return;
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
-      const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
-      el.style.transform = `perspective(1600px) rotateX(${-y * 1.5}deg) rotateY(${x * 1.8}deg)`;
-    };
-    const onLeave = () => { el.style.transform = "perspective(1600px) rotateX(0deg) rotateY(0deg)"; };
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
-    return () => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
-  }, []);
 
-  const q = QUIZ_BANK[idx];
+  const q = TEASER[idx];
   const topic = TOPICS_MAP[q.topic];
   const mm = String(Math.floor(t / 60)).padStart(2, "0");
   const ss = String(t % 60).padStart(2, "0");
 
   const reset = () => { setPicked(null); setRevealed(false); setResponse(""); setChecked([]); };
-  const next = () => { if (idx < QUIZ_BANK.length - 1) { setIdx(idx + 1); reset(); } };
+  const next = () => { if (idx < TEASER.length - 1) { setIdx(idx + 1); reset(); } };
   const prev = () => { if (idx > 0) { setIdx(idx - 1); reset(); } };
   const submit = () => {
     if (q.type === "mcq" && picked != null)
@@ -127,7 +46,7 @@ export function Practice() {
   };
 
   return (
-    <section id="practice" style={{ background: "radial-gradient(ellipse at 15% 30%, rgba(31,107,64,0.16) 0%, transparent 50%), radial-gradient(ellipse at 85% 70%, rgba(251,230,189,0.10) 0%, transparent 50%), #0D0D0D", padding: "100px 0 110px", position: "relative", overflow: "hidden" }}>
+    <section id="practice" style={{ background: "radial-gradient(ellipse at 15% 30%, rgba(31,107,64,0.16) 0%, transparent 50%), radial-gradient(ellipse at 85% 70%, rgba(251,230,189,0.10) 0%, transparent 50%), #0D0D0D", padding: "80px 0 96px", position: "relative", overflow: "hidden" }}>
       {/* Faint pastel orbs */}
       <div style={{
         position: "absolute", width: 600, height: 600, borderRadius: "50%",
@@ -142,29 +61,23 @@ export function Practice() {
 
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 28px", position: "relative" }}>
         <Reveal>
-          <div style={{ marginBottom: 14 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#FBE6BD", marginBottom: 18 }}>
-              Live practice
-            </div>
-            <h2 style={{
-              fontWeight: 600, fontSize: "clamp(34px, 4.2vw, 62px)",
-              lineHeight: 1.02, letterSpacing: "-0.04em",
-              margin: 0, color: "#FFFCF4", maxWidth: 860,
-            }}>
-              Real questions. Real marker margins.
-            </h2>
-            <p style={{ fontSize: 17, color: "#CFEAD9", maxWidth: 600, margin: "16px 0 0", lineHeight: 1.5 }}>
-              From the 2024 HSC Business Studies paper. Section I, II and III. Live timer, marking criteria, and sample responses from the NESA marking guide.
-            </p>
-          </div>
+          <h2
+            style={{
+              fontWeight: 700,
+              fontSize: "clamp(32px, 3.8vw, 56px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.04em",
+              margin: "0 0 48px",
+              color: "#ffffff",
+            }}
+          >
+            Practice
+          </h2>
         </Reveal>
-
-        <Reveal delay={120}>
+        <Reveal>
           <div ref={paperRef} style={{
-            marginTop: 48, background: "#FFFCF4", borderRadius: 14, overflow: "hidden",
-            boxShadow: "0 60px 120px rgba(0,0,0,0.55), 0 24px 60px rgba(0,0,0,0.4)",
-            transition: "transform 260ms cubic-bezier(.2,.7,.2,1)",
-            transformStyle: "preserve-3d",
+            marginTop: 0, background: "#FFFCF4", borderRadius: 14, overflow: "hidden",
+            boxShadow: "0 32px 80px rgba(0,0,0,0.45), 0 12px 32px rgba(0,0,0,0.3)",
           }}>
             {/* Paper header */}
             <div style={{
@@ -181,8 +94,14 @@ export function Practice() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap", fontSize: 13, fontWeight: 500, color: "#1A1A1A" }}>
-                <span>Q {idx + 1} / {QUIZ_BANK.length}</span>
-                <span style={{ fontVariantNumeric: "tabular-nums" }}>⏱ {mm}:{ss}</span>
+                <span>Q {idx + 1} / {TEASER.length}</span>
+                <span style={{ fontVariantNumeric: "tabular-nums", display: "inline-flex", alignItems: "center", gap: 5 }}>
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
+                    <circle cx="6.5" cy="6.5" r="5.75" stroke="#5C5C5C" strokeWidth="1.3" />
+                    <path d="M6.5 3.5v3l2 1.5" stroke="#5C5C5C" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {mm}:{ss}
+                </span>
                 <span>Score {score.c}/{score.a}</span>
               </div>
             </div>
@@ -191,7 +110,7 @@ export function Practice() {
             <div style={{ height: 3, background: "#F0F0F0" }}>
               <div style={{
                 height: "100%",
-                width: `${((idx + (revealed ? 1 : 0)) / QUIZ_BANK.length) * 100}%`,
+                width: `${((idx + (revealed ? 1 : 0)) / TEASER.length) * 100}%`,
                 background: `linear-gradient(90deg, ${TOPICS_MAP.operations.accent}, ${TOPICS_MAP.finance.accent})`,
                 transition: "width 600ms cubic-bezier(.2,.7,.2,1)",
               }} />
@@ -285,7 +204,7 @@ export function Practice() {
                       {q.type === "mcq" ? "Reveal answer" : "Show marking"}
                     </button>
                   ) : (
-                    <button onClick={next} disabled={idx === QUIZ_BANK.length - 1} style={{ ...pill, opacity: idx === QUIZ_BANK.length - 1 ? 0.4 : 1 }}>
+                    <button onClick={next} disabled={idx === TEASER.length - 1} style={{ ...pill, opacity: idx === TEASER.length - 1 ? 0.4 : 1 }}>
                       Next question →
                     </button>
                   )}
@@ -353,6 +272,27 @@ export function Practice() {
                 )}
               </div>
             </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div style={{ marginTop: 48, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+            <a
+              href="/practice"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "14px 28px", borderRadius: 12,
+                background: "#C9EFD3", color: "#0A2E1A",
+                textDecoration: "none", fontSize: 15, fontWeight: 700,
+                letterSpacing: "-0.01em",
+                boxShadow: "0 4px 20px rgba(201,239,211,0.35)",
+              }}
+            >
+              See all {QUIZ_BANK.length} questions →
+            </a>
+            <span style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", letterSpacing: "0.01em" }}>
+              Filter by topic · MCQ, short answer, extended response
+            </span>
           </div>
         </Reveal>
       </div>
