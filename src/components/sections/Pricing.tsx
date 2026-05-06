@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const INCLUSIONS = [
   {
-    t: "1.5-hour weekly lesson",
+    t: "1-hour weekly lesson",
     d: "Small group, capped at 6. Live syllabus walkthrough plus timed practice every session.",
   },
   {
@@ -133,7 +133,7 @@ export function Pricing() {
                       color: "#6B6B6B",
                     }}
                   >
-                    / 1.5 hrs
+                    / 1 hr
                   </span>
                 </div>
                 <div

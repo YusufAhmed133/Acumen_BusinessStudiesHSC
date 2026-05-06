@@ -5,11 +5,11 @@ import { LeadForm } from "@/components/sections/LeadForm";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "HSC Business Studies tutoring at $110 per 1.5-hour lesson. No lock-in, first lesson free.",
+    "HSC Business Studies tutoring at $110 per 1-hour lesson. No lock-in, first lesson free.",
 };
 
 const included = [
-  "1.5-hour weekly lesson in a group of ≤6 students",
+  "1-hour weekly lesson in a group of ≤6 students",
   "Full lesson recording sent within 24 hours",
   "Weekly topic summary notes (yours to keep)",
   "24/7 question line — answer within 4 business hours",
@@ -22,7 +22,7 @@ const included = [
 const comparison = [
   {
     feature: "Price per lesson",
-    acumen: "$110 / 1.5hrs",
+    acumen: "$110 / 1 hr",
     them: "$90–$150 / 1hr",
   },
   { feature: "Marker-trained tutors", acumen: true, them: false },
@@ -48,7 +48,7 @@ export default function PricingPage() {
             That&apos;s it.
           </h1>
           <p className="mt-5 text-lg text-ink-500">
-            1.5-hour lessons. No packages, no lock-in, no upsells.
+            1-hour lessons. No packages, no lock-in, no upsells.
             First lesson is free — no card required.
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function PricingPage() {
         <div className="mt-10 rounded-xl border-2 border-brand-800 bg-surface-raised p-6 shadow-md">
           <div className="flex items-baseline gap-2">
             <span className="font-display text-5xl font-bold text-brand-800">$110</span>
-            <span className="text-sm text-ink-500">per 1.5-hour lesson</span>
+            <span className="text-sm text-ink-500">per 1-hour lesson</span>
           </div>
           <p className="mt-2 text-sm text-ink-500">
             No minimum commitment. Book as many or as few lessons as you need.

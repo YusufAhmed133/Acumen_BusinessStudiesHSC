@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { QUIZ_BANK, TOPICS_MAP, type McqQuestion, type ShortQuestion } from "@/lib/quiz-bank";
 
@@ -12,19 +12,11 @@ export function Practice() {
   const [response, setResponse] = useState("");
   const [checked, setChecked] = useState<number[]>([]);
   const [score, setScore] = useState({ c: 0, a: 0 });
-  const [t, setT] = useState(0);
   const paperRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const id = setInterval(() => setT((s) => s + 1), 1000);
-    return () => clearInterval(id);
-  }, []);
-
 
   const q = TEASER[idx];
   const topic = TOPICS_MAP[q.topic];
-  const mm = String(Math.floor(t / 60)).padStart(2, "0");
-  const ss = String(t % 60).padStart(2, "0");
+  const isLast = idx === TEASER.length - 1;
 
   const reset = () => { setPicked(null); setRevealed(false); setResponse(""); setChecked([]); };
   const next = () => { if (idx < TEASER.length - 1) { setIdx(idx + 1); reset(); } };
@@ -95,13 +87,6 @@ export function Practice() {
               </div>
               <div style={{ display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap", fontSize: 13, fontWeight: 500, color: "#1A1A1A" }}>
                 <span>Q {idx + 1} / {TEASER.length}</span>
-                <span style={{ fontVariantNumeric: "tabular-nums", display: "inline-flex", alignItems: "center", gap: 5 }}>
-                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
-                    <circle cx="6.5" cy="6.5" r="5.75" stroke="#5C5C5C" strokeWidth="1.3" />
-                    <path d="M6.5 3.5v3l2 1.5" stroke="#5C5C5C" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  {mm}:{ss}
-                </span>
                 <span>Score {score.c}/{score.a}</span>
               </div>
             </div>
@@ -203,8 +188,16 @@ export function Practice() {
                     >
                       {q.type === "mcq" ? "Reveal answer" : "Show marking"}
                     </button>
+                  ) : isLast ? (
+                    <a href="/practice" style={{
+                      ...pill,
+                      background: "#C9EFD3", color: "#0A2E1A",
+                      border: "1px solid #C9EFD3", textDecoration: "none",
+                    }}>
+                      See all {QUIZ_BANK.length} questions →
+                    </a>
                   ) : (
-                    <button onClick={next} disabled={idx === TEASER.length - 1} style={{ ...pill, opacity: idx === TEASER.length - 1 ? 0.4 : 1 }}>
+                    <button onClick={next} style={pill}>
                       Next question →
                     </button>
                   )}
@@ -234,7 +227,7 @@ export function Practice() {
                     </div>
                   ) : (
                     <p style={{ fontSize: 14.5, lineHeight: 1.6, color: "#5C5C5C", margin: 0 }}>
-                      Pick an option and reveal the answer. We explain the marker&apos;s reasoning, not just the letter.
+                      Pick an option and reveal the answer.
                     </p>
                   )
                 ) : (
