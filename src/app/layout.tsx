@@ -186,6 +186,7 @@ export default function RootLayout({
       <head>
         {/* JSON-LD: static site data, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON }} />
       </head>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
         <ScrollProgress />
