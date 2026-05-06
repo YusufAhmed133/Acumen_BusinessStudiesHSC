@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Terms of Service" };
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Terms and conditions for HSC Business Studies tutoring services provided by Acumen HSC in Sydney.",
+  alternates: { canonical: "/terms" },
+};
 
 const S = {
   page:    { maxWidth: 720, margin: "0 auto", padding: "72px 28px 96px" } as React.CSSProperties,
@@ -25,23 +29,18 @@ export default function TermsPage() {
       <h2 style={S.h2}>1. Cancellations and Rescheduling</h2>
       <p style={S.p}>
         You may cancel or reschedule a session at no charge by giving at least 24 hours&apos; notice before the scheduled start time.
-        While you are entitled to cancel with 24 hours notice, we strongly recommend committing to at least three sessions
-        with a new tutor before assessing suitability.
       </p>
       <p style={S.p}>
         If you provide less than 24 hours&apos; notice, or do not attend without notice (no-show), the full session fee is payable.
-        We may waive this at our discretion in exceptional circumstances; any waiver must be confirmed in writing to be effective.
+        We may waive this at our discretion in exceptional circumstances.
       </p>
 
-      <h2 style={S.h2}>2. Fees and What Is Included</h2>
+      <h2 style={S.h2}>2. Fees and Inclusions</h2>
       <p style={S.p}>
-        Current rates are $110 per individual one-hour session, or $950 for a full school term (approximately 10 sessions).
-        Unless otherwise agreed in writing, each session fee covers: delivery of the scheduled lesson, reasonable preparation
-        directly connected to that lesson, and two written progress reports per school term (issued at the start and end of term).
-      </p>
-      <p style={S.p}>
-        Marking, questions, or communication outside of sessions is not included unless otherwise agreed or included in your
-        tutoring package.
+        Current rates are $110 per individual one-hour session, or $950 per school term. Package inclusions are as
+        described on our{" "}
+        <a href="/pricing" style={{ color: "#111", fontWeight: 600 }}>Pricing page</a>{" "}
+        and confirmed at the time of enrolment.
       </p>
 
       <h2 style={S.h2}>3. Payment</h2>
@@ -50,7 +49,7 @@ export default function TermsPage() {
         If payment is not received within 21 days, an additional $15 invoice handling fee will apply.
       </p>
       <p style={S.p}>
-        Payment is accepted by card only. A 1% card processing fee applies to all transactions. Bank transfer is not accepted.
+        Payment is accepted by card only. A 1% card processing fee applies to all transactions.
       </p>
 
       <h2 style={S.h2}>4. Fee Changes</h2>
@@ -62,7 +61,7 @@ export default function TermsPage() {
       <p style={S.p}>
         By submitting an enquiry or booking a session, you agree to receive communications from Acumen HSC including updates,
         invoices, pricing changes, and relevant educational content. You may opt out of marketing communications at any time
-        by contacting us at{" "}
+        by calling{" "}
         <a href="tel:0470665141" style={{ color: "#111", fontWeight: 600 }}>0470 665 141</a>.
       </p>
 
@@ -81,9 +80,7 @@ export default function TermsPage() {
       <hr style={S.divider} />
       <p style={{ ...S.p, marginTop: 32, color: "#9a9a9a", fontSize: 13 }}>
         Questions? Call{" "}
-        <a href="tel:0470665141" style={{ color: "#9a9a9a" }}>0470 665 141</a>{" "}
-        or email{" "}
-        <a href="mailto:hello@acumenhsc.com.au" style={{ color: "#9a9a9a" }}>hello@acumenhsc.com.au</a>.
+        <a href="tel:0470665141" style={{ color: "#9a9a9a" }}>0470 665 141</a>.
       </p>
     </div>
   );

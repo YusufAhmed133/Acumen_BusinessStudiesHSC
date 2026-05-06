@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { CourseCard } from "@/components/sections/CourseCard";
 
 export const metadata: Metadata = {
-  title: "Courses",
+  title: "HSC Business Studies — All 4 Topics",
   description:
-    "HSC Business Studies tutoring for all four topics: Operations, Marketing, Finance, and Human Resources.",
+    "Expert HSC Business Studies tutoring across all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Band 6-aligned, Sydney.",
+  alternates: { canonical: "/courses" },
 };
 
 const courses = [
@@ -52,7 +53,7 @@ export default function CoursesPage() {
               HSC Business Studies
             </p>
             <h1 className="mt-3 font-display text-4xl font-bold text-ink-900 sm:text-5xl">
-              The four HSC topics, taught the way they&apos;re marked.
+              The four HSC Business Studies topics, taught the way they&apos;re marked.
             </h1>
             <p className="mt-5 text-lg text-ink-500">
               Each module is taught by a tutor who has marked that topic for NESA.

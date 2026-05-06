@@ -50,10 +50,10 @@ export function Footer() {
           alignItems: "center",
         }}>
           {[
-            { href: "#syllabus", label: "Syllabus" },
-            { href: "#practice", label: "Practice" },
-            { href: "#pricing", label: "Pricing" },
-            { href: "#enquire", label: "Enquire" },
+            { href: "/#syllabus", label: "Syllabus" },
+            { href: "/#practice", label: "Practice" },
+            { href: "/#pricing",  label: "Pricing" },
+            { href: "/#enquire",  label: "Enquire" },
           ].map(({ href, label }) => (
             <a key={href} href={href} style={{ color: "inherit", textDecoration: "none" }}>
               {label}
