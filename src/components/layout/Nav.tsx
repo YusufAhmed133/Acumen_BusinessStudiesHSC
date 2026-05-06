@@ -5,8 +5,8 @@ import { MarkBug } from "@/components/ui/MarkBug";
 const LINKS = [
   { href: "/#syllabus",  label: "Syllabus" },
   { href: "/#practice",  label: "Practice" },
-  { href: "/#resources", label: "Resources" },
   { href: "/#pricing",   label: "Pricing" },
+  { href: "/#resources", label: "Resources" },
   { href: "/#faq",       label: "FAQ" },
 ];
 
@@ -100,7 +100,7 @@ export function Nav() {
 
         {/* CTA + mobile toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <a href="/#enquire" style={pill} className="hidden-mobile">
+          <a href="/" style={pill} className="hidden-mobile">
             Book a free trial lesson →
           </a>
 
@@ -163,7 +163,7 @@ export function Nav() {
               </li>
             ))}
             <li style={{ marginTop: 12 }}>
-              <a href="/#enquire" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
+              <a href="/" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
                 Book a free trial lesson →
               </a>
             </li>
