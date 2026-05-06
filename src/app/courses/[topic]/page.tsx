@@ -125,8 +125,9 @@ export async function generateMetadata({
   const data = TOPICS[topic as TopicSlug];
   if (!data) return {};
   return {
-    title: `${data.title} — HSC Business Studies`,
-    description: data.description,
+    title: `HSC Business Studies ${data.title} — Band 6 Tutoring Sydney`,
+    description: `Expert HSC Business Studies tutoring for ${data.title}. ${data.tagline} Small groups, Band 6-aligned, Sydney.`,
+    alternates: { canonical: `/courses/${topic}` },
   };
 }
 

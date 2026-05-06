@@ -26,8 +26,8 @@ export default function PrivacyPage() {
       <h2 style={S.h2}>1. What We Collect</h2>
       <p style={S.p}>
         When you submit an enquiry form on this website, we collect your name, email address, phone number, year group,
-        and any message you choose to include. We also collect standard technical data such as your IP address (stored as
-        a one-way hash), browser type, and referral source for security and analytics purposes.
+        and any message you choose to include. We may also collect standard technical information necessary to operate
+        and secure this website.
       </p>
 
       <h2 style={S.h2}>2. Why We Collect It</h2>
@@ -39,14 +39,9 @@ export default function PrivacyPage() {
 
       <h2 style={S.h2}>3. Who We Share It With</h2>
       <p style={S.p}>
-        We do not sell, rent, or trade your personal information to third parties. We use the following services to operate
-        the site, each of which processes data only as required to deliver the service:
-      </p>
-      <p style={S.p}>
-        <strong>Supabase</strong> — stores enquiry data in a managed PostgreSQL database (data hosted in Australia).{" "}
-        <strong>Resend</strong> — sends transactional email notifications.{" "}
-        <strong>Vercel</strong> — hosts the website and serverless functions (servers in the United States; standard data
-        processing agreement in place).
+        We do not sell, rent, or trade your personal information to third parties. We use reputable third-party service
+        providers to operate this website — including for hosting, database storage, and email delivery. These providers
+        process data only as necessary to deliver their services and are bound by appropriate data processing obligations.
       </p>
 
       <h2 style={S.h2}>4. Data Retention</h2>
@@ -65,21 +60,18 @@ export default function PrivacyPage() {
       <h2 style={S.h2}>6. Security</h2>
       <p style={S.p}>
         We take reasonable steps to protect your personal information from misuse, interference, loss, and unauthorised
-        access. All data is transmitted over HTTPS and access to the database is restricted to authorised personnel only.
+        access. All data is transmitted over HTTPS and access to our systems is restricted to authorised personnel only.
       </p>
 
-      <h2 style={S.h2}>7. Cookies and Analytics</h2>
+      <h2 style={S.h2}>7. Cookies</h2>
       <p style={S.p}>
-        This website does not use advertising cookies or third-party tracking pixels. Standard server logs are collected
-        by Vercel for operational and security purposes.
+        This website does not use advertising cookies or third-party tracking pixels.
       </p>
 
       <hr style={S.divider} />
       <p style={{ ...S.p, marginTop: 32, color: "#9a9a9a", fontSize: 13 }}>
         Privacy enquiries: call{" "}
-        <a href="tel:0470665141" style={{ color: "#9a9a9a" }}>0470 665 141</a>{" "}
-        or email{" "}
-        <a href="mailto:hello@acumenhsc.com.au" style={{ color: "#9a9a9a" }}>hello@acumenhsc.com.au</a>.
+        <a href="tel:0470665141" style={{ color: "#9a9a9a" }}>0470 665 141</a>.
       </p>
     </div>
   );

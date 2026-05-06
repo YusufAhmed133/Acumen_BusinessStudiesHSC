@@ -3,9 +3,10 @@ import { ResourceCard } from "@/components/sections/ResourceCard";
 import { LeadForm } from "@/components/sections/LeadForm";
 
 export const metadata: Metadata = {
-  title: "Free Resources",
+  title: "Free HSC Business Studies Resources — Notes, Essays & Past Papers",
   description:
-    "Free HSC Business Studies notes, past paper analyses, essay templates, and practice questions. Download with your email.",
+    "Free HSC Business Studies notes, essay templates, past paper analyses, and practice questions written by Band 6 graduates. Download instantly.",
+  alternates: { canonical: "/resources" },
 };
 
 const resources = [

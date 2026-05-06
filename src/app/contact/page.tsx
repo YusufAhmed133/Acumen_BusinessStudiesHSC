@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/sections/LeadForm";
-import { MapPin, Clock, Mail } from "lucide-react";
+import { MapPin, Clock, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact — Book a Free Trial HSC Business Studies Lesson",
   description:
-    "Talk to an Acumen tutor within 4 hours. Book your free strategy call today.",
+    "Book your free HSC Business Studies trial lesson. Get a response within 4 business hours. Call 0470 665 141 or fill in the form.",
+  alternates: { canonical: "/contact" },
 };
 
 const contactDetails = [
   {
-    icon: Mail,
-    label: "Email",
-    value: "hello@acumenhsc.com.au",
-    href: "mailto:hello@acumenhsc.com.au",
+    icon: Phone,
+    label: "Phone",
+    value: "0470 665 141",
+    href: "tel:0470665141",
   },
   {
     icon: MapPin,
@@ -90,14 +91,14 @@ export default function ContactPage() {
                   Already know you want in?
                 </p>
                 <p className="mt-1 text-sm text-ink-500">
-                  Skip the form — email us directly and mention &quot;first lesson free&quot;
+                  Skip the form — call or text us directly and mention &quot;first lesson free&quot;
                   and we&apos;ll get you booked same day.
                 </p>
                 <a
-                  href="mailto:hello@acumenhsc.com.au?subject=First lesson free"
+                  href="tel:0470665141"
                   className="mt-3 inline-block text-sm font-medium text-brand-800 hover:underline"
                 >
-                  hello@acumenhsc.com.au →
+                  0470 665 141 →
                 </a>
               </div>
             </div>

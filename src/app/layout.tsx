@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     "Business Studies Band 6 Sydney",
     "HSC Business Studies classes",
     "small group HSC tutoring Sydney",
+    "Year 11 Business Studies tutor",
+    "HSC Band 6 essay marking",
   ],
   alternates: { canonical: "/" },
   robots: {
@@ -52,11 +54,128 @@ export const metadata: Metadata = {
   },
 };
 
+const LOCAL_BUSINESS_JSON = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "EducationalOrganization"],
+  "@id": `${SITE_URL}/#business`,
+  name: "Acumen HSC",
+  description:
+    "HSC Business Studies tutor in Sydney offering small-group tutoring for Year 11 and 12 students. Serving Sydney CBD, Parramatta, and online.",
+  url: SITE_URL,
+  telephone: "+61470665141",
+  areaServed: [
+    { "@type": "City", name: "Sydney" },
+    { "@type": "City", name: "Parramatta" },
+    { "@type": "AdministrativeArea", name: "New South Wales" },
+  ],
+  address: [
+    {
+      "@type": "PostalAddress",
+      addressLocality: "Sydney CBD",
+      addressRegion: "NSW",
+      addressCountry: "AU",
+    },
+    {
+      "@type": "PostalAddress",
+      addressLocality: "Parramatta",
+      addressRegion: "NSW",
+      addressCountry: "AU",
+    },
+  ],
+  priceRange: "$$",
+  currenciesAccepted: "AUD",
+  paymentAccepted: "Credit Card",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday", "Tuesday", "Wednesday", "Thursday",
+      "Friday", "Saturday", "Sunday",
+    ],
+    opens: "08:00",
+    closes: "22:00",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "HSC Tutoring Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "HSC Business Studies Tutoring",
+          description:
+            "Small-group Year 11 and Year 12 Business Studies tutoring in Sydney, targeting Band 5-6 results.",
+        },
+      },
+    ],
+  },
+});
+
+const FAQ_JSON = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is the trial lesson really free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "One full lesson at no cost, no credit card required. No obligation if it is not the right fit.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is included in the price?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "The $950 term rate covers every lesson across the school term (approximately 10 sessions), all HSC past papers from 2010 to 2025 annotated by syllabus dot point, weekly essay feedback, and the full online question bank. The $110 casual rate covers a single one-hour session.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who teaches the lessons?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "All tutors are Band 6 graduates who have sat the HSC Business Studies exam and scored in the top band.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if my child has a question outside of class?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We run a 24-hour question line where students can send through any concept, essay paragraph, or past paper question and receive a written response.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What happens if my child misses a lesson?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Cancellations with more than 24 hours notice are fully refunded or credited. Cancellations inside 24 hours are charged in full. Every student who misses receives the full notes and worked solutions.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do your prices include GST?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, all prices shown on this site are inclusive of GST.",
+      },
+    },
+  ],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={GeistSans.variable}>
+      <head>
+        {/* JSON-LD: static structured data, no user input */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON }} />
+      </head>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
         <ScrollProgress />
         <a href="#main" className="skip-link">Skip to content</a>

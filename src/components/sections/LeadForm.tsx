@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { leadSchema } from "@/lib/schemas";
 
 type YearGroup = "Year 11" | "Year 12";
-type LeadSource = "hero_form" | "contact_form" | "resource_gate" | "footer_form" | "other";
+type LeadSource = "hero_form" | "contact_form" | "resource_gate" | "footer_form" | "sydney_landing" | "parramatta_landing" | "other";
 
 interface FormValues {
   name: string;
@@ -73,7 +73,7 @@ export function LeadForm({ source = "hero_form", className, compact = false }: L
       setServerError(
         err instanceof Error
           ? err.message
-          : "We couldn't reach our server. Try again or email hello@acumenhsc.com.au"
+          : "We couldn't reach our server. Try again or call us on 0470 665 141."
       );
     }
   }

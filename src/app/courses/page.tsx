@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { CourseCard } from "@/components/sections/CourseCard";
 
 export const metadata: Metadata = {
-  title: "Courses",
+  title: "HSC Business Studies Topics — Operations, Marketing, Finance, HR",
   description:
-    "HSC Business Studies tutoring for all four topics: Operations, Marketing, Finance, and Human Resources.",
+    "Expert HSC Business Studies tutoring across all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Band 6-aligned, Sydney.",
+  alternates: { canonical: "/courses" },
 };
 
 const courses = [

@@ -3,9 +3,10 @@ import { Check, X } from "lucide-react";
 import { LeadForm } from "@/components/sections/LeadForm";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Pricing — HSC Business Studies Tutoring Sydney",
   description:
-    "HSC Business Studies tutoring at $110 per 1-hour lesson. No lock-in, first lesson free.",
+    "HSC Business Studies tutoring from $110 per lesson or $950 per term. Small groups, essay marking, 24-hour question line. First lesson free.",
+  alternates: { canonical: "/pricing" },
 };
 
 const included = [

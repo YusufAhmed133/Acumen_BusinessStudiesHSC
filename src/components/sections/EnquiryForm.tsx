@@ -79,7 +79,7 @@ export function EnquiryForm() {
       if (!res.ok) throw new Error("Failed to submit");
       setSent(true);
     } catch {
-      setError("Something went wrong. Please email hello@acumenhsc.com.au");
+      setError("Something went wrong. Please call us on 0470 665 141.");
     } finally {
       setLoading(false);
     }

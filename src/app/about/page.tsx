@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/sections/LeadForm";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About — Band 6 HSC Business Studies Tutors Sydney",
   description:
-    "Acumen tutors are actual HSC Business Studies markers. Learn about our team, methodology, and why we get results.",
+    "Meet the Acumen HSC team. Our tutors are Band 6 Business Studies graduates who know exactly what markers look for — because they've been there.",
+  alternates: { canonical: "/about" },
 };
 
 const differentiators = [
