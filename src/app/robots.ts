@@ -2,7 +2,21 @@ import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/api/"] },
+    rules: [
+      { userAgent: "*", allow: "/", disallow: ["/api/"] },
+      // Allow AI search assistants — brand visibility in AI Overviews / ChatGPT / Perplexity
+      { userAgent: "GPTBot",         allow: "/" },
+      { userAgent: "OAI-SearchBot",  allow: "/" },
+      { userAgent: "ChatGPT-User",   allow: "/" },
+      { userAgent: "PerplexityBot",  allow: "/" },
+      { userAgent: "ClaudeBot",      allow: "/" },
+      { userAgent: "anthropic-ai",   allow: "/" },
+      // Block Gemini model training (separate from Googlebot / AI Overviews)
+      { userAgent: "Google-Extended", disallow: "/" },
+      // Block scraper-only bots with no search benefit
+      { userAgent: "Bytespider", disallow: "/" },
+      { userAgent: "CCBot",      disallow: "/" },
+    ],
     sitemap: "https://acumenhsc.com.au/sitemap.xml",
   };
 }

@@ -63,7 +63,7 @@ export function Pricing() {
               color: "#111111",
             }}
           >
-            Pricing
+            HSC Business Studies Tutoring Pricing
           </h2>
         </Reveal>
 
@@ -226,6 +226,16 @@ export function Pricing() {
                   }}
                 >
                   Most students choose this.
+                </div>
+                <div
+                  style={{
+                    marginTop: 6,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "#6B6B6B",
+                  }}
+                >
+                  No lock-in. Book and cancel anytime.
                 </div>
               </div>
 

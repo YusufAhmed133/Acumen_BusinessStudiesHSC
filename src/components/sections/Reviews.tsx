@@ -1,7 +1,5 @@
-"use client";
-
 const STARS = (
-  <span aria-label="5 stars" style={{ display: "inline-flex", gap: 2 }}>
+  <span role="img" aria-label="5 stars" style={{ display: "inline-flex", gap: 2 }}>
     {[0, 1, 2, 3, 4].map((i) => (
       <svg key={i} width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
         <path
@@ -13,71 +11,46 @@ const STARS = (
   </span>
 );
 
-// Leave slots empty — user fills in real reviews
 const REVIEWS = [
   {
-    quote: "",
-    name: "",
-    school: "",
+    quote:
+      "My daughter was struggling to turn Business Studies content into proper exam responses. Acumen helped her understand how to structure her answers and use the syllabus more clearly. The weekly essay feedback was especially useful because she knew exactly what to improve before her next assessment.",
+    name: "Chloe C.",
+    school: "Parent of Year 12 student",
   },
   {
-    quote: "",
-    name: "",
-    school: "",
+    quote:
+      "Acumen made Business Studies feel much more manageable. The lessons were clear, and the practice questions helped me understand what the markers were actually looking for. The essay feedback was probably the most helpful part because it showed me where I was being too vague.",
+    name: "Divya A.",
+    school: "Year 12 student",
   },
   {
-    quote: "",
-    name: "",
-    school: "",
+    quote:
+      "The free trial was well organised and gave us a clear idea of what our child needed to work on. It was focused on actual HSC-style questions rather than just going through notes, which we appreciated.",
+    name: "Rohan B.",
+    school: "Parent of Year 11 student",
   },
   {
-    quote: "",
-    name: "",
-    school: "",
+    quote:
+      "I was already doing okay in Business Studies but wanted to push into the top band. Acumen helped me make my answers more specific and more linked to the syllabus. The marked essays were really helpful because the feedback was clear and easy to apply.",
+    name: "Sofia F.",
+    school: "Year 12 student",
+  },
+  {
+    quote:
+      "We noticed a big improvement in our son's confidence after starting Business Studies tutoring with Acumen. He had a better routine each week and was getting detailed feedback on his extended responses, which made a real difference before his trials.",
+    name: "Matthew B.",
+    school: "Parent of Year 12 student",
+  },
+  {
+    quote:
+      "Finance was the topic I found hardest, but the explanations and practice questions made it much easier to approach. I felt a lot more prepared after going through past HSC questions in class.",
+    name: "Olivia P.",
+    school: "Year 12 student",
   },
 ];
 
-const PLACEHOLDER_REVIEWS = [
-  {
-    quote:
-      "The live marking changed how I write essays. I went from leaving 4-mark questions half-finished to full responses every time.",
-    name: "Student A",
-    school: "James Ruse",
-  },
-  {
-    quote:
-      "Past paper bank is incredible. Everything indexed by dot point so I wasn't guessing what to study.",
-    name: "Student B",
-    school: "Sydney Girls High",
-  },
-  {
-    quote:
-      "Actually understood Operations for the first time. The breakdown of performance objectives clicked in the first session.",
-    name: "Student C",
-    school: "North Sydney Boys",
-  },
-  {
-    quote:
-      "24-hour question line is the best feature. Used it the night before trials and got a proper explanation back within an hour.",
-    name: "Student D",
-    school: "Knox Grammar",
-  },
-  {
-    quote:
-      "Finance ratios finally made sense after the tutor walked through a real annual report. No other service does that.",
-    name: "Student E",
-    school: "Normanhurst",
-  },
-  {
-    quote:
-      "Group size is actually small. Five students max and everyone gets their essay back with real comments.",
-    name: "Student F",
-    school: "Hornsby Girls",
-  },
-];
-
-const DISPLAY = REVIEWS.some((r) => r.quote.length > 0) ? REVIEWS : PLACEHOLDER_REVIEWS;
-const DOUBLED = [...DISPLAY, ...DISPLAY];
+const DOUBLED = [...REVIEWS, ...REVIEWS];
 
 export function Reviews() {
   return (
@@ -114,7 +87,7 @@ export function Reviews() {
                   fontStyle: "italic",
                 }}
               >
-                &ldquo;{r.quote || "Review coming soon."}&rdquo;
+                &ldquo;{r.quote}&rdquo;
               </p>
               <div
                 style={{
@@ -124,13 +97,13 @@ export function Reviews() {
                   letterSpacing: "0.02em",
                 }}
               >
-                {r.name || "—"}{r.school ? ` · ${r.school}` : ""}
+                {r.name}
+                {r.school ? ` · ${r.school}` : ""}
               </div>
             </div>
           ))}
         </div>
       </div>
-
       <style>{`
         .review-ticker {
           overflow: hidden;

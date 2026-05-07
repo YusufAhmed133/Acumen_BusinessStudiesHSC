@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { MarkBug } from "@/components/ui/MarkBug";
 
 const LINKS = [
+  { href: "/",           label: "Home" },
   { href: "/#syllabus",  label: "Syllabus" },
   { href: "/#practice",  label: "Practice" },
   { href: "/#pricing",   label: "Pricing" },
@@ -75,7 +76,7 @@ export function Nav() {
               fontWeight: 600,
               letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: "#9A9A9A",
+              color: "#767676",
               lineHeight: 1,
             }}>
               HSC Business Studies
@@ -100,7 +101,7 @@ export function Nav() {
 
         {/* CTA + mobile toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <a href="/" style={pill} className="hidden-mobile">
+          <a href="/#enquire" style={pill} className="hidden-mobile">
             Book a free trial lesson →
           </a>
 
@@ -163,7 +164,7 @@ export function Nav() {
               </li>
             ))}
             <li style={{ marginTop: 12 }}>
-              <a href="/" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
+              <a href="/#enquire" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
                 Book a free trial lesson →
               </a>
             </li>

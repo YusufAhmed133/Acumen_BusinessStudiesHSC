@@ -1,38 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHash } from "crypto";
+import { createHash, createHmac } from "crypto";
 import { leadSchema } from "@/lib/schemas";
+import { supabaseConfigured, createServiceRoleClient } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/ratelimit";
+import type { YearGroup, LeadSource } from "@/types/database";
 
 function hashIp(ip: string): string {
-  const salt = process.env.IP_HASH_DAILY_SALT ?? "dev-salt";
-  return createHash("sha256").update(ip + salt).digest("hex").slice(0, 16);
-}
-
-function supabaseConfigured(): boolean {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
-  return url.startsWith("https://") && key.length > 20 && !key.startsWith("your_");
+  const salt = process.env.IP_HASH_DAILY_SALT;
+  if (!salt) console.error("[leads] IP_HASH_DAILY_SALT not set — IP hashing uses fallback salt");
+  return createHash("sha256").update(ip + (salt ?? "dev-salt")).digest("hex").slice(0, 16);
 }
 
 async function tryInsertSupabase(data: {
-  name: string; email: string; phone: string; year_group: string;
-  source: string; message?: string; utm_source: string | null;
-  utm_medium: string | null; utm_campaign: string | null;
-  referrer: string | null; user_agent: string | null; ip_hash: string;
+  name: string;
+  email: string;
+  phone: string;
+  year_group: YearGroup;
+  source: LeadSource;
+  message?: string | null;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
+  user_agent: string | null;
+  ip_hash: string;
 }): Promise<string | null> {
   try {
-    const { createServiceRoleClient } = await import("@/lib/supabase/server");
-    const supabase = createServiceRoleClient();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: row, error } = await (supabase as any)
+    const { data: row, error } = await createServiceRoleClient()
       .from("leads")
       .insert({ ...data, status: "new" })
       .select("id")
       .single();
     if (error) {
-      console.error("[leads] Supabase insert error:", (error as { message: string }).message);
+      console.error("[leads] Supabase insert error:", error.message);
       return null;
     }
-    return (row as { id: string }).id;
+    return row.id;
   } catch (err) {
     console.error("[leads] Supabase unavailable:", err);
     return null;
@@ -40,8 +43,11 @@ async function tryInsertSupabase(data: {
 }
 
 async function sendEmail(data: {
-  name: string; email: string; phone: string;
-  year_group: string; message?: string;
+  name: string;
+  email: string;
+  phone: string;
+  year_group: string;
+  message?: string;
 }): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.FOUNDER_EMAIL;
@@ -58,7 +64,9 @@ async function sendEmail(data: {
       `Phone:   ${data.phone}`,
       `Year:    ${data.year_group}`,
       data.message ? `Details: ${data.message}` : "",
-    ].filter(Boolean).join("\n");
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     const { error } = await resend.emails.send({
       from,
@@ -79,22 +87,26 @@ async function sendEmail(data: {
 }
 
 async function notifyWebhook(data: {
-  name: string; email: string; phone: string; year_group: string;
-  message?: string; submitted_at: string; id: string | null; source: string;
+  name: string;
+  email: string;
+  phone: string;
+  year_group: string;
+  message?: string;
+  submitted_at: string;
+  id: string | null;
+  source: string;
 }): Promise<void> {
   const url = process.env.NOTIFY_WEBHOOK_URL;
   if (!url) return;
   const secret = process.env.NOTIFY_WEBHOOK_SECRET;
+  const body = JSON.stringify({ type: "new_lead", ...data });
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (secret) {
+    headers["X-Webhook-Signature"] =
+      "sha256=" + createHmac("sha256", secret).update(body).digest("hex");
+  }
   try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "new_lead",
-        ...data,
-        ...(secret ? { webhook_secret: secret } : {}),
-      }),
-    });
+    await fetch(url, { method: "POST", headers, body });
   } catch (err) {
     console.error("[leads] webhook failed:", err);
   }
@@ -103,6 +115,10 @@ async function notifyWebhook(data: {
 export async function POST(request: NextRequest) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+
+  if (await checkRateLimit("leads:" + ip, 5, "60 s")) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
 
   let body: unknown;
   try {
@@ -126,9 +142,12 @@ export async function POST(request: NextRequest) {
   }
 
   const payload = {
-    name, email: email.toLowerCase(), phone, year_group,
-    source: source ?? "hero_form",
-    message: message ?? undefined,
+    name,
+    email: email.toLowerCase(),
+    phone,
+    year_group,
+    source,
+    message: message ?? null,
     utm_source: request.nextUrl.searchParams.get("utm_source"),
     utm_medium: request.nextUrl.searchParams.get("utm_medium"),
     utm_campaign: request.nextUrl.searchParams.get("utm_campaign"),
@@ -140,19 +159,24 @@ export async function POST(request: NextRequest) {
   // Always log so leads appear in Vercel function logs even without any service
   console.log("[lead]", JSON.stringify({ name, email: payload.email, phone, year_group, message }));
 
-  // Insert to Supabase if configured
   let leadId: string | null = null;
   if (supabaseConfigured()) {
     leadId = await tryInsertSupabase(payload);
   }
 
-  // Send email notification (the minimum viable integration)
   const emailSent = await sendEmail({ name, email: payload.email, phone, year_group, message });
 
-  // Fire-and-forget webhook → Google Sheets (two-way sync needs the Supabase id)
-  void notifyWebhook({ name, email: payload.email, phone, year_group, message, submitted_at: new Date().toISOString(), id: leadId, source: payload.source });
+  void notifyWebhook({
+    name,
+    email: payload.email,
+    phone,
+    year_group,
+    message,
+    submitted_at: new Date().toISOString(),
+    id: leadId,
+    source: payload.source,
+  });
 
-  // Succeed if email was sent OR Supabase stored it OR we're in dev
   const ok = emailSent || leadId !== null || process.env.NODE_ENV === "development";
   if (!ok) {
     return NextResponse.json(
