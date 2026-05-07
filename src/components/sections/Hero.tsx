@@ -90,7 +90,18 @@ export function Hero() {
               maxWidth: 520,
             }}
           >
-            Sydney&apos;s Best HSC Business Studies Tutoring, Taught by Band 6 Graduates
+            Sydney&apos;s Best HSC Business Studies Tutoring
+            <span style={{
+              display: "block",
+              fontSize: "0.72em",
+              background: "linear-gradient(135deg, #72D69B 0%, #F2C94C 30%, #F08C8C 62%, #7EB5F8 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              marginTop: "0.1em",
+            }}>
+              Taught by Band 6 Graduates
+            </span>
           </h1>
 
           <p
