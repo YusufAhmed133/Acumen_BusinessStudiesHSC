@@ -51,10 +51,11 @@ export function Footer() {
           alignItems: "center",
         }}>
           {[
-            { href: "/hsc-business-studies-tutor-sydney", label: "Sydney Tutoring" },
-            { href: "/pricing",                           label: "Pricing" },
-            { href: "/about",                             label: "About" },
-            { href: "/contact",                           label: "Contact" },
+            { href: "/",          label: "Home"      },
+            { href: "/#syllabus", label: "Syllabus"  },
+            { href: "/practice",  label: "Practice"  },
+            { href: "/#pricing",  label: "Pricing"   },
+            { href: "/#faq",      label: "FAQ"       },
           ].map(({ href, label }) => (
             <Link key={href} href={href} style={{ color: "inherit", textDecoration: "none" }}>
               {label}

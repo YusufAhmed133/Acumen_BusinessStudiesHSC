@@ -120,7 +120,7 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
           name: "HSC Business Studies Tutoring Sydney",
           description: "Small-group Year 11 and Year 12 Business Studies tutoring in Sydney CBD, targeting Band 5-6 results.",
           areaServed: { "@type": "City", name: "Sydney" },
-          url: `${SITE_URL}/hsc-business-studies-tutor-sydney`,
+          url: SITE_URL,
         },
       },
     ],

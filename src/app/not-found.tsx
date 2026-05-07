@@ -16,28 +16,14 @@ export default function NotFound() {
         Page not found
       </h1>
       <p style={{ fontSize: 15, color: "#666", lineHeight: 1.7, margin: "0 0 40px" }}>
-        The page you&apos;re looking for doesn&apos;t exist. Head back to the homepage or check the links below.
+        The page you&apos;re looking for doesn&apos;t exist.
       </p>
-      <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-        <Link
-          href="/"
-          style={{ display: "inline-block", background: "#111", color: "#fff", padding: "12px 24px", borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: "none" }}
-        >
-          Homepage
-        </Link>
-        <Link
-          href="/hsc-business-studies-tutor-sydney"
-          style={{ display: "inline-block", background: "transparent", color: "#111", border: "1px solid #E0E0E0", padding: "12px 24px", borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: "none" }}
-        >
-          HSC Tutoring Sydney
-        </Link>
-        <Link
-          href="/notes/operations"
-          style={{ display: "inline-block", background: "transparent", color: "#111", border: "1px solid #E0E0E0", padding: "12px 24px", borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: "none" }}
-        >
-          Free Notes
-        </Link>
-      </div>
+      <Link
+        href="/"
+        style={{ display: "inline-block", background: "#111", color: "#fff", padding: "12px 24px", borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: "none" }}
+      >
+        Back to homepage
+      </Link>
     </div>
   );
 }

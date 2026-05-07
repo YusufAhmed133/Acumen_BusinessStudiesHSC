@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 const SCHOOLS = [
   { name: "James Ruse Agricultural High School", src: "/logos/james-ruse.png" },
@@ -69,17 +70,13 @@ export function Trust() {
                 padding: "0 32px",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={s.src}
                 alt={s.name}
                 title={s.name}
-                style={{
-                  height: 36,
-                  width: "auto",
-                  maxWidth: 56,
-                  objectFit: "contain",
-                }}
+                width={56}
+                height={36}
+                style={{ width: "auto", height: 36, maxWidth: 56, objectFit: "contain" }}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
                 }}
