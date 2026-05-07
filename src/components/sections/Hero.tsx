@@ -90,7 +90,7 @@ export function Hero() {
               maxWidth: 520,
             }}
           >
-            HSC Business Studies Tutoring — Sydney&apos;s Band 6 Specialists
+            Sydney&apos;s Best HSC Business Studies Tutoring, Taught by Band 6 Graduates
           </h1>
 
           <p
