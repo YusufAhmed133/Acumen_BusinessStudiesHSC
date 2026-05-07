@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const SITE_URL = "https://acumenhsc.com.au";
 
@@ -200,6 +201,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );
