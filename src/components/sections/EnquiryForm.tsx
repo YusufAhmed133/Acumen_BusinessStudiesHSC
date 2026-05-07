@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 
 type Fields = {
   parent: string;
@@ -78,6 +79,7 @@ export function EnquiryForm() {
       });
       if (!res.ok) throw new Error("Failed to submit");
       setSent(true);
+      track('enquiry_submitted', { year_group: f.year });
     } catch {
       setError("Something went wrong. Please call us on 0470 665 141.");
     } finally {

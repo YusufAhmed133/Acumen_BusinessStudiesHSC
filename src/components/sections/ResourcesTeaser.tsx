@@ -39,7 +39,7 @@ export function ResourcesTeaser() {
               maxWidth: 700,
             }}
           >
-            Resources
+            HSC Business Studies Study Notes &amp; Past Papers
           </h2>
         </Reveal>
 

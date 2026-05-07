@@ -62,7 +62,7 @@ const TOPICS = [
 ] as const;
 
 function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <Reveal delay={i * 80}>
@@ -134,17 +134,17 @@ function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
             {t.num}
           </div>
 
-          <div
+          <h3
             style={{
               fontWeight: 600,
               fontSize: 22,
               letterSpacing: "-0.02em",
               color: t.ink,
-              marginBottom: 18,
+              margin: "0 0 18px",
             }}
           >
             {t.label}
-          </div>
+          </h3>
 
           <div
             style={{
@@ -154,7 +154,7 @@ function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
               letterSpacing: "0.04em",
             }}
           >
-            {open ? "Close" : "Exam breakdown →"}
+            {open ? "Hide ↑" : "Exam breakdown →"}
           </div>
         </button>
 

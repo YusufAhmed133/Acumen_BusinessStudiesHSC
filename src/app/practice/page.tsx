@@ -366,7 +366,7 @@ export default function PracticePage() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 28px 80px" }}>
         <div style={{ marginBottom: 32 }}>
           <h1 style={{ fontWeight: 700, fontSize: "clamp(26px, 3.5vw, 44px)", letterSpacing: "-0.04em", margin: "0 0 8px", color: "#111111" }}>
-            Practice Questions
+            HSC Business Studies Practice Questions
           </h1>
           <p style={{ margin: 0, fontSize: 15, color: "#5C5C5C" }}>
             {filtered.length} question{filtered.length !== 1 ? "s" : ""} · real HSC past papers, annotated by syllabus dot point

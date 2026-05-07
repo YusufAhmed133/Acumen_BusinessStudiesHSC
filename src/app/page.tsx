@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
   alternates: {
     canonical: "/",
-    languages: { "en-AU": "/" },
   },
   openGraph: {
     title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",

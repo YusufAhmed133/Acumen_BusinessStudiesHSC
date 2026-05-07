@@ -90,7 +90,7 @@ export function Hero() {
               maxWidth: 520,
             }}
           >
-            Sydney&apos;s Best HSC Business Studies Tutoring
+            HSC Business Studies Tutoring in Sydney
             <span style={{
               display: "block",
               fontSize: "0.72em",
@@ -114,7 +114,7 @@ export function Hero() {
               fontWeight: 400,
             }}
           >
-            Taught by Band 6 graduates from top institutions such as UNSW, USYD, UTS and Macquarie.
+            Taught by Band 6 graduates from UNSW, USYD, UTS and Macquarie. Available online and in Sydney for Year 11 and Year 12.
           </p>
 
           {/* HSC countdown */}

@@ -15,7 +15,7 @@ export type ResourceKind =
   | "practice_question";
 export type StudentStatus = "active" | "paused" | "churned";
 
-export interface Lead {
+export type Lead = {
   id: string;
   created_at: string;
   updated_at: string;
@@ -35,9 +35,9 @@ export interface Lead {
   notes: string | null;
   contacted_at: string | null;
   converted_student_id: string | null;
-}
+};
 
-export interface Student {
+export type Student = {
   id: string;
   created_at: string;
   updated_at: string;
@@ -51,9 +51,9 @@ export interface Student {
   package_expires_at: string | null;
   origin_lead_id: string | null;
   admin_notes: string | null;
-}
+};
 
-export interface Resource {
+export type Resource = {
   id: string;
   created_at: string;
   updated_at: string;
@@ -68,11 +68,34 @@ export interface Resource {
   is_published: boolean;
   is_preview: boolean;
   sort_order: number;
-}
+};
 
-type LeadInsert = Omit<Lead, "id" | "created_at" | "updated_at">;
+type LeadInsert = {
+  name: string;
+  email: string;
+  phone: string;
+  year_group: YearGroup;
+  source: LeadSource;
+  status?: LeadStatus;
+  message?: string | null;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  referrer?: string | null;
+  user_agent?: string | null;
+  ip_hash?: string | null;
+  notes?: string | null;
+  contacted_at?: string | null;
+  converted_student_id?: string | null;
+};
 type StudentInsert = Omit<Student, "created_at" | "updated_at">;
 type ResourceInsert = Omit<Resource, "id" | "created_at" | "updated_at">;
+
+export type Whitelist = {
+  id: string;
+  email: string;
+  created_at: string;
+};
 
 export interface Database {
   public: {
@@ -93,6 +116,12 @@ export interface Database {
         Row: Resource;
         Insert: ResourceInsert;
         Update: Partial<Resource>;
+        Relationships: [];
+      };
+      whitelist: {
+        Row: Whitelist;
+        Insert: { email: string };
+        Update: Partial<Whitelist>;
         Relationships: [];
       };
     };

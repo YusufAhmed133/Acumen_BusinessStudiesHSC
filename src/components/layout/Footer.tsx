@@ -14,7 +14,7 @@ export function Footer() {
         gap: 32,
         flexWrap: "wrap",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <a href="/" style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
           <MarkBug size={44} />
           <div>
             <span style={{
@@ -32,14 +32,14 @@ export function Footer() {
               fontWeight: 600,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#6B6B6B",
+              color: "#888888",
               marginTop: 6,
               display: "block",
             }}>
               HSC Business Studies · Sydney · NSW
             </span>
           </div>
-        </div>
+        </a>
 
         <div style={{
           fontSize: 13,

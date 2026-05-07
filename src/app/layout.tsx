@@ -5,6 +5,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const SITE_URL = "https://acumenhsc.com.au";
 
@@ -30,7 +31,10 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
-    languages: { "en-AU": "/" },
+    languages: {
+      "en-AU": "/",
+      "x-default": "/",
+    },
   },
   robots: {
     index: true,
@@ -66,7 +70,9 @@ export const metadata: Metadata = {
   },
   other: {
     "geo.region": "AU-NSW",
-    "geo.placename": "Sydney",
+    "geo.placename": "Sydney, NSW, Australia",
+    "geo.position": "-33.8688;151.2093",
+    "ICBM": "-33.8688, 151.2093",
   },
 };
 
@@ -76,28 +82,26 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
   "@id": `${SITE_URL}/#business`,
   name: "Acumen HSC",
   description:
-    "HSC Business Studies tutor in Sydney offering small-group tutoring for Year 11 and 12 students. Serving Sydney CBD, Parramatta, and online.",
+    "HSC Business Studies tutor in Sydney offering small-group tutoring for Year 11 and 12 students. Serving Sydney CBD and online.",
   url: SITE_URL,
   telephone: "+61470665141",
   areaServed: [
     { "@type": "City", name: "Sydney" },
-    { "@type": "City", name: "Parramatta" },
     { "@type": "AdministrativeArea", name: "New South Wales" },
   ],
-  address: [
-    {
-      "@type": "PostalAddress",
-      addressLocality: "Sydney CBD",
-      addressRegion: "NSW",
-      addressCountry: "AU",
-    },
-    {
-      "@type": "PostalAddress",
-      addressLocality: "Parramatta",
-      addressRegion: "NSW",
-      addressCountry: "AU",
-    },
-  ],
+  image: `${SITE_URL}/og-image.png`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Sydney",
+    addressRegion: "NSW",
+    postalCode: "2000",
+    addressCountry: "AU",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -33.8688,
+    longitude: 151.2093,
+  },
   priceRange: "$$",
   currenciesAccepted: "AUD",
   paymentAccepted: "Credit Card",
@@ -116,16 +120,69 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
     itemListElement: [
       {
         "@type": "Offer",
+        price: "110",
+        priceCurrency: "AUD",
         itemOffered: {
           "@type": "Service",
-          name: "HSC Business Studies Tutoring Sydney",
-          description: "Small-group Year 11 and Year 12 Business Studies tutoring in Sydney CBD, targeting Band 5-6 results.",
+          name: "HSC Business Studies Casual Lesson Sydney",
+          description: "Single 1-hour small-group Business Studies lesson in Sydney, marked against NESA criteria. Year 11 and 12.",
+          areaServed: { "@type": "City", name: "Sydney" },
+          url: SITE_URL,
+        },
+      },
+      {
+        "@type": "Offer",
+        price: "950",
+        priceCurrency: "AUD",
+        itemOffered: {
+          "@type": "Service",
+          name: "HSC Business Studies Term Enrolment Sydney",
+          description: "Full school term enrolment (~10 lessons) including weekly essay marking, Band 6 notes, past-paper bank, and 24-hour question line.",
           areaServed: { "@type": "City", name: "Sydney" },
           url: SITE_URL,
         },
       },
     ],
   },
+});
+
+const COURSE_JSON = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": `${SITE_URL}/#course`,
+  name: "HSC Business Studies Tutoring — Band 6 Program",
+  description: "Small-group HSC Business Studies tutoring for Year 11 and 12 students in Sydney. Covers all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Taught by Band 6 graduates.",
+  url: SITE_URL,
+  datePublished: "2026-01-01",
+  dateModified: "2026-05-07",
+  provider: {
+    "@id": `${SITE_URL}/#business`,
+  },
+  instructor: {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#business`,
+  },
+  educationalLevel: "Year 11–12 (HSC)",
+  teaches: [
+    { "@type": "DefinedTerm", name: "HSC Business Studies — Operations", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
+    { "@type": "DefinedTerm", name: "HSC Business Studies — Marketing", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
+    { "@type": "DefinedTerm", name: "HSC Business Studies — Finance", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
+    { "@type": "DefinedTerm", name: "HSC Business Studies — Human Resources", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
+    { "@type": "DefinedTerm", name: "HSC extended response essay technique", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
+    { "@type": "DefinedTerm", name: "HSC past paper analysis and Band 6 marking criteria", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
+  ],
+  inLanguage: "en-AU",
+  hasCourseInstance: [
+    {
+      "@type": "CourseInstance",
+      courseMode: "onsite",
+      location: { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", addressCountry: "AU" } },
+    },
+    {
+      "@type": "CourseInstance",
+      courseMode: "online",
+    },
+  ],
 });
 
 const FAQ_JSON = JSON.stringify({
@@ -166,6 +223,14 @@ const FAQ_JSON = JSON.stringify({
     },
     {
       "@type": "Question",
+      name: "Can a group of school friends join together?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "If two to four students from the same school want to learn together, we can arrange a dedicated session at a time that suits the group.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "What happens if my child misses a lesson?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -191,6 +256,7 @@ export default function RootLayout({
       <head>
         {/* JSON-LD: static site data, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: COURSE_JSON }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON }} />
       </head>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
@@ -202,6 +268,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
