@@ -39,7 +39,7 @@ export default function TermsPage() {
       <p style={S.p}>
         Current rates are $110 per individual one-hour session, or $950 per school term. Package inclusions are as
         described on our{" "}
-        <a href="/pricing" style={{ color: "#111", fontWeight: 600 }}>Pricing page</a>{" "}
+        <a href="/#pricing" style={{ color: "#111", fontWeight: 600 }}>Pricing page</a>{" "}
         and confirmed at the time of enrolment.
       </p>
 

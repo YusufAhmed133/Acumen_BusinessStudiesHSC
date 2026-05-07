@@ -1,9 +1,10 @@
 "use client";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
-import { QUIZ_BANK, TOPICS_MAP, type McqQuestion, type ShortQuestion } from "@/lib/quiz-bank";
+import { QUIZ_TEASER, QUIZ_TOTAL, TOPICS_MAP, type McqQuestion, type ShortQuestion } from "@/lib/quiz-teaser";
 
-const TEASER = QUIZ_BANK.slice(0, 5);
+const TEASER = QUIZ_TEASER;
 
 export function Practice() {
   const [idx, setIdx] = useState(0);
@@ -12,19 +13,27 @@ export function Practice() {
   const [response, setResponse] = useState("");
   const [checked, setChecked] = useState<number[]>([]);
   const [score, setScore] = useState({ c: 0, a: 0 });
+  const [linkReady, setLinkReady] = useState(false);
   const paperRef = useRef<HTMLDivElement>(null);
+  const linkTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const q = TEASER[idx];
   const topic = TOPICS_MAP[q.topic];
   const isLast = idx === TEASER.length - 1;
 
-  const reset = () => { setPicked(null); setRevealed(false); setResponse(""); setChecked([]); };
+  const reset = () => {
+    setPicked(null); setRevealed(false); setResponse(""); setChecked([]); setLinkReady(false);
+    if (linkTimerRef.current) clearTimeout(linkTimerRef.current);
+  };
   const next = () => { if (idx < TEASER.length - 1) { setIdx(idx + 1); reset(); } };
   const prev = () => { if (idx > 0) { setIdx(idx - 1); reset(); } };
   const submit = () => {
     if (q.type === "mcq" && picked != null)
       setScore((s) => ({ c: s.c + (picked === (q as McqQuestion).answer ? 1 : 0), a: s.a + 1 }));
     setRevealed(true);
+    if (isLast) {
+      linkTimerRef.current = setTimeout(() => setLinkReady(true), 500);
+    }
   };
 
   const pill: React.CSSProperties = {
@@ -189,13 +198,16 @@ export function Practice() {
                       {q.type === "mcq" ? "Reveal answer" : "Show marking"}
                     </button>
                   ) : isLast ? (
-                    <a href="/practice" style={{
+                    <Link href="/practice" style={{
                       ...pill,
                       background: "#C9EFD3", color: "#0A2E1A",
                       border: "1px solid #C9EFD3", textDecoration: "none",
+                      pointerEvents: linkReady ? "auto" : "none",
+                      opacity: linkReady ? 1 : 0.55,
+                      transition: "opacity 300ms ease",
                     }}>
-                      See all {QUIZ_BANK.length} questions →
-                    </a>
+                      See all {QUIZ_TOTAL} questions →
+                    </Link>
                   ) : (
                     <button onClick={next} style={pill}>
                       Next question →
@@ -270,7 +282,7 @@ export function Practice() {
 
         <Reveal>
           <div style={{ marginTop: 48, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-            <a
+            <Link
               href="/practice"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
@@ -281,8 +293,8 @@ export function Practice() {
                 boxShadow: "0 4px 20px rgba(201,239,211,0.35)",
               }}
             >
-              See all {QUIZ_BANK.length} questions →
-            </a>
+              See all {QUIZ_TOTAL} questions →
+            </Link>
             <span style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", letterSpacing: "0.01em" }}>
               Filter by topic · MCQ, short answer, extended response
             </span>

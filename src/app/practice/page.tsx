@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { QUIZ_BANK, TOPICS_MAP, type TopicKey, type McqQuestion, type ShortQuestion, type Question } from "@/lib/quiz-bank";
 
@@ -286,6 +287,8 @@ function QuestionCard({ q }: { q: Question }) {
   );
 }
 
+const PAGE_SIZE = 20;
+
 type AccessStatus = "locked" | "unlocked";
 
 export default function PracticePage() {
@@ -294,6 +297,7 @@ export default function PracticePage() {
   const [access, setAccess] = useState<AccessStatus>("locked");
   const [topic, setTopic] = useState<TopicKey | "all">("all");
   const [type, setType] = useState<TypeFilter>("all");
+  const [page, setPage] = useState(1);
 
   const unlock = () => {
     setAccess("unlocked");
@@ -304,6 +308,9 @@ export default function PracticePage() {
     const typeMatch = type === "all" || q.type === type;
     return topicMatch && typeMatch;
   });
+
+  const visible = filtered.slice(0, page * PAGE_SIZE);
+  const hasMore = visible.length < filtered.length;
 
   return (
     <div style={{ minHeight: "100vh", background: "#F9F9F7" }}>
@@ -325,7 +332,7 @@ export default function PracticePage() {
             return (
               <button
                 key={t}
-                onClick={() => setTopic(t)}
+                onClick={() => { setTopic(t); setPage(1); }}
                 style={{
                   padding: "7px 14px", borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: "pointer",
                   background: active ? accent : tint,
@@ -342,7 +349,7 @@ export default function PracticePage() {
           {(["all", "mcq", "short", "extended"] as TypeFilter[]).map((t) => (
             <button
               key={t}
-              onClick={() => setType(t)}
+              onClick={() => { setType(t); setPage(1); }}
               style={{
                 padding: "7px 14px", borderRadius: 999, fontSize: 12, fontWeight: 600, cursor: "pointer",
                 background: type === t ? "#111111" : "#EBEBEB",
@@ -371,13 +378,28 @@ export default function PracticePage() {
             No questions match this filter yet.
           </div>
         ) : (
-          filtered.map((q) => <QuestionCard key={q.id} q={q} />)
+          <>
+            {visible.map((q) => <QuestionCard key={q.id} q={q} />)}
+            {hasMore && (
+              <div style={{ textAlign: "center", marginTop: 8, marginBottom: 24 }}>
+                <button
+                  onClick={() => setPage((p) => p + 1)}
+                  style={{
+                    padding: "13px 32px", borderRadius: 12, fontWeight: 600, fontSize: 15,
+                    background: "#F0F0EE", color: "#1A1A1A", border: "1.5px solid rgba(0,0,0,0.1)",
+                    cursor: "pointer",
+                  }}
+                >
+                  Load more ({filtered.length - visible.length} remaining)
+                </button>
+              </div>
+            )}
+          </>
         )}
 
         <div style={{ marginTop: 40, textAlign: "center" }}>
-          <a
+          <Link
             href="/#enquire"
-            onClick={(e) => { e.preventDefault(); window.location.href = "/#enquire"; }}
             style={{
               display: "inline-flex", padding: "14px 28px", borderRadius: 12,
               background: "#C9EFD3", color: "#0A2E1A",
@@ -385,7 +407,7 @@ export default function PracticePage() {
             }}
           >
             Book a free trial lesson →
-          </a>
+          </Link>
         </div>
       </div>
 
