@@ -13,17 +13,20 @@ export function ScrollProgress() {
 
     // rAF fallback for Safari / Firefox
     let rafId: number;
+    let max = document.documentElement.scrollHeight - window.innerHeight;
+    const onResize = () => { max = document.documentElement.scrollHeight - window.innerHeight; };
     const onScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
     onScroll();
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       cancelAnimationFrame(rafId);
     };
   }, []);
