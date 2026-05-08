@@ -3,12 +3,8 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const INCLUSIONS = [
   {
-    t: "1-hour weekly lesson",
-    d: "Small group, capped at 6. Live syllabus walkthrough plus timed practice every session.",
-  },
-  {
-    t: "Marked essay every week",
-    d: "Write one extended response per week. Returned within 48 hours, marked against NESA criteria.",
+    t: "1.5-hour weekly lesson",
+    d: "Small group capped at 4. Live syllabus walkthrough plus timed practice every session.",
   },
   {
     t: "24-hour question line",
@@ -41,6 +37,172 @@ const CheckIcon = () => (
   </svg>
 );
 
+
+function PriceCard({
+  tag,
+  tagColor,
+  tagBg,
+  hourlyRate,
+  sessionPrice,
+  termPrice,
+  termSave,
+}: {
+  tag: string;
+  tagColor: string;
+  tagBg: string;
+  hourlyRate: string;
+  sessionPrice: string;
+  termPrice: string;
+  termSave: string;
+}) {
+  return (
+    <div
+      style={{
+        borderRadius: 18,
+        border: "1.5px solid rgba(0,0,0,0.1)",
+        overflow: "hidden",
+        background: "#ffffff",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
+      }}
+    >
+      {/* Tag */}
+      <div
+        style={{
+          padding: "9px 20px",
+          background: tagBg,
+          borderBottom: "1px solid rgba(0,0,0,0.07)",
+        }}
+      >
+        <span
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: tagColor,
+          }}
+        >
+          {tag}
+        </span>
+      </div>
+
+      {/* Hourly rate — lead */}
+      <div style={{ padding: "14px 20px 12px", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+        <span
+          style={{
+            fontWeight: 700,
+            fontSize: "clamp(36px, 4vw, 52px)",
+            lineHeight: 0.9,
+            letterSpacing: "-0.05em",
+            color: "#111111",
+            display: "block",
+          }}
+        >
+          {hourlyRate}
+        </span>
+        <div style={{ marginTop: 6, fontSize: 12, fontWeight: 500, color: "#6B6B6B" }}>
+          90-minute sessions
+        </div>
+        <div style={{ fontSize: 12, fontWeight: 500, color: "#6B6B6B" }}>
+          {sessionPrice} per session
+        </div>
+      </div>
+
+      {/* Upfront term */}
+      <div
+        style={{
+          padding: "12px 20px 14px",
+          background: "#F4FCF7",
+          borderBottom: "1px solid rgba(0,0,0,0.08)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 6,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#6B6B6B",
+            }}
+          >
+            Upfront · 10 sessions
+          </div>
+          <div
+            style={{
+              padding: "3px 9px",
+              borderRadius: 999,
+              background: "#C9EFD3",
+              fontSize: 10,
+              fontWeight: 700,
+              color: "#1B6038",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Save {termSave}
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 5 }}>
+          <span
+            style={{
+              fontWeight: 700,
+              fontSize: "clamp(28px, 3vw, 38px)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.05em",
+              color: "#111111",
+            }}
+          >
+            {termPrice}
+          </span>
+          <span style={{ fontSize: 12, fontWeight: 500, color: "#6B6B6B" }}>/ term</span>
+        </div>
+        <div style={{ marginTop: 5, fontSize: 11.5, fontWeight: 500, color: "#3A3A3A" }}>
+          Pay for 9 sessions, receive 10.
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div style={{ padding: "12px 20px" }}>
+        <a
+          href="/#enquire"
+          style={{
+            display: "block",
+            textAlign: "center",
+            padding: "11px 20px",
+            borderRadius: 10,
+            background: "#C9EFD3",
+            color: "#0A2E1A",
+            textDecoration: "none",
+            fontSize: 13.5,
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          Book a free trial lesson →
+        </a>
+        <div
+          style={{
+            marginTop: 6,
+            fontSize: 11,
+            fontWeight: 500,
+            color: "#6B6B6B",
+            textAlign: "center",
+          }}
+        >
+          No card required. First lesson is free.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Pricing() {
   return (
     <section
@@ -67,279 +229,98 @@ export function Pricing() {
           </h2>
         </Reveal>
 
+        {/* Two cards side by side */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "400px 1fr",
-            gap: 48,
-            alignItems: "start",
-          }}
-          className="pricing-grid"
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 56 }}
+          className="pricing-cards"
         >
-          {/* Price card */}
           <Reveal>
-            <div
-              style={{
-                borderRadius: 24,
-                border: "1.5px solid rgba(0,0,0,0.1)",
-                overflow: "hidden",
-                background: "#ffffff",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
-                position: "sticky",
-                top: 88,
-              }}
-            >
-              {/* Per lesson */}
-              <div
-                style={{
-                  padding: "32px 32px 28px",
-                  borderBottom: "1px solid rgba(0,0,0,0.08)",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    color: "#6B6B6B",
-                    marginBottom: 16,
-                  }}
-                >
-                  Per lesson
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: 10,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontWeight: 700,
-                      fontSize: "clamp(72px, 8vw, 100px)",
-                      lineHeight: 0.9,
-                      letterSpacing: "-0.05em",
-                      color: "#111111",
-                    }}
-                  >
-                    $110
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 15,
-                      fontWeight: 500,
-                      color: "#6B6B6B",
-                    }}
-                  >
-                    / 1 hr
-                  </span>
-                </div>
-                <div
-                  style={{
-                    marginTop: 10,
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: "#6B6B6B",
-                  }}
-                >
-                  No lock-in. Book and cancel anytime.
-                </div>
-              </div>
-
-              {/* Per term — best value */}
-              <div
-                style={{
-                  padding: "28px 32px",
-                  background: "#F9F9F7",
-                  borderBottom: "1px solid rgba(0,0,0,0.08)",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 16,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 700,
-                      letterSpacing: "0.22em",
-                      textTransform: "uppercase",
-                      color: "#6B6B6B",
-                    }}
-                  >
-                    Per term · 10 weeks
-                  </div>
-                  <div
-                    style={{
-                      padding: "5px 11px",
-                      borderRadius: 999,
-                      background: "#C9EFD3",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#1B6038",
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    Save $150
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: 10,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontWeight: 700,
-                      fontSize: "clamp(72px, 8vw, 100px)",
-                      lineHeight: 0.9,
-                      letterSpacing: "-0.05em",
-                      color: "#111111",
-                    }}
-                  >
-                    $950
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 15,
-                      fontWeight: 500,
-                      color: "#6B6B6B",
-                    }}
-                  >
-                    / term
-                  </span>
-                </div>
-                <div
-                  style={{
-                    marginTop: 10,
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: "#1A1A1A",
-                  }}
-                >
-                  Most students choose this.
-                </div>
-                <div
-                  style={{
-                    marginTop: 6,
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: "#6B6B6B",
-                  }}
-                >
-                  No lock-in. Book and cancel anytime.
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div style={{ padding: "24px 32px" }}>
-                <a
-                  href="/#enquire"
-                  style={{
-                    display: "block",
-                    textAlign: "center",
-                    padding: "15px 20px",
-                    borderRadius: 12,
-                    background: "#C9EFD3",
-                    color: "#0A2E1A",
-                    textDecoration: "none",
-                    fontSize: 15,
-                    fontWeight: 600,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  Book a free trial lesson →
-                </a>
-                <div
-                  style={{
-                    marginTop: 12,
-                    fontSize: 12,
-                    fontWeight: 500,
-                    color: "#6B6B6B",
-                    textAlign: "center",
-                  }}
-                >
-                  No card required. First lesson is free.
-                </div>
-              </div>
-            </div>
+            <PriceCard
+              tag="Small Group · Max 4 Students"
+              tagBg="#F0FAF3"
+              tagColor="#1B6038"
+              hourlyRate="$80/hr"
+              sessionPrice="$120"
+              termPrice="$1,080"
+              termSave="$120"
+            />
           </Reveal>
-
-          {/* Inclusions */}
-          <Reveal delay={120}>
-            <div>
-              <div
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.22em",
-                  textTransform: "uppercase",
-                  color: "#6B6B6B",
-                  marginBottom: 20,
-                }}
-              >
-                Everything included
-              </div>
-              <div style={{ display: "grid", gap: 0 }}>
-                {INCLUSIONS.map((v, i) => (
-                  <div
-                    key={v.t}
-                    style={{
-                      display: "flex",
-                      gap: 16,
-                      padding: "20px 0",
-                      borderBottom:
-                        i < INCLUSIONS.length - 1
-                          ? "1px solid rgba(0,0,0,0.07)"
-                          : "none",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div style={{ marginTop: 2, flexShrink: 0 }}>
-                      <CheckIcon />
-                    </div>
-                    <div>
-                      <div
-                        style={{
-                          fontWeight: 600,
-                          fontSize: 16,
-                          letterSpacing: "-0.015em",
-                          color: "#111111",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {v.t}
-                      </div>
-                      <p
-                        style={{
-                          margin: 0,
-                          fontSize: 13.5,
-                          lineHeight: 1.55,
-                          color: "#3A3A3A",
-                        }}
-                      >
-                        {v.d}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <Reveal delay={80}>
+            <PriceCard
+              tag="Private 1:1"
+              tagBg="#F9F9F7"
+              tagColor="#3A3A3A"
+              hourlyRate="$100/hr"
+              sessionPrice="$150"
+              termPrice="$1,350"
+              termSave="$150"
+            />
           </Reveal>
         </div>
+
+        {/* Inclusions full-width grid */}
+        <Reveal delay={140}>
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#6B6B6B",
+              marginBottom: 24,
+            }}
+          >
+            Everything included
+          </div>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0 32px" }}
+            className="inclusions-grid"
+          >
+            {INCLUSIONS.map((v) => (
+              <div
+                key={v.t}
+                style={{
+                  borderTop: "1px solid rgba(0,0,0,0.08)",
+                  paddingTop: 20,
+                }}
+              >
+                <div style={{ marginBottom: 8 }}>
+                  <CheckIcon />
+                </div>
+                <div
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 14,
+                    letterSpacing: "-0.015em",
+                    color: "#111111",
+                    marginBottom: 6,
+                  }}
+                >
+                  {v.t}
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 12.5,
+                    lineHeight: 1.55,
+                    color: "#3A3A3A",
+                  }}
+                >
+                  {v.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
 
       <style>{`
         @media (max-width: 900px) {
-          .pricing-grid { grid-template-columns: 1fr !important; }
+          .pricing-cards { grid-template-columns: 1fr !important; }
+          .inclusions-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 560px) {
+          .inclusions-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
