@@ -99,14 +99,17 @@ async function notifyWebhook(data: {
   const url = process.env.NOTIFY_WEBHOOK_URL;
   if (!url) return;
   const secret = process.env.NOTIFY_WEBHOOK_SECRET;
-  const body = JSON.stringify({ type: "new_lead", ...data });
-  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const payload: Record<string, unknown> = { type: "new_lead", ...data };
   if (secret) {
-    headers["X-Webhook-Signature"] =
-      "sha256=" + createHmac("sha256", secret).update(body).digest("hex");
+    const unsigned = JSON.stringify(payload);
+    payload._sig = "sha256=" + createHmac("sha256", secret).update(unsigned).digest("hex");
   }
   try {
-    await fetch(url, { method: "POST", headers, body });
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
   } catch (err) {
     console.error("[leads] webhook failed:", err);
   }
