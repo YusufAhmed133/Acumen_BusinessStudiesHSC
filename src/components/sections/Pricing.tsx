@@ -1,5 +1,6 @@
 "use client";
 import { Reveal } from "@/components/ui/Reveal";
+import { ScrollLink } from "@/components/ui/ScrollLink";
 
 const INCLUSIONS = [
   {
@@ -170,8 +171,8 @@ function PriceCard({
 
       {/* CTA */}
       <div style={{ padding: "12px 20px" }}>
-        <a
-          href="/#enquire"
+        <ScrollLink
+          sectionId="enquire"
           style={{
             display: "block",
             textAlign: "center",
@@ -186,7 +187,7 @@ function PriceCard({
           }}
         >
           Book a free trial lesson →
-        </a>
+        </ScrollLink>
         <div
           style={{
             marginTop: 6,

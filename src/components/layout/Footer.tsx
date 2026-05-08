@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
+import { ScrollLink } from "@/components/ui/ScrollLink";
 
 export function Footer() {
   return (
@@ -51,16 +53,22 @@ export function Footer() {
           alignItems: "center",
         }}>
           {[
-            { href: "/",          label: "Home"      },
-            { href: "/#syllabus", label: "Syllabus"  },
-            { href: "/practice",  label: "Practice"  },
-            { href: "/#pricing",  label: "Pricing"   },
-            { href: "/#faq",      label: "FAQ"       },
-          ].map(({ href, label }) => (
-            <Link key={href} href={href} style={{ color: "inherit", textDecoration: "none" }}>
-              {label}
-            </Link>
-          ))}
+            { href: "/",         label: "Home",     sectionId: undefined },
+            { href: "/",         label: "Syllabus", sectionId: "syllabus" },
+            { href: "/practice", label: "Practice", sectionId: undefined },
+            { href: "/",         label: "Pricing",  sectionId: "pricing" },
+            { href: "/",         label: "FAQ",      sectionId: "faq" },
+          ].map(({ href, label, sectionId }) =>
+            sectionId ? (
+              <ScrollLink key={label} sectionId={sectionId} style={{ color: "inherit", textDecoration: "none" }}>
+                {label}
+              </ScrollLink>
+            ) : (
+              <Link key={href + label} href={href} style={{ color: "inherit", textDecoration: "none" }}>
+                {label}
+              </Link>
+            )
+          )}
         </div>
       </div>
 

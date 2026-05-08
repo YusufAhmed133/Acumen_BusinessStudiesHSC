@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
+import { ScrollLink } from "@/components/ui/ScrollLink";
 
 const PREVIEWS = [
   { topic: "Operations", kind: "Notes", title: "Lean production + global operations", tint: "#C9EFD3", accent: "#1B6038" },
@@ -116,8 +117,8 @@ export function ResourcesTeaser() {
 
         <Reveal delay={380}>
           <div style={{ marginTop: 36 }}>
-            <a
-              href="/#enquire"
+            <ScrollLink
+              sectionId="enquire"
               style={{
                 display: "inline-block",
                 padding: "13px 24px",
@@ -131,7 +132,7 @@ export function ResourcesTeaser() {
               }}
             >
               Book a trial to unlock resources →
-            </a>
+            </ScrollLink>
           </div>
         </Reveal>
       </div>

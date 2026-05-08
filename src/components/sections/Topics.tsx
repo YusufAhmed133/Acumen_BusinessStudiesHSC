@@ -203,7 +203,7 @@ function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
               ))}
             </ul>
             <a
-              href="/#practice"
+              href="/practice"
               style={{
                 display: "inline-block",
                 marginTop: 20,
@@ -272,7 +272,7 @@ export function Topics() {
               Try real exam questions from each topic.
             </span>
             <a
-              href="/#practice"
+              href="/practice"
               style={{
                 fontSize: 14,
                 fontWeight: 600,

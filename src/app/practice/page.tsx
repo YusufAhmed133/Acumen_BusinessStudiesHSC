@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { ScrollLink } from "@/components/ui/ScrollLink";
 import { useEffect, useState } from "react";
 import { QUIZ_BANK, TOPICS_MAP, type TopicKey, type McqQuestion, type ShortQuestion, type Question } from "@/lib/quiz-bank";
 
@@ -398,8 +399,8 @@ export default function PracticePage() {
         )}
 
         <div style={{ marginTop: 40, textAlign: "center" }}>
-          <Link
-            href="/#enquire"
+          <ScrollLink
+            sectionId="enquire"
             style={{
               display: "inline-flex", padding: "14px 28px", borderRadius: 12,
               background: "#C9EFD3", color: "#0A2E1A",
@@ -407,7 +408,7 @@ export default function PracticePage() {
             }}
           >
             Book a free trial lesson →
-          </Link>
+          </ScrollLink>
         </div>
       </div>
 

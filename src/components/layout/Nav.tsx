@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { MarkBug } from "@/components/ui/MarkBug";
+import { ScrollLink } from "@/components/ui/ScrollLink";
 
-const LINKS = [
-  { href: "/",           label: "Home" },
-  { href: "/#syllabus",  label: "Syllabus" },
-  { href: "/#practice",  label: "Practice" },
-  { href: "/#pricing",   label: "Pricing" },
-  { href: "/#resources", label: "Resources" },
-  { href: "/#faq",       label: "FAQ" },
+const LINKS: { href: string; label: string; sectionId?: string }[] = [
+  { href: "/",          label: "Home" },
+  { href: "/",          label: "Syllabus",  sectionId: "syllabus" },
+  { href: "/practice",  label: "Practice" },
+  { href: "/",          label: "Pricing",   sectionId: "pricing" },
+  { href: "/",          label: "Resources", sectionId: "resources" },
+  { href: "/",          label: "FAQ",       sectionId: "faq" },
 ];
 
 const pill: React.CSSProperties = {
@@ -86,24 +87,36 @@ export function Nav() {
 
         {/* Desktop nav */}
         <nav style={{ display: "flex", gap: 28, alignItems: "center" }} className="hidden-mobile" aria-label="Main navigation">
-          {LINKS.map(({ href, label }) => (
-            <a key={href} href={href} style={{
-              fontSize: 14,
-              fontWeight: 500,
-              color: "#1A1A1A",
-              textDecoration: "none",
-              letterSpacing: "-0.01em",
-            }}>
-              {label}
-            </a>
-          ))}
+          {LINKS.map(({ href, label, sectionId }) =>
+            sectionId ? (
+              <ScrollLink key={label} sectionId={sectionId} style={{
+                fontSize: 14,
+                fontWeight: 500,
+                color: "#1A1A1A",
+                textDecoration: "none",
+                letterSpacing: "-0.01em",
+              }}>
+                {label}
+              </ScrollLink>
+            ) : (
+              <a key={href} href={href} style={{
+                fontSize: 14,
+                fontWeight: 500,
+                color: "#1A1A1A",
+                textDecoration: "none",
+                letterSpacing: "-0.01em",
+              }}>
+                {label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* CTA + mobile toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <a href="/#enquire" style={pill} className="hidden-mobile">
+          <ScrollLink sectionId="enquire" style={pill} className="hidden-mobile">
             Book a free trial lesson →
-          </a>
+          </ScrollLink>
 
           <button
             onClick={() => setOpen((v) => !v)}
@@ -148,25 +161,39 @@ export function Nav() {
           aria-label="Mobile navigation"
         >
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 2 }}>
-            {LINKS.map(({ href, label }) => (
-              <li key={href}>
-                <a href={href} onClick={() => setOpen(false)} style={{
-                  display: "block",
-                  padding: "11px 4px",
-                  fontSize: 16,
-                  fontWeight: 500,
-                  color: "#1A1A1A",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(10,10,10,0.06)",
-                }}>
-                  {label}
-                </a>
+            {LINKS.map(({ href, label, sectionId }) => (
+              <li key={label}>
+                {sectionId ? (
+                  <ScrollLink sectionId={sectionId} onNavigate={() => setOpen(false)} style={{
+                    display: "block",
+                    padding: "11px 4px",
+                    fontSize: 16,
+                    fontWeight: 500,
+                    color: "#1A1A1A",
+                    textDecoration: "none",
+                    borderBottom: "1px solid rgba(10,10,10,0.06)",
+                  }}>
+                    {label}
+                  </ScrollLink>
+                ) : (
+                  <a href={href} onClick={() => setOpen(false)} style={{
+                    display: "block",
+                    padding: "11px 4px",
+                    fontSize: 16,
+                    fontWeight: 500,
+                    color: "#1A1A1A",
+                    textDecoration: "none",
+                    borderBottom: "1px solid rgba(10,10,10,0.06)",
+                  }}>
+                    {label}
+                  </a>
+                )}
               </li>
             ))}
             <li style={{ marginTop: 12 }}>
-              <a href="/#enquire" onClick={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
+              <ScrollLink sectionId="enquire" onNavigate={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
                 Book a free trial lesson →
-              </a>
+              </ScrollLink>
             </li>
           </ul>
         </nav>
