@@ -56,6 +56,7 @@ export function Footer() {
             { href: "/",         label: "Home",     sectionId: undefined },
             { href: "/",         label: "Syllabus", sectionId: "syllabus" },
             { href: "/practice", label: "Practice", sectionId: undefined },
+            { href: "/tutors",   label: "Tutors",   sectionId: undefined },
             { href: "/",         label: "Pricing",  sectionId: "pricing" },
             { href: "/",         label: "FAQ",      sectionId: "faq" },
           ].map(({ href, label, sectionId }) =>
