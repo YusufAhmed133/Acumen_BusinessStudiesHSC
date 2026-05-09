@@ -32,7 +32,7 @@ export function HeroCountdown() {
         letterSpacing: "-0.03em",
       }}
     >
-      <span ref={ref}>{initial}</span>
+      <span ref={ref} suppressHydrationWarning>{initial}</span>
       <span style={{ color: "#C9EFD3", fontWeight: 400, marginLeft: 3, fontSize: 15 }}>
         {label}
       </span>

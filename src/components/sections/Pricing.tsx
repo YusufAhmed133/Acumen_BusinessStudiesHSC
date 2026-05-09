@@ -133,7 +133,7 @@ function PriceCard({
               color: "#6B6B6B",
             }}
           >
-            Upfront · 10 sessions
+            Upfront, 10 sessions
           </div>
           <div
             style={{
@@ -236,7 +236,7 @@ export function Pricing() {
         >
           <Reveal>
             <PriceCard
-              tag="Small Group · Max 4 Students"
+              tag="Small Group, Max 4 Students"
               tagBg="#F0FAF3"
               tagColor="#1B6038"
               hourlyRate="$80/hr"

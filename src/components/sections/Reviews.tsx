@@ -106,7 +106,7 @@ export function Reviews() {
                 }}
               >
                 {r.name}
-                {r.school ? ` · ${r.school}` : ""}
+                {r.school ? `, ${r.school}` : ""}
               </div>
             </div>
           ))}

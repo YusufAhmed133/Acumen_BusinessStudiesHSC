@@ -55,7 +55,7 @@ function EmailGate({ onUnlock }: { onUnlock: () => void }) {
         boxShadow: "0 32px 80px rgba(0,0,0,0.45)",
       }}>
         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 14 }}>
-          Acumen · Practice bank
+          Acumen Practice Bank
         </div>
         <h2 id="gate-title" style={{ fontWeight: 700, fontSize: 26, letterSpacing: "-0.04em", margin: "0 0 8px", color: "#0A0A0A" }}>
           Enter your email to access
@@ -187,7 +187,7 @@ function QuestionCard({ q }: { q: Question }) {
           }}>
             {topic.label}
           </span>
-          <span style={{ fontSize: 12, color: "#5C5C5C", fontWeight: 500 }}>{typeLabel} · {q.marks} mark{q.marks !== 1 ? "s" : ""}</span>
+          <span style={{ fontSize: 12, color: "#5C5C5C", fontWeight: 500 }}>{typeLabel}, {q.marks} mark{q.marks !== 1 ? "s" : ""}</span>
         </div>
         <span style={{ fontSize: 11, color: "#9B9B9B", letterSpacing: "0.06em" }}>{q.src}</span>
       </div>
@@ -292,7 +292,7 @@ function QuestionCard({ q }: { q: Question }) {
                   {(q as McqQuestion).explain}
                 </p>
                 <p style={{ margin: 0, fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "#5C5C5C" }}>
-                  Answer · ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
+                  Answer: ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
                 </p>
               </div>
             ) : (
@@ -303,7 +303,7 @@ function QuestionCard({ q }: { q: Question }) {
           ) : (
             <div>
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A3A3A", marginBottom: 10 }}>
-                Marking criteria · {q.marks} marks
+                Marking criteria, {q.marks} marks
               </div>
               <div style={{ display: "grid", gap: 8, marginBottom: 16 }}>
                 {(q as ShortQuestion).criteria.map((c, i) => {
@@ -423,7 +423,7 @@ export default function PracticePage() {
             HSC Business Studies Practice Questions
           </h1>
           <p style={{ margin: 0, fontSize: 15, color: "#5C5C5C" }}>
-            {filtered.length} question{filtered.length !== 1 ? "s" : ""} · real HSC past papers, annotated by syllabus dot point
+            {filtered.length} question{filtered.length !== 1 ? "s" : ""} from real HSC past papers, annotated by syllabus dot point
           </p>
         </div>
 

@@ -88,7 +88,7 @@ export function Practice() {
             }}>
               <div>
                 <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5C5C5C" }}>
-                  Acumen practice paper · {q.src}
+                  Acumen practice paper, {q.src}
                 </div>
                 <div style={{ fontWeight: 600, fontSize: 22, letterSpacing: "-0.025em", marginTop: 4, color: "#0A0A0A" }}>
                   HSC Business Studies
@@ -126,7 +126,7 @@ export function Practice() {
                     width: 11, height: 11, borderRadius: 3, background: topic.accent,
                     boxShadow: `0 4px 8px ${topic.accent}55`, display: "inline-block",
                   }} />
-                  Section {q.type === "mcq" ? "I" : q.type === "short" ? "II" : "III"} · {topic.label}
+                  Section {q.type === "mcq" ? "I" : q.type === "short" ? "II" : "III"}, {topic.label}
                   <span style={{ flex: 1, height: 1, background: "rgba(10,10,10,0.08)" }} />
                   <span style={{ color: "#5C5C5C" }}>({q.marks} mark{q.marks > 1 ? "s" : ""})</span>
                 </div>
@@ -234,7 +234,7 @@ export function Practice() {
                         {(q as McqQuestion).explain}
                       </p>
                       <p style={{ marginTop: 14, fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "#5C5C5C" }}>
-                        Answer · ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
+                        Answer: ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
                       </p>
                     </div>
                   ) : (
@@ -245,7 +245,7 @@ export function Practice() {
                 ) : (
                   <div>
                     <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A3A3A", marginBottom: 12 }}>
-                      Marking criteria · {q.marks} marks
+                      Marking criteria, {q.marks} marks
                     </div>
                     <div style={{ display: "grid", gap: 9 }}>
                       {(q as ShortQuestion).criteria.map((c, i) => {
@@ -268,7 +268,7 @@ export function Practice() {
                     {revealed && (
                       <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px dashed rgba(10,10,10,0.18)", fontSize: 13.5, lineHeight: 1.65, color: "#1A1A1A" }}>
                         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 10 }}>
-                          Sample response · based on NESA marking criteria
+                          Sample response, based on NESA marking criteria
                         </div>
                         {(q as ShortQuestion).sample}
                       </div>
@@ -296,7 +296,7 @@ export function Practice() {
               See all {QUIZ_TOTAL} questions →
             </Link>
             <span style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", letterSpacing: "0.01em" }}>
-              Filter by topic · MCQ, short answer, extended response
+              Filter by topic: MCQ, short answer, extended response
             </span>
           </div>
         </Reveal>

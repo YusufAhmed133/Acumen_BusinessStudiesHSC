@@ -101,7 +101,7 @@ export function EnquiryForm() {
         fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
         textTransform: "uppercase", color: "#5C5C5C",
       }}>
-        Free trial enquiry · 1 business day reply
+        Free trial enquiry, 1 business day reply
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>

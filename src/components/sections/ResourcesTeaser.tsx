@@ -95,11 +95,10 @@ export function ResourcesTeaser() {
                 {/* Content behind lock */}
                 <div
                   style={{
-                    display: "inline-flex", alignItems: "center", gap: 7,
+                    display: "inline-flex", alignItems: "center",
                     padding: "4px 10px", borderRadius: 999, background: r.tint, marginBottom: 12,
                   }}
                 >
-                  <span style={{ width: 7, height: 7, borderRadius: 999, background: r.accent, display: "inline-block" }} />
                   <span style={{ fontSize: 10, fontWeight: 700, color: r.accent, letterSpacing: "0.1em", textTransform: "uppercase" }}>
                     {r.topic}
                   </span>

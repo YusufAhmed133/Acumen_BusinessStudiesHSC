@@ -5,6 +5,7 @@ export function Hero() {
   return (
     <section
       id="top"
+      className="hero-section"
       style={{
         background: "radial-gradient(ellipse at 0% 60%, rgba(201,239,211,0.18) 0%, transparent 52%), radial-gradient(ellipse at 90% 10%, rgba(251,230,189,0.13) 0%, transparent 48%), #ffffff",
         overflowX: "hidden",
@@ -13,30 +14,6 @@ export function Hero() {
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          left: "38%",
-          top: "50%",
-          transform: "translateY(-50%) rotateZ(-5deg)",
-          fontSize: "clamp(280px, 32vw, 480px)",
-          fontWeight: 800,
-          lineHeight: 0.85,
-          letterSpacing: "-0.06em",
-          background: "linear-gradient(135deg, #72D69B 0%, #F2C94C 30%, #F08C8C 62%, #7EB5F8 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          opacity: 0.88,
-          userSelect: "none",
-          pointerEvents: "none",
-          zIndex: 0,
-          fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-        }}
-      >
-        A
-      </div>
 
       <div
         style={{

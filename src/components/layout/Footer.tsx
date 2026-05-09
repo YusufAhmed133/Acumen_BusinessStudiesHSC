@@ -38,7 +38,7 @@ export function Footer() {
               marginTop: 6,
               display: "block",
             }}>
-              HSC Business Studies · Sydney · NSW
+              HSC Business Studies, Sydney NSW
             </span>
           </div>
         </a>
@@ -86,7 +86,7 @@ export function Footer() {
         flexWrap: "wrap",
         gap: 12,
       }}>
-        <span>© Acumen HSC · Sydney NSW</span>
+        <span>© Acumen HSC, Sydney NSW</span>
         <span style={{ display: "flex", gap: 20 }}>
           <Link href="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
           <Link href="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
