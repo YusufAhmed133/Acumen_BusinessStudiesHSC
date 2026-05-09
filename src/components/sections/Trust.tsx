@@ -74,8 +74,7 @@ export function Trust() {
                 title={s.name}
                 width={56}
                 height={36}
-                style={{ width: "auto", height: 36, maxWidth: 56, objectFit: "contain" }}
-                loading="lazy"
+                style={{ width: 56, height: 36, objectFit: "contain" }}
               />
               <span style={{
                 fontSize: 13,
