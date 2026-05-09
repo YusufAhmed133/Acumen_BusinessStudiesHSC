@@ -7,7 +7,6 @@ const LINKS: { href: string; label: string; sectionId?: string }[] = [
   { href: "/",          label: "Home" },
   { href: "/",          label: "Syllabus",  sectionId: "syllabus" },
   { href: "/practice",  label: "Practice" },
-  { href: "/tutors",    label: "Tutors" },
   { href: "/",          label: "Pricing",   sectionId: "pricing" },
   { href: "/",          label: "Resources", sectionId: "resources" },
   { href: "/",          label: "FAQ",       sectionId: "faq" },
