@@ -1,31 +1,7 @@
-"use client";
-import { useEffect, useState } from "react";
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
-
-const HSC_DATE = new Date("2026-10-29T09:25:00+11:00");
-
-function useCountdown(target: Date) {
-  const [mounted, setMounted] = useState(false);
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    setMounted(true);
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  if (!mounted) return { days: 0, hrs: 0, mins: 0, secs: 0 };
-  const ms = Math.max(0, target.getTime() - now);
-  return {
-    days: Math.floor(ms / 86400000),
-    hrs: Math.floor((ms % 86400000) / 3600000),
-    mins: Math.floor((ms % 3600000) / 60000),
-    secs: Math.floor((ms % 60000) / 1000),
-  };
-}
+import { HeroCountdown } from "@/components/sections/HeroCountdown";
 
 export function Hero() {
-  const c = useCountdown(HSC_DATE);
-
-
   return (
     <section
       id="top"
@@ -37,7 +13,6 @@ export function Hero() {
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
-      {/* Giant background A — pastel gradient, angled behind the form, slow parallax */}
       <div
         aria-hidden
         style={{
@@ -77,7 +52,6 @@ export function Hero() {
         }}
         className="hero-grid"
       >
-        {/* Left — headline + descriptor */}
         <div>
           <h1
             style={{
@@ -117,69 +91,9 @@ export function Hero() {
             Taught by Band 6 graduates from UNSW, USYD, UTS and Macquarie. Available online and in Sydney for Year 11 and Year 12.
           </p>
 
-          {/* HSC countdown */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 16,
-              padding: "14px 20px",
-              borderRadius: 14,
-              background: "#111111",
-              color: "#ffffff",
-            }}
-          >
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#C9EFD3",
-                }}
-              >
-                HSC 2026
-              </span>
-              <span
-                style={{
-                  width: 1,
-                  height: 20,
-                  background: "rgba(255,255,255,0.2)",
-                  display: "inline-block",
-                }}
-              />
-              {[
-                { n: c.days, l: "d" },
-                { n: c.hrs, l: "h" },
-                { n: c.mins, l: "m" },
-                { n: c.secs, l: "s" },
-              ].map(({ n, l }) => (
-                <span
-                  key={l}
-                  style={{
-                    fontSize: 28,
-                    fontWeight: 600,
-                    fontVariantNumeric: "tabular-nums",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  {String(n).padStart(2, "0")}
-                  <span
-                    style={{
-                      color: "#C9EFD3",
-                      fontWeight: 400,
-                      marginLeft: 3,
-                      fontSize: 15,
-                    }}
-                  >
-                    {l}
-                  </span>
-                </span>
-              ))}
-          </div>
+          <HeroCountdown />
         </div>
 
-        {/* Right — form */}
         <div id="enquire">
           <EnquiryForm />
         </div>

@@ -77,7 +77,7 @@ export function Nav() {
               fontWeight: 600,
               letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: "#767676",
+              color: "#747474",
               lineHeight: 1,
             }}>
               HSC Business Studies

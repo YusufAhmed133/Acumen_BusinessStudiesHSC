@@ -62,7 +62,15 @@ export function Reviews() {
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
-      <div className="review-ticker">
+      <div className="sr-only" aria-label="Student reviews">
+        {REVIEWS.map((r) => (
+          <blockquote key={r.name}>
+            <p>{r.quote}</p>
+            <footer>{r.name}{r.school ? `, ${r.school}` : ""}</footer>
+          </blockquote>
+        ))}
+      </div>
+      <div className="review-ticker" aria-hidden="true">
         <div className="review-track">
           {DOUBLED.map((r, i) => (
             <div

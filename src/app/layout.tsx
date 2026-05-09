@@ -279,6 +279,10 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={GeistSans.variable}>
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://va.vercel-scripts.com" />
+        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         {/* JSON-LD: static site data, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: COURSE_JSON }} />

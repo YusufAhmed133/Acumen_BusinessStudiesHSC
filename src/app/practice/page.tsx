@@ -38,12 +38,17 @@ function EmailGate({ onUnlock }: { onUnlock: () => void }) {
   };
 
   return (
-    <div style={{
-      position: "fixed", inset: 0, zIndex: 100,
-      background: "rgba(13,13,13,0.72)", backdropFilter: "blur(8px)",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      padding: "24px",
-    }}>
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="gate-title"
+      style={{
+        position: "fixed", inset: 0, zIndex: 100,
+        background: "rgba(13,13,13,0.72)", backdropFilter: "blur(8px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "24px",
+      }}
+    >
       <form onSubmit={submit} style={{
         background: "#FFFCF4", borderRadius: 20, padding: "40px 36px",
         maxWidth: 420, width: "100%",
@@ -52,7 +57,7 @@ function EmailGate({ onUnlock }: { onUnlock: () => void }) {
         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 14 }}>
           Acumen · Practice bank
         </div>
-        <h2 style={{ fontWeight: 700, fontSize: 26, letterSpacing: "-0.04em", margin: "0 0 8px", color: "#0A0A0A" }}>
+        <h2 id="gate-title" style={{ fontWeight: 700, fontSize: 26, letterSpacing: "-0.04em", margin: "0 0 8px", color: "#0A0A0A" }}>
           Enter your email to access
         </h2>
         <p style={{ fontSize: 14, lineHeight: 1.6, color: "#5C5C5C", margin: "0 0 28px" }}>
@@ -225,6 +230,7 @@ function QuestionCard({ q }: { q: Question }) {
 
           {(q.type === "short" || q.type === "extended") && (
             <textarea
+              aria-label={`Your answer for: ${q.stem}`}
               value={response}
               onChange={(e) => setResponse(e.target.value)}
               placeholder={q.type === "extended" ? "Write your business report response here..." : "Write your answer here..."}
@@ -379,6 +385,7 @@ export default function PracticePage() {
               <button
                 key={t}
                 onClick={() => { setTopic(t); setPage(1); }}
+                aria-pressed={active}
                 style={{
                   padding: "7px 14px", borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: "pointer",
                   background: active ? accent : tint,
@@ -396,6 +403,7 @@ export default function PracticePage() {
             <button
               key={t}
               onClick={() => { setType(t); setPage(1); }}
+              aria-pressed={type === t}
               style={{
                 padding: "7px 14px", borderRadius: 999, fontSize: 12, fontWeight: 600, cursor: "pointer",
                 background: type === t ? "#111111" : "#EBEBEB",

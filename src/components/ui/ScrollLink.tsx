@@ -23,7 +23,7 @@ export function ScrollLink({
   };
 
   return (
-    <a href="/" onClick={handleClick} style={style} className={className}>
+    <a href={`/#${sectionId}`} onClick={handleClick} style={style} className={className}>
       {children}
     </a>
   );

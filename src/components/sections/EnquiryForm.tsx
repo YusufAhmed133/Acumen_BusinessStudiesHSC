@@ -122,11 +122,18 @@ export function EnquiryForm() {
         </Field>
       </div>
 
-      <Field label="Year level">
+      <fieldset style={{ border: "none", padding: 0, margin: 0 }}>
+        <legend style={{
+          fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase",
+          color: "#5C5C5C", fontWeight: 600, marginBottom: 5, padding: 0,
+        }}>
+          Year level
+        </legend>
         <div style={{ display: "flex", gap: 8 }}>
           {(["Year 11", "Year 12"] as const).map((y) => (
             <button
               key={y} type="button" onClick={() => set("year", y)}
+              aria-pressed={f.year === y}
               style={{
                 flex: 1, padding: "11px 12px", borderRadius: 12, cursor: "pointer",
                 border: `1px solid ${f.year === y ? "#111111" : "rgba(0,0,0,0.14)"}`,
@@ -139,7 +146,7 @@ export function EnquiryForm() {
             </button>
           ))}
         </div>
-      </Field>
+      </fieldset>
 
       <Field label="Preferred times">
         <input

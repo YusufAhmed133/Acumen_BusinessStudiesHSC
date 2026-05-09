@@ -56,7 +56,10 @@ export function Trust() {
         />
       </div>
 
-      <div className="ticker">
+      <p className="sr-only">
+        Trusted by students from: {SCHOOLS.map(s => s.name).join(", ")}.
+      </p>
+      <div className="ticker" aria-hidden="true">
         <div className="ticker-track">
           {ITEMS.map((s, i) => (
             <span
@@ -75,6 +78,7 @@ export function Trust() {
                 width={56}
                 height={36}
                 style={{ width: 56, height: 36, objectFit: "contain" }}
+                priority={i < 2}
               />
               <span style={{
                 fontSize: 13,

@@ -80,6 +80,8 @@ function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
       >
         <button
           onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls={`topic-panel-${t.key}`}
           style={{
             width: "100%",
             textAlign: "left",
@@ -159,6 +161,7 @@ function Card({ t, i }: { t: typeof TOPICS[number]; i: number }) {
         </button>
 
         <div
+          id={`topic-panel-${t.key}`}
           style={{
             overflow: "hidden",
             maxHeight: open ? 480 : 0,

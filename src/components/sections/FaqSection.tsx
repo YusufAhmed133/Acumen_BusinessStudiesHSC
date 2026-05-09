@@ -80,6 +80,8 @@ export function FaqSection() {
                 >
                   <button
                     onClick={() => setOpen(isOpen ? -1 : i)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${i}`}
                     style={{
                       width: "100%",
                       textAlign: "left",
@@ -112,6 +114,8 @@ export function FaqSection() {
                     </span>
                   </button>
                   <div
+                    id={`faq-answer-${i}`}
+                    role="region"
                     style={{
                       maxHeight: isOpen ? 300 : 0,
                       overflow: "hidden",
