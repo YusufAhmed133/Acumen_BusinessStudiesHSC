@@ -159,8 +159,7 @@ export async function POST(request: NextRequest) {
     ip_hash: hashIp(ip),
   };
 
-  // Always log so leads appear in Vercel function logs even without any service
-  console.log("[lead]", JSON.stringify({ name, email: payload.email, phone, year_group, message }));
+  console.log("[lead]", JSON.stringify({ name, email: payload.email, year_group }));
 
   let leadId: string | null = null;
   if (supabaseConfigured()) {

@@ -63,7 +63,7 @@ export function Trust() {
         <div className="ticker-track">
           {ITEMS.map((s, i) => (
             <span
-              key={i}
+              key={`${i}-${s.name}`}
               style={{
                 display: "inline-flex",
                 alignItems: "center",

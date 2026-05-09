@@ -176,3 +176,17 @@ create table if not exists public.whitelist (
 
 alter table public.whitelist enable row level security;
 revoke all on public.whitelist from anon, authenticated;
+
+-- ─── RESOURCE WHITELIST ───────────────────────────────────────────────────
+-- Separate from quiz bank whitelist. Founder adds emails here after enrolment.
+-- API route /api/resource-gate checks this table with service-role key.
+create table if not exists public.resource_whitelist (
+  id         uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  granted_by text,
+  email      citext not null unique check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
+  note       text
+);
+
+alter table public.resource_whitelist enable row level security;
+revoke all on public.resource_whitelist from anon, authenticated;

@@ -5,7 +5,7 @@ import { Trust } from "@/components/sections/Trust";
 import { Topics } from "@/components/sections/Topics";
 import { Pricing } from "@/components/sections/Pricing";
 
-const Practice = dynamic(() => import("@/components/sections/Practice").then((m) => m.Practice));
+const PracticeDemo = dynamic(() => import("@/components/sections/PracticeDemo").then((m) => m.PracticeDemo));
 import { Reviews } from "@/components/sections/Reviews";
 import { ResourcesTeaser } from "@/components/sections/ResourcesTeaser";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -39,7 +39,7 @@ export default function HomePage() {
       <Hero />
       <Trust />
       <Topics />
-      <Practice />
+      <PracticeDemo />
       <Pricing />
       <Reviews />
       <ResourcesTeaser />

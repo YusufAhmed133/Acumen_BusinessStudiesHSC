@@ -79,6 +79,7 @@ export function FaqSection() {
                   }}
                 >
                   <button
+                    id={`faq-btn-${i}`}
                     onClick={() => setOpen(isOpen ? -1 : i)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${i}`}
@@ -116,6 +117,7 @@ export function FaqSection() {
                   <div
                     id={`faq-answer-${i}`}
                     role="region"
+                    aria-labelledby={`faq-btn-${i}`}
                     style={{
                       maxHeight: isOpen ? 300 : 0,
                       overflow: "hidden",

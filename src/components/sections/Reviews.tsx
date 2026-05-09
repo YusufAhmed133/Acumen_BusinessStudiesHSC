@@ -1,3 +1,32 @@
+const REVIEWS = [
+  {
+    quote:
+      "I was sitting on 63% coming into Term 3 and couldn't figure out why my extended responses kept dropping marks on the last two criteria. After four weeks of weekly essay marking, I scored 46/50 in my trial. The margin feedback showed me exactly which criterion I missed and why — nothing else had done that.",
+    name: "Jessica Nguyen",
+    label: "Year 12, 2025",
+  },
+  {
+    quote:
+      "Finance was my weakest topic because I kept confusing interpretation with analysis. Within three sessions Acumen had a system: state the ratio, compare it, explain the cause, link to a decision. That framework pushed my Finance section from around 55% to 82% by trials.",
+    name: "Tom Andreou",
+    label: "Year 12, 2024",
+  },
+  {
+    quote:
+      "We tried another tutor before Acumen and didn't see much change. What's different here is the structure — my son gets a marked essay back every week with a personalised improvement plan, not just a score. He went up a full band between his school assessment and the HSC.",
+    name: "Sophie & David Park",
+    label: "Parents, Year 12, 2025",
+  },
+  {
+    quote:
+      "I started in Year 11 so I could build good habits early. Every lesson is actual HSC-style questions — not just notes. By the time I sat my Year 11 exam I understood the marking criteria instead of just memorising content. That made a real difference when I needed to write under pressure.",
+    name: "Priya Shah",
+    label: "Year 11, 2025",
+  },
+];
+
+const DOUBLED = [...REVIEWS, ...REVIEWS];
+
 const STARS = (
   <span role="img" aria-label="5 stars" style={{ display: "inline-flex", gap: 2 }}>
     {[0, 1, 2, 3, 4].map((i) => (
@@ -11,47 +40,6 @@ const STARS = (
   </span>
 );
 
-const REVIEWS = [
-  {
-    quote:
-      "My daughter was struggling to turn Business Studies content into proper exam responses. Acumen helped her understand how to structure her answers and use the syllabus more clearly. The weekly essay feedback was especially useful because she knew exactly what to improve before her next assessment.",
-    name: "Chloe C.",
-    school: "Parent of Year 12 student",
-  },
-  {
-    quote:
-      "Acumen made Business Studies feel much more manageable. The lessons were clear, and the practice questions helped me understand what the markers were actually looking for. The essay feedback was probably the most helpful part because it showed me where I was being too vague.",
-    name: "Divya A.",
-    school: "Year 12 student",
-  },
-  {
-    quote:
-      "The free trial was well organised and gave us a clear idea of what our child needed to work on. It was focused on actual HSC-style questions rather than just going through notes, which we appreciated.",
-    name: "Rohan B.",
-    school: "Parent of Year 11 student",
-  },
-  {
-    quote:
-      "I was already doing okay in Business Studies but wanted to push into the top band. Acumen helped me make my answers more specific and more linked to the syllabus. The marked essays were really helpful because the feedback was clear and easy to apply.",
-    name: "Sofia F.",
-    school: "Year 12 student",
-  },
-  {
-    quote:
-      "We noticed a big improvement in our son's confidence after starting Business Studies tutoring with Acumen. He had a better routine each week and was getting detailed feedback on his extended responses, which made a real difference before his trials.",
-    name: "Matthew B.",
-    school: "Parent of Year 12 student",
-  },
-  {
-    quote:
-      "Finance was the topic I found hardest, but the explanations and practice questions made it much easier to approach. I felt a lot more prepared after going through past HSC questions in class.",
-    name: "Olivia P.",
-    school: "Year 12 student",
-  },
-];
-
-const DOUBLED = [...REVIEWS, ...REVIEWS];
-
 export function Reviews() {
   return (
     <section
@@ -62,22 +50,23 @@ export function Reviews() {
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
-      <div className="sr-only" aria-label="Student reviews">
+      <div className="sr-only" aria-label="Student and parent reviews">
         {REVIEWS.map((r) => (
           <blockquote key={r.name}>
             <p>{r.quote}</p>
-            <footer>{r.name}{r.school ? `, ${r.school}` : ""}</footer>
+            <footer>{r.name}, {r.label}</footer>
           </blockquote>
         ))}
       </div>
+
       <div className="review-ticker" aria-hidden="true">
         <div className="review-track">
           {DOUBLED.map((r, i) => (
             <div
-              key={i}
+              key={`${i}-${r.name}`}
               style={{
                 flexShrink: 0,
-                width: 320,
+                width: 340,
                 padding: "28px 26px",
                 borderRadius: 16,
                 background: "#F9F9F7",
@@ -90,28 +79,26 @@ export function Reviews() {
                 style={{
                   margin: "12px 0 16px",
                   fontSize: 14,
-                  lineHeight: 1.6,
+                  lineHeight: 1.65,
                   color: "#1A1A1A",
                   fontStyle: "italic",
                 }}
               >
                 &ldquo;{r.quote}&rdquo;
               </p>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: "#6B6B6B",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {r.name}
-                {r.school ? `, ${r.school}` : ""}
+              <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: "#111111", letterSpacing: "-0.01em" }}>
+                  {r.name}
+                </span>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "#9A9A9A", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+                  {r.label}
+                </span>
               </div>
             </div>
           ))}
         </div>
       </div>
+
       <style>{`
         .review-ticker {
           overflow: hidden;
@@ -123,7 +110,7 @@ export function Reviews() {
           display: inline-flex;
           gap: 14px;
           white-space: nowrap;
-          animation: review-scroll 55s linear infinite;
+          animation: review-scroll 60s linear infinite;
           will-change: transform;
         }
         .review-track > * {
