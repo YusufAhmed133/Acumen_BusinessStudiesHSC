@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: "What's included in the price?",
-    a: "The $950 term rate covers every lesson across the school term (approximately 10 sessions), all HSC past papers from 2010 to 2025 annotated by syllabus dot point, weekly essay feedback, and the full online question bank, while the $110 casual rate covers a single one-hour session.",
+    a: "Small group sessions (max 4 students) are $120 per 90-minute lesson, or $1,080 upfront for a full term (pay for 9, receive 10). Private 1:1 is $150 per session, or $1,350 upfront for a term. Both options include Band 6 topic notes, every HSC past paper from 2010 indexed by syllabus dot point, the 24-hour question line, and a full mock exam with a personalised report.",
   },
   {
     q: "Who teaches the lessons?",
@@ -36,7 +36,7 @@ const FAQS = [
 ];
 
 export function FaqSection() {
-  const [open, setOpen] = useState<number>(0);
+  const [open, setOpen] = useState<number>(-1);
 
   return (
     <section

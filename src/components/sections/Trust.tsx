@@ -2,8 +2,7 @@
 import Image from "next/image";
 
 const SCHOOLS = [
-  { name: "James Ruse Agricultural High School", src: "/logos/james-ruse.png" },
-  { name: "Sydney Boys High School", src: "/logos/sydney-boys.png" },
+{ name: "Sydney Boys High School", src: "/logos/sydney-boys.png" },
   { name: "Sydney Girls High School", src: "/logos/sydney-girls.png" },
   { name: "North Sydney Boys High School", src: "/logos/nsbhs.png" },
   { name: "North Sydney Girls High School", src: "/logos/north-sydney-girls.png" },

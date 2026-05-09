@@ -1,4 +1,3 @@
-"use client";
 import { Reveal } from "@/components/ui/Reveal";
 import { ScrollLink } from "@/components/ui/ScrollLink";
 

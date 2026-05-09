@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { Trust } from "@/components/sections/Trust";
 import { Topics } from "@/components/sections/Topics";
-import { Practice } from "@/components/sections/Practice";
 import { Pricing } from "@/components/sections/Pricing";
+
+const Practice = dynamic(() => import("@/components/sections/Practice").then((m) => m.Practice));
 import { Reviews } from "@/components/sections/Reviews";
 import { ResourcesTeaser } from "@/components/sections/ResourcesTeaser";
 import { FaqSection } from "@/components/sections/FaqSection";

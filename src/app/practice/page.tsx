@@ -98,6 +98,51 @@ function EmailGate({ onUnlock }: { onUnlock: () => void }) {
   );
 }
 
+const PREVIEW_COUNT = 5;
+
+function GateCard({ onUnlock, remaining }: { onUnlock: () => void; remaining: number }) {
+  return (
+    <div style={{
+      background: "#FFFCF4", borderRadius: 14,
+      boxShadow: "0 8px 32px rgba(0,0,0,0.12)", marginBottom: 24,
+      padding: "48px 32px", textAlign: "center",
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 14 }}>
+        {remaining} more question{remaining !== 1 ? "s" : ""} available
+      </div>
+      <h2 style={{ fontWeight: 700, fontSize: 26, letterSpacing: "-0.04em", margin: "0 0 10px", color: "#0A0A0A" }}>
+        Unlock the full question bank
+      </h2>
+      <p style={{ fontSize: 14, lineHeight: 1.6, color: "#5C5C5C", margin: "0 auto 28px", maxWidth: 380 }}>
+        Enter your email to access all questions. Your tutor will add you after your free trial lesson.
+      </p>
+      <button
+        onClick={onUnlock}
+        style={{
+          padding: "13px 32px", borderRadius: 999, fontWeight: 700, fontSize: 15,
+          background: "#111111", color: "#ffffff", border: "none", cursor: "pointer",
+          letterSpacing: "-0.01em",
+        }}
+      >
+        Unlock {remaining} questions →
+      </button>
+      <div style={{ marginTop: 14 }}>
+        <Link
+          href="/#enquire"
+          style={{
+            display: "inline-block", padding: "11px 24px", borderRadius: 999,
+            background: "#C9EFD3", color: "#0A2E1A",
+            textDecoration: "none", fontSize: 14, fontWeight: 600,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          Book a free trial lesson →
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 type TypeFilter = "all" | "mcq" | "short" | "extended";
 
 const TYPE_LABELS: Record<TypeFilter, string> = {
@@ -290,18 +335,18 @@ function QuestionCard({ q }: { q: Question }) {
 
 const PAGE_SIZE = 20;
 
-type AccessStatus = "locked" | "unlocked";
+type AccessStatus = "preview" | "unlocked";
 
 export default function PracticePage() {
-  // No localStorage — gate shows on every page load and reload.
-  // Removing an email from Supabase locks them out immediately.
-  const [access, setAccess] = useState<AccessStatus>("locked");
+  const [access, setAccess] = useState<AccessStatus>("preview");
+  const [showGate, setShowGate] = useState(false);
   const [topic, setTopic] = useState<TopicKey | "all">("all");
   const [type, setType] = useState<TypeFilter>("all");
   const [page, setPage] = useState(1);
 
   const unlock = () => {
     setAccess("unlocked");
+    setShowGate(false);
   };
 
   const filtered = QUIZ_BANK.filter((q) => {
@@ -315,9 +360,9 @@ export default function PracticePage() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#F9F9F7" }}>
-      {access === "locked" && <EmailGate onUnlock={unlock} />}
+      {showGate && <EmailGate onUnlock={unlock} />}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <div {...(access === "locked" ? { inert: true as any } : {})}>
+      <div {...(showGate ? { inert: true as any } : {})}>
       {/* Filter bar */}
       <div style={{
         background: "rgba(249,249,247,0.96)", backdropFilter: "blur(12px)",
@@ -378,6 +423,13 @@ export default function PracticePage() {
           <div style={{ textAlign: "center", padding: "80px 0", color: "#9B9B9B", fontSize: 15 }}>
             No questions match this filter yet.
           </div>
+        ) : access === "preview" ? (
+          <>
+            {filtered.slice(0, PREVIEW_COUNT).map((q) => <QuestionCard key={q.id} q={q} />)}
+            {filtered.length > PREVIEW_COUNT && (
+              <GateCard onUnlock={() => setShowGate(true)} remaining={filtered.length - PREVIEW_COUNT} />
+            )}
+          </>
         ) : (
           <>
             {visible.map((q) => <QuestionCard key={q.id} q={q} />)}
@@ -398,18 +450,7 @@ export default function PracticePage() {
           </>
         )}
 
-        <div style={{ marginTop: 40, textAlign: "center" }}>
-          <ScrollLink
-            sectionId="enquire"
-            style={{
-              display: "inline-flex", padding: "14px 28px", borderRadius: 12,
-              background: "#C9EFD3", color: "#0A2E1A",
-              textDecoration: "none", fontSize: 15, fontWeight: 600,
-            }}
-          >
-            Book a free trial lesson →
-          </ScrollLink>
-        </div>
+
       </div>
 
       <style>{`

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -120,24 +121,48 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
     itemListElement: [
       {
         "@type": "Offer",
-        price: "110",
+        price: "120",
         priceCurrency: "AUD",
         itemOffered: {
           "@type": "Service",
-          name: "HSC Business Studies Casual Lesson Sydney",
-          description: "Single 1-hour small-group Business Studies lesson in Sydney, marked against NESA criteria. Year 11 and 12.",
+          name: "HSC Business Studies Small Group Lesson Sydney",
+          description: "Single 90-minute small-group Business Studies lesson (max 4 students) in Sydney, marked against NESA criteria. Year 11 and 12.",
           areaServed: { "@type": "City", name: "Sydney" },
           url: SITE_URL,
         },
       },
       {
         "@type": "Offer",
-        price: "950",
+        price: "1080",
         priceCurrency: "AUD",
         itemOffered: {
           "@type": "Service",
           name: "HSC Business Studies Term Enrolment Sydney",
-          description: "Full school term enrolment (~10 lessons) including weekly essay marking, Band 6 notes, past-paper bank, and 24-hour question line.",
+          description: "Full school term small-group enrolment (pay for 9, receive 10 lessons) including weekly essay marking, Band 6 notes, past-paper bank, and 24-hour question line.",
+          areaServed: { "@type": "City", name: "Sydney" },
+          url: SITE_URL,
+        },
+      },
+      {
+        "@type": "Offer",
+        price: "150",
+        priceCurrency: "AUD",
+        itemOffered: {
+          "@type": "Service",
+          name: "HSC Business Studies Private 1:1 Tutoring Sydney",
+          description: "Single 90-minute private one-on-one Business Studies lesson in Sydney. Year 11 and 12.",
+          areaServed: { "@type": "City", name: "Sydney" },
+          url: SITE_URL,
+        },
+      },
+      {
+        "@type": "Offer",
+        price: "1350",
+        priceCurrency: "AUD",
+        itemOffered: {
+          "@type": "Service",
+          name: "HSC Business Studies Private 1:1 Term Enrolment Sydney",
+          description: "Full school term private one-on-one enrolment (pay for 9, receive 10 lessons) including weekly essay marking, Band 6 notes, past-paper bank, and 24-hour question line.",
           areaServed: { "@type": "City", name: "Sydney" },
           url: SITE_URL,
         },
@@ -202,7 +227,7 @@ const FAQ_JSON = JSON.stringify({
       name: "What is included in the price?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The $950 term rate covers every lesson across the school term (approximately 10 sessions), all HSC past papers from 2010 to 2025 annotated by syllabus dot point, weekly essay feedback, and the full online question bank. The $110 casual rate covers a single one-hour session.",
+        text: "Small-group sessions (max 4 students) are $120 per 90-minute lesson, or $1,080 upfront for a full term (pay for 9, receive 10). Private 1:1 is $150 per session, or $1,350 upfront for a term. Both options include Band 6 notes, every HSC past paper from 2010 annotated by syllabus dot point, the 24-hour question line, and a full mock exam with a personalised report.",
       },
     },
     {
@@ -269,6 +294,13 @@ export default function RootLayout({
         <Footer />
         <SpeedInsights />
         <Analytics />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18150257568" strategy="afterInteractive" />
+        <Script id="gtag-config" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18150257568');
+        `}</Script>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 
 type Fields = {
@@ -46,8 +47,7 @@ export function EnquiryForm() {
     parent: "", student: "", email: "", phone: "",
     year: "Year 12", avail: "", concern: "",
   });
-  const [refId] = useState(() => Math.random().toString(36).slice(2, 7).toUpperCase());
-  const [sent, setSent] = useState(false);
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -78,49 +78,14 @@ export function EnquiryForm() {
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
-      setSent(true);
       track('enquiry_submitted', { year_group: f.year });
+      router.push('/thank-you');
     } catch {
       setError("Something went wrong. Please call us on 0470 665 141.");
     } finally {
       setLoading(false);
     }
   };
-
-  if (sent) {
-    return (
-      <div style={{
-        borderRadius: 22,
-        padding: "36px 30px",
-        background: "#CFEAD9",
-        boxShadow: "0 24px 60px rgba(10,30,20,0.1)",
-        border: "1px solid rgba(10,10,10,0.06)",
-        minHeight: 560,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}>
-        <div style={{
-          fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
-          textTransform: "uppercase", color: "#1F6B40",
-          marginBottom: 18, display: "flex", alignItems: "center", gap: 10,
-        }}>
-          <span style={{ width: 10, height: 10, borderRadius: 999, background: "#1F6B40", display: "inline-block" }} />
-          Enquiry received
-        </div>
-        <div style={{ fontWeight: 600, fontSize: 36, lineHeight: 1.05, letterSpacing: "-0.035em", color: "#0A0A0A" }}>
-          Thanks, {f.parent.split(" ")[0] || "we appreciate it"}.
-        </div>
-        <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.55, color: "#1A1A1A" }}>
-          A senior tutor will reply within one business day with available trial slots
-          {f.student ? ` for ${f.student}` : ""} and a short call to discuss goals.
-        </p>
-        <p style={{ marginTop: 18, fontSize: 12, color: "#5C5C5C", letterSpacing: "0.06em" }}>
-          Reference · ACU-{refId}
-        </p>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} style={{
