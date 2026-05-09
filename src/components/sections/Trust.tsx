@@ -1,17 +1,16 @@
-"use client";
 import Image from "next/image";
 
 const SCHOOLS = [
-{ name: "Sydney Boys High School", src: "/logos/sydney-boys.png" },
-  { name: "Sydney Girls High School", src: "/logos/sydney-girls.png" },
-  { name: "North Sydney Boys High School", src: "/logos/nsbhs.png" },
-  { name: "North Sydney Girls High School", src: "/logos/north-sydney-girls.png" },
-  { name: "Baulkham Hills High School", src: "/logos/balkaum.png" },
-  { name: "Normanhurst Boys High School", src: "/logos/normanhurst.png" },
-  { name: "Hornsby Girls High School", src: "/logos/hornsby-girls.png" },
-  { name: "Epping Boys High School", src: "/logos/epping-boys.png" },
-  { name: "Sydney Grammar School", src: "/logos/sydney-grammar.png" },
-  { name: "Knox Grammar School", src: "/logos/knox-grammar.png" },
+  { name: "Sydney Boys High School", src: "/logos/sydney-boys.webp" },
+  { name: "Sydney Girls High School", src: "/logos/sydney-girls.webp" },
+  { name: "North Sydney Boys High School", src: "/logos/nsbhs.webp" },
+  { name: "North Sydney Girls High School", src: "/logos/north-sydney-girls.webp" },
+  { name: "Baulkham Hills High School", src: "/logos/balkaum.webp" },
+  { name: "Normanhurst Boys High School", src: "/logos/normanhurst.webp" },
+  { name: "Hornsby Girls High School", src: "/logos/hornsby-girls.webp" },
+  { name: "Epping Boys High School", src: "/logos/epping-boys.webp" },
+  { name: "Sydney Grammar School", src: "/logos/sydney-grammar.webp" },
+  { name: "Knox Grammar School", src: "/logos/knox-grammar.webp" },
 ];
 
 const ITEMS = [...SCHOOLS, ...SCHOOLS];
@@ -76,9 +75,7 @@ export function Trust() {
                 width={56}
                 height={36}
                 style={{ width: "auto", height: 36, maxWidth: 56, objectFit: "contain" }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
+                loading="lazy"
               />
               <span style={{
                 fontSize: 13,
