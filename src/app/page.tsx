@@ -8,7 +8,7 @@ import { FAQS } from "@/lib/faqs";
 import { PRICING_PLANS } from "@/lib/pricing";
 
 const PracticeDemo = dynamic(() => import("@/components/sections/PracticeDemo").then((m) => m.PracticeDemo));
-import { TutorShowcase } from "@/components/sections/TutorShowcase";
+import { Reviews } from "@/components/sections/Reviews";
 import { ResourcesTeaser } from "@/components/sections/ResourcesTeaser";
 import { FaqSection } from "@/components/sections/FaqSection";
 
@@ -128,7 +128,7 @@ export default function HomePage() {
       <Topics />
       <PracticeDemo />
       <Pricing />
-      <TutorShowcase />
+      <Reviews />
       <ResourcesTeaser />
       <FaqSection />
     </>
