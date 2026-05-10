@@ -71,15 +71,23 @@ export function Trust() {
                 padding: "0 32px",
               }}
             >
-              <Image
-                src={s.src}
-                alt={s.name}
-                title={s.name}
-                width={56}
-                height={36}
-                style={{ width: 56, height: 36, objectFit: "contain" }}
-                priority={i < 2}
-              />
+              <span
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                  width: 56,
+                  height: 36,
+                  flex: "0 0 56px",
+                }}
+              >
+                <Image
+                  src={s.src}
+                  alt=""
+                  fill
+                  sizes="56px"
+                  style={{ objectFit: "contain" }}
+                />
+              </span>
               <span style={{
                 fontSize: 13,
                 fontWeight: 500,

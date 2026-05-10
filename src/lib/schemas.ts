@@ -15,7 +15,6 @@ export const leadSchema = z.object({
     .enum(["hero_form", "contact_form", "resource_gate", "footer_form", "other"])
     .default("hero_form"),
   message: z.string().max(2000).optional(),
-  turnstile_token: z.string().optional(),
   website: z.string().max(0).optional(),
 });
 
@@ -29,3 +28,9 @@ export const contactSchema = leadSchema.extend({
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
+
+export const accessEmailSchema = z.object({
+  email: z.string().trim().toLowerCase().email("Enter a valid email address").max(254),
+});
+
+export type AccessEmailInput = z.infer<typeof accessEmailSchema>;

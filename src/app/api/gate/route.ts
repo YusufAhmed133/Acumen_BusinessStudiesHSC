@@ -1,9 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseConfigured, createServiceRoleClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/ratelimit";
+import { accessEmailSchema } from "@/lib/schemas";
+import { createPracticeAccessCookie, PRACTICE_ACCESS_COOKIE } from "@/lib/practice-access";
+import { getClientIp } from "@/lib/request-ip";
+
+function practiceAccessResponse(email: string): NextResponse {
+  const cookie = createPracticeAccessCookie(email);
+  if (!cookie) {
+    return NextResponse.json(
+      { ok: false, message: "Practice access is not configured. Contact your tutor." },
+      { status: 503 }
+    );
+  }
+
+  const response = NextResponse.json({ ok: true });
+  response.cookies.set(PRACTICE_ACCESS_COOKIE, cookie.value, {
+    expires: cookie.expires,
+    httpOnly: true,
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+  return response;
+}
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = getClientIp(request);
 
   if (await checkRateLimit("gate:" + ip, 20, "60 s")) {
     return NextResponse.json({ ok: false, message: "Too many requests" }, { status: 429 });
@@ -16,18 +39,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const email =
-    typeof (body as Record<string, unknown>).email === "string"
-      ? ((body as Record<string, unknown>).email as string).toLowerCase().trim()
-      : null;
+  const parsed = accessEmailSchema.safeParse(body);
 
-  if (!email || !email.includes("@")) {
+  if (!parsed.success) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 });
   }
 
+  const { email } = parsed.data;
+
   if (process.env.PRACTICE_DEV_OPEN === "true") {
-    console.warn("[gate] PRACTICE_DEV_OPEN=true — whitelist bypassed");
-    return NextResponse.json({ ok: true });
+    console.warn("[gate] PRACTICE_DEV_OPEN=true, whitelist bypassed");
+    return practiceAccessResponse(email);
   }
 
   if (!supabaseConfigured()) {
@@ -47,10 +69,10 @@ export async function POST(request: NextRequest) {
     if (!data) {
       return NextResponse.json({
         ok: false,
-        message: "Your email isn't on the access list. Ask your tutor to add you.",
+        message: "Access is locked for now. Use the email your tutor added, or book a free trial so we can unlock it for you.",
       });
     }
-    return NextResponse.json({ ok: true });
+    return practiceAccessResponse(email);
   } catch (err) {
     console.error("[gate]", err);
     return NextResponse.json({ ok: false, message: "Could not check access list." }, { status: 503 });

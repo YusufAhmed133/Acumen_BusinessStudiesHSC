@@ -4,6 +4,17 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How Acumen HSC collects, uses, and protects your personal information in accordance with Australian privacy law.",
   alternates: { canonical: "/privacy" },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: "Privacy Policy | Acumen HSC",
+    description: "How Acumen HSC collects, uses, and protects your personal information in accordance with Australian privacy law.",
+    url: "https://acumenhsc.com.au/privacy",
+  },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy | Acumen HSC",
+    description: "How Acumen HSC collects, uses, and protects your personal information in accordance with Australian privacy law.",
+  },
 };
 
 const S = {
@@ -69,7 +80,9 @@ export default function PrivacyPage() {
 
       <h2 style={S.h2}>7. Cookies</h2>
       <p style={S.p}>
-        This website does not use advertising cookies or third-party tracking pixels.
+        This website may use Vercel Analytics, Vercel Speed Insights, and Google Ads conversion measurement to understand
+        site performance and enquiry attribution. These tools may set cookies or use similar browser signals. We do not
+        sell personal information or use these tools to collect tutoring form messages.
       </p>
 
       <hr style={S.divider} />

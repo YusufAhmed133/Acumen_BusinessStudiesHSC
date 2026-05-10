@@ -16,7 +16,6 @@
 //
 //   3. Vercel env vars to set:
 //        NOTIFY_WEBHOOK_URL      = <web app URL>?secret=<secret>
-//        NOTIFY_WEBHOOK_SECRET   = <same secret>
 //
 //   4. In Supabase dashboard → Database → Webhooks → New webhook:
 //        Table: leads  |  Events: UPDATE, DELETE
@@ -69,6 +68,19 @@ const SOURCE_COLOURS = {
   other:         '#f5f5f5',   // grey
 };
 
+function sheetSafe_(value) {
+  const text = String(value ?? '');
+  return /^[\s]*[=+\-@]/.test(text) ? `'${text}` : text;
+}
+
+function safeContext_(context) {
+  if (!context) return '';
+  return String(context)
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[email]')
+    .replace(/\+?\d[\d\s().-]{6,}\d/g, '[phone]')
+    .slice(0, 300);
+}
+
 // =============================================================================
 // doPost — single entry point for all inbound events
 // =============================================================================
@@ -76,10 +88,12 @@ function doPost(e) {
   try {
     // Validate shared secret (sent as ?secret= query param from both Next.js and Supabase)
     const expected = PropertiesService.getScriptProperties().getProperty('WEBHOOK_SECRET');
-    if (expected) {
-      const received = e.parameter && e.parameter.secret;
-      if (received !== expected) return jsonResp_({ ok: false, error: 'Unauthorized' });
+    if (!expected) {
+      logError_('doPost', 'WEBHOOK_SECRET not configured', 'blocked_public_webhook');
+      return jsonResp_({ ok: false, error: 'Webhook not configured' });
     }
+    const received = e.parameter && e.parameter.secret;
+    if (received !== expected) return jsonResp_({ ok: false, error: 'Unauthorized' });
 
     const raw = JSON.parse(e.postData.contents);
     const ss  = SpreadsheetApp.openById(SS_ID);
@@ -91,8 +105,8 @@ function doPost(e) {
 
     return jsonResp_({ ok: true, skipped: true });
   } catch (err) {
-    logError_('doPost', err.message, String((e.postData && e.postData.contents) || '').slice(0, 300));
-    return jsonResp_({ ok: false, error: err.message });
+    logError_('doPost', err.message, safeContext_('invalid_payload'));
+    return jsonResp_({ ok: false, error: 'Webhook failed' });
   }
 }
 
@@ -114,15 +128,15 @@ function handleNewLead_(ss, data) {
 
     sheet.appendRow([
       ts,
-      data.name        || '',
-      String(data.email || '').toLowerCase(),
-      data.phone        || '',
-      data.year_group   || '',
-      truncate_(data.message || '', 300),
+      sheetSafe_(data.name),
+      sheetSafe_(String(data.email || '').toLowerCase()),
+      sheetSafe_(data.phone),
+      sheetSafe_(data.year_group),
+      sheetSafe_(truncate_(data.message || '', 300)),
       'new',
       '',                          // Notes
-      data.id           || '',     // SupabaseID
-      data.source        || 'hero_form',
+      sheetSafe_(data.id),         // SupabaseID
+      sheetSafe_(data.source || 'hero_form'),
       '',                          // contacted_at (hidden)
     ]);
 
@@ -175,7 +189,7 @@ function handleSupabaseUpdate_(ss, record, oldRecord) {
 
     const newNotes = record.notes ?? '';
     if (newNotes !== String(current[C.NOTES - 1] ?? '')) {
-      sheet.getRange(row, C.NOTES).setValue(newNotes);
+      sheet.getRange(row, C.NOTES).setValue(sheetSafe_(newNotes));
     }
 
     SpreadsheetApp.flush();
@@ -349,9 +363,9 @@ function syncFromSupabase() {
       } else {
         const ts = Utilities.formatDate(new Date(lead.created_at), 'Australia/Sydney', 'dd/MM/yyyy HH:mm');
         sheet.appendRow([
-          ts, lead.name, lead.email, lead.phone || '', lead.year_group || '',
-          truncate_(lead.message || '', 300), lead.status,
-          lead.notes || '', lead.id, lead.source || '',
+          ts, sheetSafe_(lead.name), sheetSafe_(lead.email), sheetSafe_(lead.phone || ''), sheetSafe_(lead.year_group || ''),
+          sheetSafe_(truncate_(lead.message || '', 300)), lead.status,
+          sheetSafe_(lead.notes || ''), sheetSafe_(lead.id), sheetSafe_(lead.source || ''),
           lead.contacted_at || '',
         ]);
         const newRow = sheet.getLastRow();
@@ -512,7 +526,7 @@ function copyToStudents_(leadsSheet, row) {
   }
 
   students.appendRow([
-    vals[C.NAME - 1], email, vals[C.PHONE - 1], vals[C.YEAR - 1],
+    sheetSafe_(vals[C.NAME - 1]), sheetSafe_(email), sheetSafe_(vals[C.PHONE - 1]), sheetSafe_(vals[C.YEAR - 1]),
     vals[C.TIMESTAMP - 1], '', '', '', vals[C.SUPABASE_ID - 1],
   ]);
   const r = students.getLastRow();
@@ -578,7 +592,7 @@ function logError_(fn, message, context) {
     if (!errors) errors = ss.insertSheet(ERRORS_TAB);
     errors.appendRow([
       Utilities.formatDate(new Date(), 'Australia/Sydney', 'dd/MM/yyyy HH:mm:ss'),
-      fn, message, context,
+      fn, message, safeContext_(context),
     ]);
   } catch (_) { Logger.log(`[ERROR] ${fn}: ${message}`); }
 }

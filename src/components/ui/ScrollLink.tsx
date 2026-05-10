@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+import Link from "next/link";
+
+const PENDING_SCROLL_KEY = "acumen:pending-scroll";
+
 export function ScrollLink({
   sectionId,
   children,
@@ -13,18 +18,40 @@ export function ScrollLink({
   className?: string;
   onNavigate?: () => void;
 }) {
+  useEffect(() => {
+    if (window.location.pathname !== "/") return;
+    if (sessionStorage.getItem(PENDING_SCROLL_KEY) !== sectionId) return;
+
+    sessionStorage.removeItem(PENDING_SCROLL_KEY);
+    window.requestAnimationFrame(() => {
+      const el = document.getElementById(sectionId);
+      if (!el) return;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }, [sectionId]);
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (window.location.pathname !== "/") {
+      sessionStorage.setItem(PENDING_SCROLL_KEY, sectionId);
+      window.location.assign("/");
+      onNavigate?.();
+      return;
+    }
+
     const el = document.getElementById(sectionId);
     if (el) {
-      e.preventDefault();
-      el.scrollIntoView({ behavior: "smooth" });
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
     }
     onNavigate?.();
   };
 
   return (
-    <a href={`/#${sectionId}`} onClick={handleClick} style={style} className={className}>
+    <Link href="/" onClick={handleClick} style={style} className={className}>
       {children}
-    </a>
+    </Link>
   );
 }

@@ -52,18 +52,6 @@ html {
 
 body { min-height: 100dvh; }
 
-/* ── Global grain overlay — breaks flat solid sections ───── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.038;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
-}
-
 ::selection { background: #0A0A0A; color: #FFFCF4; }
 
 a { color: inherit; }
@@ -88,7 +76,7 @@ button { font-family: inherit; }
   to   { transform: translate3d(-50%, 0, 0); }
 }
 
-/* ── Scroll progress bar — CSS Scroll-Driven where supported */
+/* ── Scroll progress bar, CSS Scroll-Driven where supported */
 @supports (animation-timeline: scroll()) {
   .scroll-progress-bar {
     transform: none !important; /* JS fallback overridden */
@@ -101,7 +89,7 @@ button { font-family: inherit; }
   }
 }
 
-/* ── Hero background letter — pseudo-element excluded from LCP candidates ── */
+/* ── Hero background letter, pseudo-element excluded from LCP candidates ── */
 .hero-section::before {
   content: "A";
   position: absolute;
@@ -112,11 +100,12 @@ button { font-family: inherit; }
   font-weight: 800;
   line-height: 0.85;
   letter-spacing: -0.06em;
-  background: linear-gradient(135deg, #72D69B 0%, #F2C94C 30%, #F08C8C 62%, #7EB5F8 100%);
+  background: linear-gradient(135deg, #9FDDB4 0%, #F2CF73 31%, #EDA9AD 64%, #A9C8F3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  opacity: 0.88;
+  filter: drop-shadow(0 22px 46px rgba(10, 10, 10, 0.055));
+  opacity: 0.98;
   user-select: none;
   pointer-events: none;
   z-index: 0;
@@ -166,8 +155,8 @@ button { font-family: inherit; }
 :focus-visible { outline: 2px solid #0A0A0A; outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track,
-  .review-track { animation: none !important; }
+  html { scroll-behavior: auto; }
+  .ticker-track { animation: none !important; }
   .reveal {
     opacity: 1 !important;
     transform: none !important;

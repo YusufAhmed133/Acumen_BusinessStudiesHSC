@@ -1,14 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHash, createHmac } from "crypto";
+import { createHash } from "crypto";
 import { leadSchema } from "@/lib/schemas";
 import { supabaseConfigured, createServiceRoleClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/ratelimit";
+import { getClientIp } from "@/lib/request-ip";
 import type { YearGroup, LeadSource } from "@/types/database";
 
-function hashIp(ip: string): string {
+function hashIp(ip: string): string | null {
   const salt = process.env.IP_HASH_DAILY_SALT;
-  if (!salt) console.error("[leads] IP_HASH_DAILY_SALT not set — IP hashing uses fallback salt");
+  if (!salt && process.env.NODE_ENV === "production") {
+    console.error("[leads] IP_HASH_DAILY_SALT not set");
+    return null;
+  }
   return createHash("sha256").update(ip + (salt ?? "dev-salt")).digest("hex").slice(0, 16);
+}
+
+function escapeSheetFormula(value: string): string {
+  return /^[=+\-@]/.test(value.trimStart()) ? `'${value}` : value;
+}
+
+function escapeOptionalSheetFormula(value: string | undefined): string | undefined {
+  return value ? escapeSheetFormula(value) : value;
 }
 
 async function tryInsertSupabase(data: {
@@ -23,7 +35,7 @@ async function tryInsertSupabase(data: {
   utm_campaign: string | null;
   referrer: string | null;
   user_agent: string | null;
-  ip_hash: string;
+  ip_hash: string | null;
 }): Promise<string | null> {
   try {
     const { data: row, error } = await createServiceRoleClient()
@@ -98,17 +110,13 @@ async function notifyWebhook(data: {
 }): Promise<void> {
   const url = process.env.NOTIFY_WEBHOOK_URL;
   if (!url) return;
-  const secret = process.env.NOTIFY_WEBHOOK_SECRET;
   const payload: Record<string, unknown> = { type: "new_lead", ...data };
-  if (secret) {
-    const unsigned = JSON.stringify(payload);
-    payload._sig = "sha256=" + createHmac("sha256", secret).update(unsigned).digest("hex");
-  }
   try {
     await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(2500),
     });
   } catch (err) {
     console.error("[leads] webhook failed:", err);
@@ -116,8 +124,7 @@ async function notifyWebhook(data: {
 }
 
 export async function POST(request: NextRequest) {
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = getClientIp(request);
 
   if (await checkRateLimit("leads:" + ip, 5, "60 s")) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
@@ -159,8 +166,6 @@ export async function POST(request: NextRequest) {
     ip_hash: hashIp(ip),
   };
 
-  console.log("[lead]", JSON.stringify({ name, email: payload.email, year_group }));
-
   let leadId: string | null = null;
   if (supabaseConfigured()) {
     leadId = await tryInsertSupabase(payload);
@@ -168,12 +173,12 @@ export async function POST(request: NextRequest) {
 
   const emailSent = await sendEmail({ name, email: payload.email, phone, year_group, message });
 
-  void notifyWebhook({
-    name,
-    email: payload.email,
-    phone,
+  await notifyWebhook({
+    name: escapeSheetFormula(name),
+    email: escapeSheetFormula(payload.email),
+    phone: escapeSheetFormula(phone),
     year_group,
-    message,
+    message: escapeOptionalSheetFormula(message),
     submitted_at: new Date().toISOString(),
     id: leadId,
     source: payload.source,
@@ -187,5 +192,5 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  return NextResponse.json({ ok: true, lead_id: leadId }, { status: 200 });
+  return NextResponse.json({ ok: true }, { status: 200 });
 }

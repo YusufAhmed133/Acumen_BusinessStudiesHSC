@@ -1,9 +1,10 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { ScrollLink } from "@/components/ui/ScrollLink";
+import { PRICING_PLANS, type PricingPlan } from "@/lib/pricing";
 
 const INCLUSIONS = [
   {
-    t: "1.5-hour weekly lesson",
+    t: "Weekly lesson",
     d: "Small group capped at 4. Live syllabus walkthrough plus timed practice every session.",
   },
   {
@@ -39,21 +40,9 @@ const CheckIcon = () => (
 
 
 function PriceCard({
-  tag,
-  tagColor,
-  tagBg,
-  hourlyRate,
-  sessionPrice,
-  termPrice,
-  termSave,
+  plan,
 }: {
-  tag: string;
-  tagColor: string;
-  tagBg: string;
-  hourlyRate: string;
-  sessionPrice: string;
-  termPrice: string;
-  termSave: string;
+  plan: PricingPlan;
 }) {
   return (
     <div
@@ -69,7 +58,7 @@ function PriceCard({
       <div
         style={{
           padding: "9px 20px",
-          background: tagBg,
+          background: plan.tagBg,
           borderBottom: "1px solid rgba(0,0,0,0.07)",
         }}
       >
@@ -79,15 +68,18 @@ function PriceCard({
             fontWeight: 700,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: tagColor,
+            color: plan.tagColor,
           }}
         >
-          {tag}
+          {plan.tag}
         </span>
       </div>
 
-      {/* Hourly rate — lead */}
-      <div style={{ padding: "14px 20px 12px", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+      {/* Weekly price */}
+      <div style={{ padding: "18px 20px 16px", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#6B6B6B", marginBottom: 9 }}>
+          Pay weekly
+        </div>
         <span
           style={{
             fontWeight: 700,
@@ -98,13 +90,10 @@ function PriceCard({
             display: "block",
           }}
         >
-          {hourlyRate}
+          {plan.sessionPrice}
         </span>
         <div style={{ marginTop: 6, fontSize: 12, fontWeight: 500, color: "#6B6B6B" }}>
-          90-minute sessions
-        </div>
-        <div style={{ fontSize: 12, fontWeight: 500, color: "#6B6B6B" }}>
-          {sessionPrice} per session
+          {plan.sessionUnit}
         </div>
       </div>
 
@@ -133,21 +122,20 @@ function PriceCard({
               color: "#6B6B6B",
             }}
           >
-            Upfront, 10 sessions
+            Term option
           </div>
-          <div
+          <span
             style={{
-              padding: "3px 9px",
-              borderRadius: 999,
-              background: "#C9EFD3",
               fontSize: 10,
               fontWeight: 700,
               color: "#1B6038",
-              letterSpacing: "0.02em",
+              background: "#C9EFD3",
+              padding: "4px 8px",
+              borderRadius: 999,
             }}
           >
-            Save {termSave}
-          </div>
+            Save {plan.termSave}
+          </span>
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 5 }}>
           <span
@@ -159,12 +147,12 @@ function PriceCard({
               color: "#111111",
             }}
           >
-            {termPrice}
+            {plan.termPrice}
           </span>
           <span style={{ fontSize: 12, fontWeight: 500, color: "#6B6B6B" }}>/ term</span>
         </div>
         <div style={{ marginTop: 5, fontSize: 11.5, fontWeight: 500, color: "#3A3A3A" }}>
-          Pay for 9 sessions, receive 10.
+          {plan.termSummary}
         </div>
       </div>
 
@@ -196,7 +184,7 @@ function PriceCard({
             textAlign: "center",
           }}
         >
-          No card required. First lesson is free.
+          First lesson free. No card. No lock-in.
         </div>
       </div>
     </div>
@@ -234,28 +222,11 @@ export function Pricing() {
           style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 56 }}
           className="pricing-cards"
         >
-          <Reveal>
-            <PriceCard
-              tag="Small Group, Max 4 Students"
-              tagBg="#F0FAF3"
-              tagColor="#1B6038"
-              hourlyRate="$80/hr"
-              sessionPrice="$120"
-              termPrice="$1,080"
-              termSave="$120"
-            />
-          </Reveal>
-          <Reveal delay={80}>
-            <PriceCard
-              tag="Private 1:1"
-              tagBg="#F9F9F7"
-              tagColor="#3A3A3A"
-              hourlyRate="$100/hr"
-              sessionPrice="$150"
-              termPrice="$1,350"
-              termSave="$150"
-            />
-          </Reveal>
+          {PRICING_PLANS.map((plan, index) => (
+            <Reveal key={plan.id} delay={index * 80}>
+              <PriceCard plan={plan} />
+            </Reveal>
+          ))}
         </div>
 
         {/* Inclusions full-width grid */}

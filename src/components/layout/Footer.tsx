@@ -4,6 +4,13 @@ import { MarkBug } from "@/components/ui/MarkBug";
 import { ScrollLink } from "@/components/ui/ScrollLink";
 
 export function Footer() {
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.location.pathname !== "/") return;
+    e.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+
   return (
     <footer style={{ background: "#0A0A0A", padding: "56px 0 32px", color: "#FFFCF4" }}>
       <div style={{
@@ -16,7 +23,7 @@ export function Footer() {
         gap: 32,
         flexWrap: "wrap",
       }}>
-        <a href="/" style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
+        <Link href="/" onClick={handleLogoClick} style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
           <MarkBug size={44} />
           <div>
             <span style={{
@@ -41,7 +48,7 @@ export function Footer() {
               HSC Business Studies, Sydney NSW
             </span>
           </div>
-        </a>
+        </Link>
 
         <div style={{
           fontSize: 13,
@@ -53,11 +60,11 @@ export function Footer() {
           alignItems: "center",
         }}>
           {[
-            { href: "/",         label: "Home",     sectionId: undefined },
             { href: "/",         label: "Syllabus", sectionId: "syllabus" },
             { href: "/practice", label: "Practice", sectionId: undefined },
-            { href: "/tutors",   label: "Tutors",   sectionId: undefined },
+            { href: "/",         label: "Tutors",   sectionId: "tutors" },
             { href: "/",         label: "Pricing",  sectionId: "pricing" },
+            { href: "/",         label: "Resources", sectionId: "resources" },
             { href: "/",         label: "FAQ",      sectionId: "faq" },
           ].map(({ href, label, sectionId }) =>
             sectionId ? (

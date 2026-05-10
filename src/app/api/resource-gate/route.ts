@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseConfigured, createServiceRoleClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/ratelimit";
+import { accessEmailSchema } from "@/lib/schemas";
+import { getClientIp } from "@/lib/request-ip";
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = getClientIp(request);
 
   if (await checkRateLimit("resource-gate:" + ip, 10, "60 s")) {
     return NextResponse.json({ ok: false, message: "Too many requests" }, { status: 429 });
@@ -16,14 +18,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const email =
-    typeof (body as Record<string, unknown>).email === "string"
-      ? ((body as Record<string, unknown>).email as string).toLowerCase().trim()
-      : null;
+  const parsed = accessEmailSchema.safeParse(body);
 
-  if (!email || !email.includes("@")) {
+  if (!parsed.success) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 });
   }
+
+  const { email } = parsed.data;
 
   if (!supabaseConfigured()) {
     return NextResponse.json(
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
     if (!data) {
       return NextResponse.json({
         ok: false,
-        message: "Your email isn't on the resource access list. Ask your tutor to add you after enrolment.",
+        message: "Resource downloads are locked for now. Use the email your tutor added, or ask them to unlock resources after enrolment.",
       });
     }
     return NextResponse.json({ ok: true });

@@ -12,15 +12,15 @@ export function MarkBug({ size = 32 }: Props) {
       style={{ display: "block" }}
       aria-hidden
     >
-      {/* Top-left quadrant — Operations mint */}
+      {/* Top-left quadrant, Operations mint */}
       <polygon points="50,4 8,60 50,60" fill="#C9EFD3" />
-      {/* Top-right quadrant — Marketing butter */}
+      {/* Top-right quadrant, Marketing butter */}
       <polygon points="50,4 92,60 50,60" fill="#FDE9B0" />
-      {/* Bottom-left quadrant — Finance sky */}
+      {/* Bottom-left quadrant, Finance sky */}
       <polygon points="50,60 8,60 50,116" fill="#C9DCFB" />
-      {/* Bottom-right quadrant — HR blush */}
+      {/* Bottom-right quadrant, HR blush */}
       <polygon points="50,60 92,60 50,116" fill="#FBD3D7" />
-      {/* Division lines — crisp white hairlines */}
+      {/* Division lines, crisp white hairlines */}
       <line x1="50" y1="4" x2="50" y2="116" stroke="#fff" strokeWidth="2.5" />
       <line x1="8" y1="60" x2="92" y2="60" stroke="#fff" strokeWidth="2.5" />
       {/* Diamond outline */}

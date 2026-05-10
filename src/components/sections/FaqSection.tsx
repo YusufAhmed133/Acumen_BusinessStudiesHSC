@@ -1,39 +1,9 @@
 "use client";
 import { useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
+import { FAQS } from "@/lib/faqs";
 
 const FAQ_TINTS = ["#A8E8BE", "#FADA88", "#A8C8FC", "#F8BCBC", "#A8E8BE", "#FADA88", "#A8C8FC"];
-
-const FAQS = [
-  {
-    q: "Is the trial really free?",
-    a: "One full lesson at no cost, no credit card required, and if it is not the right fit there is no obligation and we will not follow up.",
-  },
-  {
-    q: "What's included in the price?",
-    a: "Small group sessions (max 4 students) are $120 per 90-minute lesson, or $1,080 upfront for a full term (pay for 9, receive 10). Private 1:1 is $150 per session, or $1,350 upfront for a term. Both options include Band 6 topic notes, every HSC past paper from 2010 indexed by syllabus dot point, the 24-hour question line, and a full mock exam with a personalised report.",
-  },
-  {
-    q: "Who teaches the lessons?",
-    a: "All tutors are Band 6 graduates from UNSW, USYD, UTS, and Macquarie who have sat the HSC Business Studies exam and scored in the top band, so they know exactly what markers look for and how to close the gap between where a student is and where they need to be.",
-  },
-  {
-    q: "What if my child has a question outside of class?",
-    a: "We run a 24-hour question line by message where students can send through any concept, essay paragraph, or past paper question and receive a proper written response.",
-  },
-  {
-    q: "Can a group of school friends join together?",
-    a: "If two to four students from the same school want to learn together, we can arrange a dedicated session at a time that suits the group, so get in touch and we will sort out the details.",
-  },
-  {
-    q: "What happens if my child misses a lesson?",
-    a: "Cancellations with more than 24 hours notice are fully refunded or credited toward the next session, while cancellations inside 24 hours are charged in full, and every student who misses receives the full notes and worked solutions so they do not fall behind.",
-  },
-  {
-    q: "Do your prices include GST?",
-    a: "Yes, all prices shown on this site are inclusive of GST.",
-  },
-];
 
 export function FaqSection() {
   const [open, setOpen] = useState<number>(-1);

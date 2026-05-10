@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 
 type Fields = {
@@ -13,6 +12,16 @@ type Fields = {
   concern: string;
 };
 
+const INITIAL_FIELDS: Fields = {
+  parent: "",
+  student: "",
+  email: "",
+  phone: "",
+  year: "Year 12",
+  avail: "",
+  concern: "",
+};
+
 const inp: React.CSSProperties = {
   width: "100%",
   padding: "12px 13px",
@@ -23,6 +32,16 @@ const inp: React.CSSProperties = {
   outline: "none",
   color: "#111111",
   boxSizing: "border-box",
+};
+
+const formShell: React.CSSProperties = {
+  borderRadius: 20,
+  padding: "28px 26px",
+  background: "#ffffff",
+  boxShadow: "0 4px 32px rgba(0,0,0,0.08)",
+  border: "1px solid rgba(0,0,0,0.08)",
+  display: "grid",
+  gap: 14,
 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -43,13 +62,10 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 export function EnquiryForm() {
-  const [f, setF] = useState<Fields>({
-    parent: "", student: "", email: "", phone: "",
-    year: "Year 12", avail: "", concern: "",
-  });
-  const router = useRouter();
+  const [f, setF] = useState<Fields>(INITIAL_FIELDS);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const set = <K extends keyof Fields>(k: K, v: Fields[K]) =>
     setF((s) => ({ ...s, [k]: v }));
@@ -78,8 +94,9 @@ export function EnquiryForm() {
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
-      track('enquiry_submitted', { year_group: f.year });
-      router.push('/thank-you');
+      track("enquiry_submitted", { year_group: f.year });
+      setF(INITIAL_FIELDS);
+      setSuccess(true);
     } catch {
       setError("Something went wrong. Please call us on 0470 665 141.");
     } finally {
@@ -87,16 +104,49 @@ export function EnquiryForm() {
     }
   };
 
+  if (success) {
+    return (
+      <div style={formShell} role="status" aria-live="polite">
+        <div style={{
+          fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
+          textTransform: "uppercase", color: "#5C5C5C",
+        }}>
+          Enquiry received
+        </div>
+        <h2 style={{
+          fontWeight: 700,
+          fontSize: "clamp(24px, 3vw, 32px)",
+          lineHeight: 1.08,
+          letterSpacing: "-0.04em",
+          color: "#111111",
+          margin: 0,
+        }}>
+          We will reply within one business day.
+        </h2>
+        <p style={{ fontSize: 14, lineHeight: 1.65, color: "#3A3A3A", margin: "2px 0 10px" }}>
+          Keep an eye on the parent email you entered. If it is urgent, call 0470 665 141.
+        </p>
+        <button
+          type="button"
+          onClick={() => {
+            setError("");
+            setSuccess(false);
+          }}
+          style={{
+            fontWeight: 600, fontSize: 14, letterSpacing: "-0.01em",
+            padding: "12px 16px", borderRadius: 999,
+            background: "#111111", color: "#ffffff", border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Send another enquiry
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} style={{
-      borderRadius: 20,
-      padding: "28px 26px",
-      background: "#ffffff",
-      boxShadow: "0 4px 32px rgba(0,0,0,0.08)",
-      border: "1px solid rgba(0,0,0,0.08)",
-      display: "grid",
-      gap: 14,
-    }}>
+    <form onSubmit={handleSubmit} style={formShell}>
       <div style={{
         fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
         textTransform: "uppercase", color: "#5C5C5C",
@@ -104,7 +154,7 @@ export function EnquiryForm() {
         Free trial enquiry, 1 business day reply
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
         <Field label="Parent name">
           <input required value={f.parent} onChange={(e) => set("parent", e.target.value)} style={inp} />
         </Field>
@@ -113,7 +163,7 @@ export function EnquiryForm() {
         </Field>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
         <Field label="Parent email">
           <input type="email" required value={f.email} onChange={(e) => set("email", e.target.value)} style={inp} />
         </Field>
@@ -167,7 +217,7 @@ export function EnquiryForm() {
       </Field>
 
       {error && (
-        <p style={{ fontSize: 13, color: "#923333", margin: 0 }}>{error}</p>
+        <p role="alert" style={{ fontSize: 13, color: "#923333", margin: 0 }}>{error}</p>
       )}
 
       <button

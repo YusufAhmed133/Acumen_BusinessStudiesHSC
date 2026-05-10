@@ -1,473 +1,59 @@
-"use client";
-import Link from "next/link";
-import { ScrollLink } from "@/components/ui/ScrollLink";
-import { useEffect, useState } from "react";
-import { QUIZ_BANK, TOPICS_MAP, type TopicKey, type McqQuestion, type ShortQuestion, type Question } from "@/lib/quiz-bank";
-
-function EmailGate({ onUnlock }: { onUnlock: () => void }) {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, []);
-
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch("/api/gate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json() as { ok: boolean; message?: string };
-      if (data.ok) {
-        onUnlock();
-      } else {
-        setError(data.message ?? "Access denied.");
-      }
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="gate-title"
-      style={{
-        position: "fixed", inset: 0, zIndex: 100,
-        background: "rgba(13,13,13,0.72)", backdropFilter: "blur(8px)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        padding: "24px",
-      }}
-    >
-      <form onSubmit={submit} style={{
-        background: "#FFFCF4", borderRadius: 20, padding: "40px 36px",
-        maxWidth: 420, width: "100%",
-        boxShadow: "0 32px 80px rgba(0,0,0,0.45)",
-      }}>
-        <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 14 }}>
-          Acumen Practice Bank
-        </div>
-        <h2 id="gate-title" style={{ fontWeight: 700, fontSize: 26, letterSpacing: "-0.04em", margin: "0 0 8px", color: "#0A0A0A" }}>
-          Enter your email to access
-        </h2>
-        <p style={{ fontSize: 14, lineHeight: 1.6, color: "#5C5C5C", margin: "0 0 28px" }}>
-          Your tutor will add your email to the access list after your trial lesson.
-        </p>
-
-        <label style={{ display: "grid", gap: 6 }}>
-          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5C5C5C" }}>
-            Email address
-          </span>
-          <input
-            type="email" required autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            style={{
-              width: "100%", padding: "12px 14px", borderRadius: 10,
-              border: "1.5px solid rgba(0,0,0,0.14)", fontSize: 15,
-              background: "#F9F9F7", outline: "none", color: "#111111",
-              boxSizing: "border-box",
-            }}
-          />
-        </label>
-
-        {error && (
-          <p style={{ fontSize: 13, color: "#923333", margin: "10px 0 0" }}>{error}</p>
-        )}
-
-        <button
-          type="submit" disabled={loading}
-          style={{
-            marginTop: 20, width: "100%", padding: "13px 18px", borderRadius: 999,
-            background: loading ? "#6B6B6B" : "#C9EFD3",
-            color: loading ? "#ffffff" : "#0A2E1A",
-            border: "none", cursor: loading ? "wait" : "pointer",
-            fontWeight: 700, fontSize: 15, letterSpacing: "-0.01em",
-          }}
-        >
-          {loading ? "Checking..." : "Access practice questions →"}
-        </button>
-      </form>
-    </div>
-  );
-}
-
-const PREVIEW_COUNT = 5;
-
-function GateCard({ onUnlock, remaining }: { onUnlock: () => void; remaining: number }) {
-  return (
-    <div style={{
-      background: "#FFFCF4", borderRadius: 14,
-      boxShadow: "0 8px 32px rgba(0,0,0,0.12)", marginBottom: 24,
-      padding: "48px 32px", textAlign: "center",
-    }}>
-      <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 14 }}>
-        {remaining} more question{remaining !== 1 ? "s" : ""} available
-      </div>
-      <h2 style={{ fontWeight: 700, fontSize: 26, letterSpacing: "-0.04em", margin: "0 0 10px", color: "#0A0A0A" }}>
-        Unlock the full question bank
-      </h2>
-      <p style={{ fontSize: 14, lineHeight: 1.6, color: "#5C5C5C", margin: "0 auto 28px", maxWidth: 380 }}>
-        Enter your email to access all questions. Your tutor will add you after your free trial lesson.
-      </p>
-      <button
-        onClick={onUnlock}
-        style={{
-          padding: "13px 32px", borderRadius: 999, fontWeight: 700, fontSize: 15,
-          background: "#111111", color: "#ffffff", border: "none", cursor: "pointer",
-          letterSpacing: "-0.01em",
-        }}
-      >
-        Unlock {remaining} questions →
-      </button>
-      <div style={{ marginTop: 14 }}>
-        <Link
-          href="/#enquire"
-          style={{
-            display: "inline-block", padding: "11px 24px", borderRadius: 999,
-            background: "#C9EFD3", color: "#0A2E1A",
-            textDecoration: "none", fontSize: 14, fontWeight: 600,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          Book a free trial lesson →
-        </Link>
-      </div>
-    </div>
-  );
-}
+import { PracticeClient } from "@/app/practice/PracticeClient";
+import { QUIZ_BANK } from "@/lib/quiz-bank";
+import type { Question, TopicKey } from "@/lib/quiz-types";
 
 type TypeFilter = "all" | "mcq" | "short" | "extended";
+type TopicFilter = TopicKey | "all";
 
-const TYPE_LABELS: Record<TypeFilter, string> = {
-  all: "All types",
-  mcq: "Multiple Choice",
-  short: "Short Answer",
-  extended: "Extended Response",
-};
+const PREVIEW_COUNT = 5;
+const TOPIC_FILTERS: TopicFilter[] = ["all", "operations", "marketing", "finance", "human_resources"];
+const TYPE_FILTERS: TypeFilter[] = ["all", "mcq", "short", "extended"];
 
-function QuestionCard({ q }: { q: Question }) {
-  const [picked, setPicked] = useState<number | null>(null);
-  const [revealed, setRevealed] = useState(false);
-  const [checked, setChecked] = useState<number[]>([]);
-  const [response, setResponse] = useState("");
+function filterKey(topic: TopicFilter, type: TypeFilter): string {
+  return `${topic}:${type}`;
+}
 
-  const topic = TOPICS_MAP[q.topic];
-  const reset = () => { setPicked(null); setRevealed(false); setChecked([]); setResponse(""); };
+function matchesFilter(question: Question, topic: TopicFilter, type: TypeFilter): boolean {
+  const topicMatch = topic === "all" || question.topic === topic;
+  const typeMatch = type === "all" || question.type === type;
+  return topicMatch && typeMatch;
+}
 
-  const typeLabel = q.type === "mcq" ? "Multiple Choice" : q.type === "short" ? "Short Answer" : "Extended Response";
-
-  return (
-    <div style={{
-      background: "#FFFCF4", borderRadius: 14, overflow: "hidden",
-      boxShadow: "0 8px 32px rgba(0,0,0,0.12)", marginBottom: 24,
-    }}>
-      {/* Header */}
-      <div style={{
-        padding: "16px 24px", borderBottom: "1px solid rgba(10,10,10,0.1)",
-        display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap",
-        background: "#FFFCF4",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{
-            padding: "4px 10px", borderRadius: 999, fontSize: 11, fontWeight: 600,
-            letterSpacing: "0.1em", textTransform: "uppercase",
-            background: topic.tint, color: topic.accent,
-          }}>
-            {topic.label}
-          </span>
-          <span style={{ fontSize: 12, color: "#5C5C5C", fontWeight: 500 }}>{typeLabel}, {q.marks} mark{q.marks !== 1 ? "s" : ""}</span>
-        </div>
-        <span style={{ fontSize: 11, color: "#9B9B9B", letterSpacing: "0.06em" }}>{q.src}</span>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 340px" }} className="qcard-cols">
-        {/* Question */}
-        <div style={{ padding: "28px 32px" }}>
-          <p style={{ fontSize: 16, lineHeight: 1.65, color: "#1A1A1A", margin: "0 0 20px", fontWeight: 500 }}>
-            {q.stem}
-          </p>
-
-          {q.type === "mcq" && (
-            <div style={{ display: "grid", gap: 8 }}>
-              {(q as McqQuestion).options.map((opt, i) => {
-                const letter = String.fromCharCode(65 + i);
-                const isCorrect = i === (q as McqQuestion).answer;
-                const bg = revealed
-                  ? isCorrect ? "#CFEAD9" : picked === i ? "#F4CFCF" : "#F5F5F3"
-                  : picked === i ? topic.tint : "#F5F5F3";
-                const border = revealed
-                  ? isCorrect ? "#1F6B40" : picked === i ? "#923333" : "transparent"
-                  : picked === i ? topic.accent : "transparent";
-                return (
-                  <button
-                    key={i}
-                    onClick={() => !revealed && setPicked(i)}
-                    style={{
-                      textAlign: "left", padding: "11px 14px", borderRadius: 10, cursor: revealed ? "default" : "pointer",
-                      border: `1.5px solid ${border}`, background: bg,
-                      fontSize: 14, color: "#1A1A1A", transition: "all 160ms ease", display: "flex", gap: 10,
-                    }}
-                  >
-                    <span style={{ fontWeight: 600, flexShrink: 0, color: "#5C5C5C" }}>{letter}.</span>
-                    {opt}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
-          {(q.type === "short" || q.type === "extended") && (
-            <textarea
-              aria-label={`Your answer for: ${q.stem}`}
-              value={response}
-              onChange={(e) => setResponse(e.target.value)}
-              placeholder={q.type === "extended" ? "Write your business report response here..." : "Write your answer here..."}
-              style={{
-                width: "100%", minHeight: q.type === "extended" ? 240 : 120,
-                padding: "12px 14px", borderRadius: 10, border: "1.5px solid rgba(0,0,0,0.12)",
-                fontSize: 14, lineHeight: 1.6, color: "#1A1A1A", background: "#F9F9F7",
-                resize: "vertical", boxSizing: "border-box", outline: "none",
-                fontFamily: "inherit",
-              }}
-            />
-          )}
-
-          <div style={{ marginTop: 16, display: "flex", gap: 10 }}>
-            {!revealed ? (
-              <button
-                onClick={() => setRevealed(true)}
-                disabled={q.type === "mcq" && picked === null}
-                style={{
-                  padding: "10px 20px", borderRadius: 10, fontWeight: 600, fontSize: 14,
-                  background: topic.accent, color: "#ffffff", border: "none",
-                  cursor: q.type === "mcq" && picked === null ? "not-allowed" : "pointer",
-                  opacity: q.type === "mcq" && picked === null ? 0.4 : 1,
-                }}
-              >
-                Check answer
-              </button>
-            ) : (
-              <button
-                onClick={reset}
-                style={{
-                  padding: "10px 20px", borderRadius: 10, fontWeight: 600, fontSize: 14,
-                  background: "transparent", color: "#5C5C5C",
-                  border: "1.5px solid rgba(0,0,0,0.14)", cursor: "pointer",
-                }}
-              >
-                Try again
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Marker margin */}
-        <div style={{ padding: "28px 24px", background: "#F8F4E8", borderLeft: "1px solid rgba(10,10,10,0.08)" }}>
-          <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 12 }}>
-            Marker margin
-          </div>
-
-          {q.type === "mcq" ? (
-            revealed ? (
-              <div>
-                <div style={{
-                  fontSize: 18, fontWeight: 600, letterSpacing: "-0.02em", marginBottom: 10,
-                  color: picked === (q as McqQuestion).answer ? "#1F6B40" : "#923333",
-                }}>
-                  {picked === (q as McqQuestion).answer ? "Correct." : "Not quite."}
-                </div>
-                <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1A1A1A", margin: "0 0 12px" }}>
-                  {(q as McqQuestion).explain}
-                </p>
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "#5C5C5C" }}>
-                  Answer: ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
-                </p>
-              </div>
-            ) : (
-              <p style={{ fontSize: 14, lineHeight: 1.6, color: "#5C5C5C", margin: 0 }}>
-                Pick an option and check your answer.
-              </p>
-            )
-          ) : (
-            <div>
-              <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A3A3A", marginBottom: 10 }}>
-                Marking criteria, {q.marks} marks
-              </div>
-              <div style={{ display: "grid", gap: 8, marginBottom: 16 }}>
-                {(q as ShortQuestion).criteria.map((c, i) => {
-                  const on = checked.includes(i);
-                  return (
-                    <label key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer", fontSize: 13, lineHeight: 1.5, color: "#1A1A1A" }}>
-                      <input
-                        type="checkbox" checked={on}
-                        onChange={() => setChecked((a) => on ? a.filter((x) => x !== i) : [...a, i])}
-                        style={{ marginTop: 2, accentColor: topic.accent, flexShrink: 0 }}
-                      />
-                      {c}
-                    </label>
-                  );
-                })}
-              </div>
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#0A0A0A" }}>
-                {checked.length} / {(q as ShortQuestion).criteria.length} criteria
-              </div>
-              {revealed && (
-                <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px dashed rgba(10,10,10,0.18)", fontSize: 13, lineHeight: 1.65, color: "#1A1A1A" }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 8 }}>
-                    Sample response
-                  </div>
-                  {(q as ShortQuestion).sample}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+function buildFilterCounts(): Record<string, number> {
+  return Object.fromEntries(
+    TOPIC_FILTERS.flatMap((topic) =>
+      TYPE_FILTERS.map((type) => [
+        filterKey(topic, type),
+        QUIZ_BANK.filter((question) => matchesFilter(question, topic, type)).length,
+      ])
+    )
   );
 }
 
-const PAGE_SIZE = 20;
+function buildPreviewQuestions(): Question[] {
+  const selected = new Map<string, Question>();
 
-type AccessStatus = "preview" | "unlocked";
+  for (const topic of TOPIC_FILTERS) {
+    for (const type of TYPE_FILTERS) {
+      const preview = QUIZ_BANK
+        .filter((question) => matchesFilter(question, topic, type))
+        .slice(0, PREVIEW_COUNT);
+
+      for (const question of preview) {
+        selected.set(question.id, question);
+      }
+    }
+  }
+
+  return [...selected.values()];
+}
 
 export default function PracticePage() {
-  const [access, setAccess] = useState<AccessStatus>("preview");
-  const [showGate, setShowGate] = useState(false);
-  const [topic, setTopic] = useState<TopicKey | "all">("all");
-  const [type, setType] = useState<TypeFilter>("all");
-  const [page, setPage] = useState(1);
-
-  const unlock = () => {
-    setAccess("unlocked");
-    setShowGate(false);
-  };
-
-  const filtered = QUIZ_BANK.filter((q) => {
-    const topicMatch = topic === "all" || q.topic === topic;
-    const typeMatch = type === "all" || q.type === type;
-    return topicMatch && typeMatch;
-  });
-
-  const visible = filtered.slice(0, page * PAGE_SIZE);
-  const hasMore = visible.length < filtered.length;
-
   return (
-    <div style={{ minHeight: "100vh", background: "#F9F9F7" }}>
-      {showGate && <EmailGate onUnlock={unlock} />}
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <div {...(showGate ? { inert: true as any } : {})}>
-      {/* Filter bar */}
-      <div style={{
-        background: "rgba(249,249,247,0.96)", backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(0,0,0,0.07)", padding: "12px 28px",
-        display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap",
-      }}>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          {(["all", "operations", "marketing", "finance", "hr"] as const).map((t) => {
-            const label = t === "all" ? "All topics" : TOPICS_MAP[t].label;
-            const active = topic === t;
-            const accent = t === "all" ? "#111111" : TOPICS_MAP[t].accent;
-            const tint = t === "all" ? "#EBEBEB" : TOPICS_MAP[t].tint;
-            return (
-              <button
-                key={t}
-                onClick={() => { setTopic(t); setPage(1); }}
-                aria-pressed={active}
-                style={{
-                  padding: "7px 14px", borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: "pointer",
-                  background: active ? accent : tint,
-                  color: active ? "#ffffff" : accent,
-                  border: "none", transition: "all 160ms ease",
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-        <div style={{ display: "flex", gap: 6 }}>
-          {(["all", "mcq", "short", "extended"] as TypeFilter[]).map((t) => (
-            <button
-              key={t}
-              onClick={() => { setType(t); setPage(1); }}
-              aria-pressed={type === t}
-              style={{
-                padding: "7px 14px", borderRadius: 999, fontSize: 12, fontWeight: 600, cursor: "pointer",
-                background: type === t ? "#111111" : "#EBEBEB",
-                color: type === t ? "#ffffff" : "#5C5C5C",
-                border: "none", transition: "all 160ms ease",
-              }}
-            >
-              {TYPE_LABELS[t]}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 28px 80px" }}>
-        <div style={{ marginBottom: 32 }}>
-          <h1 style={{ fontWeight: 700, fontSize: "clamp(26px, 3.5vw, 44px)", letterSpacing: "-0.04em", margin: "0 0 8px", color: "#111111" }}>
-            HSC Business Studies Practice Questions
-          </h1>
-          <p style={{ margin: 0, fontSize: 15, color: "#5C5C5C" }}>
-            {filtered.length} question{filtered.length !== 1 ? "s" : ""} from real HSC past papers, annotated by syllabus dot point
-          </p>
-        </div>
-
-        {filtered.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "80px 0", color: "#9B9B9B", fontSize: 15 }}>
-            No questions match this filter yet.
-          </div>
-        ) : access === "preview" ? (
-          <>
-            {filtered.slice(0, PREVIEW_COUNT).map((q) => <QuestionCard key={q.id} q={q} />)}
-            {filtered.length > PREVIEW_COUNT && (
-              <GateCard onUnlock={() => setShowGate(true)} remaining={filtered.length - PREVIEW_COUNT} />
-            )}
-          </>
-        ) : (
-          <>
-            {visible.map((q) => <QuestionCard key={q.id} q={q} />)}
-            {hasMore && (
-              <div style={{ textAlign: "center", marginTop: 8, marginBottom: 24 }}>
-                <button
-                  onClick={() => setPage((p) => p + 1)}
-                  style={{
-                    padding: "13px 32px", borderRadius: 12, fontWeight: 600, fontSize: 15,
-                    background: "#F0F0EE", color: "#1A1A1A", border: "1.5px solid rgba(0,0,0,0.1)",
-                    cursor: "pointer",
-                  }}
-                >
-                  Load more ({filtered.length - visible.length} remaining)
-                </button>
-              </div>
-            )}
-          </>
-        )}
-
-
-      </div>
-
-      <style>{`
-        .qcard-cols { grid-template-columns: 1fr 340px !important; }
-        @media (max-width: 760px) {
-          .qcard-cols { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-      </div>{/* end inert wrapper */}
-    </div>
+    <PracticeClient
+      filterCounts={buildFilterCounts()}
+      initialQuestions={buildPreviewQuestions()}
+      totalCount={QUIZ_BANK.length}
+    />
   );
 }

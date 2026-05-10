@@ -1,10 +1,10 @@
 import { Reveal } from "@/components/ui/Reveal";
 
 const TOPICS = [
-  { key: "operations",  label: "Operations",       num: "01", tint: "#A8E8BE", accent: "#1B6038", ink: "#0D3020" },
-  { key: "marketing",   label: "Marketing",         num: "02", tint: "#FADA88", accent: "#9A6300", ink: "#5C3B00" },
-  { key: "finance",     label: "Finance",           num: "03", tint: "#A8C8FC", accent: "#1E4B99", ink: "#0B2A5E" },
-  { key: "hr",          label: "Human Resources",   num: "04", tint: "#F8BCBC", accent: "#8B2929", ink: "#501515" },
+  { key: "operations",  label: "Operations",       num: "01", accent: "#1B6038", tint: "#DFF5E6" },
+  { key: "marketing",   label: "Marketing",         num: "02", accent: "#9A6300", tint: "#FFF0C4" },
+  { key: "finance",     label: "Finance",           num: "03", accent: "#1E4B99", tint: "#E3EEFF" },
+  { key: "human_resources", label: "Human Resources",   num: "04", accent: "#8B2929", tint: "#FFE3E3" },
 ] as const;
 
 export function Topics() {
@@ -47,21 +47,32 @@ export function Topics() {
               <div
                 style={{
                   background: t.tint,
-                  borderRadius: 20,
-                  padding: "32px 28px 28px",
+                  border: `1px solid ${t.accent}18`,
+                  borderRadius: 8,
+                  padding: "30px 28px 28px",
                   display: "flex",
                   flexDirection: "column",
                   gap: 0,
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                  boxShadow: "0 4px 18px rgba(0,0,0,0.045)",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
               >
                 <div
                   style={{
+                    position: "absolute",
+                    inset: "0 0 auto",
+                    height: 5,
+                    background: t.accent,
+                  }}
+                />
+                <div
+                  style={{
                     fontWeight: 700,
-                    fontSize: "clamp(60px, 5vw, 84px)",
+                    fontSize: "clamp(54px, 4.8vw, 78px)",
                     lineHeight: 0.88,
                     letterSpacing: "-0.05em",
-                    color: t.ink,
+                    color: `${t.accent}24`,
                     marginBottom: 12,
                   }}
                 >
@@ -73,7 +84,7 @@ export function Topics() {
                     fontWeight: 600,
                     fontSize: 22,
                     letterSpacing: "-0.02em",
-                    color: t.ink,
+                    color: t.accent,
                     margin: "0 0 24px",
                   }}
                 >
@@ -85,14 +96,15 @@ export function Topics() {
                   style={{
                     display: "inline-block",
                     padding: "10px 18px",
-                    borderRadius: 999,
-                    background: t.accent,
-                    color: "#ffffff",
+                    borderRadius: 8,
+                    background: "rgba(255,255,255,0.72)",
+                    color: t.accent,
                     textDecoration: "none",
                     fontSize: 13,
                     fontWeight: 600,
                     letterSpacing: "-0.01em",
                     alignSelf: "flex-start",
+                    border: `1px solid ${t.accent}22`,
                   }}
                 >
                   Practice questions →

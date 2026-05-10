@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Free HSC Business Studies Practice Questions | Acumen HSC",
+  title: "Free HSC Business Studies Practice Questions",
   description:
-    "Free HSC Business Studies practice questions from 2010 to 2025. MCQ, short answer and extended response, indexed by syllabus dot point. Operations, Marketing, Finance, Human Resources.",
+    "Free HSC Business Studies practice questions from 2010-2025. MCQ, short answer, and extended responses by syllabus dot point.",
   keywords: [
     "HSC Business Studies practice questions",
     "HSC Business Studies past papers",
@@ -26,9 +26,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Free HSC Business Studies Practice Questions | Acumen HSC",
     description:
-      "Free HSC Business Studies practice questions from 2010 to 2025. MCQ, short answer and extended response, indexed by syllabus dot point.",
+      "Free HSC Business Studies practice questions from 2010-2025. MCQ, short answer, and extended responses by syllabus dot point.",
     url: "https://acumenhsc.com.au/practice",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Acumen HSC — Free HSC Business Studies Practice Questions" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Acumen HSC, Free HSC Business Studies Practice Questions" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free HSC Business Studies Practice Questions | Acumen HSC",
+    description:
+      "Free HSC Business Studies practice questions from 2010-2025. MCQ, short answer, and extended responses by syllabus dot point.",
+    images: ["/og-image.png"],
   },
 };
 

@@ -7,8 +7,11 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { PRICING_PLANS } from "@/lib/pricing";
 
 const SITE_URL = "https://acumenhsc.com.au";
+
+const toJsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -55,7 +58,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Acumen HSC — Band 6 Business Studies Tutoring Sydney",
+        alt: "Acumen HSC, Band 6 Business Studies Tutoring Sydney",
       },
     ],
   },
@@ -77,7 +80,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LOCAL_BUSINESS_JSON = JSON.stringify({
+const LOCAL_BUSINESS_JSON = toJsonLd({
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "EducationalOrganization"],
   "@id": `${SITE_URL}/#business`,
@@ -91,6 +94,7 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
     { "@type": "AdministrativeArea", name: "New South Wales" },
   ],
   image: `${SITE_URL}/og-image.png`,
+  logo: `${SITE_URL}/icon.svg`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Sydney",
@@ -105,7 +109,7 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
   },
   priceRange: "$$",
   currenciesAccepted: "AUD",
-  paymentAccepted: "Credit Card",
+  paymentAccepted: "Credit Card, Debit Card",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: [
@@ -118,159 +122,37 @@ const LOCAL_BUSINESS_JSON = JSON.stringify({
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "HSC Tutoring Services",
-    itemListElement: [
+    itemListElement: PRICING_PLANS.flatMap((plan) => [
       {
         "@type": "Offer",
-        price: "120",
+        price: String(plan.sessionPriceAud),
         priceCurrency: "AUD",
+        availability: "https://schema.org/InStock",
+        url: SITE_URL,
         itemOffered: {
           "@type": "Service",
-          name: "HSC Business Studies Small Group Lesson Sydney",
-          description: "Single 90-minute small-group Business Studies lesson (max 4 students) in Sydney, marked against NESA criteria. Year 11 and 12.",
+          name: plan.schemaSessionName,
+          description: plan.schemaSessionDescription,
           areaServed: { "@type": "City", name: "Sydney" },
           url: SITE_URL,
         },
       },
       {
         "@type": "Offer",
-        price: "1080",
+        price: String(plan.termPriceAud),
         priceCurrency: "AUD",
+        availability: "https://schema.org/InStock",
+        url: SITE_URL,
         itemOffered: {
           "@type": "Service",
-          name: "HSC Business Studies Term Enrolment Sydney",
-          description: "Full school term small-group enrolment (pay for 9, receive 10 lessons) including weekly essay marking, Band 6 notes, past-paper bank, and 24-hour question line.",
+          name: plan.schemaTermName,
+          description: plan.schemaTermDescription,
           areaServed: { "@type": "City", name: "Sydney" },
           url: SITE_URL,
         },
       },
-      {
-        "@type": "Offer",
-        price: "150",
-        priceCurrency: "AUD",
-        itemOffered: {
-          "@type": "Service",
-          name: "HSC Business Studies Private 1:1 Tutoring Sydney",
-          description: "Single 90-minute private one-on-one Business Studies lesson in Sydney. Year 11 and 12.",
-          areaServed: { "@type": "City", name: "Sydney" },
-          url: SITE_URL,
-        },
-      },
-      {
-        "@type": "Offer",
-        price: "1350",
-        priceCurrency: "AUD",
-        itemOffered: {
-          "@type": "Service",
-          name: "HSC Business Studies Private 1:1 Term Enrolment Sydney",
-          description: "Full school term private one-on-one enrolment (pay for 9, receive 10 lessons) including weekly essay marking, Band 6 notes, past-paper bank, and 24-hour question line.",
-          areaServed: { "@type": "City", name: "Sydney" },
-          url: SITE_URL,
-        },
-      },
-    ],
+    ]),
   },
-});
-
-const COURSE_JSON = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Course",
-  "@id": `${SITE_URL}/#course`,
-  name: "HSC Business Studies Tutoring — Band 6 Program",
-  description: "Small-group HSC Business Studies tutoring for Year 11 and 12 students in Sydney. Covers all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Taught by Band 6 graduates.",
-  url: SITE_URL,
-  datePublished: "2026-01-01",
-  dateModified: "2026-05-07",
-  provider: {
-    "@id": `${SITE_URL}/#business`,
-  },
-  instructor: {
-    "@type": "Organization",
-    "@id": `${SITE_URL}/#business`,
-  },
-  educationalLevel: "Year 11–12 (HSC)",
-  teaches: [
-    { "@type": "DefinedTerm", name: "HSC Business Studies — Operations", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
-    { "@type": "DefinedTerm", name: "HSC Business Studies — Marketing", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
-    { "@type": "DefinedTerm", name: "HSC Business Studies — Finance", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
-    { "@type": "DefinedTerm", name: "HSC Business Studies — Human Resources", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
-    { "@type": "DefinedTerm", name: "HSC extended response essay technique", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
-    { "@type": "DefinedTerm", name: "HSC past paper analysis and Band 6 marking criteria", inDefinedTermSet: "https://curriculum.nsw.edu.au/learning-areas/business-studies/business-studies-11-12-2021" },
-  ],
-  inLanguage: "en-AU",
-  hasCourseInstance: [
-    {
-      "@type": "CourseInstance",
-      courseMode: "onsite",
-      location: { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", addressCountry: "AU" } },
-    },
-    {
-      "@type": "CourseInstance",
-      courseMode: "online",
-    },
-  ],
-});
-
-const FAQ_JSON = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Is the trial lesson really free?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "One full lesson at no cost, no credit card required. No obligation if it is not the right fit.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is included in the price?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Small-group sessions (max 4 students) are $120 per 90-minute lesson, or $1,080 upfront for a full term (pay for 9, receive 10). Private 1:1 is $150 per session, or $1,350 upfront for a term. Both options include Band 6 notes, every HSC past paper from 2010 annotated by syllabus dot point, the 24-hour question line, and a full mock exam with a personalised report.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Who teaches the lessons?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "All tutors are Band 6 graduates who have sat the HSC Business Studies exam and scored in the top band.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What if my child has a question outside of class?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We run a 24-hour question line where students can send through any concept, essay paragraph, or past paper question and receive a written response.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can a group of school friends join together?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "If two to four students from the same school want to learn together, we can arrange a dedicated session at a time that suits the group.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What happens if my child misses a lesson?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Cancellations with more than 24 hours notice are fully refunded or credited. Cancellations inside 24 hours are charged in full. Every student who misses receives the full notes and worked solutions.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do your prices include GST?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes, all prices shown on this site are inclusive of GST.",
-      },
-    },
-  ],
 });
 
 export default function RootLayout({
@@ -283,10 +165,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://va.vercel-scripts.com" />
         <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
-        {/* JSON-LD: static site data, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: COURSE_JSON }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON }} />
       </head>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
         <ScrollProgress />
@@ -298,8 +177,8 @@ export default function RootLayout({
         <Footer />
         <SpeedInsights />
         <Analytics />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18150257568" strategy="afterInteractive" />
-        <Script id="gtag-config" strategy="afterInteractive">{`
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18150257568" strategy="lazyOnload" />
+        <Script id="gtag-config" strategy="lazyOnload">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());

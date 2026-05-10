@@ -1,12 +1,12 @@
 # Acumen HSC
 
-> HSC Business Studies tutoring in Sydney, Australia. Small-group classes capped at 6 students, taught by Band 6 graduates from UNSW, USYD, UTS, and Macquarie. Serving Year 11 and Year 12 students across Sydney CBD and online.
+> HSC Business Studies tutoring in Sydney, Australia. Small-group classes capped at 4 students, taught by Band 6 graduates who know the HSC Business Studies exam. Serving Year 11 and Year 12 students across Sydney CBD and online.
 
 URL: https://acumenhsc.com.au
 
 ## What we offer
 
-- Weekly 1-hour small-group lessons (max 6 students)
+- Weekly small-group lessons (max 4 students)
 - Live essay marking returned within 48 hours, marked against NESA criteria
 - 24-hour question line: tutors respond within 24 hours, every day
 - Band 6 notes written by a 99.95 ATAR Business Studies graduate
@@ -15,17 +15,19 @@ URL: https://acumenhsc.com.au
 
 ## Pricing
 
-- Casual: $110 per 1-hour session (inc. GST)
-- Term enrolment: $950 per school term (~10 sessions, inc. GST)
+- Small group: $80 per weekly session (inc. GST)
+- Small-group term enrolment: $760 per 10-session term (inc. GST)
+- Private 1:1: $100 per weekly session (inc. GST)
+- Private 1:1 term enrolment: $950 per 10-session term (inc. GST)
 - First lesson free, no credit card required
 
 ## Syllabus topics covered
 
 The HSC Business Studies course has four topics:
-1. Operations — the highest-probability Section III essay topic (appeared 2022, 2023, 2024)
-2. Marketing — Section II allocates 8–10 marks to marketing most years
-3. Finance — ratio analysis (GPM, NPM, ROE, current ratio, gearing) tested across all sections
-4. Human Resources — Section III was an HR case study in 2024
+1. Operations, the highest-probability Section III essay topic (appeared 2022, 2023, 2024)
+2. Marketing, Section II allocates 8–10 marks to marketing most years
+3. Finance, ratio analysis (GPM, NPM, ROE, current ratio, gearing) tested across all sections
+4. Human Resources, Section III was an HR case study in 2024
 
 ## Location and contact
 

@@ -110,7 +110,7 @@ export function Practice() {
               }} />
             </div>
 
-            {/* Body — paper + margin */}
+            {/* Body, paper + margin */}
             <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr" }} className="paper-cols">
               {/* Question */}
               <div style={{
@@ -146,8 +146,8 @@ export function Practice() {
                         <button key={i} disabled={revealed} onClick={() => setPicked(i)} style={{
                           textAlign: "left", cursor: revealed ? "default" : "pointer",
                           padding: "13px 16px", borderRadius: 11,
-                          border: `1.5px solid ${correct ? TOPICS_MAP.operations.accent : wrong ? TOPICS_MAP.hr.accent : sel ? "#0A0A0A" : "rgba(10,10,10,0.14)"}`,
-                          background: correct ? TOPICS_MAP.operations.tint : wrong ? TOPICS_MAP.hr.tint : sel ? "#F4F4F0" : "#FFFCF4",
+                          border: `1.5px solid ${correct ? TOPICS_MAP.operations.accent : wrong ? TOPICS_MAP.human_resources.accent : sel ? "#0A0A0A" : "rgba(10,10,10,0.14)"}`,
+                          background: correct ? TOPICS_MAP.operations.tint : wrong ? TOPICS_MAP.human_resources.tint : sel ? "#F4F4F0" : "#FFFCF4",
                           display: "flex", gap: 14, alignItems: "flex-start",
                           fontSize: 14.5, color: "#0A0A0A", transition: "all 220ms ease",
                         }}>
@@ -226,7 +226,7 @@ export function Practice() {
                     <div>
                       <div style={{
                         fontSize: 20, fontWeight: 600, letterSpacing: "-0.02em", marginBottom: 10,
-                        color: picked === (q as McqQuestion).answer ? TOPICS_MAP.operations.accent : TOPICS_MAP.hr.accent,
+                        color: picked === (q as McqQuestion).answer ? TOPICS_MAP.operations.accent : TOPICS_MAP.human_resources.accent,
                       }}>
                         {picked === (q as McqQuestion).answer ? "Correct." : "Not quite."}
                       </div>

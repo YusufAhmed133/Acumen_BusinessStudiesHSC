@@ -1,9 +1,21 @@
 import type { Metadata } from "next";
+import { PRIVATE_PLAN, SMALL_GROUP_PLAN, TERM_SESSION_COUNT } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms and conditions for HSC Business Studies tutoring services provided by Acumen HSC in Sydney.",
   alternates: { canonical: "/terms" },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: "Terms of Service | Acumen HSC",
+    description: "Terms and conditions for HSC Business Studies tutoring services provided by Acumen HSC in Sydney.",
+    url: "https://acumenhsc.com.au/terms",
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms of Service | Acumen HSC",
+    description: "Terms and conditions for HSC Business Studies tutoring services provided by Acumen HSC in Sydney.",
+  },
 };
 
 const S = {
@@ -37,10 +49,10 @@ export default function TermsPage() {
 
       <h2 style={S.h2}>2. Fees and Inclusions</h2>
       <p style={S.p}>
-        Current rates are $110 per individual one-hour session, or $950 per school term. Package inclusions are as
-        described on our{" "}
-        <a href="/" style={{ color: "#111", fontWeight: 600 }}>Pricing section</a>{" "}
-        and confirmed at the time of enrolment.
+        Current rates are {SMALL_GROUP_PLAN.sessionPrice} per weekly small-group session, {SMALL_GROUP_PLAN.termPrice} per{" "}
+        {TERM_SESSION_COUNT}-session small-group term, {PRIVATE_PLAN.sessionPrice} per weekly private session, or{" "}
+        {PRIVATE_PLAN.termPrice} per {TERM_SESSION_COUNT}-session private term. Package inclusions are as described on our
+        pricing section and confirmed at the time of enrolment.
       </p>
 
       <h2 style={S.h2}>3. Payment</h2>

@@ -17,7 +17,7 @@ const DEMO_QS = [
     stem: "Which of the following is a type of voluntary separation in the workplace?",
     options: ["Dismissal", "Layoff", "Resignation", "Retrenchment"],
     answer: 2,
-    explain: "Resignation is the only voluntary separation — the employee chooses to leave. Dismissal, layoff, and retrenchment are all employer-initiated.",
+    explain: "Resignation is the only voluntary separation, the employee chooses to leave. Dismissal, layoff, and retrenchment are all employer-initiated.",
   },
   {
     topic: "Operations", tint: "#C9EFD3", accent: "#1B6038", src: "2022 HSC, Section I",
@@ -47,14 +47,14 @@ type Phase = {
 };
 
 const PHASES: Phase[] = [
-  // Q1 Marketing — correct (opt1 = Recession)
+  // Q1 Marketing, correct (opt1 = Recession)
   { qIdx: 0, picked: null, revealed: false, cursor: "opt1", clicking: false, ms: 1100 },
   { qIdx: 0, picked: null, revealed: false, cursor: "opt1", clicking: true,  ms: 160  },
   { qIdx: 0, picked: 1,    revealed: false, cursor: "check", clicking: false, ms: 760 },
   { qIdx: 0, picked: 1,    revealed: false, cursor: "check", clicking: true,  ms: 160 },
   { qIdx: 0, picked: 1,    revealed: true,  cursor: "next",  clicking: false, ms: 2000 },
   { qIdx: 0, picked: 1,    revealed: true,  cursor: "next",  clicking: true,  ms: 160  },
-  // Q2 HR — WRONG (picks opt0 = Dismissal, correct is opt2 = Resignation)
+  // Q2 HR, wrong (picks opt0 = Dismissal, correct is opt2 = Resignation)
   { qIdx: 1, picked: null, revealed: false, cursor: "opt0", clicking: false, ms: 900  },
   { qIdx: 1, picked: null, revealed: false, cursor: "opt0", clicking: true,  ms: 160  },
   { qIdx: 1, picked: 0,    revealed: false, cursor: "check", clicking: false, ms: 700 },
@@ -63,14 +63,14 @@ const PHASES: Phase[] = [
   { qIdx: 1, picked: 0,    revealed: true,  cursor: "margin", clicking: false, ms: 2400 },
   { qIdx: 1, picked: 0,    revealed: true,  cursor: "next",  clicking: false, ms: 600  },
   { qIdx: 1, picked: 0,    revealed: true,  cursor: "next",  clicking: true,  ms: 160  },
-  // Q3 Operations — correct (opt2 = Global sourcing)
+  // Q3 Operations, correct (opt2 = Global sourcing)
   { qIdx: 2, picked: null, revealed: false, cursor: "opt2", clicking: false, ms: 900  },
   { qIdx: 2, picked: null, revealed: false, cursor: "opt2", clicking: true,  ms: 160  },
   { qIdx: 2, picked: 2,    revealed: false, cursor: "check", clicking: false, ms: 700 },
   { qIdx: 2, picked: 2,    revealed: false, cursor: "check", clicking: true,  ms: 160 },
   { qIdx: 2, picked: 2,    revealed: true,  cursor: "next",  clicking: false, ms: 1800 },
   { qIdx: 2, picked: 2,    revealed: true,  cursor: "next",  clicking: true,  ms: 160  },
-  // Q4 Finance — correct (opt3 = ASIC)
+  // Q4 Finance, correct (opt3 = ASIC)
   { qIdx: 3, picked: null, revealed: false, cursor: "opt3", clicking: false, ms: 900  },
   { qIdx: 3, picked: null, revealed: false, cursor: "opt3", clicking: true,  ms: 160  },
   { qIdx: 3, picked: 3,    revealed: false, cursor: "check", clicking: false, ms: 700 },
@@ -92,6 +92,8 @@ const CursorSVG = ({ clicking }: { clicking: boolean }) => (
 export function PracticeDemo() {
   const [phaseIdx, setPhaseIdx] = useState(0);
   const [cursorXY, setCursorXY] = useState<{ x: number; y: number } | null>(null);
+  const [isActive, setIsActive] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const screenRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -112,33 +114,47 @@ export function PracticeDemo() {
   }, []);
 
   useEffect(() => {
+    if (reducedMotion) {
+      return;
+    }
     updateCursor(phase.cursor);
+    if (!isActive) return;
     timerRef.current = setTimeout(() => {
       setPhaseIdx((i) => (i >= PHASES.length - 1 ? 0 : i + 1));
     }, phase.ms);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [phaseIdx, phase.cursor, phase.ms, updateCursor]);
+  }, [isActive, phaseIdx, phase.cursor, phase.ms, reducedMotion, updateCursor]);
 
-  // Reset when section scrolls back into view
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setPhaseIdx(0); },
+      ([entry]) => {
+        setIsActive(entry.isIntersecting);
+        if (entry.isIntersecting) setPhaseIdx(0);
+      },
       { threshold: 0.25 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
-  const score = PHASES.slice(0, phaseIdx + 1).filter(
-    (p, i) => {
-      if (!p.revealed) return false;
-      const prev = PHASES[i - 1];
-      return prev && prev.picked === DEMO_QS[prev.qIdx].answer;
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReducedMotion(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  const answered = new Map<number, boolean>();
+  for (const p of PHASES.slice(0, phaseIdx + 1)) {
+    if (p.revealed && p.picked !== null) {
+      answered.set(p.qIdx, p.picked === DEMO_QS[p.qIdx].answer);
     }
-  ).length;
-  const attempted = PHASES.slice(0, phaseIdx + 1).filter((p) => p.revealed).length;
+  }
+  const attempted = answered.size;
+  const score = Array.from(answered.values()).filter(Boolean).length;
 
   return (
     <section
@@ -152,43 +168,36 @@ export function PracticeDemo() {
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
-      {/* Ambient orbs */}
-      <div style={{ position: "absolute", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(207,234,217,0.12) 0%, transparent 60%)", top: -180, right: -180, pointerEvents: "none" }} />
-      <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(251,230,189,0.08) 0%, transparent 60%)", bottom: -140, left: -140, pointerEvents: "none" }} />
-
-      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 28px", position: "relative" }}>
+      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 28px", position: "relative" }}>
         <Reveal>
-          <h2 style={{ fontWeight: 700, fontSize: "clamp(32px, 3.8vw, 52px)", lineHeight: 1.05, letterSpacing: "-0.04em", margin: "0 0 12px", color: "#ffffff" }}>
-            Real HSC questions, live marking
+          <h2 style={{ fontWeight: 700, fontSize: "clamp(32px, 3.8vw, 56px)", lineHeight: 1.05, letterSpacing: "-0.04em", margin: "0 0 48px", color: "#ffffff" }}>
+            Practice
           </h2>
-          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", margin: "0 0 44px", maxWidth: 480 }}>
-            Every lesson uses actual past-paper questions with instant marking criteria. Here&apos;s what a session looks like.
-          </p>
         </Reveal>
 
         <Reveal>
-          {/* Laptop frame */}
           <div
+            className="practice-video"
             style={{
-              background: "#1C1C1E",
-              borderRadius: "16px 16px 0 0",
-              padding: "12px 12px 0",
-              boxShadow: "0 0 0 1px rgba(255,255,255,0.07), 0 60px 120px rgba(0,0,0,0.7), 0 24px 48px rgba(0,0,0,0.5)",
+              aspectRatio: "16 / 9",
+              maxWidth: 980,
+              margin: "0 auto",
+              background: "#161616",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 8,
+              padding: 8,
+              boxShadow: "0 44px 100px rgba(0,0,0,0.55), 0 16px 40px rgba(0,0,0,0.45)",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            {/* Title bar */}
-            <div style={{ height: 34, background: "#2C2C2E", borderRadius: "6px 6px 0 0", display: "flex", alignItems: "center", padding: "0 14px", gap: 7 }}>
-              {["#FF5F57", "#FFBD2E", "#28CA42"].map((c) => (
-                <span key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c, display: "inline-block" }} />
-              ))}
-              <span style={{ marginLeft: 12, fontSize: 11, color: "rgba(255,255,255,0.35)", fontWeight: 500, letterSpacing: "0.04em" }}>
+            <div style={{ height: 30, background: "#242426", borderRadius: "4px 4px 0 0", display: "flex", alignItems: "center", padding: "0 14px" }}>
+              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", fontWeight: 500, letterSpacing: "0.04em" }}>
                 Acumen practice paper, {q.src}
               </span>
             </div>
 
-            {/* Screen */}
-            <div ref={screenRef} style={{ background: "#FFFCF4", position: "relative", minHeight: 340, overflow: "hidden" }} aria-hidden="true">
-              {/* Progress bar */}
+            <div ref={screenRef} className="practice-screen" style={{ background: "#FFFCF4", position: "relative", flex: 1, overflow: "hidden" }} aria-hidden="true">
               <div style={{ height: 2, background: "#F0EDE4" }}>
                 <div style={{
                   height: "100%",
@@ -198,7 +207,6 @@ export function PracticeDemo() {
                 }} />
               </div>
 
-              {/* Screen header */}
               <div style={{ padding: "14px 24px", borderBottom: "1px solid rgba(10,10,10,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <span style={{ padding: "3px 10px", borderRadius: 999, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", background: q.tint, color: q.accent }}>
@@ -211,9 +219,7 @@ export function PracticeDemo() {
                 </span>
               </div>
 
-              {/* Main split */}
               <div style={{ display: "grid", gridTemplateColumns: "3fr 2fr" }} className="demo-cols">
-                {/* Question */}
                 <div style={{ padding: "24px 28px 28px", borderRight: "1px solid rgba(10,10,10,0.07)" }}>
                   <p style={{ fontSize: 14.5, lineHeight: 1.6, color: "#0A0A0A", margin: "0 0 18px", fontWeight: 500 }}>
                     {q.stem}
@@ -231,8 +237,8 @@ export function PracticeDemo() {
                           style={{
                             padding: "9px 13px",
                             borderRadius: 9,
-                            border: `1.5px solid ${isCorrect ? "#1F6B40" : isWrong ? "#923333" : isSel ? q.accent : "rgba(10,10,10,0.12)"}`,
-                            background: isCorrect ? "#CFEAD9" : isWrong ? "#F4CFCF" : isSel ? q.tint : "#FFFCF4",
+                            border: `1.5px solid ${isCorrect ? "#1F6B40" : isWrong ? "#923333" : isSel ? "#1B6038" : "rgba(10,10,10,0.12)"}`,
+                            background: isCorrect ? "#CFEAD9" : isWrong ? "#F4CFCF" : isSel ? "#EAF7EE" : "#FFFCF4",
                             display: "flex", gap: 10, alignItems: "flex-start",
                             fontSize: 13, color: "#0A0A0A",
                             transition: "background 280ms ease, border-color 280ms ease",
@@ -251,8 +257,8 @@ export function PracticeDemo() {
                         data-demo="check"
                         style={{
                           display: "inline-flex", padding: "9px 18px", borderRadius: 8,
-                          background: phase.picked !== null ? q.accent : "#EBEBEB",
-                          color: phase.picked !== null ? "#ffffff" : "#9A9A9A",
+                          background: phase.picked !== null ? "#C9EFD3" : "#EBEBEB",
+                          color: phase.picked !== null ? "#0A2E1A" : "#9A9A9A",
                           fontSize: 13, fontWeight: 600, cursor: "default",
                           transition: "background 200ms ease",
                         }}
@@ -264,7 +270,7 @@ export function PracticeDemo() {
                         data-demo="next"
                         style={{
                           display: "inline-flex", padding: "9px 18px", borderRadius: 8,
-                          background: "#111111", color: "#ffffff",
+                          background: "#C9EFD3", color: "#0A2E1A",
                           fontSize: 13, fontWeight: 600, cursor: "default",
                         }}
                       >
@@ -274,7 +280,6 @@ export function PracticeDemo() {
                   </div>
                 </div>
 
-                {/* Marker margin */}
                 <div data-demo="margin" style={{ padding: "24px 20px", background: "#F8F4E8" }}>
                   <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 12 }}>
                     Marker margin
@@ -304,8 +309,7 @@ export function PracticeDemo() {
                 </div>
               </div>
 
-              {/* Fake cursor */}
-              {cursorXY && (
+              {cursorXY && !reducedMotion && (
                 <div
                   style={{
                     position: "absolute",
@@ -322,37 +326,43 @@ export function PracticeDemo() {
               )}
             </div>
           </div>
-
-          {/* Laptop base */}
-          <div style={{ background: "linear-gradient(180deg, #3A3A3C 0%, #2C2C2E 100%)", height: 20, borderRadius: "0 0 6px 6px", margin: "0 -2px" }} />
-          <div style={{ background: "linear-gradient(180deg, #4A4A4C 0%, #3A3A3C 100%)", height: 8, borderRadius: "0 0 8px 8px", margin: "0 auto", width: "22%" }} />
         </Reveal>
 
         <Reveal>
-          <div style={{ marginTop: 44, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <div style={{ marginTop: 36, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
             <Link
               href="/practice"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "13px 26px", borderRadius: 12,
+                padding: "13px 26px", borderRadius: 8,
                 background: "#C9EFD3", color: "#0A2E1A",
                 textDecoration: "none", fontSize: 15, fontWeight: 700,
                 letterSpacing: "-0.01em",
                 boxShadow: "0 4px 20px rgba(201,239,211,0.3)",
               }}
             >
-              Try all {QUIZ_TOTAL} questions →
+              See all {QUIZ_TOTAL} questions →
             </Link>
-            <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
-              MCQ, short answer, extended response
-            </span>
           </div>
         </Reveal>
       </div>
 
       <style>{`
         @media (max-width: 760px) {
+          .practice-video {
+            aspect-ratio: auto !important;
+            min-height: 620px !important;
+          }
           .demo-cols { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 520px) {
+          .practice-video {
+            min-height: 700px !important;
+          }
+          .practice-screen > div:nth-child(2) {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
         }
       `}</style>
     </section>

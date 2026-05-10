@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
 import { ScrollLink } from "@/components/ui/ScrollLink";
 
 const LINKS: { href: string; label: string; sectionId?: string }[] = [
-  { href: "/",          label: "Home" },
   { href: "/",          label: "Syllabus",  sectionId: "syllabus" },
   { href: "/practice",  label: "Practice" },
-  { href: "/tutors",    label: "Tutors" },
+  { href: "/",          label: "Tutors",    sectionId: "tutors" },
   { href: "/",          label: "Pricing",   sectionId: "pricing" },
   { href: "/",          label: "Resources", sectionId: "resources" },
   { href: "/",          label: "FAQ",       sectionId: "faq" },
@@ -38,6 +38,14 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.location.pathname !== "/") return;
+    e.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    setOpen(false);
+  };
+
   return (
     <header style={{
       position: "sticky",
@@ -53,15 +61,13 @@ export function Nav() {
       <div style={{
         maxWidth: 1320,
         margin: "0 auto",
-        padding: scrolled ? "10px 28px" : "14px 28px",
+        padding: "14px 28px",
         display: "flex",
-        transition: "padding 300ms ease",
         alignItems: "center",
         justifyContent: "space-between",
         gap: 24,
       }}>
-        {/* Wordmark */}
-        <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+        <Link href="/" onClick={handleLogoClick} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
           <MarkBug size={30} />
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <span style={{
@@ -84,9 +90,8 @@ export function Nav() {
               HSC Business Studies
             </span>
           </div>
-        </a>
+        </Link>
 
-        {/* Desktop nav */}
         <nav style={{ display: "flex", gap: 28, alignItems: "center" }} className="hidden-mobile" aria-label="Main navigation">
           {LINKS.map(({ href, label, sectionId }) =>
             sectionId ? (
@@ -100,7 +105,7 @@ export function Nav() {
                 {label}
               </ScrollLink>
             ) : (
-              <a key={href} href={href} style={{
+              <Link key={href} href={href} style={{
                 fontSize: 14,
                 fontWeight: 500,
                 color: "#1A1A1A",
@@ -108,12 +113,11 @@ export function Nav() {
                 letterSpacing: "-0.01em",
               }}>
                 {label}
-              </a>
+              </Link>
             )
           )}
         </nav>
 
-        {/* CTA + mobile toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <ScrollLink sectionId="enquire" style={pill} className="hidden-mobile">
             Book a free trial lesson →
@@ -177,7 +181,7 @@ export function Nav() {
                     {label}
                   </ScrollLink>
                 ) : (
-                  <a href={href} onClick={() => setOpen(false)} style={{
+                  <Link href={href} onClick={() => setOpen(false)} style={{
                     display: "block",
                     padding: "11px 4px",
                     fontSize: 16,
@@ -187,7 +191,7 @@ export function Nav() {
                     borderBottom: "1px solid rgba(10,10,10,0.06)",
                   }}>
                     {label}
-                  </a>
+                  </Link>
                 )}
               </li>
             ))}

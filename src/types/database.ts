@@ -95,6 +95,16 @@ export type Whitelist = {
   id: string;
   email: string;
   created_at: string;
+  note: string | null;
+};
+
+// CROSS-REVIEW: Claude should verify this
+export type ResourceWhitelist = {
+  id: string;
+  created_at: string;
+  granted_by: string | null;
+  email: string;
+  note: string | null;
 };
 
 export interface Database {
@@ -120,8 +130,18 @@ export interface Database {
       };
       whitelist: {
         Row: Whitelist;
-        Insert: { email: string };
+        Insert: { email: string; note?: string | null };
         Update: Partial<Whitelist>;
+        Relationships: [];
+      };
+      resource_whitelist: {
+        Row: ResourceWhitelist;
+        Insert: {
+          email: string;
+          granted_by?: string | null;
+          note?: string | null;
+        };
+        Update: Partial<ResourceWhitelist>;
         Relationships: [];
       };
     };

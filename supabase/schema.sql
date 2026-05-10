@@ -1,5 +1,5 @@
 -- =========================================================================
--- Acumen HSC Tutoring — Supabase schema
+-- Acumen HSC Tutoring, Supabase schema
 -- Run this on a fresh Supabase project. Idempotent.
 -- =========================================================================
 
@@ -114,13 +114,21 @@ create trigger students_updated_at  before update on public.students  for each r
 create trigger resources_updated_at before update on public.resources for each row execute function public.set_updated_at();
 
 -- ─── Helper: is current session an active student? ────────────────────────
-create or replace function public.is_active_student()
-returns boolean language sql stable security definer set search_path = public as $$
+-- CROSS-REVIEW: Claude should verify this
+create schema if not exists private;
+revoke all on schema private from public;
+grant usage on schema private to authenticated;
+
+create or replace function private.is_active_student()
+returns boolean language sql stable security definer set search_path = public, pg_temp as $$
   select exists (
     select 1 from public.students
     where id = auth.uid() and status = 'active'
   );
 $$;
+
+revoke all on function private.is_active_student() from public, anon;
+grant execute on function private.is_active_student() to authenticated;
 
 -- ─── RLS ──────────────────────────────────────────────────────────────────
 alter table public.leads     enable row level security;
@@ -149,7 +157,9 @@ create policy resources_preview_read
 create policy resources_student_read
   on public.resources for select
   to authenticated
-  using (is_published and public.is_active_student());
+  using (is_published and private.is_active_student());
+
+drop function if exists public.is_active_student();
 
 -- ─── Storage buckets ──────────────────────────────────────────────────────
 -- Run in Supabase dashboard or via storage API if SQL editor doesn't support it
@@ -157,7 +167,7 @@ insert into storage.buckets (id, name, public)
   values ('resources', 'resources', false), ('resource-previews', 'resource-previews', false)
   on conflict (id) do nothing;
 
--- Deny all direct client reads — all downloads go through signed URLs
+-- Deny all direct client reads, all downloads go through signed URLs
 drop policy if exists storage_resources_no_client_read on storage.objects;
 create policy storage_resources_no_client_read
   on storage.objects for select

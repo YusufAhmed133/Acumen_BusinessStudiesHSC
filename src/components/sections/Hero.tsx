@@ -1,6 +1,9 @@
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
 import { HeroCountdown } from "@/components/sections/HeroCountdown";
 
+const HERO_GRADIENT_TEXT = "Taught by Band 6 Graduates";
+const HERO_GRADIENT = "linear-gradient(135deg, #9FDDB4 0%, #F2CF73 31%, #EDA9AD 64%, #A9C8F3 100%)";
+
 export function Hero() {
   return (
     <section
@@ -45,13 +48,13 @@ export function Hero() {
             <span style={{
               display: "block",
               fontSize: "0.72em",
-              background: "linear-gradient(135deg, #72D69B 0%, #F2C94C 30%, #F08C8C 62%, #7EB5F8 100%)",
+              background: HERO_GRADIENT,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
               marginTop: "0.1em",
             }}>
-              Taught by Band 6 Graduates
+              {HERO_GRADIENT_TEXT}
             </span>
           </h1>
 
@@ -65,7 +68,7 @@ export function Hero() {
               fontWeight: 400,
             }}
           >
-            Taught by Band 6 graduates from UNSW, USYD, UTS and Macquarie. Available online and in Sydney for Year 11 and Year 12.
+            Taught by Band 6 graduates who know the HSC Business Studies exam. Available online and in Sydney for Year 11 and Year 12.
           </p>
 
           <HeroCountdown />
