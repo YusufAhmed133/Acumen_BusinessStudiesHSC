@@ -7,8 +7,8 @@ import { ScrollLink } from "@/components/ui/ScrollLink";
 const LINKS: { href: string; label: string; sectionId?: string }[] = [
   { href: "/",          label: "Syllabus",  sectionId: "syllabus" },
   { href: "/practice",  label: "Practice" },
-  { href: "/",          label: "Tutors",    sectionId: "tutors" },
   { href: "/",          label: "Pricing",   sectionId: "pricing" },
+  { href: "/",          label: "Reviews",   sectionId: "reviews" },
   { href: "/",          label: "Resources", sectionId: "resources" },
   { href: "/",          label: "FAQ",       sectionId: "faq" },
 ];

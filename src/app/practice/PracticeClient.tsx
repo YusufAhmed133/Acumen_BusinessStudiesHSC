@@ -407,8 +407,11 @@ export function PracticeClient({ initialQuestions, totalCount, filterCounts }: P
       }}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {(["all", "operations", "marketing", "finance", "human_resources"] as const).map((t) => {
-            const label = t === "all" ? "All topics" : TOPICS_MAP[t].label;
+            const topicMeta = t === "all" ? null : TOPICS_MAP[t];
+            const label = topicMeta?.label ?? "All topics";
             const active = topic === t;
+            const accent = topicMeta?.accent ?? "#111111";
+            const tint = topicMeta?.tint ?? "#EBEBEB";
             return (
               <button
                 key={t}
@@ -416,9 +419,9 @@ export function PracticeClient({ initialQuestions, totalCount, filterCounts }: P
                 aria-pressed={active}
                 style={{
                   padding: "7px 14px", borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: "pointer",
-                  background: active ? "#111111" : "#F0F0EE",
-                  color: active ? "#ffffff" : "#3A3A3A",
-                  border: "1px solid rgba(0,0,0,0.08)", transition: "all 160ms ease",
+                  background: active ? accent : tint,
+                  color: active ? "#ffffff" : accent,
+                  border: "none", transition: "all 160ms ease",
                 }}
               >
                 {label}
