@@ -8,7 +8,7 @@ export type FaqItem = {
 export const FAQS: FaqItem[] = [
   {
     q: "Is the trial really free?",
-    a: "One full lesson at no cost, no credit card required, and if it is not the right fit there is no obligation and we will not follow up.",
+    a: "One full 1-hour lesson at no cost, no credit card required, and if it is not the right fit there is no obligation and we will not follow up.",
   },
   {
     q: "What's included in the price?",

@@ -5,7 +5,7 @@ import { PRICING_PLANS, type PricingPlan } from "@/lib/pricing";
 const INCLUSIONS = [
   {
     t: "Weekly lesson",
-    d: "Small group capped at 4. Live syllabus walkthrough plus timed practice every session.",
+    d: "1-hour lesson, small group capped at 4. Live syllabus walkthrough plus timed practice every session.",
   },
   {
     t: "24-hour question line",

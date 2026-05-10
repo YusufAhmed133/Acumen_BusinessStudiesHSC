@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PRIVATE_PLAN, SMALL_GROUP_PLAN, TERM_SESSION_COUNT } from "@/lib/pricing";
+import { PRIVATE_PLAN, SESSION_DURATION_LABEL, SMALL_GROUP_PLAN, TERM_SESSION_COUNT } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -49,8 +49,8 @@ export default function TermsPage() {
 
       <h2 style={S.h2}>2. Fees and Inclusions</h2>
       <p style={S.p}>
-        Current rates are {SMALL_GROUP_PLAN.sessionPrice} per weekly small-group session, {SMALL_GROUP_PLAN.termPrice} per{" "}
-        {TERM_SESSION_COUNT}-session small-group term, {PRIVATE_PLAN.sessionPrice} per weekly private session, or{" "}
+        Current rates are {SMALL_GROUP_PLAN.sessionPrice} per {SESSION_DURATION_LABEL} weekly small-group session, {SMALL_GROUP_PLAN.termPrice} per{" "}
+        {TERM_SESSION_COUNT}-session small-group term, {PRIVATE_PLAN.sessionPrice} per {SESSION_DURATION_LABEL} weekly private session, or{" "}
         {PRIVATE_PLAN.termPrice} per {TERM_SESSION_COUNT}-session private term. Package inclusions are as described on our
         pricing section and confirmed at the time of enrolment.
       </p>
