@@ -14,13 +14,13 @@ const STARS = (
 const REVIEWS = [
   {
     quote:
-      "My daughter was struggling to turn Business Studies content into proper exam responses. Acumen helped her understand how to structure her answers and use the syllabus more clearly. The weekly essay feedback was especially useful because she knew exactly what to improve before her next assessment.",
+      "My daughter was struggling to turn Business Studies content into proper exam responses. Acumen helped her understand how to structure her answers and use the syllabus more clearly. The feedback on her practice responses was especially useful because she knew exactly what to improve before her next assessment.",
     name: "Chloe C.",
     school: "Parent of Year 12 student",
   },
   {
     quote:
-      "Acumen made Business Studies feel much more manageable. The lessons were clear, and the practice questions helped me understand what the markers were actually looking for. The essay feedback was probably the most helpful part because it showed me where I was being too vague.",
+      "Acumen made Business Studies feel much more manageable. The lessons were clear, and the practice questions helped me understand what the markers were actually looking for. The response feedback was probably the most helpful part because it showed me where I was being too vague.",
     name: "Divya A.",
     school: "Year 12 student",
   },
@@ -32,7 +32,7 @@ const REVIEWS = [
   },
   {
     quote:
-      "I was already doing okay in Business Studies but wanted to push into the top band. Acumen helped me make my answers more specific and more linked to the syllabus. The marked essays were really helpful because the feedback was clear and easy to apply.",
+      "I was already doing okay in Business Studies but wanted to push into the top band. Acumen helped me make my answers more specific and more linked to the syllabus. The marked practice responses were really helpful because the feedback was clear and easy to apply.",
     name: "Sofia F.",
     school: "Year 12 student",
   },

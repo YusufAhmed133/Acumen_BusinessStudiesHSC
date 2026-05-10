@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Acumen HSC",
   },
   description:
-    "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
+    "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, timed HSC practice, 24-hour question line. Year 11 & 12. First lesson free.",
   keywords: [
     "HSC Business Studies tutor Sydney",
     "HSC Business Studies tutoring",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "HSC Business Studies classes",
     "small group HSC tutoring Sydney",
     "Year 11 Business Studies tutor",
-    "HSC Band 6 essay marking",
+    "HSC Business Studies past papers",
   ],
   alternates: {
     canonical: "/",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
     description:
-      "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
+      "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, timed HSC practice, 24-hour question line. Year 11 & 12. First lesson free.",
     images: [
       {
         url: "/og-image.png",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Acumen HSC | Band 6 Business Studies Tutoring Sydney",
     description:
-      "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, live essay marking, 24-hour question line. Year 11 & 12. First lesson free.",
+      "Band 6 HSC Business Studies tutoring in Sydney. Small-group classes, timed HSC practice, 24-hour question line. Year 11 & 12. First lesson free.",
     images: ["/og-image.png"],
   },
   verification: {
