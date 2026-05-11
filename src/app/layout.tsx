@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 const LOCAL_BUSINESS_JSON = toJsonLd({
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "EducationalOrganization"],
-  "@id": `${SITE_URL}/#business`,
+  "@id": SITE_URL,
   name: "Acumen HSC",
   description:
     "HSC Business Studies tutor in Sydney offering small-group tutoring for Year 11 and 12 students. Serving Sydney CBD and online.",

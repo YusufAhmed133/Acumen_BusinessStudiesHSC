@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { leadSchema } from "@/lib/schemas";
 import { supabaseConfigured, createServiceRoleClient } from "@/lib/supabase/server";
@@ -166,14 +166,12 @@ export async function POST(request: NextRequest) {
     ip_hash: hashIp(ip),
   };
 
-  let leadId: string | null = null;
-  if (supabaseConfigured()) {
-    leadId = await tryInsertSupabase(payload);
-  }
+  const [leadId, emailSent] = await Promise.all([
+    supabaseConfigured() ? tryInsertSupabase(payload) : Promise.resolve(null),
+    sendEmail({ name, email: payload.email, phone, year_group, message }),
+  ]);
 
-  const emailSent = await sendEmail({ name, email: payload.email, phone, year_group, message });
-
-  await notifyWebhook({
+  after(() => notifyWebhook({
     name: escapeSheetFormula(name),
     email: escapeSheetFormula(payload.email),
     phone: escapeSheetFormula(phone),
@@ -182,12 +180,12 @@ export async function POST(request: NextRequest) {
     submitted_at: new Date().toISOString(),
     id: leadId,
     source: payload.source,
-  });
+  }));
 
-  const ok = emailSent || leadId !== null || process.env.NODE_ENV === "development";
+  const ok = emailSent && leadId !== null;
   if (!ok) {
     return NextResponse.json(
-      { error: "We couldn't save your details. Please email hello@acumenhsc.com.au" },
+      { error: "We couldn't save your details or send the email. Please email hello@acumenhsc.com.au" },
       { status: 503 }
     );
   }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { PRICING_PLANS, type PricingPlan } from "@/lib/pricing";
+import { SECTION_ROUTE_MAP } from "@/lib/section-routes";
 
 const INCLUSIONS = [
   {
@@ -159,7 +160,7 @@ function PriceCard({
       {/* CTA */}
       <div style={{ padding: "12px 20px" }}>
         <Link
-          href="/#enquire"
+          href={SECTION_ROUTE_MAP.enquire.href}
           prefetch={false}
           style={{
             display: "block",

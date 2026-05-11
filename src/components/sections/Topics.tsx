@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 
 const TOPICS = [
@@ -91,8 +92,9 @@ export function Topics() {
                   {t.label}
                 </h3>
 
-                <a
+                <Link
                   href="/practice"
+                  prefetch={false}
                   style={{
                     display: "inline-block",
                     padding: "10px 18px",
@@ -108,7 +110,7 @@ export function Topics() {
                   }}
                 >
                   Practice questions →
-                </a>
+                </Link>
               </div>
             </Reveal>
           ))}
@@ -119,8 +121,9 @@ export function Topics() {
             <span style={{ fontSize: 15, color: "#3A3A3A" }}>
               Try real exam questions from each topic.
             </span>
-            <a
+            <Link
               href="/practice"
+              prefetch={false}
               style={{
                 fontSize: 14,
                 fontWeight: 600,
@@ -132,7 +135,7 @@ export function Topics() {
               }}
             >
               Practice now →
-            </a>
+            </Link>
           </div>
         </Reveal>
       </div>

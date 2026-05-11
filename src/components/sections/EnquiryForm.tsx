@@ -93,15 +93,18 @@ export function EnquiryForm() {
           message,
         }),
       });
-      if (!res.ok) throw new Error("Failed to submit");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null) as { error?: string } | null;
+        throw new Error(data?.error ?? "Something went wrong. Please call us on 0470 665 141.");
+      }
       const analyticsWindow = window as Window & {
         gtag?: (command: "event", eventName: string, params?: Record<string, string>) => void;
       };
       analyticsWindow.gtag?.("event", "enquiry_submitted", { year_group: f.year });
       setF(INITIAL_FIELDS);
       setSuccess(true);
-    } catch {
-      setError("Something went wrong. Please call us on 0470 665 141.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please call us on 0470 665 141.");
     } finally {
       setLoading(false);
     }
@@ -109,10 +112,40 @@ export function EnquiryForm() {
 
   if (success) {
     return (
-      <div style={formShell} role="status" aria-live="polite">
+      <div
+        style={{
+          ...formShell,
+          background: "#C9EFD3",
+          border: "1px solid #B8E4C4",
+          boxShadow: "0 8px 34px rgba(31,107,64,0.14)",
+        }}
+        role="status"
+        aria-live="polite"
+      >
+        <div
+          style={{
+            width: 44,
+            height: 44,
+            borderRadius: 999,
+            background: "#ffffff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
+            <path
+              d="M5 11l4.5 4.5 7.5-8"
+              stroke="#1B6038"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
         <div style={{
-          fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
-          textTransform: "uppercase", color: "#5C5C5C",
+          fontSize: 11, fontWeight: 700, letterSpacing: "0.2em",
+          textTransform: "uppercase", color: "#1B6038",
         }}>
           Enquiry received
         </div>
@@ -121,12 +154,12 @@ export function EnquiryForm() {
           fontSize: "clamp(24px, 3vw, 32px)",
           lineHeight: 1.08,
           letterSpacing: "-0.04em",
-          color: "#111111",
+          color: "#0A2E1A",
           margin: 0,
         }}>
           We will reply within one business day.
         </h2>
-        <p style={{ fontSize: 14, lineHeight: 1.65, color: "#3A3A3A", margin: "2px 0 10px" }}>
+        <p style={{ fontSize: 14, lineHeight: 1.65, color: "#0A2E1A", margin: "2px 0 10px" }}>
           Keep an eye on the parent email you entered. If it is urgent, call 0470 665 141.
         </p>
         <button
@@ -138,11 +171,11 @@ export function EnquiryForm() {
           style={{
             fontWeight: 600, fontSize: 14, letterSpacing: "-0.01em",
             padding: "12px 16px", borderRadius: 999,
-            background: "#111111", color: "#ffffff", border: "none",
+            background: "#ffffff", color: "#0A2E1A", border: "1px solid #B8E4C4",
             cursor: "pointer",
           }}
         >
-          Send another enquiry
+          Submit another enquiry
         </button>
       </div>
     );

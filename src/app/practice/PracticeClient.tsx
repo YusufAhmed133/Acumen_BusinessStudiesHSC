@@ -4,6 +4,19 @@ import Link from "next/link";
 import { TOPICS_MAP, type TopicKey, type McqQuestion, type ShortQuestion, type Question } from "@/lib/quiz-types";
 
 type UnlockResult = { ok: true } | { ok: false; message: string };
+type TypeFilter = "all" | "mcq" | "short" | "extended";
+type PracticeClientProps = {
+  initialQuestions: Question[];
+  totalCount: number;
+  filterCounts: Record<string, number>;
+};
+
+const TYPE_LABELS: Record<TypeFilter, string> = {
+  all: "All types",
+  mcq: "Multiple Choice",
+  short: "Short Answer",
+  extended: "Extended Response",
+};
 
 function EmailGate({
   onUnlock,
@@ -174,7 +187,7 @@ function GateCard({ onUnlock, remaining }: { onUnlock: () => void; remaining: nu
       </button>
       <div style={{ marginTop: 14 }}>
         <Link
-          href="/#enquire"
+          href="/enquire"
           prefetch={false}
           style={{
             display: "inline-block", padding: "11px 24px", borderRadius: 999,
@@ -190,19 +203,44 @@ function GateCard({ onUnlock, remaining }: { onUnlock: () => void; remaining: nu
   );
 }
 
-type TypeFilter = "all" | "mcq" | "short" | "extended";
-type PracticeClientProps = {
-  initialQuestions: Question[];
-  totalCount: number;
-  filterCounts: Record<string, number>;
-};
+function formatStemForDisplay(text: string): string {
+  if (text.length < 220 && !text.includes("[") && !text.includes(" / ")) {
+    return text;
+  }
 
-const TYPE_LABELS: Record<TypeFilter, string> = {
-  all: "All types",
-  mcq: "Multiple Choice",
-  short: "Short Answer",
-  extended: "Extended Response",
-};
+  return text
+    .replace(/\. (SWOT:|Features of the business include:|The business has provided|Below is|You have been hired|In your report:)/g, ".\n\n$1")
+    .replace(/ (Strengths,|Weaknesses,|Opportunities,|Threats,|Role:|Responsibilities:|General information:|Hours of work are)/g, "\n$1")
+    .replace(/ \[/g, "\n\n[")
+    .replace(/\] /g, "]\n\n")
+    .replace(/ \/ /g, " /\n")
+    .replace(/; /g, ";\n")
+    .replace(/\n{3,}/g, "\n\n");
+}
+
+function QuestionStem({ text }: { text: string }) {
+  const formatted = formatStemForDisplay(text);
+  const isLong = formatted !== text;
+
+  return (
+    <p
+      style={{
+        fontSize: 16,
+        lineHeight: isLong ? 1.78 : 1.65,
+        color: "#1A1A1A",
+        margin: "0 0 20px",
+        fontWeight: 500,
+        whiteSpace: "pre-line",
+        background: isLong ? "#FFF9E8" : "transparent",
+        border: isLong ? "1px solid rgba(10,10,10,0.08)" : "none",
+        borderRadius: isLong ? 12 : 0,
+        padding: isLong ? "16px 18px" : 0,
+      }}
+    >
+      {formatted}
+    </p>
+  );
+}
 
 function QuestionCard({ q }: { q: Question }) {
   const [picked, setPicked] = useState<number | null>(null);
@@ -242,9 +280,7 @@ function QuestionCard({ q }: { q: Question }) {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 340px" }} className="qcard-cols">
         {/* Question */}
         <div style={{ padding: "28px 32px" }}>
-          <p style={{ fontSize: 16, lineHeight: 1.65, color: "#1A1A1A", margin: "0 0 20px", fontWeight: 500 }}>
-            {q.stem}
-          </p>
+          <QuestionStem text={q.stem} />
 
           {q.type === "mcq" && (
             <div style={{ display: "grid", gap: 8 }}>
@@ -387,7 +423,6 @@ function QuestionCard({ q }: { q: Question }) {
 }
 
 const PAGE_SIZE = 20;
-
 type AccessStatus = "preview" | "unlocked";
 
 function filterKey(topic: TopicKey | "all", type: TypeFilter): string {

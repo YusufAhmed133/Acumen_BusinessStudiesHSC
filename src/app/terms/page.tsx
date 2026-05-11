@@ -60,9 +60,7 @@ export default function TermsPage() {
         Invoices are issued within one week of the end of each month and must be paid within 21 days of the invoice date.
         If payment is not received within 21 days, an additional $15 invoice handling fee will apply.
       </p>
-      <p style={S.p}>
-        Payment is accepted by card only. A 1% card processing fee applies to all transactions.
-      </p>
+      <p style={S.p}>Payment is accepted by card only.</p>
 
       <h2 style={S.h2}>4. Fee Changes</h2>
       <p style={S.p}>

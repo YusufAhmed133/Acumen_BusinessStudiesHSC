@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { SECTION_ROUTE_MAP } from "@/lib/section-routes";
 
 const PACKS = [
   {
@@ -227,7 +228,7 @@ export function ResourcesTeaser() {
         <Reveal delay={340}>
           <div style={{ marginTop: 32 }}>
             <Link
-              href="/#enquire"
+              href={SECTION_ROUTE_MAP.enquire.href}
               prefetch={false}
               style={{
                 display: "inline-block",

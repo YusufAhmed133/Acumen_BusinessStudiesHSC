@@ -97,7 +97,7 @@ LocalBusiness schema is injected globally in `layout.tsx`. Course and FAQPage sc
 
 ### 2.1 LocalBusiness + EducationalOrganization
 
-**`@id`:** `https://acumenhsc.com.au/#business`
+**`@id`:** `https://acumenhsc.com.au`
 
 | Property | Value |
 |---|---|
@@ -133,7 +133,7 @@ LocalBusiness schema is injected globally in `layout.tsx`. Course and FAQPage sc
 
 ### 2.2 Course
 
-**`@id`:** `https://acumenhsc.com.au/#course`
+**`@id`:** `https://acumenhsc.com.au/syllabus`
 
 | Property | Value |
 |---|---|
@@ -143,8 +143,8 @@ LocalBusiness schema is injected globally in `layout.tsx`. Course and FAQPage sc
 | `url` | `https://acumenhsc.com.au` |
 | `datePublished` | `2026-01-01` |
 | `dateModified` | `2026-05-10` |
-| `provider` | `@id` ref to `#business` |
-| `instructor` | `Organization` `@id` ref to `#business` |
+| `provider` | `@id` ref to `https://acumenhsc.com.au` |
+| `instructor` | `Organization` `@id` ref to `https://acumenhsc.com.au` |
 | `educationalLevel` | `Year 11–12 (HSC)` |
 | `teaches` | 6 `DefinedTerm` entries (Operations, Marketing, Finance, HR, essay technique, past papers) |
 | `inLanguage` | `en-AU` |

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
+import { SECTION_ROUTE_MAP } from "@/lib/section-routes";
 
-const LINKS: { href: string; label: string; sectionId?: string }[] = [
-  { href: "/",          label: "Syllabus",  sectionId: "syllabus" },
-  { href: "/practice",  label: "Practice" },
-  { href: "/",          label: "Pricing",   sectionId: "pricing" },
-  { href: "/",          label: "Reviews",   sectionId: "reviews" },
-  { href: "/",          label: "Resources", sectionId: "resources" },
-  { href: "/",          label: "FAQ",       sectionId: "faq" },
+const LINKS: { href: string; label: string }[] = [
+  SECTION_ROUTE_MAP.syllabus,
+  { href: "/practice", label: "Practice" },
+  SECTION_ROUTE_MAP.pricing,
+  SECTION_ROUTE_MAP.reviews,
+  SECTION_ROUTE_MAP.resources,
+  SECTION_ROUTE_MAP.faq,
 ];
 
 const pill: React.CSSProperties = {
@@ -71,24 +72,21 @@ export function Nav() {
         </Link>
 
         <nav style={{ display: "flex", gap: 28, alignItems: "center" }} className="hidden-mobile" aria-label="Main navigation">
-          {LINKS.map(({ href, label, sectionId }) => {
-            const targetHref = sectionId ? `${href}#${sectionId}` : href;
-            return (
-              <Link key={label} href={targetHref} prefetch={false} style={{
-                fontSize: 14,
-                fontWeight: 500,
-                color: "#1A1A1A",
-                textDecoration: "none",
-                letterSpacing: "-0.01em",
-              }}>
-                {label}
-              </Link>
-            );
-          })}
+          {LINKS.map(({ href, label }) => (
+            <Link key={label} href={href} prefetch={false} style={{
+              fontSize: 14,
+              fontWeight: 500,
+              color: "#1A1A1A",
+              textDecoration: "none",
+              letterSpacing: "-0.01em",
+            }}>
+              {label}
+            </Link>
+          ))}
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <Link href="/#enquire" prefetch={false} style={pill} className="hidden-mobile">
+          <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch={false} style={pill} className="hidden-mobile">
             Book a free trial lesson →
           </Link>
 
@@ -125,26 +123,23 @@ export function Nav() {
               aria-label="Mobile navigation"
             >
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 2 }}>
-                {LINKS.map(({ href, label, sectionId }) => {
-                  const targetHref = sectionId ? `${href}#${sectionId}` : href;
-                  return (
-                    <li key={label}>
-                      <Link href={targetHref} prefetch={false} style={{
-                        display: "block",
-                        padding: "11px 4px",
-                        fontSize: 16,
-                        fontWeight: 500,
-                        color: "#1A1A1A",
-                        textDecoration: "none",
-                        borderBottom: "1px solid rgba(10,10,10,0.06)",
-                      }}>
-                        {label}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {LINKS.map(({ href, label }) => (
+                  <li key={label}>
+                    <Link href={href} prefetch={false} style={{
+                      display: "block",
+                      padding: "11px 4px",
+                      fontSize: 16,
+                      fontWeight: 500,
+                      color: "#1A1A1A",
+                      textDecoration: "none",
+                      borderBottom: "1px solid rgba(10,10,10,0.06)",
+                    }}>
+                      {label}
+                    </Link>
+                  </li>
+                ))}
                 <li style={{ marginTop: 12 }}>
-                  <Link href="/#enquire" prefetch={false} style={{ ...pill, display: "block", textAlign: "center" }}>
+                  <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch={false} style={{ ...pill, display: "block", textAlign: "center" }}>
                     Book a free trial lesson →
                   </Link>
                 </li>

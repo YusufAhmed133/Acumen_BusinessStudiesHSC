@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
+import { SECTION_ROUTE_MAP } from "@/lib/section-routes";
 
 export function Footer() {
   return (
@@ -51,20 +52,17 @@ export function Footer() {
           alignItems: "center",
         }}>
           {[
-            { href: "/",         label: "Syllabus", sectionId: "syllabus" },
-            { href: "/practice", label: "Practice", sectionId: undefined },
-            { href: "/",         label: "Pricing",  sectionId: "pricing" },
-            { href: "/",         label: "Reviews",  sectionId: "reviews" },
-            { href: "/",         label: "Resources", sectionId: "resources" },
-            { href: "/",         label: "FAQ",      sectionId: "faq" },
-          ].map(({ href, label, sectionId }) => {
-            const targetHref = sectionId ? `${href}#${sectionId}` : href;
-            return (
-              <Link key={href + label} href={targetHref} prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>
-                {label}
-              </Link>
-            );
-          })}
+            SECTION_ROUTE_MAP.syllabus,
+            { href: "/practice", label: "Practice" },
+            SECTION_ROUTE_MAP.pricing,
+            SECTION_ROUTE_MAP.reviews,
+            SECTION_ROUTE_MAP.resources,
+            SECTION_ROUTE_MAP.faq,
+          ].map(({ href, label }) => (
+            <Link key={href + label} href={href} prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
 

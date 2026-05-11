@@ -13,7 +13,7 @@ export async function checkRateLimit(
       console.error("[ratelimit] Upstash Redis env vars are not configured");
       warnedMissingRateLimit = true;
     }
-    return process.env.NODE_ENV === "production";
+    return false;
   }
   const ratelimit = new Ratelimit({
     redis: Redis.fromEnv(),

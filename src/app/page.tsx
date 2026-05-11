@@ -9,6 +9,7 @@ import { PRICING_PLANS } from "@/lib/pricing";
 import { Reviews } from "@/components/sections/Reviews";
 import { ResourcesTeaser } from "@/components/sections/ResourcesTeaser";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { CanonicalizeSectionHash } from "@/components/ui/CanonicalizeSectionHash";
 
 const PracticeDemo = dynamic(() => import("@/components/sections/PracticeDemo").then((m) => m.PracticeDemo));
 
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
 const COURSE_JSON = toJsonLd({
   "@context": "https://schema.org",
   "@type": "Course",
-  "@id": `${SITE_URL}/#course`,
+  "@id": `${SITE_URL}/syllabus`,
   name: "HSC Business Studies Tutoring, Band 6 Program",
   description: "Small-group HSC Business Studies tutoring for Year 11 and 12 students in Sydney. Covers all four syllabus topics: Operations, Marketing, Finance, and Human Resources. Taught by Band 6 graduates.",
   url: SITE_URL,
@@ -52,7 +53,7 @@ const COURSE_JSON = toJsonLd({
   dateModified: "2026-05-10",
   image: `${SITE_URL}/og-image.png`,
   provider: {
-    "@id": `${SITE_URL}/#business`,
+    "@id": SITE_URL,
   },
   offers: PRICING_PLANS.flatMap((plan) => [
     {
@@ -76,7 +77,7 @@ const COURSE_JSON = toJsonLd({
   ]),
   instructor: {
     "@type": "Organization",
-    "@id": `${SITE_URL}/#business`,
+    "@id": SITE_URL,
   },
   educationalLevel: "Year 11-12 (HSC)",
   teaches: [
@@ -121,6 +122,7 @@ const FAQ_JSON = toJsonLd({
 export default function HomePage() {
   return (
     <>
+      <CanonicalizeSectionHash />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: COURSE_JSON }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON }} />
       <Hero />

@@ -33,6 +33,6 @@ export const FAQS: FaqItem[] = [
   {
     q: "Do your prices include GST?",
     // CROSS-REVIEW: Claude should verify this
-    a: "Yes, all prices shown on this site are inclusive of GST. Card payments include a 1% processing fee shown on the invoice.",
+    a: "Yes, all prices shown on this site are inclusive of GST.",
   },
 ];
