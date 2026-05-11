@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     if (!data) {
       return NextResponse.json({
         ok: false,
-        message: "Access is locked for now. Use the email your tutor added, or book a free trial so we can unlock it for you.",
+        message: "This email isn't recognised as an active student account. Please contact your tutor.",
       });
     }
     return practiceAccessResponse(email);

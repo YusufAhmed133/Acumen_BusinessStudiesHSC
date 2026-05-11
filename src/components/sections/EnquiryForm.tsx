@@ -11,6 +11,8 @@ type Fields = {
   concern: string;
 };
 
+type SubmittedEnquiry = Pick<Fields, "parent" | "student">;
+
 const INITIAL_FIELDS: Fields = {
   parent: "",
   student: "",
@@ -65,6 +67,7 @@ export function EnquiryForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [submitted, setSubmitted] = useState<SubmittedEnquiry | null>(null);
 
   const set = <K extends keyof Fields>(k: K, v: Fields[K]) =>
     setF((s) => ({ ...s, [k]: v }));
@@ -101,6 +104,10 @@ export function EnquiryForm() {
         gtag?: (command: "event", eventName: string, params?: Record<string, string>) => void;
       };
       analyticsWindow.gtag?.("event", "enquiry_submitted", { year_group: f.year });
+      setSubmitted({
+        parent: f.parent.trim(),
+        student: f.student.trim(),
+      });
       setF(INITIAL_FIELDS);
       setSuccess(true);
     } catch (err) {
@@ -111,6 +118,9 @@ export function EnquiryForm() {
   };
 
   if (success) {
+    const parentName = submitted?.parent || "there";
+    const studentName = submitted?.student || "your child";
+
     return (
       <div
         style={{
@@ -118,31 +128,11 @@ export function EnquiryForm() {
           background: "#C9EFD3",
           border: "1px solid #B8E4C4",
           boxShadow: "0 8px 34px rgba(31,107,64,0.14)",
+          gap: 12,
         }}
         role="status"
         aria-live="polite"
       >
-        <div
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 999,
-            background: "#ffffff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
-            <path
-              d="M5 11l4.5 4.5 7.5-8"
-              stroke="#1B6038"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
         <div style={{
           fontSize: 11, fontWeight: 700, letterSpacing: "0.2em",
           textTransform: "uppercase", color: "#1B6038",
@@ -151,21 +141,22 @@ export function EnquiryForm() {
         </div>
         <h2 style={{
           fontWeight: 700,
-          fontSize: "clamp(24px, 3vw, 32px)",
-          lineHeight: 1.08,
-          letterSpacing: "-0.04em",
+          fontSize: 24,
+          lineHeight: 1.15,
+          letterSpacing: "-0.02em",
           color: "#0A2E1A",
           margin: 0,
         }}>
-          We will reply within one business day.
+          Thanks, {parentName}.
         </h2>
-        <p style={{ fontSize: 14, lineHeight: 1.65, color: "#0A2E1A", margin: "2px 0 10px" }}>
-          Keep an eye on the parent email you entered. If it is urgent, call 0470 665 141.
+        <p style={{ fontSize: 14, lineHeight: 1.6, color: "#0A2E1A", margin: "0 0 8px" }}>
+          We will contact you within 1 business day to organise a suitable time for a free lesson with {studentName}.
         </p>
         <button
           type="button"
           onClick={() => {
             setError("");
+            setSubmitted(null);
             setSuccess(false);
           }}
           style={{
