@@ -1,4 +1,5 @@
-import Image from "next/image";
+// Native img is intentional: these are fixed-size, pre-compressed ticker logos and Next image srcsets were larger.
+/* eslint-disable @next/next/no-img-element */
 
 const SCHOOLS = [
   { name: "Sydney Boys High School", src: "/logos/sydney-boys.webp" },
@@ -59,6 +60,18 @@ export function Trust() {
       <p className="sr-only">
         Trusted by students from: {SCHOOLS.map(s => s.name).join(", ")}.
       </p>
+      <p
+        style={{
+          maxWidth: 1320,
+          margin: "-8px auto 18px",
+          padding: "0 28px",
+          fontSize: 11,
+          lineHeight: 1.5,
+          color: "#7A7A7A",
+        }}
+      >
+        School names indicate student attendance only. No school affiliation or endorsement is implied.
+      </p>
       <div className="ticker" aria-hidden="true">
         <div className="ticker-track">
           {ITEMS.map((s, i) => (
@@ -80,12 +93,14 @@ export function Trust() {
                   flex: "0 0 56px",
                 }}
               >
-                <Image
+                <img
                   src={s.src}
                   alt=""
-                  fill
-                  sizes="56px"
-                  style={{ objectFit: "contain" }}
+                  width={56}
+                  height={36}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />
               </span>
               <span style={{

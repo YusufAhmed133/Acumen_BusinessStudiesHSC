@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { ScrollLink } from "@/components/ui/ScrollLink";
 import { PRICING_PLANS, type PricingPlan } from "@/lib/pricing";
 
 const INCLUSIONS = [
@@ -17,7 +17,7 @@ const INCLUSIONS = [
   },
   {
     t: "Past-paper bank",
-    d: "Every Section I, II, III and IV question from 2010 onward, indexed by syllabus dot point.",
+    d: "Every Section I, II, III and IV question in the 2022-2025 bank, indexed by syllabus dot point.",
   },
   {
     t: "Mock exam + report",
@@ -158,8 +158,9 @@ function PriceCard({
 
       {/* CTA */}
       <div style={{ padding: "12px 20px" }}>
-        <ScrollLink
-          sectionId="enquire"
+        <Link
+          href="/#enquire"
+          prefetch={false}
           style={{
             display: "block",
             textAlign: "center",
@@ -174,7 +175,7 @@ function PriceCard({
           }}
         >
           Book a free trial lesson →
-        </ScrollLink>
+        </Link>
         <div
           style={{
             marginTop: 6,

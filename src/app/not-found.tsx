@@ -20,6 +20,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
+        prefetch={false}
         style={{ display: "inline-block", background: "#111", color: "#fff", padding: "12px 24px", borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: "none" }}
       >
         Back to homepage

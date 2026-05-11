@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const HSC_DATE = new Date("2026-10-29T09:25:00+11:00");
+// Business Studies written exam, not the first day of the overall HSC exam block.
+const HSC_DATE = new Date("2026-10-26T09:25:00+11:00");
 
 export function HeroCountdown() {
   const daysRef = useRef<HTMLSpanElement>(null);
@@ -48,7 +49,7 @@ export function HeroCountdown() {
       className="hero-countdown"
       role="timer"
       aria-live="off"
-      aria-label="HSC 2026 countdown"
+      aria-label="HSC Business Studies 2026 exam countdown"
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -69,7 +70,7 @@ export function HeroCountdown() {
           color: "#C9EFD3",
         }}
       >
-        HSC 2026
+        Business Studies HSC 2026
       </span>
       <span
         style={{

@@ -45,12 +45,15 @@ html {
   background: #ffffff;
   color: #111111;
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 body { min-height: 100dvh; }
+
+[id] { scroll-margin-top: 96px; }
 
 ::selection { background: #0A0A0A; color: #FFFCF4; }
 
@@ -79,7 +82,7 @@ button { font-family: inherit; }
 /* ── Scroll progress bar, CSS Scroll-Driven where supported */
 @supports (animation-timeline: scroll()) {
   .scroll-progress-bar {
-    transform: none !important; /* JS fallback overridden */
+    transform: none !important;
     animation: scroll-fill linear both;
     animation-timeline: scroll(root block);
   }
@@ -139,16 +142,11 @@ button { font-family: inherit; }
   border: 0;
 }
 
-/* ── Reveal fade-up + 3D entrance ────────────────────────── */
+/* ── Reveal, visible by default to avoid hydration-blocked content ─────── */
 .reveal {
-  opacity: 0;
-  transform: perspective(1100px) translateY(32px) rotateX(5deg);
-  transform-origin: center top;
-  transition: opacity 680ms cubic-bezier(.2,.7,.2,1), transform 680ms cubic-bezier(.2,.7,.2,1);
-}
-.reveal.shown {
   opacity: 1;
-  transform: perspective(1100px) translateY(0) rotateX(0deg);
+  transform: none;
+  transform-origin: center top;
 }
 
 /* ── Focus ───────────────────────────────────────────────── */
@@ -157,9 +155,15 @@ button { font-family: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .ticker-track { animation: none !important; }
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
+  .review-ticker {
+    overflow-x: auto !important;
+    -webkit-mask-image: none !important;
+            mask-image: none !important;
+  }
+  .review-track {
+    animation: none !important;
+  }
+  .review-track > :nth-child(n+7) {
+    display: none !important;
   }
 }

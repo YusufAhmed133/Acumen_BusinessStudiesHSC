@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
-import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 import { PRICING_PLANS } from "@/lib/pricing";
 
 const SITE_URL = "https://acumenhsc.com.au";
@@ -161,29 +157,65 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={GeistSans.variable}>
       <head>
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://va.vercel-scripts.com" />
         <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LOCAL_BUSINESS_JSON }} />
       </head>
       <body style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
-        <ScrollProgress />
+        <div
+          aria-hidden
+          className="scroll-progress-bar"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 2,
+            background: "linear-gradient(90deg, #1F6B40, #2A4F94)",
+            transformOrigin: "left center",
+            transform: "scaleX(0)",
+            zIndex: 9999,
+            pointerEvents: "none",
+          }}
+        />
         <a href="#main" className="skip-link">Skip to content</a>
         <Nav />
         <main id="main" style={{ flex: 1 }}>
           {children}
         </main>
         <Footer />
-        <SpeedInsights />
-        <Analytics />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18150257568" strategy="lazyOnload" />
-        <Script id="gtag-config" strategy="lazyOnload">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'AW-18150257568');
-        `}</Script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(){
+                var id = 'AW-18150257568';
+                function loadTag(){
+                  if (window.__acumenGtagLoaded) return;
+                  window.__acumenGtagLoaded = true;
+                  window.dataLayer = window.dataLayer || [];
+                  window.gtag = function(){ window.dataLayer.push(arguments); };
+                  var s = document.createElement('script');
+                  s.async = true;
+                  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+                  document.head.appendChild(s);
+                  window.gtag('js', new Date());
+                  window.gtag('config', id);
+                }
+                function schedule(){
+                  window.setTimeout(function(){
+                    if ('requestIdleCallback' in window) {
+                      window.requestIdleCallback(loadTag, { timeout: 2500 });
+                    } else {
+                      loadTag();
+                    }
+                  }, 6500);
+                }
+                if (document.readyState === 'complete') schedule();
+                else window.addEventListener('load', schedule, { once: true });
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   );

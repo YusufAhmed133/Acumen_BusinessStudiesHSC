@@ -1,16 +1,7 @@
-"use client";
 import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
-import { ScrollLink } from "@/components/ui/ScrollLink";
 
 export function Footer() {
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (window.location.pathname !== "/") return;
-    e.preventDefault();
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
-  };
-
   return (
     <footer style={{ background: "#0A0A0A", padding: "56px 0 32px", color: "#FFFCF4" }}>
       <div style={{
@@ -23,7 +14,7 @@ export function Footer() {
         gap: 32,
         flexWrap: "wrap",
       }}>
-        <Link href="/" onClick={handleLogoClick} style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
+        <Link href="/" prefetch={false} style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
           <MarkBug size={44} />
           <div>
             <span style={{
@@ -66,17 +57,14 @@ export function Footer() {
             { href: "/",         label: "Reviews",  sectionId: "reviews" },
             { href: "/",         label: "Resources", sectionId: "resources" },
             { href: "/",         label: "FAQ",      sectionId: "faq" },
-          ].map(({ href, label, sectionId }) =>
-            sectionId ? (
-              <ScrollLink key={label} sectionId={sectionId} style={{ color: "inherit", textDecoration: "none" }}>
-                {label}
-              </ScrollLink>
-            ) : (
-              <Link key={href + label} href={href} style={{ color: "inherit", textDecoration: "none" }}>
+          ].map(({ href, label, sectionId }) => {
+            const targetHref = sectionId ? `${href}#${sectionId}` : href;
+            return (
+              <Link key={href + label} href={targetHref} prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>
                 {label}
               </Link>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
 
@@ -96,8 +84,8 @@ export function Footer() {
       }}>
         <span>© Acumen HSC, Sydney NSW</span>
         <span style={{ display: "flex", gap: 20 }}>
-          <Link href="/privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
-          <Link href="/terms" style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
+          <Link href="/privacy" prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
           <a href="tel:0470665141" style={{ color: "inherit", textDecoration: "none" }}>0470 665 141</a>
         </span>
       </div>

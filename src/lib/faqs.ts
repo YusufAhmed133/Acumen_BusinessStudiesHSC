@@ -28,10 +28,11 @@ export const FAQS: FaqItem[] = [
   },
   {
     q: "What happens if my child misses a lesson?",
-    a: "Cancellations with more than 24 hours notice are fully refunded or credited toward the next session, while cancellations inside 24 hours are charged in full, and every student who misses receives the full notes and worked solutions so they do not fall behind.",
+    a: "Cancellations with at least 24 hours notice are fully refunded or credited toward the next session, while cancellations inside 24 hours are charged in full, and every student who misses receives the full notes and worked solutions so they do not fall behind.",
   },
   {
     q: "Do your prices include GST?",
-    a: "Yes, all prices shown on this site are inclusive of GST.",
+    // CROSS-REVIEW: Claude should verify this
+    a: "Yes, all prices shown on this site are inclusive of GST. Card payments include a 1% processing fee shown on the invoice.",
   },
 ];

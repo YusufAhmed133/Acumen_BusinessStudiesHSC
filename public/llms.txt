@@ -10,7 +10,7 @@ URL: https://acumenhsc.com.au
 - Timed HSC-style practice during lessons
 - 24-hour question line: tutors respond within 24 hours, every day
 - Band 6 notes written by a 99.95 ATAR Business Studies graduate
-- Full past-paper bank: every Section I–IV question from 2010–2025, indexed by syllabus dot point
+- Practice bank: every local Section I-IV question from 2022-2025, indexed by syllabus dot point
 - Full mock exam with personalised improvement report before each major exam
 
 ## Pricing
@@ -24,10 +24,10 @@ URL: https://acumenhsc.com.au
 ## Syllabus topics covered
 
 The HSC Business Studies course has four topics:
-1. Operations, the highest-probability Section III essay topic (appeared 2022, 2023, 2024)
-2. Marketing, Section II allocates 8–10 marks to marketing most years
-3. Finance, ratio analysis (GPM, NPM, ROE, current ratio, gearing) tested across all sections
-4. Human Resources, Section III was an HR case study in 2024
+1. Operations
+2. Marketing
+3. Finance
+4. Human Resources
 
 ## Location and contact
 

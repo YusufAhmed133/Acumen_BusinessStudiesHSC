@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { track } from "@vercel/analytics";
 
 type Fields = {
   parent: string;
@@ -81,7 +80,8 @@ export function EnquiryForm() {
         f.concern ? `Concern: ${f.concern}` : "",
       ].filter(Boolean).join("\n");
 
-      const res = await fetch("/api/leads", {
+      const query = window.location.search;
+      const res = await fetch(`/api/leads${query}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -94,7 +94,10 @@ export function EnquiryForm() {
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
-      track("enquiry_submitted", { year_group: f.year });
+      const analyticsWindow = window as Window & {
+        gtag?: (command: "event", eventName: string, params?: Record<string, string>) => void;
+      };
+      analyticsWindow.gtag?.("event", "enquiry_submitted", { year_group: f.year });
       setF(INITIAL_FIELDS);
       setSuccess(true);
     } catch {

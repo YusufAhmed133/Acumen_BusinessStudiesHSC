@@ -1,16 +1,3 @@
-const STARS = (
-  <span role="img" aria-label="5 stars" style={{ display: "inline-flex", gap: 2 }}>
-    {[0, 1, 2, 3, 4].map((i) => (
-      <svg key={i} width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
-        <path
-          d="M6.5 1l1.545 3.13 3.455.5-2.5 2.437.59 3.433L6.5 8.885 3.91 10.5l.59-3.433L2 4.63l3.455-.5L6.5 1z"
-          fill="#FBBF24"
-        />
-      </svg>
-    ))}
-  </span>
-);
-
 const REVIEWS = [
   {
     quote:
@@ -68,9 +55,11 @@ export function Reviews() {
           {DOUBLED.map((r, i) => (
             <div
               key={i}
+              aria-hidden={i >= REVIEWS.length}
               style={{
                 flexShrink: 0,
-                width: 320,
+                width: "min(320px, calc(100vw - 56px))",
+                boxSizing: "border-box",
                 padding: "28px 26px",
                 borderRadius: 16,
                 background: "#F9F9F7",
@@ -78,10 +67,9 @@ export function Reviews() {
                 margin: "24px 0",
               }}
             >
-              {STARS}
               <p
                 style={{
-                  margin: "12px 0 16px",
+                  margin: "0 0 16px",
                   fontSize: 14,
                   lineHeight: 1.6,
                   color: "#1A1A1A",
@@ -131,6 +119,7 @@ export function Reviews() {
         }
         @media (prefers-reduced-motion: reduce) {
           .review-track { animation: none !important; }
+          .review-track > :nth-child(n+7) { display: none !important; }
         }
       `}</style>
     </section>

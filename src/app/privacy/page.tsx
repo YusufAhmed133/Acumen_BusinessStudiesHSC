@@ -80,8 +80,8 @@ export default function PrivacyPage() {
 
       <h2 style={S.h2}>7. Cookies</h2>
       <p style={S.p}>
-        This website may use Vercel Analytics, Vercel Speed Insights, and Google Ads conversion measurement to understand
-        site performance and enquiry attribution. These tools may set cookies or use similar browser signals. We do not
+        This website may use Google Ads conversion measurement to understand
+        enquiry attribution. This tool may set cookies or use similar browser signals. We do not
         sell personal information or use these tools to collect tutoring form messages.
       </p>
 

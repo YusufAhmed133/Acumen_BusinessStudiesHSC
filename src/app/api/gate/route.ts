@@ -47,7 +47,12 @@ export async function POST(request: NextRequest) {
 
   const { email } = parsed.data;
 
-  if (process.env.PRACTICE_DEV_OPEN === "true") {
+  // CROSS-REVIEW: Claude should verify this
+  if (await checkRateLimit("gate-email:" + email, 5, "600 s")) {
+    return NextResponse.json({ ok: false, message: "Too many attempts. Try again later." }, { status: 429 });
+  }
+
+  if (process.env.PRACTICE_DEV_OPEN === "true" && process.env.NODE_ENV !== "production") {
     console.warn("[gate] PRACTICE_DEV_OPEN=true, whitelist bypassed");
     return practiceAccessResponse(email);
   }

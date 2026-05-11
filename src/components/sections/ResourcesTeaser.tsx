@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { ScrollLink } from "@/components/ui/ScrollLink";
 
 const PACKS = [
   {
@@ -214,9 +214,9 @@ export function ResourcesTeaser() {
                       letterSpacing: "-0.01em",
                       justifyContent: "center",
                     }}
-                    >
+                  >
                       <LockIcon />
-                    Download locked
+                    Enrolled students only
                   </button>
                 </div>
               </div>
@@ -226,8 +226,9 @@ export function ResourcesTeaser() {
 
         <Reveal delay={340}>
           <div style={{ marginTop: 32 }}>
-            <ScrollLink
-              sectionId="enquire"
+            <Link
+              href="/#enquire"
+              prefetch={false}
               style={{
                 display: "inline-block",
                 padding: "13px 24px",
@@ -240,8 +241,8 @@ export function ResourcesTeaser() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Book a trial to unlock all resources →
-            </ScrollLink>
+              Book a trial to discuss resources →
+            </Link>
           </div>
         </Reveal>
       </div>

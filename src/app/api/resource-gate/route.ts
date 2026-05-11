@@ -26,6 +26,11 @@ export async function POST(request: NextRequest) {
 
   const { email } = parsed.data;
 
+  // CROSS-REVIEW: Claude should verify this
+  if (await checkRateLimit("resource-gate-email:" + email, 5, "600 s")) {
+    return NextResponse.json({ ok: false, message: "Too many attempts. Try again later." }, { status: 429 });
+  }
+
   if (!supabaseConfigured()) {
     return NextResponse.json(
       { ok: false, message: "Resources not available right now. Contact your tutor." },
@@ -43,7 +48,7 @@ export async function POST(request: NextRequest) {
     if (!data) {
       return NextResponse.json({
         ok: false,
-        message: "Resource downloads are locked for now. Use the email your tutor added, or ask them to unlock resources after enrolment.",
+        message: "Resource downloads are for enrolled students. Use the email your tutor added after enrolment.",
       });
     }
     return NextResponse.json({ ok: true });

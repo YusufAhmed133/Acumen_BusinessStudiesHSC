@@ -5,12 +5,11 @@ export const PRACTICE_ACCESS_COOKIE = "acumen_practice_access";
 const ACCESS_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 function getPracticeAccessSecret(): string | null {
-  return (
-    process.env.PRACTICE_ACCESS_SECRET ??
-    process.env.IP_HASH_DAILY_SALT ??
-    process.env.SUPABASE_SERVICE_ROLE_KEY ??
-    (process.env.NODE_ENV === "production" ? null : "dev-practice-access-secret")
-  );
+  if (process.env.PRACTICE_ACCESS_SECRET) return process.env.PRACTICE_ACCESS_SECRET;
+  // CROSS-REVIEW: Claude should verify this
+  if (process.env.NODE_ENV === "production") return null;
+
+  return process.env.IP_HASH_DAILY_SALT ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "dev-practice-access-secret";
 }
 
 function signPracticeAccessPayload(payload: string, secret: string): string {
@@ -32,21 +31,40 @@ export function createPracticeAccessCookie(email: string): { value: string; expi
   };
 }
 
-export function verifyPracticeAccessCookie(value: string | undefined): boolean {
+function verifyPracticeAccessParts(value: string | undefined): { subject: string } | null {
   const secret = getPracticeAccessSecret();
-  if (!secret || !value) return false;
+  if (!secret || !value) return null;
 
   const parts = value.split(".");
-  if (parts.length !== 3) return false;
+  if (parts.length !== 3) return null;
 
   const [subject, expiresAtRaw, signature] = parts;
   const expiresAt = Number(expiresAtRaw);
-  if (!subject || !Number.isFinite(expiresAt) || expiresAt < Date.now()) return false;
+  if (!subject || !Number.isFinite(expiresAt) || expiresAt < Date.now()) return null;
 
   const payload = `${subject}.${expiresAtRaw}`;
   const expected = signPracticeAccessPayload(payload, secret);
   const actualBuffer = Buffer.from(signature, "base64url");
   const expectedBuffer = Buffer.from(expected, "base64url");
 
-  return actualBuffer.length === expectedBuffer.length && timingSafeEqual(actualBuffer, expectedBuffer);
+  if (actualBuffer.length !== expectedBuffer.length || !timingSafeEqual(actualBuffer, expectedBuffer)) {
+    return null;
+  }
+
+  return { subject };
+}
+
+export function verifyPracticeAccessCookie(value: string | undefined): boolean {
+  return verifyPracticeAccessParts(value) !== null;
+}
+
+export function getPracticeAccessEmail(value: string | undefined): string | null {
+  const verified = verifyPracticeAccessParts(value);
+  if (!verified) return null;
+
+  try {
+    return Buffer.from(verified.subject, "base64url").toString("utf8");
+  } catch {
+    return null;
+  }
 }

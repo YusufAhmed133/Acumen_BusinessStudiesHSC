@@ -198,7 +198,7 @@ export function Practice() {
                       {q.type === "mcq" ? "Reveal answer" : "Show marking"}
                     </button>
                   ) : isLast ? (
-                    <Link href="/practice" style={{
+                    <Link href="/practice" prefetch={false} style={{
                       ...pill,
                       background: "#C9EFD3", color: "#0A2E1A",
                       border: "1px solid #C9EFD3", textDecoration: "none",
@@ -284,6 +284,7 @@ export function Practice() {
           <div style={{ marginTop: 48, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
             <Link
               href="/practice"
+              prefetch={false}
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 padding: "14px 28px", borderRadius: 12,

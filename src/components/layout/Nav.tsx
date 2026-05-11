@@ -1,8 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MarkBug } from "@/components/ui/MarkBug";
-import { ScrollLink } from "@/components/ui/ScrollLink";
 
 const LINKS: { href: string; label: string; sectionId?: string }[] = [
   { href: "/",          label: "Syllabus",  sectionId: "syllabus" },
@@ -29,34 +26,15 @@ const pill: React.CSSProperties = {
 };
 
 export function Nav() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (window.location.pathname !== "/") return;
-    e.preventDefault();
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
-    setOpen(false);
-  };
-
   return (
     <header style={{
       position: "sticky",
       top: 0,
       zIndex: 50,
-      background: scrolled ? "rgba(255,255,255,0.96)" : "rgba(255,255,255,0.9)",
+      background: "rgba(255,255,255,0.94)",
       backdropFilter: "saturate(160%) blur(16px)",
       WebkitBackdropFilter: "saturate(160%) blur(16px)",
       borderBottom: "1px solid rgba(0,0,0,0.07)",
-      transition: "background 300ms ease, box-shadow 300ms ease",
-      boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.06)" : "none",
     }}>
       <div style={{
         maxWidth: 1320,
@@ -67,7 +45,7 @@ export function Nav() {
         justifyContent: "space-between",
         gap: 24,
       }}>
-        <Link href="/" onClick={handleLogoClick} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+        <Link href="/" prefetch={false} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
           <MarkBug size={30} />
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <span style={{
@@ -93,19 +71,10 @@ export function Nav() {
         </Link>
 
         <nav style={{ display: "flex", gap: 28, alignItems: "center" }} className="hidden-mobile" aria-label="Main navigation">
-          {LINKS.map(({ href, label, sectionId }) =>
-            sectionId ? (
-              <ScrollLink key={label} sectionId={sectionId} style={{
-                fontSize: 14,
-                fontWeight: 500,
-                color: "#1A1A1A",
-                textDecoration: "none",
-                letterSpacing: "-0.01em",
-              }}>
-                {label}
-              </ScrollLink>
-            ) : (
-              <Link key={href} href={href} style={{
+          {LINKS.map(({ href, label, sectionId }) => {
+            const targetHref = sectionId ? `${href}#${sectionId}` : href;
+            return (
+              <Link key={label} href={targetHref} prefetch={false} style={{
                 fontSize: 14,
                 fontWeight: 500,
                 color: "#1A1A1A",
@@ -114,99 +83,82 @@ export function Nav() {
               }}>
                 {label}
               </Link>
-            )
-          )}
+            );
+          })}
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <ScrollLink sectionId="enquire" style={pill} className="hidden-mobile">
+          <Link href="/#enquire" prefetch={false} style={pill} className="hidden-mobile">
             Book a free trial lesson →
-          </ScrollLink>
+          </Link>
 
-          <button
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            style={{
-              display: "none",
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              padding: "6px",
-              color: "#0A0A0A",
-            }}
-            className="mobile-only"
-          >
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
-              {open ? (
-                <>
-                  <path d="M5 5L17 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M17 5L5 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </>
-              ) : (
-                <>
-                  <path d="M3 6h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M3 11h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M3 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </>
-              )}
-            </svg>
-          </button>
+          <details className="mobile-only" style={{ position: "relative" }}>
+            <summary
+              aria-label="Open menu"
+              style={{
+                listStyle: "none",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "6px",
+                color: "#0A0A0A",
+              }}
+            >
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
+                <path d="M3 6h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M3 11h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M3 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </summary>
+            <nav
+              style={{
+                position: "absolute",
+                right: 0,
+                top: "calc(100% + 14px)",
+                width: "min(320px, calc(100vw - 56px))",
+                border: "1px solid rgba(0,0,0,0.08)",
+                borderRadius: 12,
+                background: "#ffffff",
+                padding: "12px 16px 16px",
+                boxShadow: "0 18px 44px rgba(0,0,0,0.14)",
+              }}
+              aria-label="Mobile navigation"
+            >
+              <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 2 }}>
+                {LINKS.map(({ href, label, sectionId }) => {
+                  const targetHref = sectionId ? `${href}#${sectionId}` : href;
+                  return (
+                    <li key={label}>
+                      <Link href={targetHref} prefetch={false} style={{
+                        display: "block",
+                        padding: "11px 4px",
+                        fontSize: 16,
+                        fontWeight: 500,
+                        color: "#1A1A1A",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(10,10,10,0.06)",
+                      }}>
+                        {label}
+                      </Link>
+                    </li>
+                  );
+                })}
+                <li style={{ marginTop: 12 }}>
+                  <Link href="/#enquire" prefetch={false} style={{ ...pill, display: "block", textAlign: "center" }}>
+                    Book a free trial lesson →
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </details>
         </div>
       </div>
 
-      {/* Mobile drawer */}
-      {open && (
-        <nav
-          style={{
-            borderTop: "1px solid rgba(0,0,0,0.07)",
-            background: "#ffffff",
-            padding: "16px 28px 20px",
-          }}
-          aria-label="Mobile navigation"
-        >
-          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 2 }}>
-            {LINKS.map(({ href, label, sectionId }) => (
-              <li key={label}>
-                {sectionId ? (
-                  <ScrollLink sectionId={sectionId} onNavigate={() => setOpen(false)} style={{
-                    display: "block",
-                    padding: "11px 4px",
-                    fontSize: 16,
-                    fontWeight: 500,
-                    color: "#1A1A1A",
-                    textDecoration: "none",
-                    borderBottom: "1px solid rgba(10,10,10,0.06)",
-                  }}>
-                    {label}
-                  </ScrollLink>
-                ) : (
-                  <Link href={href} onClick={() => setOpen(false)} style={{
-                    display: "block",
-                    padding: "11px 4px",
-                    fontSize: 16,
-                    fontWeight: 500,
-                    color: "#1A1A1A",
-                    textDecoration: "none",
-                    borderBottom: "1px solid rgba(10,10,10,0.06)",
-                  }}>
-                    {label}
-                  </Link>
-                )}
-              </li>
-            ))}
-            <li style={{ marginTop: 12 }}>
-              <ScrollLink sectionId="enquire" onNavigate={() => setOpen(false)} style={{ ...pill, display: "block", textAlign: "center" }}>
-                Book a free trial lesson →
-              </ScrollLink>
-            </li>
-          </ul>
-        </nav>
-      )}
-
       <style>{`
-        @media (min-width: 768px) { .mobile-only { display: none !important; } }
-        @media (max-width: 767px) { .hidden-mobile { display: none !important; } .mobile-only { display: flex !important; } }
+        .mobile-only > summary::-webkit-details-marker { display: none; }
+        .mobile-only > summary::marker { content: ""; }
+        @media (min-width: 1024px) { .mobile-only { display: none !important; } }
+        @media (max-width: 1023px) { .hidden-mobile { display: none !important; } .mobile-only { display: block !important; } }
       `}</style>
     </header>
   );

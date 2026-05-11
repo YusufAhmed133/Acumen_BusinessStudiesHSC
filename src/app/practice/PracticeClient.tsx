@@ -1,19 +1,33 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ScrollLink } from "@/components/ui/ScrollLink";
+import Link from "next/link";
 import { TOPICS_MAP, type TopicKey, type McqQuestion, type ShortQuestion, type Question } from "@/lib/quiz-types";
 
 type UnlockResult = { ok: true } | { ok: false; message: string };
 
-function EmailGate({ onUnlock }: { onUnlock: () => Promise<UnlockResult> }) {
+function EmailGate({
+  onUnlock,
+  onClose,
+}: {
+  onUnlock: () => Promise<UnlockResult>;
+  onClose: () => void;
+}) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, []);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onClose]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +60,7 @@ function EmailGate({ onUnlock }: { onUnlock: () => Promise<UnlockResult> }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="gate-title"
+      onClick={onClose}
       style={{
         position: "fixed", inset: 0, zIndex: 100,
         background: "rgba(13,13,13,0.72)", backdropFilter: "blur(8px)",
@@ -53,11 +68,33 @@ function EmailGate({ onUnlock }: { onUnlock: () => Promise<UnlockResult> }) {
         padding: "24px",
       }}
     >
-      <form onSubmit={submit} style={{
+      <form onSubmit={submit} onClick={(event) => event.stopPropagation()} style={{
         background: "#FFFCF4", borderRadius: 20, padding: "40px 36px",
         maxWidth: 420, width: "100%",
         boxShadow: "0 32px 80px rgba(0,0,0,0.45)",
+        position: "relative",
       }}>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close practice access dialog"
+          style={{
+            position: "absolute",
+            top: 14,
+            right: 14,
+            width: 34,
+            height: 34,
+            borderRadius: 999,
+            border: "1px solid rgba(0,0,0,0.12)",
+            background: "#ffffff",
+            color: "#111111",
+            cursor: "pointer",
+            fontSize: 20,
+            lineHeight: 1,
+          }}
+        >
+          x
+        </button>
         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 14 }}>
           Acumen Practice Bank
         </div>
@@ -136,8 +173,9 @@ function GateCard({ onUnlock, remaining }: { onUnlock: () => void; remaining: nu
         Unlock {remaining} questions →
       </button>
       <div style={{ marginTop: 14 }}>
-        <ScrollLink
-          sectionId="enquire"
+        <Link
+          href="/#enquire"
+          prefetch={false}
           style={{
             display: "inline-block", padding: "11px 24px", borderRadius: 999,
             background: "#C9EFD3", color: "#0A2E1A",
@@ -146,7 +184,7 @@ function GateCard({ onUnlock, remaining }: { onUnlock: () => void; remaining: nu
           }}
         >
           Book a free trial lesson →
-        </ScrollLink>
+        </Link>
       </div>
     </div>
   );
@@ -397,7 +435,7 @@ export function PracticeClient({ initialQuestions, totalCount, filterCounts }: P
 
   return (
     <div style={{ minHeight: "100vh", background: "#F9F9F7" }}>
-      {showGate && <EmailGate onUnlock={unlock} />}
+      {showGate && <EmailGate onUnlock={unlock} onClose={() => setShowGate(false)} />}
       <div {...gatedContentProps}>
       {/* Filter bar */}
       <div style={{
