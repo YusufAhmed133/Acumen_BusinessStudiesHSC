@@ -60,18 +60,6 @@ export function Trust() {
       <p className="sr-only">
         Trusted by students from: {SCHOOLS.map(s => s.name).join(", ")}.
       </p>
-      <p
-        style={{
-          maxWidth: 1320,
-          margin: "-8px auto 18px",
-          padding: "0 28px",
-          fontSize: 11,
-          lineHeight: 1.5,
-          color: "#7A7A7A",
-        }}
-      >
-        School names indicate student attendance only. No school affiliation or endorsement is implied.
-      </p>
       <div className="ticker" aria-hidden="true">
         <div className="ticker-track">
           {ITEMS.map((s, i) => (

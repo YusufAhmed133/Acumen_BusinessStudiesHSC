@@ -142,11 +142,16 @@ button { font-family: inherit; }
   border: 0;
 }
 
-/* ── Reveal, visible by default to avoid hydration-blocked content ─────── */
+/* ── Reveal fade-up + 3D entrance ────────────────────────── */
 .reveal {
-  opacity: 1;
-  transform: none;
+  opacity: 0;
+  transform: perspective(1100px) translateY(32px) rotateX(5deg);
   transform-origin: center top;
+  transition: opacity 680ms cubic-bezier(.2,.7,.2,1), transform 680ms cubic-bezier(.2,.7,.2,1);
+}
+.reveal.shown {
+  opacity: 1;
+  transform: perspective(1100px) translateY(0) rotateX(0deg);
 }
 
 /* ── Focus ───────────────────────────────────────────────── */
@@ -162,6 +167,11 @@ button { font-family: inherit; }
   }
   .review-track {
     animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
   .review-track > :nth-child(n+7) {
     display: none !important;

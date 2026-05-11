@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { Trust } from "@/components/sections/Trust";
 import { Topics } from "@/components/sections/Topics";
 import { Pricing } from "@/components/sections/Pricing";
 import { FAQS } from "@/lib/faqs";
 import { PRICING_PLANS } from "@/lib/pricing";
-import { PracticeDemo } from "@/components/sections/PracticeDemo";
 import { Reviews } from "@/components/sections/Reviews";
 import { ResourcesTeaser } from "@/components/sections/ResourcesTeaser";
 import { FaqSection } from "@/components/sections/FaqSection";
+
+const PracticeDemo = dynamic(() => import("@/components/sections/PracticeDemo").then((m) => m.PracticeDemo));
 
 const SITE_URL = "https://acumenhsc.com.au";
 
