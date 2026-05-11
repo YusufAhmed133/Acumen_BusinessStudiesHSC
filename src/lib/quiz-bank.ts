@@ -2,16 +2,7 @@ export { TOPICS_MAP } from "./quiz-types";
 export type { TopicKey, McqQuestion, ShortQuestion, Question } from "./quiz-types";
 import type { Question } from "./quiz-types";
 
-const FORMAT_AUDIT_EXCLUDED_IDS = new Set([
-  "22m6",
-  "22m20",
-  "22s21c",
-  "22s23a",
-  "22s23b",
-  "22s23c",
-  "22s23d",
-  "22e25",
-]);
+const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
@@ -32,7 +23,7 @@ const RAW_QUIZ_BANK: Question[] = [
     options: ["Questionnaires and industry reports", "Industry reports and internet sources", "Personal interviews and questionnaires", "Internet sources and personal interviews"],
     answer: 2, explain: "Personal interviews and questionnaires are both primary, collected first-hand. Industry reports and internet sources are secondary data." },
 
-  { id: "22m4", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q4",
+  { id: "22m4", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q4",
     stem: "A watch manufacturer uses price-skimming strategies and provides a lifetime warranty on their products. What would most likely have influenced the implementation of these strategies?",
     options: ["Legal compliance", "Quality expectations", "Ethical responsibility", "Cost-based competition"],
     answer: 1, explain: "Quality expectations drive both premium pricing (price skimming) and a lifetime warranty, both signal and guarantee product durability." },
@@ -44,6 +35,7 @@ const RAW_QUIZ_BANK: Question[] = [
 
   { id: "22m6", topic: "human_resources", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q6",
     stem: "All staff in a business participate equally in a profit-sharing scheme. Which row of the table correctly identifies this reward strategy?",
+    stimulus: [{ type: "table", headers: ["", "Reward", "Staff"], rows: [["A.", "Monetary", "Group"], ["B.", "Monetary", "Individual"], ["C.", "Non-monetary", "Group"], ["D.", "Non-monetary", "Individual"]] }],
     options: ["Monetary / Group", "Monetary / Individual", "Non-monetary / Group", "Non-monetary / Individual"],
     answer: 0, explain: "Profit-sharing is a monetary (cash/financial) reward distributed equally across all staff, making it a group reward, not tied to individual performance." },
 
@@ -67,12 +59,18 @@ const RAW_QUIZ_BANK: Question[] = [
     options: ["Superannuation", "Code of conduct", "Union membership", "Environmental protection"],
     answer: 3, explain: "Environmental protection laws regulate chemical waste disposal and directly affect operations. Superannuation and union membership are HR/legal matters; codes of conduct are internal ethical frameworks." },
 
+  { id: "22m11", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q11",
+    stem: "Which of the following is correct for the growth phase of the product life cycle?",
+    stimulus: [{ type: "table", headers: ["", "Production", "Price"], rows: [["A.", "Decreased", "Maintained"], ["B.", "Maintained", "Increased"], ["C.", "Increased", "Increased"], ["D.", "Increased", "Maintained"]] }],
+    options: ["Production decreased; price maintained", "Production maintained; price increased", "Production increased; price increased", "Production increased; price maintained"],
+    answer: [2, 3], explain: "The official marking guideline accepts C and D for this question." },
+
   { id: "22m12", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q12",
     stem: "Which of the following is an example of service differentiation?",
     options: ["A car manufacturer supplies cars with premium tinted windows.", "A chemist issues a patient with medication in exchange for a script.", "A shoe store assistant spends varying amounts of time with customers.", "A salesperson provides a receipt to a customer who has purchased a bed."],
     answer: 2, explain: "Service differentiation means varying the service experience. Spending varying time with different customers adapts the service to individual needs. The other options are standard goods transactions." },
 
-  { id: "22m13", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q13",
+  { id: "22m13", topic: "finance", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q13",
     stem: "Which combination of global market influences would support a business's decision to expand globally?",
     options: ["A depressed economic outlook and low interest rates", "A depressed economic outlook and high interest rates", "An improved economic outlook and low interest rates", "An improved economic outlook and high interest rates"],
     answer: 2, explain: "An improved economic outlook boosts consumer spending (demand for exports) and low interest rates reduce borrowing costs for expansion, both conditions support global expansion." },
@@ -82,7 +80,7 @@ const RAW_QUIZ_BANK: Question[] = [
     options: ["Australian Taxation Office", "Australian Securities Exchange", "Australian Prudential Regulation Authority", "Australian Securities and Investments Commission"],
     answer: 3, explain: "ASIC regulates investment companies and enforces laws against financial fraud such as misappropriation of client funds. APRA regulates banks/insurance; ASX operates the stock exchange." },
 
-  { id: "22m15", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q15",
+  { id: "22m15", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q15",
     stem: "Heidi has a small farm that has a variety of animals, including chickens. She would like to sell the excess chicken eggs to customers. Which distribution method would best support her situation?",
     options: ["Producer → consumer", "Producer → retailer → consumer", "Producer → wholesaler → consumer", "Producer → agent → retailer → consumer"],
     answer: 0, explain: "A small farm selling directly to local customers uses the shortest channel. Longer channels involve intermediaries that take margin and are unsuitable for small-scale perishable items." },
@@ -108,7 +106,11 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 2, explain: "Outsourcing a production input involves: operations (specifications/quality), finance (cost/payment terms), and HR (workforce implications). Marketing is not directly involved in a supplier contract." },
 
   { id: "22m20", topic: "finance", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q20",
-    stem: "A business provides the following financial information. Year 1 ($): Sales 600 000 / Cost of goods sold 200 000 / Gross profit ? / Expenses 250 000 / Net profit ?. Year 2 ($): Sales 700 000 / Cost of goods sold 200 000 / Gross profit ? / Expenses 200 000 / Net profit ?. Other financial information: Owner's equity – $500 000 (return on owner's equity: net profit ÷ owner's equity) / Gross profit ratio (industry average) – 78% (gross profit ratio: gross ÷ sales). Which of the following reflects the changes to profitability in Year 2?",
+    stem: "A business provides the following financial information.\n\nWhich of the following reflects the changes to profitability in Year 2?",
+    stimulus: [
+      { type: "table", headers: ["", "Year 1 ($)", "Year 2 ($)"], rows: [["Sales", "600 000", "700 000"], ["Cost of goods sold", "200 000", "200 000"], ["Gross profit", "?", "?"], ["Expenses", "250 000", "200 000"], ["Net profit", "?", "?"]] },
+      { type: "note", text: "Other financial information: Owner's equity – $500 000 (return on owner's equity: net profit ÷ owner's equity). Gross profit ratio (industry average) – 78% (gross profit ratio: gross ÷ sales)." },
+    ],
     options: ["Return on owner's equity has improved and the gross profit ratio is worse than the industry average", "Return on owner's equity has worsened and the gross profit ratio is worse than the industry average", "Return on owner's equity has improved and the gross profit ratio is better than the industry average", "Return on owner's equity has worsened and the gross profit ratio is better than the industry average"],
     answer: 0, explain: "Year 1: ROE = $150k/$500k = 30%, GPR = 66.7%. Year 2: ROE = $300k/$500k = 60%, GPR = 71.4%. ROE improved; GPR of 71.4% is still below the 78% industry average." },
 
@@ -117,89 +119,214 @@ const RAW_QUIZ_BANK: Question[] = [
   { id: "22s21a", topic: "operations", type: "short", marks: 2, src: "2022 HSC, Section II, Q21(a)",
     stem: "Michael would like to open a new burger restaurant. Outline a performance objective relevant to this business.",
     criteria: ["Sketches in general terms a performance objective relevant to the business", "Identifies an objective for this business"],
-    sample: "Dependability would be a key performance objective for this business as customers expect consistency. They want their burgers to be served in the same timeframe, be the same size, temperature and taste each time they purchase one." },
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms a performance objective relevant to the business"] },
+      { marks: "1", criteria: ["Identifies an objective for this business"] },
+    ],
+    sample: "Dependability would be a key performance objective for this business as customers expect consistency. They want their burgers to be served in the same timeframe, be the same size, temperature and taste each time they purchase one.",
+    sampleBlocks: [{ type: "heading", text: "Answers could include:" }, { type: "list", items: ["Quality, speed, dependability, flexibility, customisation, cost."] }] },
 
   { id: "22s21b", topic: "operations", type: "short", marks: 3, src: "2022 HSC, Section II, Q21(b)",
     stem: "Michael would like to open a new burger restaurant. Recommend an appropriate inventory management strategy for this business.",
     criteria: ["Provides reasons in favour of an appropriate inventory management strategy for the business", "Provides a reason in favour of an appropriate inventory management strategy for the business", "Makes a relevant statement about inventory management"],
-    sample: "Just-in-time would be an effective inventory method as it would allow the business to take advantage of fresh produce as it arrives. This would also save them storage space and the costs associated with this." },
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides reasons in favour of an appropriate inventory management strategy for the business"] },
+      { marks: "2", criteria: ["Provides a reason in favour of an appropriate inventory management strategy for the business"] },
+      { marks: "1", criteria: ["Makes a relevant statement about inventory management"] },
+    ],
+    sample: "Just-in-time would be an effective inventory method as it would allow the business to take advantage of fresh produce as it arrives. This would also save them storage space and the costs associated with this.",
+    sampleBlocks: [{ type: "heading", text: "Answers could include:" }, { type: "list", items: ["Last in first out", "First in first out."] }] },
 
   { id: "22s21c", topic: "operations", type: "short", marks: 4, src: "2022 HSC, Section II, Q21(c)",
-    stem: "Michael is considering which process layout would be the most efficient for this restaurant. Process layout option 1: [Stove / Raw meat refrigerator / Finished burgers across the top; Burger assembly station on the left side; Seating area / Cash registers / Entrance]. Process layout option 2: [Stove / Burger assembly station / Finished burgers in a sequential line across the top; Raw meat refrigerator on the left; Seating area (smaller) / Cash registers / Entrance]. Compare each layout in terms of efficiency and profitability.",
+    stem: "Michael is considering which process layout would be the most efficient for this restaurant.\n\nCompare each layout in terms of efficiency and profitability.",
+    stimulus: [
+      { type: "table", caption: "Process layout option 1", rows: [["", "Stove", "Raw meat\nrefrigerator", "Finished\nburgers"], ["Burger assembly\nstation", "Seating area", "", "Cash registers"], ["", "", "", "Entrance"]] },
+      { type: "table", caption: "Process layout option 2", rows: [["", "Stove", "", ""], ["", "", "Burger assembly\nstation", "Finished\nburgers"], ["Raw meat\nrefrigerator", "Seating area", "", "Cash registers"], ["", "", "", "Entrance"]] },
+    ],
     criteria: ["Provides detailed similarities and/or differences about the efficiency and profitability of each layout", "Provides some similarities and/or differences about efficiency and profitability of each layout", "Provides similarities and/or differences about efficiency and/or profitability of the layouts", "Provides relevant information about process layout"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides detailed similarities and/or differences about the efficiency and profitability of each layout"] },
+      { marks: "3", criteria: ["Provides some similarities and/or differences about efficiency and profitability of each layout"] },
+      { marks: "2", criteria: ["Provides similarities and/or differences about efficiency and/or profitability of the layouts"] },
+      { marks: "1", criteria: ["Provides relevant information about process layout"] },
+    ],
     sample: "The layout of option 2 allows employees to make a finished burger efficiently as the process to make burgers is sequential. In comparison, option 1's narrow kitchen layout requires employees to go back and forth between work stations to make the burger which could lead to accidents and time lost, causing it to be more inefficient. Option 1 has more tables which could seat more customers and therefore increase profitability compared to option 2 which has fewer tables for dine-in customers, therefore it is unable to maximise profitability." },
 
   { id: "22s22a", topic: "human_resources", type: "short", marks: 2, src: "2022 HSC, Section II, Q22(a)",
     stem: "Outline how an increase in the minimum wage rate could affect business.",
     criteria: ["Sketches in general terms the effect an increase in the minimum wage has on business", "Makes a general statement about minimum wage"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms the effect an increase in the minimum wage has on business"] },
+      { marks: "1", criteria: ["Makes a general statement about minimum wage"] },
+    ],
     sample: "An increase in the minimum wage is likely to increase on-costs for businesses. This may lead to businesses passing these costs on to consumers or it may reduce profitability as business expenses rise." },
 
   { id: "22s22b", topic: "human_resources", type: "short", marks: 3, src: "2022 HSC, Section II, Q22(b)",
     stem: "Outline how the minimum employment standards protect employees in Australia. Use examples in your answer.",
     criteria: ["Sketches in general terms how minimum employment standards protect employees using examples", "Sketches in general terms how minimum employment standards protect employees and may provide example(s)", "Makes a relevant statement about minimum employment standards"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Sketches in general terms how minimum employment standards protect employees using examples"] },
+      { marks: "2", criteria: ["Sketches in general terms how minimum employment standards protect employees and may provide example(s)"] },
+      { marks: "1", criteria: ["Makes a relevant statement about minimum employment standards"] },
+    ],
     sample: "Minimum employment standards include eleven legally mandated standards that provide basic protections for all employees. The minimum standards outline basic employee rights in the workplace, regardless of the type of employment contract. For example, all full-time workers are provided with the right to four weeks annual leave and a paid day off on public holidays." },
 
   { id: "22s22c", topic: "human_resources", type: "short", marks: 3, src: "2022 HSC, Section II, Q22(c)",
     stem: "How are performance appraisals of employees beneficial to employers?",
     criteria: ["Provides the ways performance appraisals are beneficial to employers", "Provides a way performance appraisals are beneficial to employers", "Makes a relevant statement about performance appraisals"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides the ways performance appraisals are beneficial to employers"] },
+      { marks: "2", criteria: ["Provides a way performance appraisals are beneficial to employers"] },
+      { marks: "1", criteria: ["Makes a relevant statement about performance appraisals"] },
+    ],
     sample: "Performance appraisals can be developmental or administrative. They allow employers to provide feedback to employees about their performance and can be used to identify their training and development needs. They can also be used to reward and incentivise employees for high performance." },
 
   { id: "22s22d", topic: "human_resources", type: "short", marks: 3, src: "2022 HSC, Section II, Q22(d)",
     stem: "Explain the importance of carrying out an induction program for new employees.",
     criteria: ["Provides why and/or how an induction program for new employees is important", "Provides characteristics and features of the induction process for new employees", "Makes a relevant statement about induction"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides why and/or how an induction program for new employees is important"] },
+      { marks: "2", criteria: ["Provides characteristics and features of the induction process for new employees"] },
+      { marks: "1", criteria: ["Makes a relevant statement about induction"] },
+    ],
     sample: "The induction process introduces new employees to the workplace. Induction can enhance employee understanding of workplace culture, policies and procedures, allowing them to make a significant contribution to the business from the outset of their employment enhancing employee competence, providing a positive attitude to the job and the business." },
 
   { id: "22s23a", topic: "finance", type: "short", marks: 1, src: "2022 HSC, Section II, Q23(a)",
-    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery. They have provided the following financial information: Operating income (revenue) $1 500 000 / Gross profit $1 100 000 / Expenses $600 000 / Total liabilities $2 000 000 / Net profit $500 000 / Owner's equity $1 800 000. Calculate the efficiency (total expenses ÷ total sales) of this business.",
-    criteria: ["Calculates efficiency correctly and shows working"],
+    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery.\n\nThey have provided the following financial information.\n\nCalculate the efficiency (total expenses ÷ total sales) of this business.",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Operating income (revenue)", "1 500 000"], ["Gross profit", "1 100 000"], ["Expenses", "600 000"], ["Total liabilities", "2 000 000"], ["Net profit", "500 000"], ["Owner's equity", "1 800 000"]] }],
+    criteria: ["Correctly calculates the efficiency of the business"],
+    criteriaBands: [{ marks: "1", criteria: ["Correctly calculates the efficiency of the business"] }],
     sample: "Total expenses ÷ total sales = $600 000 ÷ $1 500 000 = 40% (or 0.4 : 1)" },
 
   { id: "22s23b", topic: "finance", type: "short", marks: 3, src: "2022 HSC, Section II, Q23(b)",
-    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery (Expenses $600 000 / Sales $1 500 000). Explain how the expense ratio can help this business determine their efficiency.",
-    criteria: ["Provides detailed explanation of how expense ratio determines efficiency for this business", "Provides some explanation linking expense ratio to efficiency", "Makes a relevant statement about expense ratio or efficiency"],
+    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery.\n\nThey have provided the following financial information.\n\nExplain how the expense ratio can help this business determine their efficiency.",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Operating income (revenue)", "1 500 000"], ["Gross profit", "1 100 000"], ["Expenses", "600 000"], ["Total liabilities", "2 000 000"], ["Net profit", "500 000"], ["Owner's equity", "1 800 000"]] }],
+    criteria: ["Clearly shows the relationship between the expense ratio and the business' efficiency", "Provides characteristics and features of the expense ratio and business' efficiency", "Makes a relevant statement about the expense ratio or efficiency"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Clearly shows the relationship between the expense ratio and the business' efficiency"] },
+      { marks: "2", criteria: ["Provides characteristics and features of the expense ratio and business' efficiency"] },
+      { marks: "1", criteria: ["Makes a relevant statement about the expense ratio or efficiency"] },
+    ],
     sample: "Efficiency is a measure of the ability of a business to use its resources effectively. The gifts and homewares business are currently spending $0.40 in expenses for every $1 of sales. The lower this expense ratio is, the more efficient the business is. If this business can reduce their indirect costs and maintain or increase sales, they demonstrate that they are able to use resources effectively and improve their profitability." },
 
   { id: "22s23c", topic: "finance", type: "short", marks: 3, src: "2022 HSC, Section II, Q23(c)",
-    stem: "A gifts and homewares business (Net profit $500 000 / Owner's equity $1 800 000 / Total liabilities $2 000 000). The family-owned business is considering expansion by opening two new stores. Their bank has given approval to borrow $3 000 000 at 4% interest to finance their expansion. Why is the level of gearing an important consideration for the lender to this business?",
-    criteria: ["Provides detailed explanation of why gearing is important for the lender", "Provides some explanation of gearing and its relationship to lending risk", "Makes a relevant statement about gearing"],
+    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery.\n\nThey have provided the following financial information.\n\nThe family-owned business is considering expansion by opening two new stores. Their bank has given approval to borrow $3 000 000 at 4% interest to finance their expansion.\n\nWhy is the level of gearing an important consideration for the lender to this business?",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Operating income (revenue)", "1 500 000"], ["Gross profit", "1 100 000"], ["Expenses", "600 000"], ["Total liabilities", "2 000 000"], ["Net profit", "500 000"], ["Owner's equity", "1 800 000"]] }],
+    criteria: ["Provides a reason for gearing being an important consideration for the lender to this business", "Demonstrates an understanding of a reason the level of gearing is an important consideration", "Provides some relevant information about gearing"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides a reason for gearing being an important consideration for the lender to this business"] },
+      { marks: "2", criteria: ["Demonstrates an understanding of a reason the level of gearing is an important consideration"] },
+      { marks: "1", criteria: ["Provides some relevant information about gearing"] },
+    ],
     sample: "Gearing refers to the ability of a business to meet its financial obligations in the longer term. It can help the lender to this business understand their risk and determine the ability of the business to meet its loan repayments, helping them decide whether to lend the business money, or not. In this case the business gearing would indicate they can repay their debt." },
 
   { id: "22s23d", topic: "finance", type: "short", marks: 4, src: "2022 HSC, Section II, Q23(d)",
-    stem: "A gifts and homewares business (Net profit $500 000 / Owner's equity $1 800 000 / Total liabilities $2 000 000). The family-owned business is considering expansion by opening two new stores, borrowing $3 000 000 at 4% interest. Using the financial information provided, explain why the business should use debt finance to acquire the two new stores.",
-    criteria: ["Provides detailed explanation referencing data from the financial information", "Provides some explanation of why debt finance is appropriate for this business", "Makes a relevant statement about debt finance", "Provides some relevant information"],
+    stem: "A gifts and homewares business sells goods such as candles, bags, cushions, soaps and jewellery.\n\nThey have provided the following financial information.\n\nThe family-owned business is considering expansion by opening two new stores. Their bank has given approval to borrow $3 000 000 at 4% interest to finance their expansion.\n\nUsing the financial information provided, explain why the business should use debt finance to acquire the two new stores.",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Operating income (revenue)", "1 500 000"], ["Gross profit", "1 100 000"], ["Expenses", "600 000"], ["Total liabilities", "2 000 000"], ["Net profit", "500 000"], ["Owner's equity", "1 800 000"]] }],
+    criteria: ["Using financial information, clearly provides reasons why the business should use debt finance to acquire the two new stores", "Provides reasons why the business should use debt finance to acquire the two new stores", "Sketches in general terms a reason for the business using debt finance", "Makes a relevant statement about debt and/or finance"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Using financial information, clearly provides reasons why the business should use debt finance to acquire the two new stores"] },
+      { marks: "3", criteria: ["Provides reasons why the business should use debt finance to acquire the two new stores"] },
+      { marks: "2", criteria: ["Sketches in general terms a reason for the business using debt finance"] },
+      { marks: "1", criteria: ["Makes a relevant statement about debt and/or finance"] },
+    ],
     sample: "The gifts and homewares business should use debt finance to purchase their new stores because of the relatively low interest rate of 4% they can access. Currently with a $500 000 net profit and potential for this to increase due to the new stores they will be able to meet their increased debt obligations. Debt finance also allows the business to access the money relatively quickly and as the borrowed money is forecast to create increased profits, it seems like an appropriate decision. Additionally, there is no loss of ownership in the family-owned business." },
 
   { id: "22s24a", topic: "marketing", type: "short", marks: 2, src: "2022 HSC, Section II, Q24(a)",
     stem: "A business wishes to introduce new products into the market. Outline ONE promotion strategy this business could use to launch the new product range.",
-    criteria: ["Outlines a suitable promotion strategy and explains how it would launch the product", "Makes a relevant statement about promotion"],
+    criteria: ["Sketches in general terms one promotion strategy to launch the new product range", "Identifies a promotion strategy"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms one promotion strategy to launch the new product range"] },
+      { marks: "1", criteria: ["Identifies a promotion strategy"] },
+    ],
     sample: "The business could use advertising via television or social media to launch their new product range. This would alert potential customers to their new products using different media." },
 
   { id: "22s24b", topic: "marketing", type: "short", marks: 3, src: "2022 HSC, Section II, Q24(b)",
     stem: "A business wishes to introduce new products into the market. How will the business know that their marketing plan has been successful for a new product range?",
-    criteria: ["Provides detailed explanation of how the business can evaluate marketing plan success", "Provides some explanation of monitoring and controlling the marketing plan", "Makes a relevant statement about evaluating a marketing plan"],
+    criteria: ["Demonstrates a clear understanding of the way the business will know the marketing plan has been successful", "Demonstrates an understanding of the way the business will know the marketing plan has been successful", "Makes a relevant statement about the marketing plan"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Demonstrates a clear understanding of the way the business will know the marketing plan has been successful"] },
+      { marks: "2", criteria: ["Demonstrates an understanding of the way the business will know the marketing plan has been successful"] },
+      { marks: "1", criteria: ["Makes a relevant statement about the marketing plan"] },
+    ],
     sample: "In the marketing plan, the business would have developed a financial forecast that included the cost and potential sales of the new product range. The business could monitor and control the marketing plan, comparing actual with planned results in terms of sales and market share to determine the success of their new product range." },
 
   { id: "22s24c", topic: "marketing", type: "short", marks: 4, src: "2022 HSC, Section II, Q24(c)",
     stem: "A business wishes to introduce new products into the market. Why should this business adopt a marketing approach instead of a selling approach?",
-    criteria: ["Provides detailed explanation of why marketing approach is superior to selling approach for this business", "Provides some comparison of marketing and selling approaches", "Makes a relevant statement about marketing or selling approaches", "Provides some relevant information"],
+    criteria: ["Provides reasons why the business should adopt the marketing approach instead of the selling approach", "Provides a reason why the business should adopt the marketing approach instead of the selling approach", "Sketches in general terms the marketing approach and/or the selling approach", "Makes a relevant statement"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides reasons why the business should adopt the marketing approach instead of the selling approach"] },
+      { marks: "3", criteria: ["Provides a reason why the business should adopt the marketing approach instead of the selling approach"] },
+      { marks: "2", criteria: ["Sketches in general terms the marketing approach and/or the selling approach"] },
+      { marks: "1", criteria: ["Makes a relevant statement"] },
+    ],
     sample: "The business should adopt the marketing approach instead of the selling approach as the selling approach is focused mostly on selling due to increased competition and it often neglects the needs of the customer. By using the marketing approach the business can find out what the customer wants and can satisfy their needs. This is usually achieved through market research and finding out customer needs and wants prior to introducing new products into a market." },
 
 // ─── 2022 Section III/IV ──────────────────────────────────────────────────────
 
-  { id: "22e25", topic: "marketing", type: "extended", marks: 20, src: "2022 HSC, Section III, Q25",
-    stem: "Bee Sticky Pty Ltd is an established Australian manufacturing business that produces a wide range of high quality and premium organic honey products. It is expanding into global markets. It will lease warehouses in Malaysia and the USA. SWOT: Strengths, High quality, premium and organic honey products; Approved for consumption and medical uses; Made by honeybees from Australian flora. Weaknesses, Frequent breakage of product during transportation; Lack of experience in foreign payment systems. Opportunities, Expanding market for high quality honey products in countries overseas; Falling bee populations in countries overseas; Potential collaborations with up-market restaurants/chefs. Threats, Established competition in foreign markets; Fluctuations in the Australian dollar. You have been hired as a consultant by Bee Sticky Pty Ltd to write a business report. In your report: describe branding and product strategies the business could use to expand into global markets / recommend a channel choice that would suit this business's expansion / analyse the global financial management strategies required for a successful expansion.",
-    criteria: ["Describes branding and product strategies appropriate to global expansion (e.g. packaging for transport, global branding)", "Recommends a suitable channel choice with justification (e.g. agent/distributor given lack of foreign experience)", "Analyses global financial management strategies (exchange rates, hedging, derivatives, methods of payment)", "Makes effective use of the SWOT stimulus material", "Presents a sustained, logical and cohesive business report using relevant terminology"],
-    sample: "Bee Sticky should develop strong global branding that emphasises its premium Australian origin and organic credentials, with redesigned packaging to reduce breakage during international transport. A channel using agents or distributors in Malaysia and the USA is recommended, as this mitigates the weakness of limited experience in foreign markets, agents understand local regulations and payment systems. For financial management, the business should hedge against AUD fluctuations using forward contracts or derivatives to lock in exchange rates and protect revenue. Payment in advance or letters of credit should be used until foreign buyer relationships are established, given the weakness identified in unfamiliar foreign payment systems." },
+  { id: "22e25", topic: "marketing", topics: ["marketing", "finance"], type: "extended", marks: 20, src: "2022 HSC, Section III, Q25",
+    stem: "You have been hired as a consultant by Bee Sticky Pty Ltd to write a business report for the owners.\n\nIn your report:\n• describe branding and product strategies the business could use to expand into global markets\n• recommend a channel choice that would suit this business's expansion\n• analyse the global financial management strategies required for a successful expansion.",
+    stimulus: [
+      { type: "paragraph", text: "Bee Sticky Pty Ltd is an established Australian manufacturing business that produces a wide range of high quality and premium organic honey. It is expanding into global markets. It will lease warehouses in Malaysia and the USA." },
+      { type: "paragraph", text: "The company has provided you with a recently completed SWOT analysis." },
+      { type: "table", caption: "SWOT analysis", headers: ["Strengths", "Weaknesses"], rows: [["High quality, premium and organic honey products\n\nApproved for consumption and medical uses\n\nMade by honeybees from Australian flora", "Frequent breakage of product during transportation\n\nLack of experience in foreign payment systems"]] },
+      { type: "table", headers: ["Opportunities", "Threats"], rows: [["Expanding market for high quality honey in countries overseas\n\nFalling bee populations overseas\n\nPotential collaborations with up-market restaurants/chefs", "Established competition in foreign markets\n\nFluctuations in the Australian dollar"]] },
+    ],
+    criteria: ["Provides a detailed description of product and branding strategies that the company could use to expand into global markets", "Provides detailed reasons in favour of a channel choice for the company", "Draws out and relates the implications of global financial management strategies for the company", "Applies the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Provides a description of product and branding strategies that the company could use to expand into global markets", "Provides some reasons in favour of a channel choice for the company", "Makes evident the impact of global financial management strategies for the company", "Uses the information provided, demonstrating knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts", "Outlines a product and/or branding strategy that the company could use", "Provides a description of channel choice for the company", "Provides a description of a global financial management strategy/ies", "Makes some use of the information provided", "Includes features of a business report and uses some business terminology and concepts", "Outlines a product and/or branding strategy", "Outlines a channel choice", "Indicates a feature of a financial management strategy", "May include some features of a business report and uses some basic business terminology", "Refers to marketing and/or finance", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Provides a detailed description of product and branding strategies that the company could use to expand into global markets", "Provides detailed reasons in favour of a channel choice for the company", "Draws out and relates the implications of global financial management strategies for the company", "Applies the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides a description of product and branding strategies that the company could use to expand into global markets", "Provides some reasons in favour of a channel choice for the company", "Makes evident the impact of global financial management strategies for the company", "Uses the information provided, demonstrating knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Outlines a product and/or branding strategy that the company could use", "Provides a description of channel choice for the company", "Provides a description of a global financial management strategy/ies", "Makes some use of the information provided", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Outlines a product and/or branding strategy", "Outlines a channel choice", "Indicates a feature of a financial management strategy", "May include some features of a business report and uses some basic business terminology"] },
+      { marks: "1–4", criteria: ["Refers to marketing and/or finance", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Product strategies" },
+      { type: "list", items: ["Branding", "Packaging"] },
+      { type: "heading", text: "Global branding/standardisation" },
+      { type: "heading", text: "Channel choice" },
+      { type: "list", items: ["Intensive", "Selective", "Exclusive"] },
+      { type: "heading", text: "Global financial management strategies" },
+      { type: "list", items: ["Exchange rates", "Interest rates", "Methods of international payment", "Hedging", "Derivatives."] },
+    ] },
 
   { id: "22e26", topic: "human_resources", type: "extended", marks: 20, src: "2022 HSC, Section IV, Q26",
     stem: "Explain the importance to a business of having human resources strategies that reduce workplace disputes and increase worker satisfaction.",
-    criteria: ["Explains strategies that reduce workplace disputes (e.g. negotiation, mediation, FWC processes, grievance procedures)", "Explains strategies that increase worker satisfaction (e.g. rewards, development, flexible conditions, leadership)", "Links HR strategies to business outcomes (productivity, retention, cost reduction)", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response using relevant business terminology"],
-    sample: "Human resource strategies that reduce disputes, such as clear grievance procedures, negotiation processes, and fostering positive relations through consultation, prevent costly industrial action and legal proceedings. Strategies increasing worker satisfaction, including competitive monetary rewards, career development opportunities, and flexible working conditions, directly reduce staff turnover and absenteeism. Together, these approaches improve workforce productivity and lower recruitment and training costs. Businesses that proactively manage HR relationships are better positioned to attract and retain skilled employees, contributing to long-term competitive advantage." },
+    criteria: ["Provides a detailed explanation of the importance to a business of having human resource strategies that reduce workplace disputes and increase worker satisfaction", "Integrates relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Provides a sound explanation of the importance to a business of having human resource strategies that reduce workplace disputes and increase worker satisfaction", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Describes the importance to a business of having human resource strategies that reduce workplace disputes and increase worker satisfaction", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Makes some reference to human resources strategies that are important to levels of disputation and/or worker satisfaction", "May make limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to human resource strategies", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Provides a detailed explanation of the importance to a business of having human resource strategies that reduce workplace disputes and increase worker satisfaction", "Integrates relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides a sound explanation of the importance to a business of having human resource strategies that reduce workplace disputes and increase worker satisfaction", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Describes the importance to a business of having human resource strategies that reduce workplace disputes and increase worker satisfaction", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Makes some reference to human resources strategies that are important to levels of disputation and/or worker satisfaction", "May make limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to human resource strategies", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Strategies in human resource management" },
+      { type: "list", items: ["Leadership style", "Job design – general or specific tasks", "Recruitment – internal or external, general or specific skills", "Training and development – current and future skills", "Performance management – developmental or administrative", "Rewards – monetary and non-monetary, individual or group, performance pay", "Global – costs, skills, supply", "Workplace disputes – resolution – negotiation, meditation, grievance procedures, involvement of courts and tribunals"] },
+    ] },
 
   { id: "22e27", topic: "operations", type: "extended", marks: 20, src: "2022 HSC, Section IV, Q27",
     stem: "Explain the importance to a business of having operations processes that can maintain a competitive advantage.",
-    criteria: ["Explains specific operations processes (transformation process, quality management, technology, inventory management)", "Links operations processes to performance objectives (cost, quality, speed, flexibility, dependability, customisation)", "Explains how these processes sustain competitive advantage against rivals", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response using relevant business terminology"],
-    sample: "Operations processes such as lean manufacturing, quality management systems, and advanced technology implementation directly reduce costs and improve output quality, key sources of competitive advantage. Businesses that achieve high dependability (consistent delivery) and flexibility (rapid response to demand changes) outperform rivals in customer satisfaction. Continuous improvement strategies like TQM and kaizen ensure processes evolve, preventing competitors from eroding the advantage. Supply chain development and global sourcing further reduce input costs. Collectively, superior operations processes enable a business to deliver greater value at lower cost, which is the foundation of sustained competitive advantage." },
+    criteria: ["Provides a detailed explanation of why operation processes are important in maintaining a competitive advantage", "Integrates relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Provides a sound explanation of why operation processes are important in maintaining a competitive advantage", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Describes why operation processes and/or strategies are important in maintaining a competitive advantage", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Makes some reference to operations processes and/or strategies and/or competitive advantage", "May make limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to operations", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Provides a detailed explanation of why operation processes are important in maintaining a competitive advantage", "Integrates relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides a sound explanation of why operation processes are important in maintaining a competitive advantage", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Describes why operation processes and/or strategies are important in maintaining a competitive advantage", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Makes some reference to operations processes and/or strategies and/or competitive advantage", "May make limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to operations", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Operations processes" },
+      { type: "list", items: ["Inputs – transformed resources (materials, information, customers)", "Inputs – transforming resources (facilities and human resources)", "Transformation processes – the influence of volume, variety, variation in demand and visibility (customer contact)", "Sequencing and scheduling – Gantt charts, critical path analysis", "Technology, task design and process layout", "Monitoring, control and improvement", "Outputs – customer service, warranties"] },
+      { type: "paragraph", text: "A variety of sustained competitive advantage factors could be considered. Examples could include:" },
+      { type: "list", items: ["Cheaper inputs", "Increased volume", "Improved cost leadership", "Improved good/service differentiation", "Economies of scale", "Improved technology", "Increased quality, speed, dependability, flexibility, customisation", "Increased profitability."] },
+    ] },
 
 // ─── 2023 Section I ───────────────────────────────────────────────────────────
 
