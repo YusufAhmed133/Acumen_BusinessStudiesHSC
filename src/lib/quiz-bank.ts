@@ -6,6 +6,320 @@ const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
+// ─── 2021 Section I ───────────────────────────────────────────────────────────
+
+  { id: "21m1", topic: "finance", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q1",
+    stem: "The role of a cost centre within a business is to monitor and control",
+    options: ["assets.", "expenses.", "liabilities.", "receipts."],
+    answer: 1, explain: "A cost centre is a business unit responsible for monitoring and controlling expenses." },
+
+  { id: "21m2", topic: "human_resources", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q2",
+    stem: "Which pair of business functions is conducted by human resource management?",
+    options: ["Pricing and scheduling", "Scheduling and induction", "Induction and recruitment", "Recruitment and receivables"],
+    answer: 2, explain: "Recruitment and induction are both human resource management functions." },
+
+  { id: "21m3", topic: "operations", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q3",
+    stem: "Which row of the table shows both an advantage and a disadvantage of a business investing in leading edge technology?",
+    stimulus: [{ type: "table", headers: ["", "Advantage", "Disadvantage"], rows: [["A.", "Higher quality output", "High initial investment"], ["B.", "Proven effectiveness", "Increased waste"], ["C.", "Widely accepted and used", "High initial investment"], ["D.", "Increased speed", "Increased waste"]] }],
+    options: ["Higher quality output / High initial investment", "Proven effectiveness / Increased waste", "Widely accepted and used / High initial investment", "Increased speed / Increased waste"],
+    answer: 0, explain: "Leading edge technology can improve quality but commonly requires high initial investment." },
+
+  { id: "21m4", topic: "human_resources", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q4",
+    stem: "Which statement about common law contracts is correct?",
+    options: ["Common law contracts are determined by the Fair Work Commission.", "Common law contracts are required to pass the 'better off overall test'.", "Common law contracts are negotiated by unions on behalf of employees.", "Common law contracts are between individual employees and their employer."],
+    answer: 3, explain: "Common law contracts are negotiated individually between an employee and their employer." },
+
+  { id: "21m5", topic: "marketing", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q5",
+    stem: "A consumer purchases expensive designer clothing as they believe they are getting higher quality and a longer lasting product.\n\nWhich factor is influencing this consumer's choice?",
+    options: ["Economic", "Government", "Psychological", "Sociocultural"],
+    answer: 2, explain: "The consumer's perception of quality and durability is a psychological factor influencing choice." },
+
+  { id: "21m6", topic: "human_resources", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q6",
+    stem: "Which row of the table shows how a recession would affect human resource management (HRM) processes and strategies in the tourism industry?",
+    stimulus: [{ type: "table", headers: ["", "Effect on HRM processes", "Effect on HRM strategies"], rows: [["A.", "Increase in separation", "Decrease in monetary rewards"], ["B.", "Increase in acquisition", "Increase in training expenditure"], ["C.", "Decrease in separation", "Decrease in monetary rewards"], ["D.", "Decrease in acquisition", "Increase in training expenditure"]] }],
+    options: ["Increase in separation / Decrease in monetary rewards", "Increase in acquisition / Increase in training expenditure", "Decrease in separation / Decrease in monetary rewards", "Decrease in acquisition / Increase in training expenditure"],
+    answer: 0, explain: "A recession in tourism would likely reduce demand, increasing separation and reducing monetary rewards." },
+
+  { id: "21m7", topic: "marketing", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q7",
+    stem: "A manufacturer of fishing equipment sponsors an annual fishing competition. A local TV news station reports on the competition, which leads to an increase in sales for the manufacturer.\n\nWhich combination of elements of the promotion mix have benefited the manufacturer?",
+    options: ["Publicity and advertising", "Advertising and sales promotion", "Relationship marketing and publicity", "Sales promotion and relationship marketing"],
+    answer: 0, explain: "Sponsoring the competition is advertising, while the TV news coverage is publicity." },
+
+  { id: "21m8", topic: "marketing", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q8",
+    stem: "A farmer sells vegetables to a manufacturer of tinned vegetables. The manufacturer then sells the tinned vegetables to supermarkets.\n\nWhich row of the table shows the markets targeted by the farmer and the manufacturer?",
+    stimulus: [{ type: "table", headers: ["", "Market targeted by farmer", "Market targeted by manufacturer"], rows: [["A.", "Resource", "Intermediate"], ["B.", "Industrial", "Intermediate"], ["C.", "Industrial", "Consumer"], ["D.", "Resource", "Consumer"]] }],
+    options: ["Resource / Intermediate", "Industrial / Intermediate", "Industrial / Consumer", "Resource / Consumer"],
+    answer: 1, explain: "The farmer sells to another business using vegetables as inputs, an industrial market. The manufacturer sells to supermarkets as intermediaries." },
+
+  { id: "21m9", topic: "marketing", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q9",
+    stem: "A business spends one million dollars on an advertising campaign.\n\nWhich pair of analyses could this business use to evaluate the effectiveness of this marketing strategy?",
+    options: ["Market share and sales", "SWOT and market share", "Sales and product life cycle", "Product life cycle and SWOT"],
+    answer: 0, explain: "Sales and market share are direct measures of advertising effectiveness." },
+
+  { id: "21m10", topic: "operations", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q10",
+    stem: "A manufacturing business is a cost leader in their industry.\n\nWhich combination of features of the transformation process are they most likely to demonstrate?",
+    options: ["Low volume, low variety", "High volume, low variety", "Low volume, high variety", "High volume, high variety"],
+    answer: 1, explain: "Cost leadership is commonly achieved through high volume and low variety, allowing economies of scale and standardisation." },
+
+  { id: "21m11", topic: "operations", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q11",
+    stem: "A mobile phone manufacturer decides to globally source inputs that they had previously produced themselves.\n\nWhich of the following shows possible negative effects of this decision?",
+    options: ["Simplified logistics and delays in the supply chain", "Delays in the supply chain and increased transport costs", "Increased transport costs and reduced access to specialist suppliers", "Reduced access to specialist suppliers and a decrease in logistics costs"],
+    answer: 1, explain: "Global sourcing can create supply chain delays and increase transport costs." },
+
+  { id: "21m12", topic: "operations", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q12",
+    stem: "A manager at a fast-food business wants to change the operations process in response to the influence of corporate social responsibility.\n\nWhich action would achieve this objective?",
+    options: ["Providing cash donations to a local hospital", "Increasing the visibility of the cooking process", "Offering a wider variety of healthy options on their menu", "Ensuring that injured workers receive access to compensation payments"],
+    answer: 2, explain: "Offering healthier menu options changes the operations output in response to social responsibility expectations." },
+
+  { id: "21m13", topic: "finance", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q13",
+    stem: "Consider the following financial information provided by a business.\n\nWhich of the following must have occurred between Year 1 and Year 2?",
+    stimulus: [{ type: "table", headers: ["Year", "Revenue ($M)", "Gross Profit ($M)", "Net Profit ($M)"], rows: [["1", "100", "80", "30"], ["2", "80", "60", "30"]] }],
+    options: ["Expenses increased", "Expenses decreased", "Cost of goods sold increased", "Cost of goods sold decreased"],
+    answer: 1, explain: "Expenses fell from $50M in Year 1 to $30M in Year 2 because net profit stayed at $30M while gross profit fell from $80M to $60M." },
+
+  { id: "21m14", topic: "operations", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q14",
+    stem: "A car manufacturer's marketing manager suggests to the operations manager that they increase the warranty period from 3 to 5 years in order to increase market share.\n\nThe operations manager would agree to this suggestion if",
+    options: ["gearing has reduced.", "it provided an incentive to increase production speed.", "current quality management strategies could support it.", "it provided sales staff the opportunity to increase sales commissions."],
+    answer: 2, explain: "A longer warranty is only viable if quality management can support durable output and reduce warranty claims." },
+
+  { id: "21m15", topic: "human_resources", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q15",
+    stem: "A food delivery business made a recent change to their human resource management strategy with the following results.\n\nWhich human resource strategy is most likely to have resulted in the changes?",
+    stimulus: [{ type: "table", headers: ["Indicator", "Change"], rows: [["Absenteeism", "30% decrease"], ["Deliveries per driver", "25% increase"], ["Number of accidents", "100% increase"], ["Worker satisfaction", "15% decrease"]] }],
+    options: ["An increase in work health and safety training", "The reduced use of staff performance reviews", "A move from an autocratic to a democratic leadership style", "Move from a fixed salary to pay based on individual deliveries"],
+    answer: 3, explain: "Pay based on individual deliveries would incentivise more deliveries but may reduce satisfaction and increase accidents." },
+
+  { id: "21m16", topic: "marketing", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q16",
+    stem: "Why might a business move from a production approach to a selling approach?",
+    options: ["In response to increased competition", "In order to increase promotional expenditure", "In order to better understand customer needs", "In response to an inability to satisfy current demand"],
+    answer: 0, explain: "A selling approach is commonly adopted when competition increases and a business needs to persuade customers to buy." },
+
+  { id: "21m17", topic: "human_resources", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q17",
+    stem: "Joe was made redundant by his employer but believes that he was dismissed unfairly. He takes his case to a lawyer.\n\nWhat evidence would effectively support the employer's decision?",
+    options: ["Video of Joe stealing goods from the storeroom", "Consistent warnings over ongoing poor performance", "Financial records showing ongoing losses due to poor sales", "Documents showing that a new employee is doing Joe's job"],
+    answer: 2, explain: "Redundancy is supported by evidence that the position is no longer required because of business conditions such as ongoing financial losses." },
+
+  { id: "21m18", topic: "finance", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q18",
+    stem: "When a business uses factoring, they improve their",
+    options: ["cash flow by increasing their revenue.", "cash flow but reduce their profitability.", "working capital by reducing their costs.", "working capital but increase their liabilities."],
+    answer: 1, explain: "Factoring converts receivables into cash faster but reduces profitability because the factor charges a fee or discount." },
+
+  { id: "21m19", topic: "finance", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q19",
+    stem: "An Australian farmer has been contracted to sell 1000 tonnes of oranges to an American juice manufacturer at a set price. Payment is required in 60 days in Australian dollars.\n\nWhich of the following would be an effective method of hedging in this transaction?",
+    options: ["The Australian farmer using a derivative to protect themselves from a falling Australian dollar.", "The Australian farmer using a derivative to protect themselves from a falling American dollar.", "The American manufacturer using a derivative to protect themselves from a falling Australian dollar.", "The American manufacturer using a derivative to protect themselves from a falling American dollar."],
+    answer: 3, explain: "The American manufacturer must pay in Australian dollars, so it needs protection if the American dollar falls against the Australian dollar." },
+
+  { id: "21m20", topic: "finance", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q20",
+    stem: "Company A intends to buy Company B. Company A might pay too much for Company B if Company B's financial manager decides to",
+    options: ["normalise a large one-off asset sale.", "capitalise their research and development expenses.", "fully disclose the nature of the receivables owed to the company.", "record their buildings at historical cost although they increased in value."],
+    answer: 1, explain: "Capitalising research and development expenses can inflate assets and profit, leading a buyer to overvalue the business." },
+
+// ─── 2021 Section II ──────────────────────────────────────────────────────────
+
+  { id: "21s21a", topic: "operations", type: "short", marks: 2, src: "2021 HSC, Section II, Q21(a)",
+    stem: "A building company has been contracted to build a new home for a customer. The contract requires the home to be completed within six months and within budget.\n\nOutline how this customer can be considered an input in the construction of the new home.",
+    criteria: ["Sketches in general terms how this customer is an input in the construction of the new home", "Makes a relevant statement about inputs in the construction of a new home"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms how this customer is an input in the construction of the new home"] },
+      { marks: "1", criteria: ["Makes a relevant statement about inputs in the construction of a new home"] },
+    ],
+    sample: "Customers are a transformed resource in the operations process. If the customer provides information to the builder about, for example, the materials, paint colours, or size of the house, they are acting as an input in the construction of the new home." },
+
+  { id: "21s21b", topic: "operations", type: "short", marks: 4, src: "2021 HSC, Section II, Q21(b)",
+    stem: "A building company has been contracted to build a new home for a customer. The contract requires the home to be completed within six months and within budget.\n\nHow could a Gantt chart help the building company meet the terms of the contract?",
+    criteria: ["Makes evident the relationship between a Gantt chart and the way it helps the building company meet the terms of the contract", "Provides characteristics of a Gantt chart and the way it helps the building company with reference to the contract", "Sketches in general terms a Gantt chart with reference to the contract", "Makes a relevant statement about a Gantt chart"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Makes evident the relationship between a Gantt chart and the way it helps the building company meet the terms of the contract"] },
+      { marks: "3", criteria: ["Provides characteristics of a Gantt chart and the way it helps the building company with reference to the contract"] },
+      { marks: "2", criteria: ["Sketches in general terms a Gantt chart with reference to the contract"] },
+      { marks: "1", criteria: ["Makes a relevant statement about a Gantt chart"] },
+    ],
+    sample: "A sequencing and scheduling tool such as a Gantt chart could help the building company meet the terms of the contract as this tool identifies the sequence or order in which components of the home need to be built and it allocates a timeframe for each component. This allows the builder to stay within the agreed timeframe in the contract and it should improve efficiency, hence allowing them to keep to the agreed budget in the contract. For example, the Gantt chart could ensure that different tradespeople come in correct order (for example, painters don't arrive before electricians) to ensure an efficient transformation process." },
+
+  { id: "21s21c", topic: "operations", type: "short", marks: 4, src: "2021 HSC, Section II, Q21(c)",
+    stem: "A building company has been contracted to build a new home for a customer. The contract requires the home to be completed within six months and within budget.\n\nThe operations manager will need to outsource certain elements of the construction process.\n\nExplain TWO quality management strategies that could be used to ensure the quality of the outsourced work.",
+    criteria: ["Clearly makes evident the relationship between each of two quality management strategies and the resulting quality of the outsourced work", "Provides characteristics and features of two quality management strategies and their effect on the quality of the work", "Sketches in general terms a quality management strategy and refers to quality of the work", "OR", "Sketches in general terms two quality management strategies", "Makes a relevant statement about quality management or outsourcing"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Clearly makes evident the relationship between each of two quality management strategies and the resulting quality of the outsourced work"] },
+      { marks: "3", criteria: ["Provides characteristics and features of two quality management strategies and their effect on the quality of the work"] },
+      { marks: "2", criteria: ["Sketches in general terms a quality management strategy and refers to quality of the work", "OR", "Sketches in general terms two quality management strategies"] },
+      { marks: "1", criteria: ["Makes a relevant statement about quality management or outsourcing"] },
+    ],
+    sample: "Outsourcing involves using other businesses to complete some activities in the construction of the house. To ensure the quality of this work, the operations manager could use a quality assurance strategy. This might involve checking that the provider has certified international standards and understands pre-determined standards which should ensure the quality of the work done by this contractor. They could also use quality control measures such as ongoing inspections of the outsourced work to ensure standards are met." },
+
+  { id: "21s22a", topic: "finance", type: "short", marks: 2, src: "2021 HSC, Section II, Q22(a)",
+    stem: "A luxury Australian handbag business is going to expand. They intend to borrow 30 million US dollars to buy several new retail properties across Australia.\n\nIdentify where the business could record the loan and the properties on its balance sheet.",
+    criteria: ["States where the business would record the loan and the properties on its balance sheet", "States ONE place that this transaction would be recorded on the business's balance sheet"],
+    criteriaBands: [
+      { marks: "2", criteria: ["States where the business would record the loan and the properties on its balance sheet"] },
+      { marks: "1", criteria: ["States ONE place that this transaction would be recorded on the business's balance sheet"] },
+    ],
+    sample: "The new $30m loan would be recorded as a non-current liability on this company's balance sheet and the properties would be recorded as a non-current asset." },
+
+  { id: "21s22b", topic: "finance", type: "short", marks: 3, src: "2021 HSC, Section II, Q22(b)",
+    stem: "A luxury Australian handbag business is going to expand. They intend to borrow 30 million US dollars to buy several new retail properties across Australia.\n\nExplain a financial risk associated with borrowing funds from the USA.",
+    criteria: ["Provides a cause and effect relationship between the choice to borrow funds from the USA and financial risk for the business", "Sketches in general terms how borrowing from the USA could lead to financial risk for the business", "Makes a relevant statement about borrowing from overseas"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides a cause and effect relationship between the choice to borrow funds from the USA and financial risk for the business"] },
+      { marks: "2", criteria: ["Sketches in general terms how borrowing from the USA could lead to financial risk for the business"] },
+      { marks: "1", criteria: ["Makes a relevant statement about borrowing from overseas"] },
+    ],
+    sample: "Exchange rate fluctuations are a financial risk the Australian handbag business needs to consider when borrowing from the US Bank. If the Australian Dollar were to depreciate against the American Dollar, the business would be required to pay back significantly more than the $30 million they borrowed. This would result in an increase in loan repayments and therefore a loss in profitability.",
+    sampleBlocks: [{ type: "heading", text: "Answers could include:" }, { type: "list", items: ["An increase in US interest rates."] }] },
+
+  { id: "21s22c", topic: "finance", type: "short", marks: 5, src: "2021 HSC, Section II, Q22(c)",
+    stem: "A luxury Australian handbag business is going to expand. They intend to borrow 30 million US dollars to buy several new retail properties across Australia.\n\nThe table shows financial information for this Australian handbag business.\n\nAccount for the changes in this business's current and forecast profitability and gearing.",
+    stimulus: [{ type: "table", headers: ["Ratio", "Current\n(Before loan)", "Forecast\n(12 months after loan)"], rows: [["Gross profit", "65%", "70%"], ["Net profit", "21%", "18%"], ["Debt to equity", "0.85 : 1 or 85%", "1.5 : 1 or 150%"]] }],
+    criteria: ["Provides detailed reasons for the changes in the current and forecast profitability and gearing of this business", "Provides reasons for the changes in the current and forecast profitability and gearing of this business", "Provides reasons for the expected change to the profitability OR gearing of this business", "OR", "Provides characteristics and features of the changes to the profitability and gearing", "Sketches in general terms changes to either the profitability OR gearing", "Makes a relevant statement about profitability or gearing"],
+    criteriaBands: [
+      { marks: "5", criteria: ["Provides detailed reasons for the changes in the current and forecast profitability and gearing of this business"] },
+      { marks: "4", criteria: ["Provides reasons for the changes in the current and forecast profitability and gearing of this business"] },
+      { marks: "3", criteria: ["Provides reasons for the expected change to the profitability OR gearing of this business", "OR", "Provides characteristics and features of the changes to the profitability and gearing"] },
+      { marks: "2", criteria: ["Sketches in general terms changes to either the profitability OR gearing"] },
+      { marks: "1", criteria: ["Makes a relevant statement about profitability or gearing"] },
+    ],
+    sample: "The change in the forecast gearing is measured via the change to the debt to equity ratio and is likely to be a direct result of taking on the additional $30m in debt funding with no increase in equity. This new debt is likely to be responsible for the increase in the debt to equity ratio from 85% to 150%. The changes to forecast profitability are witnessed via the increased GRP and the fall in NPR. It is likely that the anticipated additional volume of sales that will be generated by the expansion will lead to increased economies of scale and purchasing power. Although their COGS would increase, the economies of scale enjoyed would increase their gross profit margin, which would lead to the higher GPR (moving from 65% to 70%). The worsening of the NPR (from 21% to 18%) may be explained by the additional interest expense payable on the loan." },
+
+  { id: "21s23a", topic: "human_resources", type: "short", marks: 2, src: "2021 HSC, Section II, Q23(a)",
+    stem: "Outline how corporate culture can affect staff turnover.",
+    criteria: ["Sketches in general terms how corporate culture can affect staff turnover", "Provides relevant information about corporate culture or staff turnover"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms how corporate culture can affect staff turnover"] },
+      { marks: "1", criteria: ["Provides relevant information about corporate culture or staff turnover"] },
+    ],
+    sample: "Corporate culture reflects the beliefs and values that are shared amongst employees in a business. A good corporate culture should reduce staff turnover, as employees will want to work for such a business, as typically, they will feel valued and respected." },
+
+  { id: "21s23b", topic: "human_resources", type: "short", marks: 2, src: "2021 HSC, Section II, Q23(b)",
+    stem: "Why might a business use a contractor to recruit staff?",
+    criteria: ["Provides a relevant reason for a business to use a contractor to recruit staff", "Makes a relevant statement about contracting and/or recruitment"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Provides a relevant reason for a business to use a contractor to recruit staff"] },
+      { marks: "1", criteria: ["Makes a relevant statement about contracting and/or recruitment"] },
+    ],
+    sample: "Recruitment involves identifying and attracting appropriate employees for a role. A contractor could provide specialist recruitment skills that may not be present in a business which would allow the business to focus on other core functions." },
+
+  { id: "21s23c", topic: "human_resources", type: "short", marks: 6, src: "2021 HSC, Section II, Q23(c)",
+    stem: "In recent times governments have imposed restrictions on businesses such as lockdowns, social distancing and the movement of people. As a result, businesses have changed the way their employees work and communicate with each other.\n\nDiscuss the possible implications of these influences on human resource management.",
+    criteria: ["Provides detailed advantages and/or disadvantages of the possible implications of these influences on human resource management", "Provides advantages and/or disadvantages of possible implications of these influences on human resource management", "Provides characteristics and features of these influences on human resource management", "Sketches in general terms aspects of human resource management and/or implications of these influences for business", "Sketches in general terms an aspect of human resource management and/or an implication of these influences for business", "Provides some relevant information about human resource management"],
+    criteriaBands: [
+      { marks: "6", criteria: ["Provides detailed advantages and/or disadvantages of the possible implications of these influences on human resource management"] },
+      { marks: "5", criteria: ["Provides advantages and/or disadvantages of possible implications of these influences on human resource management"] },
+      { marks: "4", criteria: ["Provides characteristics and features of these influences on human resource management"] },
+      { marks: "3", criteria: ["Sketches in general terms aspects of human resource management and/or implications of these influences for business"] },
+      { marks: "2", criteria: ["Sketches in general terms an aspect of human resource management and/or an implication of these influences for business"] },
+      { marks: "1", criteria: ["Provides some relevant information about human resource management"] },
+    ],
+    sample: "By reducing movement of people and social distancing many businesses have had fewer customers and suffered a loss of sales. This may cause human resources management to reduce acquisition of staff and, in some cases, increase separations or reduce hours for their employees. As a result of these restrictions, businesses have used technology to allow their employees to work from home.\n\nThis presents challenges for businesses in terms of ensuring that their employees understand WHS laws in their home setting and communicate ethically and in a socially responsible manner online. This has also presented opportunities to acquire workers in remote or overseas locations who can work from home, at a potentially lower cost. WHS laws have increased training and requirements of human resources management. Businesses may reduce other training or travel expenditure on courses that may be interstate or overseas." },
+
+  { id: "21s24a", topic: "marketing", type: "short", marks: 3, src: "2021 HSC, Section II, Q24(a)",
+    stem: "Explain the benefits of customisation as a global marketing strategy.",
+    criteria: ["Provides a relationship between customisation as a global marketing strategy and it's benefits", "Provides characteristics and features of customisation as a global marketing strategy", "Makes a relevant statement about customisation or global marketing"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides a relationship between customisation as a global marketing strategy and it's benefits"] },
+      { marks: "2", criteria: ["Provides characteristics and features of customisation as a global marketing strategy"] },
+      { marks: "1", criteria: ["Makes a relevant statement about customisation or global marketing"] },
+    ],
+    sample: "A customised global marketing strategy requires a marketing manager to alter their marketing mix to meet the customers' tastes and preferences in different countries. Marketing managers might do this in order to successfully appeal to the different target market audience to grow sales revenue and market share in each country by altering the product price, promotion or place strategies." },
+
+  { id: "21s24b", topic: "marketing", type: "short", marks: 3, src: "2021 HSC, Section II, Q24(b)",
+    stem: "Use the following advertisement to answer parts (b) and (c).\n\nHow does this advertisement use sociocultural factors to influence customer choice?",
+    stimulus: [
+      { type: "heading", text: "Be the envy of your neighbours" },
+      { type: "table", rows: [["The best quality fridge in the market\n\nComes with a massive 6-month warranty***", "*This weekend only\n30% off\nin-store only\n\n**Zero carbon emissions"]] },
+      { type: "note", text: "*30% off not applicable to this product. **Zero carbon emissions only in houses that are zero carbon powered. ***No repairs or returns will be considered after 6 months." },
+    ],
+    criteria: ["Demonstrates clearly how aspect/s of the advertisement use sociocultural factors to influence customer choice", "Sketches in general terms how aspect/s of the advertisement use sociocultural factors to influence customer choice", "Makes a relevant statement about sociocultural factors"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Demonstrates clearly how aspect/s of the advertisement use sociocultural factors to influence customer choice"] },
+      { marks: "2", criteria: ["Sketches in general terms how aspect/s of the advertisement use sociocultural factors to influence customer choice"] },
+      { marks: "1", criteria: ["Makes a relevant statement about sociocultural factors"] },
+    ],
+    sample: "This advertisement uses several sociocultural factors to encourage customers to buy the fridge. It states that if I buy this fridge I will be 'the envy of my neighbours'. This is because this fridge is the 'best quality fridge in the market', it is expensive, but I can get it at a cheaper price! These factors appeal to a customer's sense of self and where they fit in their society." },
+
+  { id: "21s24c", topic: "marketing", type: "short", marks: 4, src: "2021 HSC, Section II, Q24(c)",
+    stem: "Use the following advertisement to answer parts (b) and (c).\n\nHow might aspects of this advertisement breach Australian consumer laws?",
+    stimulus: [
+      { type: "heading", text: "Be the envy of your neighbours" },
+      { type: "table", rows: [["The best quality fridge in the market\n\nComes with a massive 6-month warranty***", "*This weekend only\n30% off\nin-store only\n\n**Zero carbon emissions"]] },
+      { type: "note", text: "*30% off not applicable to this product. **Zero carbon emissions only in houses that are zero carbon powered. ***No repairs or returns will be considered after 6 months." },
+    ],
+    criteria: ["Demonstrates a thorough understanding of how aspects of the advertisement might breach Australian consumer laws", "Demonstrates how aspects of the advertisement might breach Australian consumer laws", "Sketches in general terms an aspect of the advertisement that might breach Australian consumer laws", "Provides some relevant information"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Demonstrates a thorough understanding of how aspects of the advertisement might breach Australian consumer laws"] },
+      { marks: "3", criteria: ["Demonstrates how aspects of the advertisement might breach Australian consumer laws"] },
+      { marks: "2", criteria: ["Sketches in general terms an aspect of the advertisement that might breach Australian consumer laws"] },
+      { marks: "1", criteria: ["Provides some relevant information"] },
+    ],
+    sample: "This advertisement breaches Australian consumer laws by saying that it comes with a 'massive 6-month warranty'. The advertisement most likely breaches the implied conditions associated with Australian consumer laws as the length of the warranty (6 months) is not appropriately long enough relative to the expected quality represented by the best quality fridge on the market. This is most likely a breach of the acceptable quality consumer guarantee in the ACL, based on not being reasonably durable. Also, in the small print, the advertisement states that no repairs or returns will be considered after 6 months.\n\nThe body of the advertisement states that there is 30% off, but the fine print says that this discount is not available on this product. This is clearly deceptive advertising, advertising which misleads or is likely to mislead consumers, and thus is a breach of Australian consumer law as the fine print is in direct contradiction with the advertised statement." },
+
+// ─── 2021 Section III/IV ──────────────────────────────────────────────────────
+
+  { id: "21e25", topic: "operations", topics: ["operations", "finance"], type: "extended", marks: 20, src: "2021 HSC, Section III, Q25",
+    stem: "You have been hired as a consultant by Ozzi Baby Food Pty Ltd to write a business report to the owners.\n\nIn your report:\n• outline TWO operations influences affecting this business\n• discuss the use of retraining and redundancy payments to help overcome employee resistance to these changes\n• compare the use of a mortgage to a new issue of shares to fund the factory purchase.",
+    stimulus: [
+      { type: "paragraph", text: "Ozzi Baby Food Pty Ltd have developed a trusted reputation in domestic and global markets due to their safe and sustainably-sourced product range. This has led to a significant increase in demand." },
+      { type: "paragraph", text: "As a result, they are considering the purchase of a larger automated factory. This will lead to some job losses. The business will require external finance to fund the factory purchase using either a mortgage or becoming a public company on the Australian Securities Exchange (ASX)." },
+    ],
+    criteria: ["Sketches in detail the main features of two operations influences on this business", "Provides detailed reasons for and/or against the use of redundancy payments and retraining to overcome employee resistance to changes in this business", "Provides detailed similarities and differences between a mortgage and a new issue of shares to fund the factory purchase", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Provides a sketch indicating features of two operations influences on this business", "Provides reasons for and/or against the use of redundancy payments and retraining to overcome employee resistance to changes in this business", "Provides similarities and differences between a mortgage and a new issue of shares to fund the factory", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts", "Indicates features of operations influences on this business", "Provides some characteristics and features of redundancy payments and retraining to overcome employee resistance to changes in this business", "Provides some similarities and differences between a new issue of shares and a mortgage in relation to the purchase of the factory", "Includes features of a business report and uses some business terminology and concepts", "Identifies operations influences on this business", "Sketches briefly redundancy payments and/or retraining", "Sketches in general terms a new issue of shares and/or a mortgage", "May include some features of a business report and uses basic business terminology", "Refers to operations and/or finance", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Sketches in detail the main features of two operations influences on this business", "Provides detailed reasons for and/or against the use of redundancy payments and retraining to overcome employee resistance to changes in this business", "Provides detailed similarities and differences between a mortgage and a new issue of shares to fund the factory purchase", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides a sketch indicating features of two operations influences on this business", "Provides reasons for and/or against the use of redundancy payments and retraining to overcome employee resistance to changes in this business", "Provides similarities and differences between a mortgage and a new issue of shares to fund the factory", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Indicates features of operations influences on this business", "Provides some characteristics and features of redundancy payments and retraining to overcome employee resistance to changes in this business", "Provides some similarities and differences between a new issue of shares and a mortgage in relation to the purchase of the factory", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Identifies operations influences on this business", "Sketches briefly redundancy payments and/or retraining", "Sketches in general terms a new issue of shares and/or a mortgage", "May include some features of a business report and uses basic business terminology"] },
+      { marks: "1–4", criteria: ["Refers to operations and/or finance", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Operations Influences" },
+      { type: "list", items: ["Globalisation, technology, quality expectations, legal regulations, environmental sustainability", "Corporate social responsibility"] },
+      { type: "heading", text: "Operations Strategies" },
+      { type: "list", items: ["Overcoming resistance to change", "Redundancy payments", "Retraining"] },
+      { type: "heading", text: "Influences on Financial Management" },
+      { type: "list", items: ["External sources of finance", "Debt – long term borrowing (mortgage)", "Equity – new issue"] },
+      { type: "heading", text: "Processes of Financial Management" },
+      { type: "list", items: ["Debt and equity financing – advantages and disadvantages of each", "Matching the terms and source of finance to business purpose"] },
+      { type: "heading", text: "Relevant similarities and differences between a mortgage and a new issue of shares to fund the factory purchase:" },
+      { type: "list", items: ["Cost of finance – interest vs dividends, establishment costs", "Ownership/control and voting rights", "Time taken to access finance", "Assets to secure finance", "Tax implications", "Effects on gearing", "Interest rate volatility or ability to fix interest rates."] },
+    ] },
+
+  { id: "21e26", topic: "marketing", type: "extended", marks: 20, src: "2021 HSC, Section IV, Q26",
+    stem: "Analyse how a situational analysis (SWOT, product life cycle) may affect marketing strategies.",
+    criteria: ["Draws out and clearly relates the implications of a situational analysis (SWOT, PLC) on marketing strategies", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the relationship between a situational analysis (SWOT, PLC) and marketing strategies", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of a situational analysis (SWOT, PLC) and marketing strategies", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts", "Sketches in general terms a situational analysis and/or marketing strategies", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to marketing", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Draws out and clearly relates the implications of a situational analysis (SWOT, PLC) on marketing strategies", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the relationship between a situational analysis (SWOT, PLC) and marketing strategies", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of a situational analysis (SWOT, PLC) and marketing strategies", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms a situational analysis and/or marketing strategies", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to marketing", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Marketing Process" },
+      { type: "list", items: ["Situational analysis – SWOT (strengths, weaknesses, opportunities, threats)", "Product life cycle"] },
+      { type: "heading", text: "Marketing Strategies" },
+      { type: "list", items: ["Market segmentation, product/service differentiation and positioning", "Products – goods and/or services, branding, packaging", "Price including pricing methods – cost, market, competition-based", "Pricing strategies – skimming, penetration, loss leaders, price points", "Price and quality interaction", "Promotion – elements of the promotion mix – advertising, personal selling and relationship marketing, sales promotions, publicity and public relations", "The communication process – opinion leaders, word of mouth", "Place/distribution – distribution channels, channel choice – intensive, selective, exclusive, physical distribution issues – transport, warehousing, inventory", "People, processes and physical evidence", "E-marketing", "Global marketing – global branding, standardisation, customisation, global pricing, competitive positioning."] },
+    ] },
+
+  { id: "21e27", topic: "human_resources", type: "extended", marks: 20, src: "2021 HSC, Section IV, Q27",
+    stem: "Analyse how human resource management strategies can improve the process of employee acquisition and maintenance.",
+    criteria: ["Clearly draws out and relates how human resource management strategies can improve the process of employee acquisition and maintenance", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the relationship between human resource management strategies and improvement in the process of employee acquisition and maintenance", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of human resource management strategies that can improve the process of employee acquisition and maintenance", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts", "Sketches in general terms human resource strategies and the process of employee acquisition and/or maintenance", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to human resource management", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Clearly draws out and relates how human resource management strategies can improve the process of employee acquisition and maintenance", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the relationship between human resource management strategies and improvement in the process of employee acquisition and maintenance", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of human resource management strategies that can improve the process of employee acquisition and maintenance", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms human resource strategies and the process of employee acquisition and/or maintenance", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to human resource management", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Processes of human resource management:" },
+      { type: "list", items: ["Acquisition", "Maintenance"] },
+      { type: "heading", text: "Strategies in human resource management" },
+      { type: "list", items: ["Leadership style", "Job design – general or specific tasks", "Recruitment – internal or external, general or specific skills", "Training and development – current or future skills", "Performance management – developmental or administrative", "Rewards – monetary and non-monetary, individual or group, performance pay", "Global – costs, skills, supply", "Workplace disputes – resolution – negotiation, mediation, grievance procedures, involvement of courts and tribunals."] },
+    ] },
+
 // ─── 2022 Section I ───────────────────────────────────────────────────────────
 
   { id: "22m1", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q1",
