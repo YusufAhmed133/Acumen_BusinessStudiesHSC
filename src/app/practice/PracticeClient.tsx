@@ -287,6 +287,135 @@ function RichContentBlocks({ blocks, compact = false }: { blocks: RichContentBlo
           );
         }
 
+        if (block.type === "lineChart") {
+          const width = 560;
+          const height = 260;
+          const padLeft = 54;
+          const padRight = 130;
+          const padTop = 34;
+          const padBottom = 42;
+          const plotWidth = width - padLeft - padRight;
+          const plotHeight = height - padTop - padBottom;
+          const yTicks = Array.from(
+            { length: Math.floor((block.yMax - block.yMin) / block.yStep) + 1 },
+            (_, tickIndex) => block.yMin + tickIndex * block.yStep
+          );
+          const xPosition = (index: number) => padLeft + (plotWidth / Math.max(block.xLabels.length - 1, 1)) * index;
+          const yPosition = (value: number) => padTop + ((block.yMax - value) / (block.yMax - block.yMin)) * plotHeight;
+
+          return (
+            <figure key={blockIndex} style={{ margin: 0, overflowX: "auto" }}>
+              <svg
+                role="img"
+                aria-label={`${block.title}. ${block.series.map((series) => `${series.label}: ${series.values.join(", ")}`).join(". ")}`}
+                viewBox={`0 0 ${width} ${height}`}
+                style={{ width: "100%", minWidth: compact ? 420 : 560, height: "auto", display: "block" }}
+              >
+                <text x={width / 2} y={18} textAnchor="middle" style={{ fontSize: 15, fontWeight: 700, fill: "#1A1A1A" }}>
+                  {block.title}
+                </text>
+                {yTicks.map((tick) => {
+                  const y = yPosition(tick);
+                  return (
+                    <g key={tick}>
+                      <line x1={padLeft} x2={padLeft + plotWidth} y1={y} y2={y} stroke="rgba(10,10,10,0.18)" />
+                      <text x={padLeft - 10} y={y + 4} textAnchor="end" style={{ fontSize: 11, fill: "#3A3A3A" }}>
+                        {tick}
+                      </text>
+                    </g>
+                  );
+                })}
+                <line x1={padLeft} x2={padLeft + plotWidth} y1={padTop + plotHeight} y2={padTop + plotHeight} stroke="#1A1A1A" />
+                <line x1={padLeft} x2={padLeft} y1={padTop} y2={padTop + plotHeight} stroke="#1A1A1A" />
+                <text x={18} y={padTop + plotHeight / 2} textAnchor="middle" transform={`rotate(-90 18 ${padTop + plotHeight / 2})`} style={{ fontSize: 12, fill: "#1A1A1A" }}>
+                  {block.yLabel}
+                </text>
+                {block.xLabels.map((label, labelIndex) => (
+                  <text key={label} x={xPosition(labelIndex)} y={padTop + plotHeight + 24} textAnchor="middle" style={{ fontSize: 11, fill: "#1A1A1A" }}>
+                    {label}
+                  </text>
+                ))}
+                {block.series.map((series) => {
+                  const points = series.values.map((value, valueIndex) => `${xPosition(valueIndex)},${yPosition(value)}`).join(" ");
+                  return (
+                    <g key={series.label}>
+                      <polyline
+                        points={points}
+                        fill="none"
+                        stroke={series.stroke}
+                        strokeWidth={3}
+                        strokeDasharray={series.dash}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      {series.values.map((value, valueIndex) => (
+                        <circle key={valueIndex} cx={xPosition(valueIndex)} cy={yPosition(value)} r={3.5} fill={series.stroke} />
+                      ))}
+                    </g>
+                  );
+                })}
+                {block.series.map((series, seriesIndex) => (
+                  <g key={series.label} transform={`translate(${padLeft + plotWidth + 28} ${padTop + 22 + seriesIndex * 24})`}>
+                    <line x1={0} x2={34} y1={0} y2={0} stroke={series.stroke} strokeWidth={3} strokeDasharray={series.dash} strokeLinecap="round" />
+                    <text x={42} y={4} style={{ fontSize: 12, fill: "#1A1A1A" }}>
+                      {series.label}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+            </figure>
+          );
+        }
+
+        if (block.type === "gantt") {
+          return (
+            <div key={blockIndex} style={{ overflowX: "auto", border: "1px solid rgba(10,10,10,0.1)", borderRadius: 10 }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", minWidth: compact ? 520 : 700, background: "#FFFCF4" }}>
+                <caption style={{ captionSide: "top", textAlign: "center", padding: "10px 12px", fontSize: 12, fontWeight: 700, color: "#1A1A1A" }}>
+                  {block.caption}
+                </caption>
+                <thead>
+                  <tr>
+                    <th style={{ padding: "9px 10px", background: "#F8F4E8", borderTop: "1px solid rgba(10,10,10,0.1)", borderRight: "1px solid rgba(10,10,10,0.08)", fontSize: 12, textAlign: "left" }}>
+                      Activity/sequence
+                    </th>
+                    {block.columns.map((column) => (
+                      <th key={column} style={{ padding: "9px 10px", background: "#F8F4E8", borderTop: "1px solid rgba(10,10,10,0.1)", borderRight: "1px solid rgba(10,10,10,0.08)", fontSize: 12, textAlign: "center" }}>
+                        {column}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {block.rows.map((row) => (
+                    <tr key={row.label}>
+                      <th scope="row" style={{ padding: "9px 10px", borderTop: "1px solid rgba(10,10,10,0.08)", borderRight: "1px solid rgba(10,10,10,0.08)", fontSize: 12, lineHeight: 1.35, textAlign: "left", fontWeight: 500 }}>
+                        {row.label}
+                      </th>
+                      {block.columns.map((column) => {
+                        const active = row.active.includes(column);
+                        return (
+                          <td key={column} style={{ padding: 6, borderTop: "1px solid rgba(10,10,10,0.08)", borderRight: "1px solid rgba(10,10,10,0.08)", textAlign: "center" }}>
+                            <span
+                              aria-label={active ? `${row.label}: ${column}` : undefined}
+                              style={{
+                                display: "block",
+                                height: 18,
+                                borderRadius: 4,
+                                background: active ? "#1A1A1A" : "transparent",
+                              }}
+                            />
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+
         return (
           <div key={blockIndex} style={{ overflowX: "auto", border: "1px solid rgba(10,10,10,0.1)", borderRadius: 10 }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: compact ? 320 : 520, background: "#FFFCF4" }}>
@@ -473,7 +602,7 @@ function QuestionCard({ q }: { q: Question }) {
                   >
                     <span style={{ fontWeight: 600, flexShrink: 0, color: "#5C5C5C" }}>{letter}.</span>
                     <span style={{ display: "grid", gap: optionBlocks ? 8 : 0, flex: 1 }}>
-                      {opt}
+                      {!optionBlocks && opt}
                       {optionBlocks && <RichContentBlocks blocks={optionBlocks} compact />}
                     </span>
                   </button>
@@ -571,7 +700,7 @@ function QuestionCard({ q }: { q: Question }) {
               {revealed && (
                 <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px dashed rgba(10,10,10,0.18)", fontSize: 13, lineHeight: 1.65, color: "#1A1A1A" }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 8 }}>
-                    Sample response
+                    {(q as ShortQuestion).sample ? "Sample response" : "Marking guidance"}
                   </div>
                   {(q as ShortQuestion).sample && (
                     <p style={{ margin: (q as ShortQuestion).sampleBlocks ? "0 0 10px" : 0 }}>

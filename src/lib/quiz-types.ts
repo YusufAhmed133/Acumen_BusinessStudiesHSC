@@ -12,6 +12,22 @@ export type RichContentBlock =
   | { type: "heading"; text: string }
   | { type: "list"; items: string[] }
   | { type: "table"; caption?: string; headers?: string[]; rows: string[][] }
+  | {
+      type: "lineChart";
+      title: string;
+      yLabel: string;
+      xLabels: string[];
+      yMin: number;
+      yMax: number;
+      yStep: number;
+      series: Array<{ label: string; values: number[]; stroke: string; dash?: string }>;
+    }
+  | {
+      type: "gantt";
+      caption: string;
+      columns: string[];
+      rows: Array<{ label: string; active: string[] }>;
+    }
   | { type: "note"; text: string };
 
 export type MarkingCriteriaBand = {
