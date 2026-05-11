@@ -6,6 +6,317 @@ const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
+// ─── 2020 Section I ───────────────────────────────────────────────────────────
+
+  { id: "20m1", topic: "human_resources", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q1",
+    stem: "Which row of the table shows benefits of both staff training and staff development?",
+    stimulus: [{ type: "table", headers: ["", "Staff training", "Staff development"], rows: [["A.", "Increase staff skills", "Increased staff turnover"], ["B.", "Increase staff skills", "Retain experienced staff"], ["C.", "Decrease in workplace accidents", "Increased staff turnover"], ["D.", "Decrease in workplace redundancies", "Retain experienced staff"]] }],
+    options: ["Increase staff skills / Increased staff turnover", "Increase staff skills / Retain experienced staff", "Decrease in workplace accidents / Increased staff turnover", "Decrease in workplace redundancies / Retain experienced staff"],
+    answer: 1, explain: "Training can increase staff skills, while development can help retain experienced staff." },
+
+  { id: "20m2", topic: "human_resources", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q2",
+    stem: "Betty believes she is eligible to ask her employer for flexible working arrangements.\n\nWhich of the following is a provision of the Fair Work Act 2009 (Cth) that gives Betty the right to make this request?",
+    options: ["A modern award", "A common law contract", "An enterprise agreement", "Minimum employment standards"],
+    answer: 3, explain: "The National Employment Standards include the right for eligible employees to request flexible working arrangements." },
+
+  { id: "20m3", topic: "human_resources", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q3",
+    stem: "A firm has been hiring its own staff but due to growth no longer has time to satisfactorily manage this process.\n\nWhat could the firm's human resource manager use to resolve this issue?",
+    options: ["Acquisition", "Outsourcing", "Recruitment", "Selection"],
+    answer: 1, explain: "The firm can outsource the hiring process to an external specialist." },
+
+  { id: "20m4", topic: "marketing", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q4",
+    stem: "Australian businesses are required by law to offer a refund if the product or service",
+    options: ["does not match the description.", "is no longer required by the customer.", "is damaged by the customer after purchase.", "is available at a competitor's business for a cheaper price."],
+    answer: 0, explain: "Consumer law requires remedies when a product or service does not match its description." },
+
+  { id: "20m5", topic: "marketing", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q5",
+    stem: "A business collects its own primary data through market research prior to developing a new product.\n\nWhich of the following could this business have used to provide primary data?",
+    options: ["Customer survey", "Published journal", "Australian Bureau of Statistics catalogue", "Australian Bureau of Statistics census data"],
+    answer: 0, explain: "A customer survey gathers new data directly from respondents, making it primary data." },
+
+  { id: "20m6", topic: "operations", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q6",
+    stem: "The main advantage of economies of scale is that a business can achieve",
+    options: ["economic objectives.", "industry benchmarks.", "lower per unit input costs.", "simplified supply chain management."],
+    answer: 2, explain: "Economies of scale lower average input cost per unit as output increases." },
+
+  { id: "20m7", topic: "operations", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q7",
+    stem: "What is the most likely reason for an Australian clothing business choosing to manufacture locally?",
+    options: ["To achieve cost leadership", "To maintain quality control", "To focus on other key business functions", "To take advantage of lower overseas wages"],
+    answer: 1, explain: "Local manufacturing can give a business closer control over quality." },
+
+  { id: "20m8", topic: "marketing", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q8",
+    stem: "Two boxes of oats are shown.\n\nWhich strategy is being used by Product B that is not being used by Product A?",
+    stimulus: [{ type: "table", headers: ["Product A", "Product B"], rows: [["Fruit Oats\n\n300 g", "Miller's Farm\nFruit Oats\n\n300 g"]] }],
+    options: ["Branding", "Labelling", "Packaging", "Trademarking"],
+    answer: 0, explain: "Product B uses the brand name Miller's Farm, while Product A only gives the product description." },
+
+  { id: "20m9", topic: "human_resources", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q9",
+    stem: "At which stage of the economic cycle is it most likely for a business to begin to reduce staff working hours?",
+    options: ["Boom", "Downswing", "Recession", "Upswing"],
+    answer: 1, explain: "Businesses often begin reducing staff hours during a downswing as demand starts to fall." },
+
+  { id: "20m10", topic: "marketing", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q10",
+    stem: "A company has reduced the price of their current razor as a new model will be released soon.\n\nWhich stage of the product life cycle for the current razor is indicated by this decision?",
+    options: ["Introduction", "Growth", "Maturity", "Decline"],
+    answer: 3, explain: "Reducing the price before a replacement model is released indicates the current model is in decline." },
+
+  { id: "20m11", topic: "operations", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q11",
+    stem: "A manager is concerned about ongoing theft and the cost of storing raw materials.\n\nWhich inventory management strategy would best address the manager's concerns?",
+    options: ["Just-in-time", "Warehousing", "Last-in-first-out", "First-in-first-out"],
+    answer: 0, explain: "Just-in-time reduces inventory held on site, lowering storage costs and exposure to theft." },
+
+  { id: "20m12", topic: "human_resources", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q12",
+    stem: "A NSW employer develops a return to work plan in consultation with an insurer and an injured employee.\n\nWhich legislation requires the employer to undertake this action?",
+    options: ["Fair Work Act 2009 (Cth)", "Workers Compensation Act 1987 (NSW)", "Work Health and Safety Act 2011 (NSW)", "Australian Human Rights Commission Act 1986 (Cth)"],
+    answer: 1, explain: "Return to work planning after workplace injury is governed by NSW workers compensation legislation." },
+
+  { id: "20m13", topic: "operations", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q13",
+    stem: "In order to achieve best practice, a mobile phone company examines global trends in phone technology before designing and producing their phones.\n\nWhat operations strategy is this business using?",
+    options: ["Standardisation", "Global sourcing", "Scanning and learning", "Inventory management"],
+    answer: 2, explain: "Examining global trends to improve practice is scanning and learning." },
+
+  { id: "20m14", topic: "finance", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q14",
+    stem: "A hairdresser includes proceeds of the sale of salon equipment in the business's income statement.\n\nWhich limitation of financial reporting is evident?",
+    options: ["Timing issues", "Valuing assets", "Normalised earnings", "Capitalising expenses"],
+    answer: 2, explain: "Including a one-off asset sale in income can distort normalised earnings." },
+
+  { id: "20m15", topic: "operations", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q15",
+    stem: "A sandwich shop bakes a variety of breads throughout the day. Customers select their choice of bread and filling(s) and sandwiches are then made to order.\n\nWhich pair of performance objectives would have influenced the development of this approach?",
+    options: ["Cost and efficiency", "Efficiency and quality", "Cost and customisation", "Quality and customisation"],
+    answer: 3, explain: "Fresh bread and made-to-order sandwiches emphasise quality and customisation." },
+
+  { id: "20m16", topic: "marketing", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q16",
+    stem: "A bathroom products business cannot sustain the production of their current range. A consultant has advised the business to reduce the product range.\n\nThe actual and planned results for the entire year are shown.\n\nBy comparing actual and planned results, which product should be deleted?",
+    stimulus: [{ type: "table", headers: ["Bathroom product", "Actual results Jan - Jun (units)", "Planned results Jan - Jun (units)", "Actual results Jul - Dec (units)", "Planned results Jul - Dec (units)"], rows: [["Coconut Handwash", "7 500", "7 500", "10 000", "9 000"], ["Lavender Bodywash", "8 000", "8 500", "8 500", "9 500"], ["Blueberry Handcream", "7 000", "6 000", "7 500", "8 000"], ["Peppermint Bath Salts", "8 000", "7 000", "8 500", "10 000"]] }],
+    options: ["Coconut Handwash", "Lavender Bodywash", "Blueberry Handcream", "Peppermint Bath Salts"],
+    answer: 1, explain: "Lavender Bodywash is below planned results in both periods, so it is the weakest candidate for deletion." },
+
+  { id: "20m17", topic: "finance", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q17",
+    stem: "Use the following information to answer Questions 17 and 18.\n\nA business provided the following financial information.\n\nWhich of the following shows the gross profit and the net profit ratio for this business in 2020?",
+    stimulus: [{ type: "table", headers: ["", "2019 ($)", "2020 ($)"], rows: [["Sales", "250 000", "275 000"], ["Cost of goods sold", "145 000", "145 000"], ["Gross profit", "?", "?"], ["Expenses", "35 000", "35 000"], ["Net profit", "?", "?"]] }],
+    options: ["$105 000 / 28.0%", "$105 000 / 42.0%", "$130 000 / 34.5%", "$130 000 / 47.0%"],
+    answer: 2, explain: "In 2020, gross profit is $275 000 - $145 000 = $130 000; net profit is $95 000; net profit ratio is $95 000 ÷ $275 000 = 34.5%." },
+
+  { id: "20m18", topic: "finance", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q18",
+    stem: "Use the following information to answer Questions 17 and 18.\n\nA business provided the following financial information.\n\nWhich of the following describes the change in both the gross profit ratio and expense ratio from 2019 to 2020?",
+    stimulus: [{ type: "table", headers: ["", "2019 ($)", "2020 ($)"], rows: [["Sales", "250 000", "275 000"], ["Cost of goods sold", "145 000", "145 000"], ["Gross profit", "?", "?"], ["Expenses", "35 000", "35 000"], ["Net profit", "?", "?"]] }],
+    options: ["Improved / Improved", "Improved / Worsened", "Worsened / Improved", "Worsened / Worsened"],
+    answer: 0, explain: "Gross profit ratio increased from 42% to 47.3%, while the expense ratio decreased from 14% to 12.7%, so both improved." },
+
+  { id: "20m19", topic: "finance", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q19",
+    stem: "Use the following information to answer Questions 19 and 20.\n\nThe liquidity position of this business in 2020 indicates that it is",
+    stimulus: [
+      { type: "heading", text: "Extract from balance sheet for a business as at June 2020" },
+      { type: "table", headers: ["", "($)"], rows: [["Current assets", "1700"], ["Non-current assets", "8650"], ["Current liabilities", "1100"], ["Non-current liabilities", "6500"]] },
+      { type: "heading", text: "Additional information" },
+      { type: "list", items: ["Financial data 2019", "Debt to equity ratio = 2 : 1 or 200%", "Current ratio = 1.25 : 1 or 125%", "Industry averages for 2019-2020", "Debt to equity ratio (total liabilities ÷ total equity) = 1 : 1 or 100%", "Current ratio (current assets ÷ current liabilities) = 2 : 1 or 200%"] },
+    ],
+    options: ["better than the industry average and has improved since 2019.", "better than the industry average and has worsened since 2019.", "worse than the industry average and has improved since 2019.", "worse than the industry average and has worsened since 2019."],
+    answer: 2, explain: "The 2020 current ratio is 1700 ÷ 1100 = 1.55:1, better than 2019 but worse than the industry average of 2:1." },
+
+  { id: "20m20", topic: "finance", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q20",
+    stem: "Use the following information to answer Questions 19 and 20.\n\nThe gearing for this business in 2020 indicates that it is",
+    stimulus: [
+      { type: "heading", text: "Extract from balance sheet for a business as at June 2020" },
+      { type: "table", headers: ["", "($)"], rows: [["Current assets", "1700"], ["Non-current assets", "8650"], ["Current liabilities", "1100"], ["Non-current liabilities", "6500"]] },
+      { type: "heading", text: "Additional information" },
+      { type: "list", items: ["Financial data 2019", "Debt to equity ratio = 2 : 1 or 200%", "Current ratio = 1.25 : 1 or 125%", "Industry averages for 2019-2020", "Debt to equity ratio (total liabilities ÷ total equity) = 1 : 1 or 100%", "Current ratio (current assets ÷ current liabilities) = 2 : 1 or 200%"] },
+    ],
+    options: ["better than the industry average and has improved since 2019.", "better than the industry average and has worsened since 2019.", "worse than the industry average and has improved since 2019.", "worse than the industry average and has worsened since 2019."],
+    answer: 3, explain: "Total liabilities are $7600 and equity is $2750, so 2020 gearing is about 276%, worse than both 2019 and the industry average." },
+
+// ─── 2020 Section II ──────────────────────────────────────────────────────────
+
+  { id: "20s21a", topic: "human_resources", type: "short", marks: 2, src: "2020 HSC, Section II, Q21(a)",
+    stem: "Outline the role of ONE external stakeholder who represents the interests of employees in workplace disputes.",
+    criteria: ["Sketches in general terms the role of ONE stakeholder who represents the interests of employees in workplace disputes", "Provides some relevant information about ONE stakeholder who represents the interests of employees"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms the role of ONE stakeholder who represents the interests of employees in workplace disputes"] },
+      { marks: "1", criteria: ["Provides some relevant information about ONE stakeholder who represents the interests of employees"] },
+    ],
+    sample: "In a workplace dispute, employee interests are represented by trade unions. Trade unions operate for the benefit of their members and one of the services which they provide is to bargain on behalf of members in negotiations with employers." },
+
+  { id: "20s21b", topic: "human_resources", type: "short", marks: 4, src: "2020 HSC, Section II, Q21(b)",
+    stem: "Distinguish between voluntary and involuntary separation.",
+    criteria: ["Demonstrates a clear understanding of the difference between voluntary and involuntary separation", "Demonstrates an understanding of the difference between voluntary and involuntary separation", "Demonstrates some understanding of a difference between voluntary and involuntary separation", "OR", "Sketches in general terms voluntary and involuntary separation", "Provides some relevant information about voluntary or involuntary separation"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Demonstrates a clear understanding of the difference between voluntary and involuntary separation"] },
+      { marks: "3", criteria: ["Demonstrates an understanding of the difference between voluntary and involuntary separation"] },
+      { marks: "2", criteria: ["Demonstrates some understanding of a difference between voluntary and involuntary separation", "OR", "Sketches in general terms voluntary and involuntary separation"] },
+      { marks: "1", criteria: ["Provides some relevant information about voluntary or involuntary separation"] },
+    ],
+    sample: "Voluntary separation is when an employee has chosen to leave their employment of their own accord. This could be in the form of a resignation, retirement or relocation. Involuntary separation occurs when an employee is forced to leave their place of employment because they may have breached their employment conditions, finished their contract or been made redundant." },
+
+  { id: "20s21c", topic: "human_resources", type: "short", marks: 4, src: "2020 HSC, Section II, Q21(c)",
+    stem: "Explain how technological influences and globalisation can lead to a company reducing staff numbers. Support your answer with relevant examples.",
+    criteria: ["Provides why AND/OR how technological influences and globalisation can lead to a company reducing staff numbers with reference to relevant examples", "Provides characteristics and features of how technological influences and globalisation can lead to a company reducing staff numbers with reference to a relevant example", "Sketches in general terms how technological influences AND/OR globalisation can lead to a company reducing staff numbers with reference to an example", "Sketches in general terms how technological influences AND/OR globalisation can lead to a company reducing staff numbers"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides why AND/OR how technological influences and globalisation can lead to a company reducing staff numbers with reference to relevant examples"] },
+      { marks: "3", criteria: ["Provides characteristics and features of how technological influences and globalisation can lead to a company reducing staff numbers with reference to a relevant example"] },
+      { marks: "2", criteria: ["Sketches in general terms how technological influences AND/OR globalisation can lead to a company reducing staff numbers with reference to an example"] },
+      { marks: "1", criteria: ["Sketches in general terms how technological influences AND/OR globalisation can lead to a company reducing staff numbers"] },
+    ],
+    sample: "Changes in technology can influence a business's ability to create and sell its product/service. A change in technology usually allows for an increase in speed and production which generally means a reduction in time spent making the product eg Samsung uses CAD and robotics to manufacture their products which has caused their assembly based labour force to be retrenched. Globalisation, which involves increased economic integration, can also increase production and create cost saving measures. Globalisation allows businesses to benefit from lower production and labour costs found overseas which may lead to the outsourcing of jobs overseas. For example, Bonds moved their manufacturing operations offshore to take advantage of cheaper labour costs leading to Australian staff retrenchment." },
+
+  { id: "20s22a", topic: "marketing", type: "short", marks: 3, src: "2020 HSC, Section II, Q22(a)",
+    stem: "A popular Australian guitar manufacturer is about to enter the US market using a standardised marketing strategy.\n\nClarify the purpose of a SWOT analysis for this business.",
+    criteria: ["Clearly determines the purpose of a SWOT analysis for this business", "Names elements of a SWOT analysis and refers to its purpose for this business", "Names elements of a SWOT analysis"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Clearly determines the purpose of a SWOT analysis for this business"] },
+      { marks: "2", criteria: ["Names elements of a SWOT analysis and refers to its purpose for this business"] },
+      { marks: "1", criteria: ["Names elements of a SWOT analysis"] },
+    ],
+    sample: "The purpose of the SWOT analysis for this business is to enable them to understand the current position of the business by identifying internal strengths and weaknesses. Additionally, it provides this business with information on potential opportunities and threats when entering the US market.\n\nAs part of the situational analysis, the SWOT informs the rest of the marketing process as marketing objectives and strategies can only be determined upon completion of the SWOT." },
+
+  { id: "20s22b", topic: "marketing", type: "short", marks: 3, src: "2020 HSC, Section II, Q22(b)",
+    stem: "A popular Australian guitar manufacturer is about to enter the US market using a standardised marketing strategy.\n\nRecommend a pricing method this business could adopt for the US market.",
+    criteria: ["Clearly provides reasons for adopting a particular pricing method", "Provides characteristics and features of a pricing method or pricing strategy", "Names a pricing method or pricing strategy"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Clearly provides reasons for adopting a particular pricing method"] },
+      { marks: "2", criteria: ["Provides characteristics and features of a pricing method or pricing strategy"] },
+      { marks: "1", criteria: ["Names a pricing method or pricing strategy"] },
+    ],
+    sample: "Competition based pricing could be an effective pricing method for this business in the US market. This pricing method covers materials and operations costs and is comparable with the competitor's price based on the following pricing options:\n• Below that of competitors to undercut the competition to establish themselves in the market.\n• Equal to competitor's price which saves money on researching how much consumers would pay for guitars.\n• Above that of competitors to create a perception of superiority." },
+
+  { id: "20s22c", topic: "marketing", type: "short", marks: 4, src: "2020 HSC, Section II, Q22(c)",
+    stem: "A popular Australian guitar manufacturer is about to enter the US market using a standardised marketing strategy.\n\nJustify this business's decision to adopt a standardised marketing strategy.",
+    criteria: ["Provides a clear and supported argument for the use of a standardised marketing strategy by this business", "Provides an argument for the use of a standardised marketing strategy this business", "Sketches in general terms a standardised marketing strategy", "Makes a relevant statement about a standardised marketing strategy"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides a clear and supported argument for the use of a standardised marketing strategy by this business"] },
+      { marks: "3", criteria: ["Provides an argument for the use of a standardised marketing strategy this business"] },
+      { marks: "2", criteria: ["Sketches in general terms a standardised marketing strategy"] },
+      { marks: "1", criteria: ["Makes a relevant statement about a standardised marketing strategy"] },
+    ],
+    sample: "Using a standardised marketing strategy this business can increase its success when entering the global market. It can achieve economies of scale which achieve lower per unit input costs. This strategy paired with standardised marketing can save the business money when taking spare parts, repairs and after-sales service into account. Customers also benefit from this strategy as they can expect consistency throughout the world and product features remain the same regardless of where the product is purchased. Finally, the business will achieve cost savings as the one marketing approach will be adopted worldwide and does not need to be customised for the needs of individual markets." },
+
+  { id: "20s23a", topic: "operations", type: "short", marks: 4, src: "2020 HSC, Section II, Q23(a)",
+    stem: "Use the information provided to answer parts (a) and (b).\n\nA denim jeans clothing store is concerned about declining sales. They have identified that the lower sales are a result of:\n• outdated store presentation\n• increased foreign competition\n• a reluctance to adopt modern in-store payment methods.\n\nHow could the strategic role of operations management assist this business?",
+    criteria: ["Provides detailed ways in which the strategic role of operations management could assist this business", "Provides ways in which the strategic role of operations management could assist this business", "Provides characteristics and features of operations management that could assist this business", "Sketches in general terms an aspect of operations management"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides detailed ways in which the strategic role of operations management could assist this business"] },
+      { marks: "3", criteria: ["Provides ways in which the strategic role of operations management could assist this business"] },
+      { marks: "2", criteria: ["Provides characteristics and features of operations management that could assist this business"] },
+      { marks: "1", criteria: ["Sketches in general terms an aspect of operations management"] },
+    ],
+    sample: "The strategic role of operations management ensures the operations function effectively contributes to the achievement of goals and the strategic direction of the business. The business could examine goods/service differentiation as currently the business' product range is limited to denim products. They could differentiate their products and add non-denim items and clothing accessories. This would potentially increase the customer base, attracting customers who are interested in non-denim items which may increase sales and profits." },
+
+  { id: "20s23b", topic: "operations", type: "short", marks: 6, src: "2020 HSC, Section II, Q23(b)",
+    stem: "Use the information provided to answer parts (a) and (b).\n\nA denim jeans clothing store is concerned about declining sales. They have identified that the lower sales are a result of:\n• outdated store presentation\n• increased foreign competition\n• a reluctance to adopt modern in-store payment methods.\n\nAnalyse operations strategies that could be used to address TWO operations influences affecting this business.",
+    criteria: ["Draws out and relates the implications of using operations strategies to address TWO operations influences affecting the business", "Provides implications of operations strategies that could be used to address TWO operations influences affecting the business", "Provides characteristics and features of operations strategies which could be used by this business to address TWO operations influences affecting the business", "Sketches in general terms operations strategies in general terms with limited link to operations influences", "Sketches in general terms a strategy or an operations influence in general terms", "Provides some relevant information"],
+    criteriaBands: [
+      { marks: "6", criteria: ["Draws out and relates the implications of using operations strategies to address TWO operations influences affecting the business"] },
+      { marks: "5", criteria: ["Provides implications of operations strategies that could be used to address TWO operations influences affecting the business"] },
+      { marks: "4", criteria: ["Provides characteristics and features of operations strategies which could be used by this business to address TWO operations influences affecting the business"] },
+      { marks: "3", criteria: ["Sketches in general terms operations strategies in general terms with limited link to operations influences"] },
+      { marks: "2", criteria: ["Sketches in general terms a strategy or an operations influence in general terms"] },
+      { marks: "1", criteria: ["Provides some relevant information"] },
+    ],
+    sample: "The business should address the influence of technology. To manage this influence, the store could adopt more leading-edge payment methods such as smartphones and smart watches or established technologies such as EFTPOS. By purchasing this new equipment, customers might be more inclined to shop at the business which may increase sales and enhance speed of service.\n\nTo address the influence of cost-based competition, which has resulted in declining sales, the business could utilise the strategies of supply chain management, global sourcing or the performance objective of cost. By improving logistics in the supply chain and focusing on cost as a performance objective the business could improve efficiency and better compete with foreign businesses. Moreover, global sourcing typically enables lower input costs as the business takes advantage of low cost clothing producers." },
+
+  { id: "20s24a", topic: "finance", type: "short", marks: 1, src: "2020 HSC, Section II, Q24(a)",
+    stem: "Financial Information for robotics company\n\nCalculate the accounts receivable turnover ratio (sales ÷ accounts receivable) for this business.",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Sales", "225 000"], ["Cost of goods sold", "105 000"], ["Selling expenses", "8 500"], ["Administration expenses", "6 000"], ["Financial expenses", "4 000"], ["Accounts receivable", "30 000"], ["Robotics company credit policy", "30 days"], ["Industry expense ratio", "10%"]] }],
+    criteria: ["Correctly calculates the accounts receivable turnover ratio for this business"],
+    criteriaBands: [{ marks: "1", criteria: ["Correctly calculates the accounts receivable turnover ratio for this business"] }],
+    sample: "(Sales ÷ accounts receivable) = 225 000 ÷ 30 000 = 7.5 (times per year)\n\nOR\n\n365 ÷ 7.5 = 49 (days)" },
+
+  { id: "20s24b", topic: "finance", type: "short", marks: 2, src: "2020 HSC, Section II, Q24(b)",
+    stem: "Financial Information for robotics company\n\nInterpret this business's expense ratio (total expenses ÷ sales).",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Sales", "225 000"], ["Cost of goods sold", "105 000"], ["Selling expenses", "8 500"], ["Administration expenses", "6 000"], ["Financial expenses", "4 000"], ["Accounts receivable", "30 000"], ["Robotics company credit policy", "30 days"], ["Industry expense ratio", "10%"]] }],
+    criteria: ["Correctly calculates and interprets the expense ratio for this business", "Correctly calculates the expense ratio for this business or correctly interprets the expense ratio"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Correctly calculates and interprets the expense ratio for this business"] },
+      { marks: "1", criteria: ["Correctly calculates the expense ratio for this business or correctly interprets the expense ratio"] },
+    ],
+    sample: "(Total expenses ÷ sales) = 18 500 ÷ 225 000 = 8.2%\n\nFor every $1 the business makes in sales the business is spending 8 cents on expenses.\n\nThe ratio compares total expenses with total sales and indicates that for every $1 of sales, 8.2% (or 8.2 cents) is absorbed by expenses. This business is below the industry standard of 10%." },
+
+  { id: "20s24c", topic: "finance", type: "short", marks: 3, src: "2020 HSC, Section II, Q24(c)",
+    stem: "Financial Information for robotics company\n\nRecommend ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable.",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Sales", "225 000"], ["Cost of goods sold", "105 000"], ["Selling expenses", "8 500"], ["Administration expenses", "6 000"], ["Financial expenses", "4 000"], ["Accounts receivable", "30 000"], ["Robotics company credit policy", "30 days"], ["Industry expense ratio", "10%"]] }],
+    criteria: ["Provides reasons in favour of ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable", "Sketches in general terms ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable", "Names ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides reasons in favour of ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable"] },
+      { marks: "2", criteria: ["Sketches in general terms ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable"] },
+      { marks: "1", criteria: ["Names ONE financial strategy this business could implement to improve efficiency in the collection of accounts receivable"] },
+    ],
+    sample: "Discounts for early payments. This is where the business provides a discount to customers if they pay early to encourage faster debt collection. This could be in line with penalties for late payments to encourage this efficiency." },
+
+  { id: "20s24d", topic: "finance", type: "short", marks: 4, src: "2020 HSC, Section II, Q24(d)",
+    stem: "Financial Information for robotics company\n\nExplain TWO ways in which comparative ratio analysis can be used by this business to assess its financial position.",
+    stimulus: [{ type: "table", headers: ["", "($)"], rows: [["Sales", "225 000"], ["Cost of goods sold", "105 000"], ["Selling expenses", "8 500"], ["Administration expenses", "6 000"], ["Financial expenses", "4 000"], ["Accounts receivable", "30 000"], ["Robotics company credit policy", "30 days"], ["Industry expense ratio", "10%"]] }],
+    criteria: ["Provides an explanation of how TWO ways of comparative ratio analysis can be used to assess the financial position of the business", "Sketches in general terms how TWO ways of comparative ratio analysis can be used to assess the financial position of the business", "Sketches in general terms how comparative ratio analysis can be used to assess the financial position of the business", "Sketches comparative ratio analysis in general terms"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides an explanation of how TWO ways of comparative ratio analysis can be used to assess the financial position of the business"] },
+      { marks: "3", criteria: ["Sketches in general terms how TWO ways of comparative ratio analysis can be used to assess the financial position of the business"] },
+      { marks: "2", criteria: ["Sketches in general terms how comparative ratio analysis can be used to assess the financial position of the business"] },
+      { marks: "1", criteria: ["Sketches comparative ratio analysis in general terms"] },
+    ],
+    sample: "First method is over different time periods. This business could be comparing financial data within different years or financial periods to analyse liquidity, gearing, profitability and efficiency and to understand how these have changed and put strategies in place to address any issues.\n\nThe second way is against similar businesses. This business could see the financial position of the competition to understand if their expenses are too high compared to competitors. If this is the case, then the business could change their supplier to a cheaper one. Also, if the competitor has consistently made sales, even during slow periods, the business can analyse this to understand what they are doing wrong and hence make adjustments." },
+
+// ─── 2020 Section III/IV ──────────────────────────────────────────────────────
+
+  { id: "20e25", topic: "marketing", topics: ["marketing", "operations"], type: "extended", marks: 20, src: "2020 HSC, Section III, Q25",
+    stem: "To address these concerns, you have been hired as a consultant by Icecreams R Us to write a report to their directors. In your report:\n\n• describe TWO physical distribution issues that the business needs to consider in the delivery of their product\n• justify ONE promotional strategy the business could use\n• recommend possible changes the business could make to their operations processes to address the volume and quality concerns of Eucafuels Ltd.",
+    stimulus: [
+      { type: "paragraph", text: "Icecreams R Us exclusively delivers ice-cream to homes in Newcastle. To increase market share, they are negotiating with a major service station chain, Eucafuels Ltd, to sell their brand of ice-cream throughout NSW." },
+      { type: "paragraph", text: "Before they agree to sell the ice-cream, Eucafuels Ltd have a number of concerns over the ability of Icecreams R Us to:" },
+      { type: "list", items: ["deliver ice-cream to their outlets in NSW in a timely manner", "create an awareness that the ice-cream will be sold at Eucafuels Ltd outlets", "produce an increased volume of ice-cream while maintaining a quality product."] },
+    ],
+    criteria: ["Provides detailed characteristics and features of TWO physical distribution issues which the business could use to deliver the product", "Clearly provides an argument for ONE promotional strategy the business could use", "Provides detailed reasons in favour of possible changes the business could make to their operations processes to address the volume and quality concerns of Eucafuels", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Provides characteristics and features of TWO physical distribution issues which the business could use to deliver the product", "Provides an argument for ONE promotional strategy the business could use", "Provides reasons in favour of possible change(s) the business could make to their operations processes to address the volume and quality concerns of Eucafuels", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report integrating relevant business terminology and concepts", "Sketches in general terms TWO physical distribution issues which the business could use to deliver the product OR provides characteristics and features of ONE physical distribution issue which the business could use to deliver the product", "Provides characteristics and features of ONE promotional strategy which the business could use", "Provides characteristics and features of operations processes to address volume and/or quality concerns", "Includes features of a business report and uses some business terminology and concepts", "Identifies a physical distribution issue", "Sketches in general terms ONE promotional strategy", "Sketches in general terms operations processes", "May include some features of a business report and uses some basic business terminology", "Refers to operations and/or marketing", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Provides detailed characteristics and features of TWO physical distribution issues which the business could use to deliver the product", "Clearly provides an argument for ONE promotional strategy the business could use", "Provides detailed reasons in favour of possible changes the business could make to their operations processes to address the volume and quality concerns of Eucafuels", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides characteristics and features of TWO physical distribution issues which the business could use to deliver the product", "Provides an argument for ONE promotional strategy the business could use", "Provides reasons in favour of possible change(s) the business could make to their operations processes to address the volume and quality concerns of Eucafuels", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Sketches in general terms TWO physical distribution issues which the business could use to deliver the product OR provides characteristics and features of ONE physical distribution issue which the business could use to deliver the product", "Provides characteristics and features of ONE promotional strategy which the business could use", "Provides characteristics and features of operations processes to address volume and/or quality concerns", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Identifies a physical distribution issue", "Sketches in general terms ONE promotional strategy", "Sketches in general terms operations processes", "May include some features of a business report and uses some basic business terminology"] },
+      { marks: "1–4", criteria: ["Refers to operations and/or marketing", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Marketing" },
+      { type: "list", items: ["Place/distribution", "Physical distribution issues - transport, warehousing, inventory", "Promotion", "Elements of the promotion mix - advertising, personal selling and relationship marketing, sales promotions, publicity and public relations", "The communication process - opinion leaders, word of mouth"] },
+      { type: "heading", text: "Operations" },
+      { type: "list", items: ["Transformation processes", "The influence of volume, variety, variation in demand and visibility (customer contact)", "Sequencing and scheduling Gantt charts, critical path analysis", "Technology, task design and process layout", "Monitoring, control and improvement", "Operations strategies."] },
+    ] },
+
+  { id: "20e26", topic: "finance", type: "extended", marks: 20, src: "2020 HSC, Section IV, Q26",
+    stem: "Evaluate the effectiveness of financial management strategies used to achieve profit and growth objectives.",
+    criteria: ["Makes a judgement about the financial management strategies used to achieve profit and growth objectives", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Clearly explains the relationship between financial management strategies and profit and growth objectives", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Identifies the relationship between financial management strategies AND profit and/or growth objectives", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts", "Sketches in general terms financial management strategies and/or profit and growth objectives", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to financial management", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Makes a judgement about the financial management strategies used to achieve profit and growth objectives", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Clearly explains the relationship between financial management strategies and profit and growth objectives", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Identifies the relationship between financial management strategies AND profit and/or growth objectives", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms financial management strategies and/or profit and growth objectives", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to financial management", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Role of financial management" },
+      { type: "list", items: ["Objectives of financial management - profitability, growth, efficiency, liquidity, solvency", "Short term and long term"] },
+      { type: "heading", text: "Financial management strategies" },
+      { type: "list", items: ["Cash-flow management - cash-flow statements, distribution of payments, discounts for early payment, factoring", "Working capital management - control of current assets - cash, receivables, inventories; control of current liabilities - payables, loans, overdrafts; strategies - leasing, sale and lease back", "Profitability management - cost controls - fixed and variable, cost centres, expense minimisation; revenue controls - marketing objectives", "Global financial management - exchange rates, interest rates, methods of international payment - payment in advance, letter of credit, clean payment, bill of exchange, hedging, derivatives."] },
+    ] },
+
+  { id: "20e27", topic: "human_resources", type: "extended", marks: 20, src: "2020 HSC, Section IV, Q27",
+    stem: "Evaluate human resource strategies used to achieve THREE indicators of effective human resource management.",
+    criteria: ["Makes a judgement about the human resource strategies used to achieve three indicators of effective human resource management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the relationship between human resource strategies and three indicators of effective human resource management", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of human resource strategies and three indicators of effective human resource management", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts", "Sketches in general terms human resource strategies and/or effective human resource management", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to human resource strategies and/or effective human resource management", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Makes a judgement about the human resource strategies used to achieve three indicators of effective human resource management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the relationship between human resource strategies and three indicators of effective human resource management", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of human resource strategies and three indicators of effective human resource management", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms human resource strategies and/or effective human resource management", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to human resource strategies and/or effective human resource management", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Strategies in human resource management" },
+      { type: "list", items: ["Leadership style", "Job design - general or specific tasks", "Recruitment - internal or external, general or specific skills", "Training and development - current or future skills", "Performance management - developmental or administrative", "Rewards - monetary and non-monetary, individual or group, performance pay", "Global - costs, skills, supply", "Workplace disputes - resolution - negotiation, mediation, grievance procedures, involvement of courts and tribunals"] },
+      { type: "heading", text: "Effectiveness of human resource management" },
+      { type: "list", items: ["Indicators", "Corporate culture", "Benchmarking key variables", "Changes in staff turnover", "Absenteeism", "Accidents", "Levels of disputation", "Worker satisfaction."] },
+    ] },
+
 // ─── 2021 Section I ───────────────────────────────────────────────────────────
 
   { id: "21m1", topic: "finance", type: "mcq", marks: 1, src: "2021 HSC, Section I, Q1",
