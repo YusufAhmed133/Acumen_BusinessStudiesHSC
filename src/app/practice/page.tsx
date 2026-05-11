@@ -14,7 +14,7 @@ function filterKey(topic: TopicFilter, type: TypeFilter): string {
 }
 
 function matchesFilter(question: Question, topic: TopicFilter, type: TypeFilter): boolean {
-  const topicMatch = topic === "all" || question.topic === topic;
+  const topicMatch = topic === "all" || question.topic === topic || (question.topics?.includes(topic) ?? false);
   const typeMatch = type === "all" || question.type === type;
   return topicMatch && typeMatch;
 }

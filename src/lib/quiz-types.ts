@@ -28,6 +28,14 @@ export type RichContentBlock =
       columns: string[];
       rows: Array<{ label: string; active: string[] }>;
     }
+  | {
+      type: "networkDiagram";
+      caption?: string;
+      width?: number;
+      height?: number;
+      nodes: Array<{ id: string; label?: string; x: number; y: number; labelX?: number; labelY?: number }>;
+      edges: Array<{ from: string; to: string; label: string; labelX?: number; labelY?: number }>;
+    }
   | { type: "note"; text: string };
 
 export type MarkingCriteriaBand = {

@@ -416,6 +416,53 @@ function RichContentBlocks({ blocks, compact = false }: { blocks: RichContentBlo
           );
         }
 
+        if (block.type === "networkDiagram") {
+          const width = block.width ?? 640;
+          const height = block.height ?? 300;
+          const nodeById = new Map(block.nodes.map((node) => [node.id, node]));
+
+          return (
+            <figure key={blockIndex} style={{ margin: 0, overflowX: "auto" }}>
+              <svg
+                role="img"
+                aria-label={`${block.caption ? `${block.caption}. ` : ""}${block.edges.map((edge) => `${edge.from}${edge.to}: ${edge.label}`).join(". ")}`}
+                viewBox={`0 0 ${width} ${height}`}
+                style={{ width: "100%", minWidth: compact ? 420 : 560, height: "auto", display: "block" }}
+              >
+                {block.caption && (
+                  <text x={width / 2} y={24} textAnchor="middle" style={{ fontSize: 14, fontWeight: 700, fill: "#1A1A1A" }}>
+                    {block.caption}
+                  </text>
+                )}
+                {block.edges.map((edge, edgeIndex) => {
+                  const from = nodeById.get(edge.from);
+                  const to = nodeById.get(edge.to);
+                  if (!from || !to) return null;
+                  const labelX = edge.labelX ?? (from.x + to.x) / 2;
+                  const labelY = edge.labelY ?? (from.y + to.y) / 2 - 10;
+
+                  return (
+                    <g key={`${edge.from}-${edge.to}-${edgeIndex}`}>
+                      <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#1A1A1A" strokeWidth={2} />
+                      <text x={labelX} y={labelY} textAnchor="middle" style={{ fontSize: 14, fill: "#1A1A1A" }}>
+                        {edge.label}
+                      </text>
+                    </g>
+                  );
+                })}
+                {block.nodes.map((node) => (
+                  <g key={node.id}>
+                    <circle cx={node.x} cy={node.y} r={7} fill="#1A1A1A" />
+                    <text x={node.labelX ?? node.x - 12} y={node.labelY ?? node.y + 27} textAnchor="middle" style={{ fontSize: 18, fontStyle: "italic", fill: "#1A1A1A" }}>
+                      {node.label ?? node.id}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+            </figure>
+          );
+        }
+
         return (
           <div key={blockIndex} style={{ overflowX: "auto", border: "1px solid rgba(10,10,10,0.1)", borderRadius: 10 }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: compact ? 320 : 520, background: "#FFFCF4" }}>
@@ -542,7 +589,9 @@ function QuestionCard({ q }: { q: Question }) {
   const [checked, setChecked] = useState<number[]>([]);
   const [response, setResponse] = useState("");
 
-  const topic = TOPICS_MAP[q.topic];
+  const primaryTopic = TOPICS_MAP[q.topic];
+  const topicKeys = q.topics ?? [q.topic];
+  const markerAccent = primaryTopic.accent;
   const reset = () => { setPicked(null); setRevealed(false); setChecked([]); setResponse(""); };
 
   const typeLabel = q.type === "mcq" ? "Multiple Choice" : q.type === "short" ? "Short Answer" : "Extended Response";
@@ -562,10 +611,25 @@ function QuestionCard({ q }: { q: Question }) {
           <span style={{
             padding: "4px 10px", borderRadius: 999, fontSize: 11, fontWeight: 600,
             letterSpacing: "0.1em", textTransform: "uppercase",
-            background: topic.tint, color: topic.accent,
+            background: primaryTopic.tint, color: primaryTopic.accent,
           }}>
-            {topic.label}
+            {TOPICS_MAP[topicKeys[0]].label}
           </span>
+          {topicKeys.slice(1).map((topicKey) => {
+            const topic = TOPICS_MAP[topicKey];
+            return (
+              <span
+                key={topicKey}
+                style={{
+                  padding: "4px 10px", borderRadius: 999, fontSize: 11, fontWeight: 600,
+                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  background: topic.tint, color: topic.accent,
+                }}
+              >
+                {topic.label}
+              </span>
+            );
+          })}
           <span style={{ fontSize: 12, color: "#5C5C5C", fontWeight: 500 }}>{typeLabel}, {q.marks} mark{q.marks !== 1 ? "s" : ""}</span>
         </div>
         <span style={{ fontSize: 11, color: "#9B9B9B", letterSpacing: "0.06em" }}>{q.src}</span>
@@ -692,7 +756,7 @@ function QuestionCard({ q }: { q: Question }) {
                 question={q as ShortQuestion}
                 checked={checked}
                 setChecked={setChecked}
-                accent={topic.accent}
+                accent={markerAccent}
               />
               <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#0A0A0A" }}>
                 {checked.length} / {getCriteriaItems(q as ShortQuestion).length} criteria
@@ -817,7 +881,7 @@ export function PracticeClient({ initialQuestions, totalCount, filterCounts }: P
   };
 
   const filtered = questions.filter((q) => {
-    const topicMatch = topic === "all" || q.topic === topic;
+    const topicMatch = topic === "all" || q.topic === topic || (q.topics?.includes(topic) ?? false);
     const typeMatch = type === "all" || q.type === type;
     return topicMatch && typeMatch;
   });
