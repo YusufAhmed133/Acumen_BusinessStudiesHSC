@@ -7,14 +7,44 @@ export const TOPICS_MAP = {
 
 export type TopicKey = keyof typeof TOPICS_MAP;
 
-export type McqQuestion = {
-  id: string; topic: TopicKey; type: "mcq"; marks: number; src: string;
-  stem: string; options: string[]; answer: number; explain: string;
+export type RichContentBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "list"; items: string[] }
+  | { type: "table"; caption?: string; headers?: string[]; rows: string[][] }
+  | { type: "note"; text: string };
+
+export type MarkingCriteriaBand = {
+  marks: string;
+  criteria: string[];
 };
 
-export type ShortQuestion = {
-  id: string; topic: TopicKey; type: "short" | "extended"; marks: number; src: string;
-  stem: string; criteria: string[]; sample: string;
+type QuestionBase = {
+  id: string;
+  topic: TopicKey;
+  topics?: TopicKey[];
+  type: "mcq" | "short" | "extended";
+  marks: number;
+  src: string;
+  stem: string;
+  stimulus?: RichContentBlock[];
+  sourceRefs?: string[];
 };
+
+export type McqQuestion = {
+  type: "mcq";
+  options: string[];
+  optionBlocks?: RichContentBlock[][];
+  answer: number | number[];
+  explain: string;
+} & QuestionBase;
+
+export type ShortQuestion = {
+  type: "short" | "extended";
+  criteria: string[];
+  criteriaBands?: MarkingCriteriaBand[];
+  sample: string;
+  sampleBlocks?: RichContentBlock[];
+} & QuestionBase;
 
 export type Question = McqQuestion | ShortQuestion;

@@ -6,6 +6,20 @@ import { QUIZ_TEASER, QUIZ_TOTAL, TOPICS_MAP, type McqQuestion, type ShortQuesti
 
 const TEASER = QUIZ_TEASER;
 
+function getMcqAnswers(q: McqQuestion): number[] {
+  return Array.isArray(q.answer) ? q.answer : [q.answer];
+}
+
+function isMcqAnswer(q: McqQuestion, picked: number | null): boolean {
+  return picked !== null && getMcqAnswers(q).includes(picked);
+}
+
+function formatMcqAnswer(q: McqQuestion): string {
+  return getMcqAnswers(q)
+    .map((answerIndex) => `(${String.fromCharCode(65 + answerIndex)}) ${q.options[answerIndex]}`)
+    .join(" and ");
+}
+
 export function Practice() {
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
@@ -29,7 +43,7 @@ export function Practice() {
   const prev = () => { if (idx > 0) { setIdx(idx - 1); reset(); } };
   const submit = () => {
     if (q.type === "mcq" && picked != null)
-      setScore((s) => ({ c: s.c + (picked === (q as McqQuestion).answer ? 1 : 0), a: s.a + 1 }));
+      setScore((s) => ({ c: s.c + (isMcqAnswer(q as McqQuestion, picked) ? 1 : 0), a: s.a + 1 }));
     setRevealed(true);
     if (isLast) {
       linkTimerRef.current = setTimeout(() => setLinkReady(true), 500);
@@ -139,8 +153,9 @@ export function Practice() {
                 {q.type === "mcq" && (
                   <div style={{ marginTop: 24, display: "grid", gap: 10, paddingLeft: 52 }}>
                     {(q as McqQuestion).options.map((o, i) => {
-                      const correct = revealed && i === (q as McqQuestion).answer;
-                      const wrong = revealed && picked === i && i !== (q as McqQuestion).answer;
+                      const mcq = q as McqQuestion;
+                      const correct = revealed && getMcqAnswers(mcq).includes(i);
+                      const wrong = revealed && picked === i && !getMcqAnswers(mcq).includes(i);
                       const sel = picked === i;
                       return (
                         <button key={i} disabled={revealed} onClick={() => setPicked(i)} style={{
@@ -226,15 +241,15 @@ export function Practice() {
                     <div>
                       <div style={{
                         fontSize: 20, fontWeight: 600, letterSpacing: "-0.02em", marginBottom: 10,
-                        color: picked === (q as McqQuestion).answer ? TOPICS_MAP.operations.accent : TOPICS_MAP.human_resources.accent,
+                        color: isMcqAnswer(q as McqQuestion, picked) ? TOPICS_MAP.operations.accent : TOPICS_MAP.human_resources.accent,
                       }}>
-                        {picked === (q as McqQuestion).answer ? "Correct." : "Not quite."}
+                        {isMcqAnswer(q as McqQuestion, picked) ? "Correct." : "Not quite."}
                       </div>
                       <p style={{ fontSize: 14.5, lineHeight: 1.6, color: "#1A1A1A", margin: 0 }}>
                         {(q as McqQuestion).explain}
                       </p>
                       <p style={{ marginTop: 14, fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "#5C5C5C" }}>
-                        Answer: ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
+                        Answer: {formatMcqAnswer(q as McqQuestion)}
                       </p>
                     </div>
                   ) : (

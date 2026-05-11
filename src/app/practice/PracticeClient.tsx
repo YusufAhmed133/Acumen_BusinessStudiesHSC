@@ -1,7 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import Link from "next/link";
-import { TOPICS_MAP, type TopicKey, type McqQuestion, type ShortQuestion, type Question } from "@/lib/quiz-types";
+import {
+  TOPICS_MAP,
+  type TopicKey,
+  type McqQuestion,
+  type ShortQuestion,
+  type Question,
+  type RichContentBlock,
+} from "@/lib/quiz-types";
 
 type UnlockResult = { ok: true } | { ok: false; message: string };
 type TypeFilter = "all" | "mcq" | "short" | "extended";
@@ -218,6 +225,150 @@ function formatStemForDisplay(text: string): string {
     .replace(/\n{3,}/g, "\n\n");
 }
 
+function RichContentBlocks({ blocks, compact = false }: { blocks: RichContentBlock[]; compact?: boolean }) {
+  return (
+    <div style={{ display: "grid", gap: compact ? 8 : 12, marginBottom: compact ? 0 : 20 }}>
+      {blocks.map((block, blockIndex) => {
+        if (block.type === "heading") {
+          return (
+            <h3
+              key={blockIndex}
+              style={{
+                margin: 0,
+                fontSize: compact ? 13 : 15,
+                lineHeight: 1.35,
+                fontWeight: 700,
+                letterSpacing: "0",
+                color: "#1A1A1A",
+              }}
+            >
+              {block.text}
+            </h3>
+          );
+        }
+
+        if (block.type === "paragraph") {
+          return (
+            <p key={blockIndex} style={{ margin: 0, fontSize: compact ? 13 : 15, lineHeight: 1.65, color: "#1A1A1A" }}>
+              {block.text}
+            </p>
+          );
+        }
+
+        if (block.type === "note") {
+          return (
+            <p
+              key={blockIndex}
+              style={{
+                margin: 0,
+                padding: compact ? "8px 10px" : "10px 12px",
+                borderRadius: 8,
+                background: "#F5F5F3",
+                border: "1px solid rgba(10,10,10,0.08)",
+                fontSize: compact ? 12 : 13,
+                lineHeight: 1.55,
+                color: "#3A3A3A",
+              }}
+            >
+              {block.text}
+            </p>
+          );
+        }
+
+        if (block.type === "list") {
+          return (
+            <ul key={blockIndex} style={{ margin: 0, paddingLeft: 20, display: "grid", gap: 6 }}>
+              {block.items.map((item, itemIndex) => (
+                <li key={itemIndex} style={{ fontSize: compact ? 13 : 15, lineHeight: 1.55, color: "#1A1A1A" }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
+        return (
+          <div key={blockIndex} style={{ overflowX: "auto", border: "1px solid rgba(10,10,10,0.1)", borderRadius: 10 }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: compact ? 320 : 520, background: "#FFFCF4" }}>
+              {block.caption && (
+                <caption style={{ captionSide: "top", textAlign: "left", padding: "10px 12px", fontSize: 12, fontWeight: 700, color: "#3A3A3A" }}>
+                  {block.caption}
+                </caption>
+              )}
+              {block.headers && (
+                <thead>
+                  <tr>
+                    {block.headers.map((header, headerIndex) => (
+                      <th
+                        key={headerIndex}
+                        scope="col"
+                        style={{
+                          padding: compact ? "8px 9px" : "10px 12px",
+                          borderBottom: "1px solid rgba(10,10,10,0.1)",
+                          borderRight: headerIndex === block.headers!.length - 1 ? "none" : "1px solid rgba(10,10,10,0.08)",
+                          background: "#F8F4E8",
+                          textAlign: "left",
+                          fontSize: compact ? 11 : 12,
+                          lineHeight: 1.35,
+                          fontWeight: 700,
+                          color: "#1A1A1A",
+                          whiteSpace: "pre-line",
+                        }}
+                      >
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+              )}
+              <tbody>
+                {block.rows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.map((cell, cellIndex) => (
+                      <td
+                        key={cellIndex}
+                        style={{
+                          padding: compact ? "8px 9px" : "10px 12px",
+                          borderTop: block.headers || rowIndex > 0 ? "1px solid rgba(10,10,10,0.08)" : "none",
+                          borderRight: cellIndex === row.length - 1 ? "none" : "1px solid rgba(10,10,10,0.08)",
+                          fontSize: compact ? 12 : 13,
+                          lineHeight: 1.45,
+                          color: "#1A1A1A",
+                          verticalAlign: "top",
+                          whiteSpace: "pre-line",
+                        }}
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function QuestionStimulus({ blocks }: { blocks: RichContentBlock[] }) {
+  return (
+    <section
+      aria-label="Question stimulus"
+      style={{
+        marginBottom: 20,
+        padding: "16px 18px",
+        borderRadius: 12,
+        border: "1px solid rgba(10,10,10,0.1)",
+        background: "#FFF9E8",
+      }}
+    >
+      <RichContentBlocks blocks={blocks} />
+    </section>
+  );
+}
+
 function QuestionStem({ text }: { text: string }) {
   const formatted = formatStemForDisplay(text);
   const isLong = formatted !== text;
@@ -240,6 +391,20 @@ function QuestionStem({ text }: { text: string }) {
       {formatted}
     </p>
   );
+}
+
+function getMcqAnswers(q: McqQuestion): number[] {
+  return Array.isArray(q.answer) ? q.answer : [q.answer];
+}
+
+function formatMcqAnswer(q: McqQuestion): string {
+  return getMcqAnswers(q)
+    .map((answerIndex) => `(${String.fromCharCode(65 + answerIndex)}) ${q.options[answerIndex]}`)
+    .join(" and ");
+}
+
+function getCriteriaItems(q: ShortQuestion): string[] {
+  return q.criteriaBands?.flatMap((band) => band.criteria) ?? q.criteria;
 }
 
 function QuestionCard({ q }: { q: Question }) {
@@ -280,13 +445,16 @@ function QuestionCard({ q }: { q: Question }) {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 340px" }} className="qcard-cols">
         {/* Question */}
         <div style={{ padding: "28px 32px" }}>
+          {q.stimulus && <QuestionStimulus blocks={q.stimulus} />}
           <QuestionStem text={q.stem} />
 
           {q.type === "mcq" && (
             <div style={{ display: "grid", gap: 8 }}>
               {(q as McqQuestion).options.map((opt, i) => {
                 const letter = String.fromCharCode(65 + i);
-                const isCorrect = i === (q as McqQuestion).answer;
+                const mcq = q as McqQuestion;
+                const isCorrect = getMcqAnswers(mcq).includes(i);
+                const optionBlocks = mcq.optionBlocks?.[i];
                 const bg = revealed
                   ? isCorrect ? "#CFEAD9" : picked === i ? "#F4CFCF" : "#F5F5F3"
                   : picked === i ? "#EAF7EE" : "#F5F5F3";
@@ -304,7 +472,10 @@ function QuestionCard({ q }: { q: Question }) {
                     }}
                   >
                     <span style={{ fontWeight: 600, flexShrink: 0, color: "#5C5C5C" }}>{letter}.</span>
-                    {opt}
+                    <span style={{ display: "grid", gap: optionBlocks ? 8 : 0, flex: 1 }}>
+                      {opt}
+                      {optionBlocks && <RichContentBlocks blocks={optionBlocks} compact />}
+                    </span>
                   </button>
                 );
               })}
@@ -367,15 +538,15 @@ function QuestionCard({ q }: { q: Question }) {
               <div>
                 <div style={{
                   fontSize: 18, fontWeight: 600, letterSpacing: "-0.02em", marginBottom: 10,
-                  color: picked === (q as McqQuestion).answer ? "#1F6B40" : "#923333",
+                  color: picked !== null && getMcqAnswers(q as McqQuestion).includes(picked) ? "#1F6B40" : "#923333",
                 }}>
-                  {picked === (q as McqQuestion).answer ? "Correct." : "Not quite."}
+                  {picked !== null && getMcqAnswers(q as McqQuestion).includes(picked) ? "Correct." : "Not quite."}
                 </div>
                 <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1A1A1A", margin: "0 0 12px" }}>
                   {(q as McqQuestion).explain}
                 </p>
                 <p style={{ margin: 0, fontSize: 12, fontWeight: 600, letterSpacing: "0.06em", color: "#5C5C5C" }}>
-                  Answer: ({String.fromCharCode(65 + (q as McqQuestion).answer)}) {(q as McqQuestion).options[(q as McqQuestion).answer]}
+                  Answer: {formatMcqAnswer(q as McqQuestion)}
                 </p>
               </div>
             ) : (
@@ -388,36 +559,97 @@ function QuestionCard({ q }: { q: Question }) {
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A3A3A", marginBottom: 10 }}>
                 Marking criteria, {q.marks} marks
               </div>
-              <div style={{ display: "grid", gap: 8, marginBottom: 16 }}>
-                {(q as ShortQuestion).criteria.map((c, i) => {
-                  const on = checked.includes(i);
-                  return (
-                    <label key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer", fontSize: 13, lineHeight: 1.5, color: "#1A1A1A" }}>
-                      <input
-                        type="checkbox" checked={on}
-                        onChange={() => setChecked((a) => on ? a.filter((x) => x !== i) : [...a, i])}
-                        style={{ marginTop: 2, accentColor: topic.accent, flexShrink: 0 }}
-                      />
-                      {c}
-                    </label>
-                  );
-                })}
-              </div>
+              <CriteriaChecklist
+                question={q as ShortQuestion}
+                checked={checked}
+                setChecked={setChecked}
+                accent={topic.accent}
+              />
               <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#0A0A0A" }}>
-                {checked.length} / {(q as ShortQuestion).criteria.length} criteria
+                {checked.length} / {getCriteriaItems(q as ShortQuestion).length} criteria
               </div>
               {revealed && (
                 <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px dashed rgba(10,10,10,0.18)", fontSize: 13, lineHeight: 1.65, color: "#1A1A1A" }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 8 }}>
                     Sample response
                   </div>
-                  {(q as ShortQuestion).sample}
+                  {(q as ShortQuestion).sample && (
+                    <p style={{ margin: (q as ShortQuestion).sampleBlocks ? "0 0 10px" : 0 }}>
+                      {(q as ShortQuestion).sample}
+                    </p>
+                  )}
+                  {(q as ShortQuestion).sampleBlocks && <RichContentBlocks blocks={(q as ShortQuestion).sampleBlocks!} compact />}
                 </div>
               )}
             </div>
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function CriteriaChecklist({
+  question,
+  checked,
+  setChecked,
+  accent,
+}: {
+  question: ShortQuestion;
+  checked: number[];
+  setChecked: Dispatch<SetStateAction<number[]>>;
+  accent: string;
+}) {
+  const toggle = (index: number) => {
+    setChecked((current) => current.includes(index) ? current.filter((item) => item !== index) : [...current, index]);
+  };
+
+  if (!question.criteriaBands) {
+    return (
+      <div style={{ display: "grid", gap: 8, marginBottom: 16 }}>
+        {question.criteria.map((criterion, index) => {
+          const on = checked.includes(index);
+          return (
+            <label key={index} style={{ display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer", fontSize: 13, lineHeight: 1.5, color: "#1A1A1A" }}>
+              <input
+                type="checkbox"
+                checked={on}
+                onChange={() => toggle(index)}
+                style={{ marginTop: 2, accentColor: accent, flexShrink: 0 }}
+              />
+              {criterion}
+            </label>
+          );
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: "grid", gap: 12, marginBottom: 16 }}>
+      {question.criteriaBands.map((band, bandIndex) => (
+        <div key={bandIndex} style={{ display: "grid", gap: 7 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: "#0A0A0A" }}>{band.marks}</div>
+          {band.criteria.map((criterion, criterionIndex) => {
+            const previousCriteriaCount = question.criteriaBands!
+              .slice(0, bandIndex)
+              .reduce((total, previousBand) => total + previousBand.criteria.length, 0);
+            const currentIndex = previousCriteriaCount + criterionIndex;
+            const on = checked.includes(currentIndex);
+            return (
+              <label key={currentIndex} style={{ display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer", fontSize: 13, lineHeight: 1.5, color: "#1A1A1A" }}>
+                <input
+                  type="checkbox"
+                  checked={on}
+                  onChange={() => toggle(currentIndex)}
+                  style={{ marginTop: 2, accentColor: accent, flexShrink: 0 }}
+                />
+                {criterion}
+              </label>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 }
