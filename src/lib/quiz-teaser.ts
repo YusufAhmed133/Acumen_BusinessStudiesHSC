@@ -1,7 +1,7 @@
 export { TOPICS_MAP } from "./quiz-types";
 export type { TopicKey, McqQuestion, ShortQuestion, Question } from "./quiz-types";
 
-export const QUIZ_TOTAL = 141;
+export const QUIZ_TOTAL = 110;
 
 import type { McqQuestion, ShortQuestion } from "./quiz-types";
 

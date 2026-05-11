@@ -2,7 +2,41 @@ export { TOPICS_MAP } from "./quiz-types";
 export type { TopicKey, McqQuestion, ShortQuestion, Question } from "./quiz-types";
 import type { Question } from "./quiz-types";
 
-export const QUIZ_BANK: Question[] = [
+const FORMAT_AUDIT_EXCLUDED_IDS = new Set([
+  "22m6",
+  "22m20",
+  "22s21c",
+  "22s23a",
+  "22s23b",
+  "22s23c",
+  "22s23d",
+  "22e25",
+  "23m14",
+  "23m16",
+  "23m17",
+  "23m18",
+  "23s22b",
+  "23s22c",
+  "23e25",
+  "24m5",
+  "24m10",
+  "24m14",
+  "24m20",
+  "24s21b",
+  "24s24ai",
+  "24s24aii",
+  "24e25",
+  "25m15",
+  "25m16",
+  "25m17",
+  "25m20",
+  "25s23a",
+  "25s23b",
+  "25s23c",
+  "25e25",
+]);
+
+const RAW_QUIZ_BANK: Question[] = [
 
 // ─── 2022 Section I ───────────────────────────────────────────────────────────
 
@@ -735,3 +769,6 @@ export const QUIZ_BANK: Question[] = [
 
 ];
 
+export const QUIZ_BANK: Question[] = RAW_QUIZ_BANK.filter(
+  (question) => !FORMAT_AUDIT_EXCLUDED_IDS.has(question.id)
+);
