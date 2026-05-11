@@ -18,14 +18,6 @@ const FORMAT_AUDIT_EXCLUDED_IDS = new Set([
   "23s22b",
   "23s22c",
   "23e25",
-  "24m5",
-  "24m10",
-  "24m14",
-  "24m20",
-  "24s21b",
-  "24s24ai",
-  "24s24aii",
-  "24e25",
 ]);
 
 const RAW_QUIZ_BANK: Question[] = [
@@ -415,8 +407,9 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 0, explain: "Price skimming sets a high initial price to capture less price-sensitive early customers, then reduces it over time. Penetration pricing is the reverse, entering low to gain market share." },
 
   { id: "24m5", topic: "human_resources", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q5",
-    stem: "Which row of the table shows the results of effective human resource management? [Table: Workplace accidents / Absenteeism, A: Increase/Decrease, B: Increase/Increase, C: Decrease/Decrease, D: Decrease/Increase]",
-    options: ["Workplace accidents Increase / Absenteeism Decrease", "Workplace accidents Increase / Absenteeism Increase", "Workplace accidents Decrease / Absenteeism Decrease", "Workplace accidents Decrease / Absenteeism Increase"],
+    stem: "Which row of the table shows the results of effective human resource management?",
+    stimulus: [{ type: "table", headers: ["", "Workplace accidents", "Absenteeism"], rows: [["A.", "Increase", "Decrease"], ["B.", "Increase", "Increase"], ["C.", "Decrease", "Decrease"], ["D.", "Decrease", "Increase"]] }],
+    options: ["Workplace accidents increase; absenteeism decrease", "Workplace accidents increase; absenteeism increase", "Workplace accidents decrease; absenteeism decrease", "Workplace accidents decrease; absenteeism increase"],
     answer: 2, explain: "Effective HRM reduces workplace accidents (through WH&S training) and reduces absenteeism (through motivation, fair treatment, and good working conditions). Both decrease." },
 
   { id: "24m6", topic: "operations", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q6",
@@ -440,7 +433,11 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 0, explain: "The core role of an operations manager is to maximise efficiency and minimise waste in the transformation process, improving the ratio of outputs to inputs." },
 
   { id: "24m10", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q10",
-    stem: "A business has: Sales $800 000 / COGS $200 000 / Gross profit $600 000 / Net profit $250 000. Expense ratio = total expenses ÷ sales. What is the expense ratio for this business?",
+    stem: "A business has the following financial information.\n\nWhat is the expense ratio for this business?",
+    stimulus: [
+      { type: "table", rows: [["Sales", "$800 000"], ["Cost of goods sold", "$200 000"], ["Gross profit", "$600 000"], ["Net profit", "$250 000"]] },
+      { type: "note", text: "Expense ratio = total expenses ÷ sales" },
+    ],
     options: ["25%", "31%", "35%", "44%"],
     answer: 3, explain: "Total expenses = Gross profit − Net profit = $600 000 − $250 000 = $350 000. Expense ratio = $350 000 ÷ $800 000 = 43.75% ≈ 44%." },
 
@@ -460,7 +457,8 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 3, explain: "Brand perception is a psychological factor influencing customer choice. Customers' subjective judgement based on the brand name is psychological, not financial, environmental, or legally implied." },
 
   { id: "24m14", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q14",
-    stem: "The table shows the cash flow information for a business. Opening balance (Jul): $40 000. Cash in: Jul $30 000 / Aug $10 000 / Sep $22 000. Cash out: Jul $20 000 / Aug $13 000 / Sep $15 000. What is the closing cash balance for September?",
+    stem: "The table shows the cash flow information for a business.\n\nWhat is the closing cash balance for September?",
+    stimulus: [{ type: "table", headers: ["", "Jul", "Aug", "Sep"], rows: [["Opening balance ($)", "40 000", "", ""], ["Cash in ($)", "30 000", "10 000", "22 000"], ["Cash out ($)", "20 000", "13 000", "15 000"]] }],
     options: ["$7 000", "$47 000", "$54 000", "$150 000"],
     answer: 2, explain: "Jul closing = 40+30−20 = $50 000. Aug closing = 50+10−13 = $47 000. Sep closing = 47+22−15 = $54 000." },
 
@@ -490,7 +488,8 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 2, explain: "When a private company becomes publicly listed and issues shares to the public for the first time (IPO), this is a new issue of shares, a form of external equity finance." },
 
   { id: "24m20", topic: "marketing", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q20",
-    stem: "A company sets its primary marketing objective for 2025 to be the dominant market leader. [Table: 2023: Ad budget $1m / Sales $10m / Market share 20%; 2024: Ad budget $2m / Sales $15m / Market share 15%] What should the marketing manager do to achieve the marketing objective?",
+    stem: "A company sets its primary marketing objective for 2025 to be the dominant market leader in the product it distributes. Its sales results are shown in the table.\n\nWhat should the marketing manager do to achieve the marketing objective?",
+    stimulus: [{ type: "table", headers: ["Year", "Advertising Budget", "Sales ($)", "Market Share (%)"], rows: [["2023", "$1 million", "$10 million", "20%"], ["2024", "$2 million", "$15 million", "15%"]] }],
     options: ["Increase the advertising budget to boost market share", "Make no changes as sales have increased by $5 million", "Decrease the advertising budget as the market is growing", "Control the marketing mix as the market share has declined"],
     answer: 3, explain: "Despite rising sales, market share fell from 20% to 15%, the objective of market leadership is not being met. The manager must control and adjust the marketing mix to reverse the share decline." },
 
@@ -502,7 +501,8 @@ const RAW_QUIZ_BANK: Question[] = [
     sample: "The operations department is dependent on the finance department who would need to provide a source of funds to pay for employee overtime and an increase in electricity, fabric etc. Finance is guided by the operations department's product specifications as this is what will determine the cost/finance required." },
 
   { id: "24s21b", topic: "operations", type: "short", marks: 3, src: "2024 HSC, Section II, Q21(b)",
-    stem: "A department store is considering the quantity of products they will need to order and store for the following year. Products include: Product A, Baby Milk Formula 900g; Product B, Air conditioner. How can each of these TWO products affect inventory management?",
+    stem: "A department store is considering the quantity of products they will need to order and store for the following year.\n\nHow can each of these TWO products affect inventory management?",
+    stimulus: [{ type: "table", headers: ["Product A", "Product B"], rows: [["Baby Milk Formula 900 g", "Air conditioner"]] }],
     criteria: ["Provides an explanation of how each product will affect inventory management", "Demonstrates some understanding of how product/s will affect inventory management", "Provides some relevant information"],
     sample: "Air conditioners are a bulky item and take considerable warehouse space to store at greater expense. Baby formula needs a FIFO or JIT inventory system, as it is a perishable item." },
 
@@ -542,14 +542,17 @@ const RAW_QUIZ_BANK: Question[] = [
     sample: "This business could divide the total market into smaller segments so it can target its service to them more effectively and increase sales. For example, it could divide by demographics and advertise and tailor the service and price to a particular income level and social class. It could also segment by psychographic characteristics and appeal to aspirational pianists who may want to increase their skills and satisfy their personal interest." },
 
   { id: "24s24ai", topic: "finance", type: "short", marks: 2, src: "2024 HSC, Section II, Q24(a)(i)",
-    stem: "The following is an extract from a business balance sheet. Assets: Cash at bank $5 000 / Accounts receivable $20 000 / Inventory $5 000 / Office equipment $70 000 / Motor vehicles $80 000. Liabilities: Overdraft $9 000 / Accounts payable $11 000 / Long-term loan $90 000. Owners' equity: Capital $55 000 / Retained profits $15 000. Calculate the current ratio for this business. Show all working. (Current ratio = current assets ÷ current liabilities)",
+    stem: "The following is an extract from a business balance sheet.\n\nCalculate the current ratio for this business. Show all working.\n(Current ratio = current assets ÷ current liabilities)",
+    stimulus: [{ type: "table", headers: ["Assets", "", "Liabilities", ""], rows: [["Cash at bank", "$5 000", "Overdraft", "$9 000"], ["Accounts receivable", "$20 000", "Accounts payable", "$11 000"], ["Inventory", "$5 000", "Long-term loan", "$90 000"], ["Office equipment", "$70 000", "Owners’ equity", ""], ["Motor vehicles", "$80 000", "Capital", "$55 000"], ["", "", "Retained profits", "$15 000"]] }],
     criteria: ["Calculates the correct current ratio and shows working", "Provides some relevant information"],
     sample: "Current assets = (Cash at bank + accounts receivable + inventory) ÷ (Overdraft + Accounts payable) = ($5 000 + $20 000 + $5 000) ÷ ($9 000 + $11 000) = $30 000 ÷ $20 000 = 1.5 = 1.5 : 1" },
 
   { id: "24s24aii", topic: "finance", type: "short", marks: 4, src: "2024 HSC, Section II, Q24(a)(ii)",
-    stem: "A business has a current ratio of 1.5:1. Overdraft $9 000 / Accounts payable $11 000 / Long-term loan $90 000 / Capital $55 000 / Retained profits $15 000. Explain the influence of ONE financial institution on the financial management of this business.",
+    stem: "The following is an extract from a business balance sheet.\n\nExplain the influence of ONE financial institution on the financial management of this business.",
+    stimulus: [{ type: "table", headers: ["Assets", "", "Liabilities", ""], rows: [["Cash at bank", "$5 000", "Overdraft", "$9 000"], ["Accounts receivable", "$20 000", "Accounts payable", "$11 000"], ["Inventory", "$5 000", "Long-term loan", "$90 000"], ["Office equipment", "$70 000", "Owners’ equity", ""], ["Motor vehicles", "$80 000", "Capital", "$55 000"], ["", "", "Retained profits", "$15 000"]] }],
     criteria: ["Provides a thorough explanation of the influence of ONE financial institution on the financial management of this business", "Provides a sound explanation of the influence of ONE financial institution on financial management", "Demonstrates some understanding of the influence on financial management", "Provides some relevant information"],
-    sample: "This business is highly geared and a financial institution, such as a bank, may not be willing to lend additional finance because they pose a risk, which restricts the business's ability to achieve growth. Banks may increase interest rates, which will increase the business's financial commitments and affect its liquidity and capacity to repay existing debt." },
+    sample: "This business is highly geared and a financial institution, such as a bank, may not be willing to lend additional finance because they pose a risk, which restricts the business’s ability to achieve growth. Banks may increase interest rates, which will increase the business’s financial commitments and affect its liquidity and capacity to repay existing debt.",
+    sampleBlocks: [{ type: "heading", text: "Answers could include:" }, { type: "list", items: ["Australian Securities Exchange", "Finance companies", "Investment banks", "Superannuation funds."] }] },
 
   { id: "24s24b", topic: "finance", type: "short", marks: 4, src: "2024 HSC, Section II, Q24(b)",
     stem: "Explain how offering discounts for early payment may improve a business's cash flow and reduce working capital.",
@@ -558,20 +561,72 @@ const RAW_QUIZ_BANK: Question[] = [
 
 // ─── 2024 Section III/IV ──────────────────────────────────────────────────────
 
-  { id: "24e25", topic: "human_resources", type: "extended", marks: 20, src: "2024 HSC, Section III, Q25",
-    stem: "Hans-Made Watches is a business that designs and hand-makes European-style watches with a lifetime warranty. Features of the business include: family run business / selling watches to the local community / autocratic leadership style. The business has seen a decrease in sales and market share. The owner is retiring soon and his children are hoping to improve the performance of the business. Below is an expression of interest for an assistant manager role that has been distributed to the business's family and friends only. [Hans-Made Watches, Established 1976, Expression of interest: Assistant Manager, You will be required to work in the shop and manage day-to-day business needs. Hours of work are 8 am to 6 pm Monday to Saturday. General information: award wages offered / free parking onsite / use of coffee machine / reports to the owner / no experience necessary.] You have been hired as a consultant by the owner to write a business report. In your report: describe the product differentiation strategy for this business / discuss the current acquisition process for this business / recommend appropriate human resource strategies for this business.",
-    criteria: ["Comprehensively describes the product differentiation strategy for this business", "Comprehensively discusses the current acquisition process of this business", "Comprehensively recommends appropriate human resource strategies", "Makes effective use of the information provided, demonstrating extensive knowledge relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"],
-    sample: "Hans-Made Watches differentiates its product through its craftsmanship positioning, hand-made European-style watches with a lifetime warranty signal premium quality and exclusivity. The business could strengthen this through branding strategies such as packaging upgrades and positioning in the luxury segment. The current acquisition process, a closed expression of interest distributed only to family and friends with no stated experience requirements, is problematic. It severely narrows the talent pool, risks nepotism, and is unlikely to attract candidates with the retail, digital, or management skills needed to reverse declining sales. Recommended HR strategies: (1) shift from autocratic to participative leadership to empower the incoming generation and improve employee engagement; (2) implement external, merit-based recruitment to attract skilled applicants; (3) invest in training and development to build digital retail and customer service capabilities; (4) introduce performance-based monetary rewards to motivate and retain talent during the ownership transition." },
+  { id: "24e25", topic: "human_resources", topics: ["marketing", "human_resources"], type: "extended", marks: 20, src: "2024 HSC, Section III, Q25",
+    stem: "You have been hired as a consultant by the owner to write a business report.\n\nIn your report:\n• describe the product differentiation strategy for this business\n• discuss the current acquisition process for this business\n• recommend appropriate human resource strategies for this business.",
+    stimulus: [
+      { type: "paragraph", text: "Hans-Made Watches is a business that designs and hand-makes European-style watches with a lifetime warranty." },
+      { type: "heading", text: "Features of the business include:" },
+      { type: "list", items: ["family run business", "selling watches to the local community", "autocratic leadership style."] },
+      { type: "paragraph", text: "The business has seen a decrease in sales and market share. The owner is retiring soon and his children are hoping to improve the performance of the business." },
+      { type: "paragraph", text: "Below is an expression of interest for an assistant manager role that has been distributed to the business’s family and friends only." },
+      { type: "table", caption: "Hans-Made Watches", rows: [["Established 1976"], ["Expression of interest: Assistant Manager"], ["You will be required to work in the shop and manage day-to-day business needs. Hours of work are 8 am to 6 pm Monday to Saturday."], ["General information\n• award wages offered\n• free parking onsite\n• use of coffee machine\n• reports to the owner\n• no experience necessary."]] },
+    ],
+    criteria: ["Comprehensively describes the product differentiation strategy for this business", "Comprehensively discusses the current acquisition process of this business", "Comprehensively recommends appropriate human resource strategies", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Thoroughly describes the product differentiation strategy for this business", "Discusses the current acquisition process of this business", "Recommends appropriate human resource strategies", "Makes sound use of the information provided, demonstrating knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts", "Describes a product differentiation strategy for this business", "Describes the current acquisition process for this business", "Recommends human resource strategy(ies)", "Makes use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Includes features of a business report and uses some business terminology and concepts", "Outlines a product differentiation strategy", "Makes a statement about the acquisition process", "Makes a statement about possible human resource strategy(ies)", "May include some features of a business report and uses some basic business terminology and/or concepts", "Makes some reference to marketing and/or human resources", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Comprehensively describes the product differentiation strategy for this business", "Comprehensively discusses the current acquisition process of this business", "Comprehensively recommends appropriate human resource strategies", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Thoroughly describes the product differentiation strategy for this business", "Discusses the current acquisition process of this business", "Recommends appropriate human resource strategies", "Makes sound use of the information provided, demonstrating knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Describes a product differentiation strategy for this business", "Describes the current acquisition process for this business", "Recommends human resource strategy(ies)", "Makes use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Outlines a product differentiation strategy", "Makes a statement about the acquisition process", "Makes a statement about possible human resource strategy(ies)", "May include some features of a business report and uses some basic business terminology and/or concepts"] },
+      { marks: "1–4", criteria: ["Makes some reference to marketing and/or human resources", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Marketing strategies" },
+      { type: "list", items: ["Marketing segmentation, product/service differentiation and positioning", "Place/distribution – distribution channels", "Price and quality interaction", "Products – goods and/or services", "branding", "packaging."] },
+      { type: "heading", text: "Acquisition process" },
+      { type: "list", items: ["Identifying staffing needs", "Recruitment", "Selection."] },
+      { type: "heading", text: "Human resources strategies" },
+      { type: "list", items: ["Leadership style", "Job design – general or specific tasks", "Recruitment – internal or external, general or specific skills", "Training and development – current or future skills", "Rewards – monetary and non-monetary, individual or group, performance pay."] },
+    ] },
 
   { id: "24e26", topic: "finance", type: "extended", marks: 20, src: "2024 HSC, Section IV, Q26",
     stem: "How can financial strategies affect the objectives of financial management?",
-    criteria: ["Demonstrates a comprehensive understanding of how financial strategies affect objectives of financial management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response communicating clearly using relevant business terminology", "Links specific strategies (cash flow management, working capital management, profitability management, global financial management) to specific objectives (profitability, growth, efficiency, liquidity, solvency)", "Considers both short-term and long-term effects"],
-    sample: "Financial strategies directly shape a business's ability to achieve its financial management objectives. Cash flow management strategies, such as factoring receivables, offering discounts for early payment, and managing distribution of payments, improve liquidity by ensuring sufficient short-term cash. Working capital strategies (controlling current assets and current liabilities, using leasing or sale and leaseback) improve solvency. Profitability management through cost controls (expense minimisation, cost centres) and revenue controls (setting marketing objectives) directly addresses the profitability objective. Global financial management strategies, hedging, derivatives, and selecting appropriate methods of international payment, protect against exchange rate risk and preserve profit margins in global operations. Each strategy has trade-offs: aggressive cost-cutting may harm quality; factoring improves liquidity but at a cost to revenue. Businesses that align their financial strategies with their specific stage of growth and financial position will most effectively achieve their objectives." },
+    criteria: ["Demonstrates a comprehensive understanding of how financial strategies affect objectives of financial management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Demonstrates a sound understanding of how financial strategies affect objectives of financial management", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Demonstrates some understanding of how financial strategies affect objectives of financial management", "Makes reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Describes some aspects of financial strategies and/or financial objectives", "Makes limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and/or concepts", "Makes limited reference to financial strategies and/or financial objectives", "May identify case study/studies", "Uses basic business terminology and/or concepts"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Demonstrates a comprehensive understanding of how financial strategies affect objectives of financial management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Demonstrates a sound understanding of how financial strategies affect objectives of financial management", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Demonstrates some understanding of how financial strategies affect objectives of financial management", "Makes reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Describes some aspects of financial strategies and/or financial objectives", "Makes limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and/or concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to financial strategies and/or financial objectives", "May identify case study/studies", "Uses basic business terminology and/or concepts"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Objectives of financial management:" },
+      { type: "list", items: ["Profitability, growth, efficiency, liquidity, solvency", "Short term and long term."] },
+      { type: "heading", text: "Financial management strategies:" },
+      { type: "list", items: ["Cash flow management", "cash flow statements", "distribution of payments, discounts for early payment, factoring", "Working capital management", "control of current assets – cash, receivables, inventories", "control of current liabilities – payables, loans, overdrafts", "strategies – leasing, sale and lease back", "Profitability management", "cost controls – fixed and variable, cost centres, expense minimisation", "revenue controls – marketing objectives", "Global financial management", "exchange rates", "interest rates", "methods of international payment – payment in advance, letter of credit, clean payment, bill of exchange", "hedging", "derivatives."] },
+    ] },
 
   { id: "24e27", topic: "operations", type: "extended", marks: 20, src: "2024 HSC, Section IV, Q27",
     stem: "How can operations strategies affect corporate social responsibility?",
-    criteria: ["Demonstrates a comprehensive understanding of how operations strategies affect corporate social responsibility", "Applies relevant case study/studies and contemporary business issues", "Distinguishes between legal compliance and ethical responsibility in operations strategies", "Links specific operations strategies (quality management, technology, outsourcing, inventory, supply chain, global factors, new product/service design) to CSR outcomes", "Presents a sustained, logical and cohesive response using relevant business terminology"],
-    sample: "Operations strategies can significantly advance or undermine corporate social responsibility. Quality management strategies that emphasise zero defects and continuous improvement reduce waste and product recalls, benefiting consumers and the environment. Outsourcing decisions have major CSR implications, outsourcing to suppliers with poor labour conditions or environmental practices can expose a business to reputational and ethical risk, while ethical sourcing policies demonstrate social responsibility. Supply chain development strategies that prioritise local sourcing or certified ethical suppliers strengthen CSR credentials. Technology adoption can improve environmental sustainability through energy efficiency and waste reduction. Global sourcing offers cost advantages but must be balanced against the ethical responsibility to ensure fair treatment of workers throughout the supply chain. Businesses that embed CSR considerations into their operations strategy, rather than treating it as a compliance afterthought, build stronger brand equity, customer loyalty, and employee engagement." },
+    criteria: ["Demonstrates a comprehensive understanding of how operations strategies affect corporate social responsibility", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Demonstrates a sound understanding of how operations strategies affect corporate social responsibility", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Demonstrates a sound understanding of operations strategies and/or corporate social responsibility", "Makes reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Describes some aspects of operations strategies and/or corporate social responsibility", "Makes limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and/or concepts", "Makes limited reference to operations strategies and/or corporate social responsibility", "May identify case study/studies", "Uses basic business terminology and/or concepts"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Demonstrates a comprehensive understanding of how operations strategies affect corporate social responsibility", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Demonstrates a sound understanding of how operations strategies affect corporate social responsibility", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Demonstrates a sound understanding of operations strategies and/or corporate social responsibility", "Makes reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Describes some aspects of operations strategies and/or corporate social responsibility", "Makes limited reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and/or concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to operations strategies and/or corporate social responsibility", "May identify case study/studies", "Uses basic business terminology and/or concepts"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "paragraph", text: "Any operations strategy that affects CSR:" },
+      { type: "list", items: ["Quality management", "Technology", "Outsourcing", "Inventory management", "Supply chain management", "Global factors", "global sourcing", "economies of scale", "scanning and learning", "research and development", "New product or service design and development."] },
+      { type: "heading", text: "Corporate social responsibility:" },
+      { type: "list", items: ["The difference between legal compliance and ethical responsibility", "Environmental sustainability and social responsibility."] },
+    ] },
 
 // ─── 2025 Section I ───────────────────────────────────────────────────────────
 
