@@ -319,9 +319,11 @@ function RichContentBlocks({ blocks, compact = false }: { blocks: RichContentBlo
                   return (
                     <g key={tick}>
                       <line x1={padLeft} x2={padLeft + plotWidth} y1={y} y2={y} stroke="rgba(10,10,10,0.18)" />
-                      <text x={padLeft - 10} y={y + 4} textAnchor="end" style={{ fontSize: 11, fill: "#3A3A3A" }}>
-                        {tick}
-                      </text>
+                      {block.showYTickLabels !== false && (
+                        <text x={padLeft - 10} y={y + 4} textAnchor="end" style={{ fontSize: 11, fill: "#3A3A3A" }}>
+                          {tick}
+                        </text>
+                      )}
                     </g>
                   );
                 })}

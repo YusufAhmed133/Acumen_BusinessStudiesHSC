@@ -20,6 +20,7 @@ export type RichContentBlock =
       yMin: number;
       yMax: number;
       yStep: number;
+      showYTickLabels?: boolean;
       series: Array<{ label: string; values: number[]; stroke: string; dash?: string }>;
     }
   | {

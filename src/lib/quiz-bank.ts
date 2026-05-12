@@ -6,6 +6,328 @@ const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
+// ─── 2017 Section I ───────────────────────────────────────────────────────────
+
+  { id: "17m1", topic: "human_resources", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q1",
+    stem: "A recruitment officer is employed by a business.\n\nIn which specific business function are they most likely to be engaged?",
+    options: ["Finance", "Human resources", "Marketing", "Operations"],
+    answer: 1, explain: "Recruitment is part of the human resources function." },
+
+  { id: "17m2", topic: "operations", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q2",
+    stem: "In which aspect of a business does continuous improvement occur?",
+    options: ["Quality assurance", "Legal compliance", "Just-in-time management", "Total quality management"],
+    answer: 3, explain: "Continuous improvement is a feature of total quality management." },
+
+  { id: "17m3", topic: "marketing", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q3",
+    stem: "As a result of a SWOT analysis, a gym operator finds that a new larger gym is opening nearby. The operator then decides to extend its opening hours.\n\nThe aim of this strategy is to use",
+    options: ["a strength to overcome a threat.", "a strength to overcome a weakness.", "an opportunity to overcome a threat.", "an opportunity to overcome a weakness."],
+    answer: 0, explain: "Extended opening hours are an internal strength used to respond to the external threat of a new larger gym." },
+
+  { id: "17m4", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q4",
+    stem: "A business ensures all its debts are paid as they fall due.\n\nWhich financial objective is the business satisfying?",
+    options: ["Efficiency", "Growth", "Liquidity", "Solvency"],
+    answer: [2, 3], explain: "The official marking guideline accepts both C and D for this question." },
+
+  { id: "17m5", topic: "marketing", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q5",
+    stem: "A manufacturer sells her organic meals only to major supermarkets.\n\nWhich distribution channel has the manufacturer chosen?",
+    options: ["Exclusive", "Intensive", "Selective", "Warehousing"],
+    answer: 2, explain: "Selling only through chosen major supermarkets is selective distribution." },
+
+  { id: "17m6", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q6",
+    stem: "A sole trader invests $500 000 into her business.\n\nWhat is this an example of?",
+    options: ["An overdraft", "Retained profits", "Internal debt finance", "Internal equity finance"],
+    answer: 3, explain: "Owner investment is internal equity finance." },
+
+  { id: "17m7", topic: "marketing", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q7",
+    stem: "Vinh's friends tell him that a particular brand makes poor quality jeans. He does not buy this brand due to his friends' opinions.\n\nWhich factor is influencing his choice?",
+    options: ["Economic", "Government", "Sociocultural", "Psychological"],
+    answer: 2, explain: "Friends' opinions are a sociocultural influence on consumer choice." },
+
+  { id: "17m8", topic: "marketing", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q8",
+    stem: "A customer returns a chainsaw to the place of purchase as it does not cut branches.\n\nOn what basis must the business refund the cost of the chainsaw?",
+    options: ["Implied conditions", "Ethical considerations", "Relationship marketing", "Accuracy in advertising"],
+    answer: 0, explain: "A product that does not perform its basic function breaches implied conditions." },
+
+  { id: "17m9", topic: "operations", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q9",
+    stem: "Which operations process uses a Gantt chart?",
+    options: ["Customisation", "Input", "Output", "Transformation"],
+    answer: 3, explain: "A Gantt chart schedules and controls transformation activities." },
+
+  { id: "17m10", topic: "marketing", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q10",
+    stem: "Salty Sunscreens sells the following sunscreens, both containing the same ingredients.\n\nThis is an example of which of the following?",
+    stimulus: [
+      { type: "table", headers: ["", "Sunscreen 1", "Sunscreen 2"], rows: [["Brand", "SALTY SUNSCREEN", "SALTY SUNSCREEN"], ["Label", "for TEENAGERS", "for ADULTS"], ["Volume", "200 mL", "200 mL"], ["Price", "$15", "$10"]] },
+    ],
+    options: ["Price leading", "Price skimming", "Price penetration", "Price discrimination"],
+    answer: 3, explain: "The same product is sold at different prices to different market segments, which is price discrimination." },
+
+  { id: "17m11", topic: "human_resources", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q11",
+    stem: "Whose interests is an organisation most likely to be representing when it meets with government to discuss business flexibility, expansion and competitiveness?",
+    options: ["Employees", "Employers", "Society", "Unions"],
+    answer: 1, explain: "Business flexibility, expansion and competitiveness are employer interests." },
+
+  { id: "17m12", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q12",
+    stem: "The efficiency of a business can best be determined by which of the following?",
+    options: ["Gross profit ratio", "Value of current assets", "Value of current liabilities", "Accounts receivable turnover ratio"],
+    answer: 3, explain: "Accounts receivable turnover is an efficiency ratio." },
+
+  { id: "17m13", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q13",
+    stem: "Why would a business factor its accounts receivables?",
+    options: ["To improve cash flow", "To increase owner's equity", "To increase the value of current assets", "To improve the value of the business"],
+    answer: 0, explain: "Factoring accounts receivable brings cash into the business sooner." },
+
+  { id: "17m14", topic: "marketing", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q14",
+    stem: "In which type of market would a large scale manufacturer of pasta purchase flour for its products?",
+    options: ["Consumer", "Industrial", "Mass", "Resource"],
+    answer: 1, explain: "A manufacturer buying inputs for production is operating in an industrial market." },
+
+  { id: "17m15", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q15",
+    stem: "Mick is deciding whether to purchase Business A or Business B and has received the following information.\n\nWhich of the following will help Mick make the best decision?",
+    stimulus: [{ type: "table", headers: ["", "Business A", "Business B"], rows: [["Assets ($)", "10 million", "1 million"], ["Total sales ($)", "4 million", "2 million"]] }],
+    options: ["Total sales", "Industry averages", "The value of assets", "Comparative ratio analysis"],
+    answer: 3, explain: "Comparative ratio analysis lets Mick compare performance relative to business size." },
+
+  { id: "17m16", topic: "operations", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q16",
+    stem: "Which of the following actions is an example of corporate social responsibility?",
+    options: ["Sponsoring a sporting event", "Opening a manufacturing plant", "Introducing a community health program", "Paying compensation for a work-related injury"],
+    answer: 2, explain: "A community health program demonstrates responsibility beyond ordinary business operations." },
+
+  { id: "17m17", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q17",
+    stem: "The expense ratio (total expenses ÷ sales) is always",
+    options: ["the difference between the net profit ratio and the gross profit ratio.", "the difference between sales and the gross profit ratio.", "greater than the gross profit ratio.", "greater than the net profit ratio."],
+    answer: 0, explain: "Expense ratio equals gross profit ratio minus net profit ratio." },
+
+  { id: "17m18", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q18",
+    stem: "Which organisation ensures that Barb's Batteries Pty Ltd operates in a financially responsible manner?",
+    options: ["Australian Securities and Investments Commission", "Australian Prudential Regulation Authority", "Australian Securities Exchange", "Reserve Bank of Australia"],
+    answer: 0, explain: "ASIC regulates companies and financial reporting responsibilities." },
+
+  { id: "17m19", topic: "human_resources", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q19",
+    stem: "A business implements a new policy that limits the use of work-related email accounts before 8 am and after 8 pm.\n\nWhich consideration has most likely led to the development of this policy?",
+    options: ["Economic", "Legal", "Social", "Technological"],
+    answer: 2, explain: "Limits on after-hours email reflect social considerations such as work-life balance." },
+
+  { id: "17m20", topic: "finance", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q20",
+    stem: "The table shows information supplied by a business.\n\nWhich row in the following table shows the sales and net profit for this business?",
+    stimulus: [
+      { type: "table", rows: [["Sales", "?"], ["Cost of goods sold", "?"], ["Gross profit", "$400 000"], ["Expenses", "?"], ["Net profit", "?"], ["Gross profit ratio\n(gross profit ÷ sales)", "66.7%"], ["Net profit ratio\n(net profit ÷ sales)", "50%"]] },
+    ],
+    options: ["Sales $66 700; net profit $50 000", "Sales $200 000; net profit $100 000", "Sales $600 000; net profit $200 000", "Sales $600 000; net profit $300 000"],
+    optionBlocks: [
+      [{ type: "table", headers: ["Sales", "Net profit"], rows: [["$66 700", "$50 000"]] }],
+      [{ type: "table", headers: ["Sales", "Net profit"], rows: [["$200 000", "$100 000"]] }],
+      [{ type: "table", headers: ["Sales", "Net profit"], rows: [["$600 000", "$200 000"]] }],
+      [{ type: "table", headers: ["Sales", "Net profit"], rows: [["$600 000", "$300 000"]] }],
+    ],
+    answer: 3, explain: "$400 000 is 66.7% of $600 000, and 50% of $600 000 is $300 000." },
+
+// ─── 2017 Section II ──────────────────────────────────────────────────────────
+
+  { id: "17s21a", topic: "operations", type: "short", marks: 2, src: "2017 HSC, Section II, Q21(a)",
+    stem: "A recently established bank has branches in Australian capital cities and online customers across Australia. The management of this bank wants to focus on improving operations processes.\n\nOutline the role of operations management in this business.",
+    criteria: ["Sketches in general terms the role of operations management in this business", "Makes a statement about operations"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms the role of operations management in this business"] },
+      { marks: "1", criteria: ["Makes a statement about operations"] },
+    ],
+    sample: "Operations management involves the bank being a cost leader and differentiating the business from competitors." },
+
+  { id: "17s21b", topic: "operations", type: "short", marks: 4, src: "2017 HSC, Section II, Q21(b)",
+    stem: "A recently established bank has branches in Australian capital cities and online customers across Australia. The management of this bank wants to focus on improving operations processes.\n\nExplain how improving operations processes may lead to better customer service.",
+    criteria: ["Clearly provides why and/or how improving operations processes may lead to better customer service", "Provides why and/or how improving operations processes may lead to better customer service", "Sketches in general terms operations processes and/or customer service", "Makes a statement about operations processes and/or customer service"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Clearly provides why and/or how improving operations processes may lead to better customer service"] },
+      { marks: "3", criteria: ["Provides why and/or how improving operations processes may lead to better customer service"] },
+      { marks: "2", criteria: ["Sketches in general terms operations processes and/or customer service"] },
+      { marks: "1", criteria: ["Makes a statement about operations processes and/or customer service"] },
+    ],
+    sample: "Improved transforming resources, such as bank staff and facilities like branches, along with changes to the transformation process, such as more effective use of technology and improved role descriptions for staff, will lead to improvements in customer service. Bank branches are laid out more efficiently and internet banking and other online banking services are aimed at providing better customer service." },
+
+  { id: "17s21c", topic: "operations", type: "short", marks: 6, src: "2017 HSC, Section II, Q21(c)",
+    stem: "A recently established bank has branches in Australian capital cities and online customers across Australia. The management of this bank wants to focus on improving operations processes.\n\nAssess ONE operations strategy this business could use to improve its long-term success.",
+    criteria: ["Makes a clear judgement of ONE operations strategy that may improve the long-term success of the business", "Makes a judgement of ONE operations strategy that may improve the long-term success of the business", "Provides the relationship between ONE operational strategy and long-term improved success of the business", "Provides characteristics and features of an operations strategy that could improve the long-term success of the business", "Sketches in general terms an operations strategy", "Makes a statement about an operations strategy"],
+    criteriaBands: [
+      { marks: "6", criteria: ["Makes a clear judgement of ONE operations strategy that may improve the long-term success of the business"] },
+      { marks: "5", criteria: ["Makes a judgement of ONE operations strategy that may improve the long-term success of the business"] },
+      { marks: "4", criteria: ["Provides the relationship between ONE operational strategy and long-term improved success of the business"] },
+      { marks: "3", criteria: ["Provides characteristics and features of an operations strategy that could improve the long-term success of the business"] },
+      { marks: "2", criteria: ["Sketches in general terms an operations strategy"] },
+      { marks: "1", criteria: ["Makes a statement about an operations strategy"] },
+    ],
+    sample: "The bank may use outsourcing as a cost-effective strategy to improve the long-term sustainability of the business. Outsourcing allows the bank to focus on the quality of service to customers, grow market share and improve profitability. Outsourcing the customer inquiry centre improves flexibility in regards to operating in different time zones to accommodate Australian customers. Establishing an overseas customer inquiry centre will reduce costs because the business will have access to less expensive labour." },
+
+  { id: "17s22a", topic: "marketing", type: "short", marks: 4, src: "2017 HSC, Section II, Q22(a)",
+    stem: "An Australian company sells educational toys for pre-school aged children.\n\nWhy is ethical behaviour important in the marketing of this business?",
+    criteria: ["Gives detailed reason/s why ethical behaviour is important in the marketing of this business", "Gives reason/s why ethical behaviour is important in the marketing of this business", "Identifies why ethical behaviour is important", "Gives an example of ethical behaviour", "Refers to ethical behaviour"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Gives detailed reason/s why ethical behaviour is important in the marketing of this business"] },
+      { marks: "3", criteria: ["Gives reason/s why ethical behaviour is important in the marketing of this business"] },
+      { marks: "2", criteria: ["Identifies why ethical behaviour is important", "Gives an example of ethical behaviour"] },
+      { marks: "1", criteria: ["Refers to ethical behaviour"] },
+    ],
+    sample: "Ethical behaviour is important in the marketing of this business because their target market is the parents/carers of young children who need to be protected from products that may damage their health. Ethical behaviour exceeds legal requirements and improves the business's reputation leading to improved sales and therefore increased profitability." },
+
+  { id: "17s22b", topic: "marketing", type: "short", marks: 5, src: "2017 HSC, Section II, Q22(b)",
+    stem: "An Australian company sells educational toys for pre-school aged children.\n\nExplain the influence of consumer laws on this company's promotion strategies.",
+    criteria: ["Clearly provides why and/or how one area of consumer law influences the company's promotion strategies", "Provides why and/or how one aspect of consumer law influences the company's promotion strategies", "Provides characteristics and features of consumer laws and/or promotion strategies", "Sketches in general terms promotion strategies and/or consumer laws", "Refers to promotion strategies or consumer laws"],
+    criteriaBands: [
+      { marks: "5", criteria: ["Clearly provides why and/or how one area of consumer law influences the company's promotion strategies"] },
+      { marks: "4", criteria: ["Provides why and/or how one aspect of consumer law influences the company's promotion strategies"] },
+      { marks: "3", criteria: ["Provides characteristics and features of consumer laws and/or promotion strategies"] },
+      { marks: "2", criteria: ["Sketches in general terms promotion strategies and/or consumer laws"] },
+      { marks: "1", criteria: ["Refers to promotion strategies or consumer laws"] },
+    ],
+    sample: "The company may use advertising such as brochures, TV and parenting magazines to promote their toys. They must follow consumer laws. These laws prohibit deceptive and misleading advertising such as fine print that is difficult to read and unsubstantiated data of the educational benefits of their products. The company should comply with consumer laws or risk financial penalties such as fines or even prosecution through the courts." },
+
+  { id: "17s23ai", topic: "human_resources", type: "short", marks: 2, src: "2017 HSC, Section II, Q23(a)(i)",
+    stem: "A business has been rapidly expanding and requires additional staff.\n\nDescribe ONE monetary reward that could be offered during the recruitment process.",
+    criteria: ["Provides characteristics and features of ONE monetary reward offered during the recruitment process", "Shows an understanding of ONE monetary reward"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Provides characteristics and features of ONE monetary reward offered during the recruitment process"] },
+      { marks: "1", criteria: ["Shows an understanding of ONE monetary reward"] },
+    ],
+    sample: "A salary is paid to the receptionist for the work they perform. It includes sick leave, long service leave and superannuation." },
+
+  { id: "17s23aii", topic: "human_resources", type: "short", marks: 2, src: "2017 HSC, Section II, Q23(a)(ii)",
+    stem: "A business has been rapidly expanding and requires additional staff.\n\nDescribe ONE non-monetary reward that could be offered during the recruitment process.",
+    criteria: ["Provides characteristics and features of ONE non-monetary reward offered during the recruitment process", "Shows an understanding of ONE non-monetary reward"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Provides characteristics and features of ONE non-monetary reward offered during the recruitment process"] },
+      { marks: "1", criteria: ["Shows an understanding of ONE non-monetary reward"] },
+    ],
+    sample: "Non-monetary rewards do not have financial value. An employee of the month award is recognition either publicly or within the business of the contribution the employee has made." },
+
+  { id: "17s23b", topic: "human_resources", type: "short", marks: 2, src: "2017 HSC, Section II, Q23(b)",
+    stem: "A business has been rapidly expanding and requires additional staff.\n\nOutline an issue that could arise during the acquisition process.",
+    criteria: ["Sketches in general terms an issue that could arise during the acquisition process", "Makes a statement about acquisition"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms an issue that could arise during the acquisition process"] },
+      { marks: "1", criteria: ["Makes a statement about acquisition"] },
+    ],
+    sample: "One issue that may arise is the lack of suitable applicants for the position. This may result in the business not being able to fill the position with an applicant who has the appropriate skills." },
+
+  { id: "17s23c", topic: "human_resources", type: "short", marks: 6, src: "2017 HSC, Section II, Q23(c)",
+    stem: "A business has been rapidly expanding and requires additional staff.\n\nThe expansion of the business has led to conflict and uncertainty in the workplace.\n\nRecommend TWO indicators that could be used by the business to measure the effectiveness of human resource management.",
+    criteria: ["Provides detailed reasons in favour of TWO indicators that could be used to measure the effectiveness of human resource management", "Provides reasons in favour of TWO indicators that could be used to measure the effectiveness of human resource management", "Provides reasons in favour of ONE indicator that could be used to measure the effectiveness of human resource management", "Provides characteristics and features of ONE indicator that could be used to measure the effectiveness of human resource management", "Provides reasons in favour of effective human resource management", "Provides characteristics and features of TWO indicators", "Sketches in general terms an indicator", "Makes a statement about the effectiveness of human resource management"],
+    criteriaBands: [
+      { marks: "6", criteria: ["Provides detailed reasons in favour of TWO indicators that could be used to measure the effectiveness of human resource management"] },
+      { marks: "5", criteria: ["Provides reasons in favour of TWO indicators that could be used to measure the effectiveness of human resource management"] },
+      { marks: "4", criteria: ["Provides reasons in favour of ONE indicator that could be used to measure the effectiveness of human resource management", "Provides characteristics and features of ONE indicator that could be used to measure the effectiveness of human resource management"] },
+      { marks: "3", criteria: ["Provides reasons in favour of effective human resource management", "Provides characteristics and features of TWO indicators"] },
+      { marks: "2", criteria: ["Sketches in general terms an indicator"] },
+      { marks: "1", criteria: ["Makes a statement about the effectiveness of human resource management"] },
+    ],
+    sample: "Level of disputation - as there have been workplace disputes, this could indicate workers have not adjusted to the rapid expansion of the company. The company may have failed to put into place adequate training and development to cope with the expansion. Human resource management has not been effective and must prepare the staff for changes within the workplace or further disputation may occur.\n\nChanges in staff turnover - high levels of staff turnover may indicate staff dissatisfaction with work. Human resource management needs to address the reasons why staff are leaving the business. To do this, management may conduct interviews with staff before they leave." },
+
+  { id: "17s24a", topic: "finance", type: "short", marks: 2, src: "2017 HSC, Section II, Q24(a)",
+    stem: "A business imports computers from China and sells them to customers in Australia.\n\nHow will an appreciation of the Australian dollar affect the competitive position of this business?",
+    criteria: ["Makes clear that the appreciation of the Australian dollar reduces costs AND affects the business's competitive position", "Makes a general statement about the effects of an appreciation of the Australian dollar"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Makes clear that the appreciation of the Australian dollar reduces costs AND affects the business's competitive position"] },
+      { marks: "1", criteria: ["Makes a general statement about the effects of an appreciation of the Australian dollar"] },
+    ],
+    sample: "The appreciation of the Australian dollar means that the imports will be cheaper for the importing business. This enables the business to improve its competitive position." },
+
+  { id: "17s24b", topic: "finance", type: "short", marks: 5, src: "2017 HSC, Section II, Q24(b)",
+    stem: "A business imports computers from China and sells them to customers in Australia.\n\nJustify the method of payment that would be most effective in reducing the business's financial risk.",
+    criteria: ["Supports in detail a method of payment that reduces the business's financial risk with clear argument or conclusion", "Provides why and/or how a method of payment reduces the business's financial risk", "Provides characteristics and features of a method of payment that reduces financial risk", "Indicates the features of a method of payment or reducing financial risk", "Makes a general statement about a method of payment or reducing financial risk"],
+    criteriaBands: [
+      { marks: "5", criteria: ["Supports in detail a method of payment that reduces the business's financial risk with clear argument or conclusion"] },
+      { marks: "4", criteria: ["Provides why and/or how a method of payment reduces the business's financial risk"] },
+      { marks: "3", criteria: ["Provides characteristics and features of a method of payment that reduces financial risk"] },
+      { marks: "2", criteria: ["Indicates the features of a method of payment or reducing financial risk"] },
+      { marks: "1", criteria: ["Makes a general statement about a method of payment or reducing financial risk"] },
+    ],
+    sample: "The method of payment with the lowest risk for the importer is clean payment. With this method the goods will be shipped and received before the importer pays for them, which reduces risk. The risk to the importer is minimised as it allows them to inspect the goods for quality and quantity prior to payment. While this method requires the exporter to trust the importer it is an effective method to reduce the business's risk." },
+
+// ─── 2017 Section III/IV ──────────────────────────────────────────────────────
+
+  { id: "17e25", topic: "finance", topics: ["finance", "marketing"], type: "extended", marks: 20, src: "2017 HSC, Section III, Q25",
+    stem: "The directors have asked you to write a business report in which you:\n• outline ONE strategic role of financial management\n• recommend TWO strategies to improve financial performance\n• explain the importance of monitoring and controlling the business's marketing strategy.",
+    stimulus: [
+      { type: "paragraph", text: "Sportyz Goodz Ltd is a retailer that has been operating for the past 20 years in Australia. The directors have provided the following information:" },
+      { type: "list", items: ["In 2013 the business issued new shares on the Australian Securities Exchange and expanded its retail activities internationally.", "The business is facing increasing competition.", "The directors are concerned about the positioning of their product in the market.", "The directors want the business to operate for the benefit of shareholders in the long term."] },
+      { type: "paragraph", text: "Financial data for Sportyz Goodz are shown on the graph." },
+      {
+        type: "lineChart",
+        title: "Financial data for Sportyz Goodz",
+        yLabel: "Amount (millions of $)",
+        xLabels: ["2012", "2013", "2014", "2015", "2016", "2017"],
+        yMin: 0,
+        yMax: 4,
+        yStep: 1,
+        showYTickLabels: false,
+        series: [
+          { label: "Sales", values: [4, 2, 3.2, 2.8, 2.4, 2], stroke: "#1A1A1A" },
+          { label: "Profit", values: [2.8, 1, 2.3, 1.9, 1.5, 1.1], stroke: "#1A1A1A" },
+        ],
+      },
+    ],
+    criteria: ["Sketches in general terms one strategic role of financial management", "Provides detailed reasons in favour of two appropriate strategies to improve financial performance", "Provides detailed reasons showing why and/or how monitoring and controlling the business's marketing strategy is important", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Provides reasons in favour of two strategies to improve financial performance", "Provides reasons showing why and/or how monitoring and controlling the business's marketing strategy is important", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts", "Provides characteristics and features of strategy/ies to improve financial performance", "Provides characteristics and features of the importance of monitoring and controlling the business's marketing strategy", "Includes features of a business report and uses some business terminology and concepts", "Identifies one strategic role of financial management", "Sketches in general terms financial strategy/ies", "Sketches in general terms the business's marketing strategy", "May include some features of a business report and uses basic business terminology", "Refers to finance and/or marketing strategy/ies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Sketches in general terms one strategic role of financial management", "Provides detailed reasons in favour of two appropriate strategies to improve financial performance", "Provides detailed reasons showing why and/or how monitoring and controlling the business's marketing strategy is important", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Sketches in general terms one strategic role of financial management", "Provides reasons in favour of two strategies to improve financial performance", "Provides reasons showing why and/or how monitoring and controlling the business's marketing strategy is important", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Sketches in general terms one strategic role of financial management", "Provides characteristics and features of strategy/ies to improve financial performance", "Provides characteristics and features of the importance of monitoring and controlling the business's marketing strategy", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Identifies one strategic role of financial management", "Sketches in general terms financial strategy/ies", "Sketches in general terms the business's marketing strategy", "May include some features of a business report and uses basic business terminology"] },
+      { marks: "1–4", criteria: ["Refers to finance and/or marketing strategy/ies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Strategic role of financial management" },
+      { type: "list", items: ["Benefit shareholders in long term", "New structure post float", "Navigate declining sales and profitability", "Maintain competitiveness"] },
+      { type: "heading", text: "Cash flow management" },
+      { type: "list", items: ["Cash flow statements", "Distribution of payments, discounts for early payment, factoring"] },
+      { type: "heading", text: "Working capital management" },
+      { type: "list", items: ["Control of current assets - cash, receivables, inventories", "Control of current liabilities - payables, loans, overdrafts", "Strategies - leasing, sale and lease back"] },
+      { type: "heading", text: "Profitability management" },
+      { type: "list", items: ["Cost controls - fixed and variable, cost centres, expense minimisation", "Revenue controls - marketing objectives"] },
+      { type: "heading", text: "Global financial management" },
+      { type: "list", items: ["Exchange rates", "Interest rates", "Methods of international payment - payment in advance, letter of credit, clean payment, bill of exchange", "Hedging", "Derivatives"] },
+      { type: "heading", text: "Implementation, monitoring and controlling" },
+      { type: "list", items: ["Developing a financial forecast", "Comparing actual and planned results", "Revising the marketing strategy if necessary."] },
+    ] },
+
+  { id: "17e26", topic: "human_resources", type: "extended", marks: 20, src: "2017 HSC, Section IV, Q26",
+    stem: "Analyse the response of human resource management to economic, technological and social influences.",
+    criteria: ["Draws out and clearly relates the response of human resource management to economic, technological and social influences", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the response of human resource management to economic, technological and social influences", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of economic, technological and social influences on human resource management", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Sketches in general terms economic and/or technological and/or social influences", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to human resource management", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Draws out and clearly relates the response of human resource management to economic, technological and social influences", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the response of human resource management to economic, technological and social influences", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of economic, technological and social influences on human resource management", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms economic and/or technological and/or social influences", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to human resource management", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Economic" },
+      { type: "list", items: ["Economic cycle", "Structural change", "Globalisation"] },
+      { type: "heading", text: "Technological" },
+      { type: "list", items: ["Telecommuting, new communications technologies", "Virtual teams", "Disruptive technologies"] },
+      { type: "heading", text: "Social" },
+      { type: "list", items: ["Changing work patterns, living standards", "Career flexibility", "Job mobility", "Changing female participation rates", "Aging workforce", "Changing retirement age", "Living standards", "Work/life balance."] },
+    ] },
+
+  { id: "17e27", topic: "operations", type: "extended", marks: 20, src: "2017 HSC, Section IV, Q27",
+    stem: "Analyse the effect of globalisation on operations management.",
+    criteria: ["Draws out and clearly relates the effect of globalisation to operations management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the relationship between the effect of globalisation and operations management", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of the effect of globalisation on operations management", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Sketches in general terms globalisation and/or operations management", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to operations management or globalisation", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Draws out and clearly relates the effect of globalisation to operations management", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the relationship between the effect of globalisation and operations management", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of the effect of globalisation on operations management", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms globalisation and/or operations management", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to operations management or globalisation", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Role of operations management" },
+      { type: "list", items: ["Strategic role of operations management", "Cost leadership", "Goods/services differentiation", "Goods and/or services in different industries", "Interdependence with other key business functions"] },
+      { type: "heading", text: "Global factors" },
+      { type: "list", items: ["Global sourcing", "Economies of scale", "Scanning and learning", "Research and development."] },
+    ] },
+
 // ─── 2018 Section I ───────────────────────────────────────────────────────────
 
   { id: "18m1", topic: "human_resources", type: "mcq", marks: 1, src: "2018 HSC, Section I, Q1",
