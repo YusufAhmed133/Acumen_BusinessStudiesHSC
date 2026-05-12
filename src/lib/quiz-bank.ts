@@ -6,6 +6,308 @@ const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
+// ─── 2016 Section I ───────────────────────────────────────────────────────────
+
+  { id: "16m1", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q1",
+    stem: "A red leather lounge was purchased from Lounge Ltd. After only two weeks of use, the legs of the couch fell off.\n\nWhat is the law that enforces the warranty in this situation?",
+    options: ["Corporations Act 2001 (Cth)", "Fair Trading Act 1987 (NSW)", "Trade Practices Act 1974 (Cth)", "Competition and Consumer Act 2010 (Cth)"],
+    answer: 3, explain: "The Competition and Consumer Act 2010 (Cth) contains the Australian Consumer Law, including consumer guarantees and warranties." },
+
+  { id: "16m2", topic: "human_resources", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q2",
+    stem: "Ruth observed that a work colleague was stealing and reported the theft to her supervisor. As a result, Ruth's employment was terminated.\n\nWhat is this an example of?",
+    options: ["Performance management", "Redundancy", "Retrenchment", "Unfair dismissal"],
+    answer: 3, explain: "Terminating Ruth for reporting theft is unfair dismissal." },
+
+  { id: "16m3", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q3",
+    stem: "While developing a new marketing plan a business discovers that many customers think its website is boring and confusing.\n\nAt what stage in the marketing process should this have been identified?",
+    options: ["Identifying target markets", "Developing marketing strategies", "Conducting a situational analysis", "Establishing marketing objectives"],
+    answer: 2, explain: "A situational analysis identifies current weaknesses such as customer perceptions of the website." },
+
+  { id: "16m4", topic: "finance", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q4",
+    stem: "Solvency is the ability of a business to",
+    options: ["maximise its profits.", "increase its market share.", "meet its long-term financial commitments.", "meet its short-term financial commitments."],
+    answer: 2, explain: "Solvency is the ability to meet long-term financial commitments." },
+
+  { id: "16m5", topic: "human_resources", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q5",
+    stem: "An employee is treated unfairly because she is pregnant.\n\nWhat legislation prohibits this behaviour?",
+    options: ["Trade Practices Act 1974 (Cth)", "Affirmative Action (Equal Employment Opportunity for Women) Act 1986 (Cth)", "Sex Discrimination Act 1984 (Cth)", "Competition and Consumer Act 2010 (Cth)"],
+    answer: 2, explain: "Pregnancy discrimination is prohibited by the Sex Discrimination Act 1984 (Cth)." },
+
+  { id: "16m6", topic: "operations", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q6",
+    stem: "A global business has adopted a strategy which aims to lower the average cost of its product by increasing output.\n\nWhat is this strategy called?",
+    options: ["Outsourcing", "Global pricing", "Global sourcing", "Economies of scale"],
+    answer: 3, explain: "Increasing output to lower average cost is economies of scale." },
+
+  { id: "16m7", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q7",
+    stem: "A person purchases his clothing from a discount store because he is a low-income earner.\n\nWhat factor is influencing his consumer choice?",
+    options: ["Economic", "Legal", "Psychological", "Sociocultural"],
+    answer: 3, explain: "The official answer key identifies this as a sociocultural influence." },
+
+  { id: "16m8", topic: "operations", topics: ["operations", "marketing"], type: "mcq", marks: 1, src: "2016 HSC, Section I, Q8",
+    stem: "A business plans to increase its stock to be ready for the grand opening of five new stores.\n\nThis shows the interdependence between which business functions?",
+    options: ["Operations and finance", "Operations and marketing", "Finance and human resources", "Human resources and marketing"],
+    answer: 1, explain: "Increasing stock for new store openings links operations with marketing." },
+
+  { id: "16m9", topic: "operations", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q9",
+    stem: "Which performance objective measures how well a product meets the prescribed design specifications?",
+    options: ["Cost", "Flexibility", "Quality", "Speed"],
+    answer: 2, explain: "Quality measures how well a product meets design specifications." },
+
+  { id: "16m10", topic: "finance", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q10",
+    stem: "The table shows cash flow information for a business.\n\nWhat is the opening cash balance for April?",
+    stimulus: [{ type: "table", headers: ["", "Jan", "Feb", "March", "April"], rows: [["Opening balance ($)", "4 000", "", "", ""], ["Cash in ($)", "20 000", "20 000", "20 000", "24 000"], ["Cash out ($)", "14 000", "50 000", "24 000", "26 000"]] }],
+    options: ["-$24 000", "-$18 000", "-$16 000", "-$12 000"],
+    answer: 0, explain: "January closes at $10 000, February at -$20 000, and March at -$24 000, which becomes April's opening balance." },
+
+  { id: "16m11", topic: "finance", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q11",
+    stem: "Use the information below to answer Questions 11 and 12.\n\nIf Steve is a sole trader, how much equity does he have in the business?",
+    stimulus: [
+      { type: "table", caption: "Balance sheet for Steve's Lawn Services as at 30th June 2016", headers: ["Current assets", "$", "Current liabilities", "$"], rows: [["Cash", "15 000", "Accounts payable", "5 000"], ["Accounts receivable", "3 000", "Overdraft", "5 500"], ["Stock", "?", "", ""]] },
+      { type: "table", headers: ["Non-current assets", "$", "Non-current liabilities", "$"], rows: [["Plant and equipment", "40 000", "Long-term loan", "100 000"], ["Goodwill", "85 000", "", ""]] },
+      { type: "table", headers: ["Total equity", "$"], rows: [["Capital", "22 700"], ["Net profit", "12 800"], ["Industry standard current ratio", "1.9 : 1"]] },
+    ],
+    options: ["$12 800", "$35 500", "$135 500", "$146 000"],
+    answer: 1, explain: "For a sole trader, equity is capital plus net profit: $22 700 + $12 800 = $35 500." },
+
+  { id: "16m12", topic: "finance", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q12",
+    stem: "Use the information below to answer Questions 11 and 12.\n\nThe current ratio (current assets ÷ current liabilities) for this business is",
+    stimulus: [
+      { type: "table", caption: "Balance sheet for Steve's Lawn Services as at 30th June 2016", headers: ["Current assets", "$", "Current liabilities", "$"], rows: [["Cash", "15 000", "Accounts payable", "5 000"], ["Accounts receivable", "3 000", "Overdraft", "5 500"], ["Stock", "?", "", ""]] },
+      { type: "table", headers: ["Non-current assets", "$", "Non-current liabilities", "$"], rows: [["Plant and equipment", "40 000", "Long-term loan", "100 000"], ["Goodwill", "85 000", "", ""]] },
+      { type: "table", headers: ["Total equity", "$"], rows: [["Capital", "22 700"], ["Net profit", "12 800"], ["Industry standard current ratio", "1.9 : 1"]] },
+    ],
+    options: ["too high.", "acceptable.", "dangerously low.", "unable to be calculated."],
+    answer: 1, explain: "Using total assets and claims gives stock of $3000, current assets of $21 000 and current liabilities of $10 500, a 2:1 current ratio, close to the 1.9:1 industry standard." },
+
+  { id: "16m13", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q13",
+    stem: "A beauty company sends samples of its new lip balm to members of its loyalty program and to online beauty bloggers.\n\nWhat strategies is the company using?",
+    options: ["Publicity and global branding", "Global branding and opinion leaders", "Customisation and relationship marketing", "Relationship marketing and opinion leaders"],
+    answer: 3, explain: "Loyalty program members reflect relationship marketing, while beauty bloggers are opinion leaders." },
+
+  { id: "16m14", topic: "finance", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q14",
+    stem: "Which of the following is an example of a unit trust?",
+    options: ["An investor purchases shares in a public company.", "Investors lend money directly to businesses and receive interest in return.", "Investors pool their money together and it is invested in the property market.", "An investor deposits money with a financial institution and receives a fixed rate of interest."],
+    answer: 2, explain: "A unit trust pools investors' funds and invests them, such as in property." },
+
+  { id: "16m15", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q15",
+    stem: "A confectionery company used to sell its chocolate bars direct to the public. Now its products will only be available in supermarkets.\n\nHow has the market for the product changed?",
+    options: ["From a resource market to an industrial market", "From a consumer market to an industrial market", "From a consumer market to an intermediate market", "From an intermediate market to a consumer market"],
+    answer: 2, explain: "Selling direct to the public is a consumer market; selling through supermarkets is an intermediate market." },
+
+  { id: "16m16", topic: "human_resources", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q16",
+    stem: "A business needs to reduce its workforce for financial reasons. All its employees are equally skilled and have 3 years of service.\n\nWhich staff member should be dismissed first?",
+    options: ["A casual employee", "A pregnant employee", "A part-time employee", "A 66-year-old employee"],
+    answer: 0, explain: "With all employees equally skilled and with the same service, the casual employee is the least secure employment category." },
+
+  { id: "16m17", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q17",
+    stem: "A small business has developed a new piece of gym equipment that it wants to sell to gyms throughout Sydney.\n\nWhat would be the most appropriate marketing strategy for this?",
+    options: ["Advertising on billboards on main roads", "Placing its logo on a sporting team's uniform", "Sales representatives visiting gyms to demonstrate the product", "Advertising on television during football games throughout the season"],
+    answer: 2, explain: "Personal selling through sales representatives is most appropriate for demonstrating specialised gym equipment to gyms." },
+
+  { id: "16m18", topic: "human_resources", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q18",
+    stem: "Hannah is a permanent employee at XYZ Ltd who has been injured in a workplace accident.\n\nWho is ultimately responsible for paying Hannah's medical expenses for this injury?",
+    options: ["Hannah", "Medicare", "WorkCover NSW", "XYZ Ltd's insurance company"],
+    answer: 3, explain: "The official answer key identifies XYZ Ltd's insurance company as ultimately responsible." },
+
+  { id: "16m19", topic: "finance", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q19",
+    stem: "The table shows financial data for two businesses.\n\nWhich of the following statements is correct?",
+    stimulus: [
+      { type: "table", headers: ["", "Business A", "Business B"], rows: [["Annual sales ($)", "1 600 000", "2 800 000"], ["Net profit ($)", "400 000", "400 000"], ["Accounts receivable ($)", "200 000", "250 000"]] },
+      { type: "list", items: ["Net profit ratio: net profit ÷ sales", "Accounts receivable turnover ratio: sales ÷ accounts receivable"] },
+    ],
+    options: ["Business A is more profitable but less efficient than Business B.", "Business B is more profitable but less efficient than Business A.", "Business A is more profitable and more efficient than Business B.", "Business B is more profitable and more efficient than Business A."],
+    answer: 0, explain: "Business A has the higher net profit ratio, while Business B has the higher accounts receivable turnover ratio." },
+
+  { id: "16m20", topic: "human_resources", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q20",
+    stem: "An independent web designer has a legal agreement with a department store to improve its online shopping site in time for the Christmas sales.\n\nThe web designer's working conditions are specified in",
+    options: ["an award.", "the contract for service.", "an enterprise agreement.", "the National Employment Standards."],
+    answer: 1, explain: "An independent contractor's conditions are specified in a contract for service." },
+
+// ─── 2016 Section II ──────────────────────────────────────────────────────────
+
+  { id: "16s21a", topic: "finance", type: "short", marks: 3, src: "2016 HSC, Section II, Q21(a)",
+    stem: "Sue is a sole trader whose business is growing rapidly as sales are increasing. As a result of the growth, she needs to purchase stock worth $10 000.\n\nExplain a potential conflict between a short-term and a long-term financial objective for Sue.",
+    criteria: ["Shows how and/or why a short-term and long-term financial objective may conflict", "Names a short-term and a long-term financial objective OR outlines why a conflict might occur", "Names a financial objective"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Shows how and/or why a short-term and long-term financial objective may conflict"] },
+      { marks: "2", criteria: ["Names a short-term and a long-term financial objective OR outlines why a conflict might occur"] },
+      { marks: "1", criteria: ["Names a financial objective"] },
+    ],
+    sample: "Sue may aim for long-run higher profit through more sales. In the short run, this requires her to purchase stock, which may reduce her liquidity. Hence, her long-term goal of higher profit conflicts in the short run with liquidity." },
+
+  { id: "16s21b", topic: "finance", type: "short", marks: 6, src: "2016 HSC, Section II, Q21(b)",
+    stem: "Sue is a sole trader whose business is growing rapidly as sales are increasing. As a result of the growth, she needs to purchase stock worth $10 000.\n\nDiscuss ONE internal and ONE external source of finance for Sue's purchase of stock.",
+    criteria: ["Provides points for and/or against one internal and one external source of finance for this purchase", "Provides points for and/or against one internal source and provides a point for or against an external source", "Provides points for and/or against one external source and provides a point for or against an internal source", "Provides points for and/or against one internal source of finance and sketches in general terms one external source of finance", "Provides points for and/or against one external source of finance and sketches in general terms one internal source of finance", "Provides points for and/or against one source of finance", "Sketches both internal and external sources of finance", "Provides a point for or against one source of finance OR names one external and one internal source of finance", "Names one source of finance"],
+    criteriaBands: [
+      { marks: "6", criteria: ["Provides points for and/or against one internal and one external source of finance for this purchase"] },
+      { marks: "5", criteria: ["Provides points for and/or against one internal source and provides a point for or against an external source", "Provides points for and/or against one external source and provides a point for or against an internal source"] },
+      { marks: "4", criteria: ["Provides points for and/or against one internal source of finance and sketches in general terms one external source of finance", "Provides points for and/or against one external source of finance and sketches in general terms one internal source of finance"] },
+      { marks: "3", criteria: ["Provides points for and/or against one source of finance", "Sketches both internal and external sources of finance"] },
+      { marks: "2", criteria: ["Provides a point for or against one source of finance OR names one external and one internal source of finance"] },
+      { marks: "1", criteria: ["Names one source of finance"] },
+    ],
+    sample: "Sue could consider using retained profits for this purchase. This would be a lower risk option as it does not add to her gearing. It could however significantly reduce her cash flow. She could also use a mortgage. This would be a lower interest rate than many other types of loan but she would be using a long-term loan for a short-term purpose. Sue would still be paying back the mortgage years after the stock has been sold." },
+
+  { id: "16s22a", topic: "marketing", type: "short", marks: 2, src: "2016 HSC, Section II, Q22(a)",
+    stem: "A business develops video games. It had three different games for sale last year. The table shows forecast and actual sales for each game.\n\nUse the information in the table to answer parts (a), (b) and (c).\n\nWhy is this information an important part of the marketing process?",
+    stimulus: [{ type: "table", headers: ["", "Forecast sales ($)", "Actual sales ($)"], rows: [["Game A", "500 000", "495 000"], ["Game B", "200 000", "100 000"], ["Game C", "300 000", "800 000"]] }],
+    criteria: ["Clearly provides the reason why the information is important in the monitoring and controlling aspect of the marketing process", "Sketches the importance of the information for marketing"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Clearly provides the reason why the information is important in the monitoring and controlling aspect of the marketing process"] },
+      { marks: "1", criteria: ["Sketches the importance of the information for marketing"] },
+    ],
+    sample: "This information is important as it allows the firm to compare actual and planned results and to see how their marketing plan worked. Therefore the firm can see what if any changes need to be made." },
+
+  { id: "16s22b", topic: "marketing", type: "short", marks: 3, src: "2016 HSC, Section II, Q22(b)",
+    stem: "A business develops video games. It had three different games for sale last year. The table shows forecast and actual sales for each game.\n\nUse the information in the table to answer parts (a), (b) and (c).\n\nWith reference to the information, recommend a strategy for promoting game B.",
+    stimulus: [{ type: "table", headers: ["", "Forecast sales ($)", "Actual sales ($)"], rows: [["Game A", "500 000", "495 000"], ["Game B", "200 000", "100 000"], ["Game C", "300 000", "800 000"]] }],
+    criteria: ["Identifies an appropriate promotion strategy and provides a reason in favour of this strategy with reference to the data", "Provides a reason in favour of a promotion strategy OR provides characteristics and features of a promotion strategy", "Sketches in general terms a promotion strategy"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Identifies an appropriate promotion strategy and provides a reason in favour of this strategy with reference to the data"] },
+      { marks: "2", criteria: ["Provides a reason in favour of a promotion strategy OR provides characteristics and features of a promotion strategy"] },
+      { marks: "1", criteria: ["Sketches in general terms a promotion strategy"] },
+    ],
+    sample: "Sales for game B are less than planned, therefore a new promotion strategy needs to be adopted. Personal selling involves the process of taking the business and the product directly to the consumer. Personal selling would be a good strategy as you are able to demonstrate the game in action to customers and highlight its positive features. You would also be able to direct customers to other products in the range. This would improve sales." },
+
+  { id: "16s22c", topic: "marketing", type: "short", marks: 3, src: "2016 HSC, Section II, Q22(c)",
+    stem: "A business develops video games. It had three different games for sale last year. The table shows forecast and actual sales for each game.\n\nUse the information in the table to answer parts (a), (b) and (c).\n\nWith reference to the information, recommend a strategy for distributing game C.",
+    stimulus: [{ type: "table", headers: ["", "Forecast sales ($)", "Actual sales ($)"], rows: [["Game A", "500 000", "495 000"], ["Game B", "200 000", "100 000"], ["Game C", "300 000", "800 000"]] }],
+    criteria: ["Identifies an appropriate distribution strategy and provides a reason in favour of it with reference to the data", "Provides a reason in favor of a distribution strategy OR provides characteristics and features of a distribution strategy", "Sketches in general terms a distribution strategy"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Identifies an appropriate distribution strategy and provides a reason in favour of it with reference to the data"] },
+      { marks: "2", criteria: ["Provides a reason in favor of a distribution strategy OR provides characteristics and features of a distribution strategy"] },
+      { marks: "1", criteria: ["Sketches in general terms a distribution strategy"] },
+    ],
+    sample: "Sales are higher than predicted. The business may therefore be finding it difficult to distribute the product quickly enough (physical distribution issue). They may have to increase the resources devoted to transport and warehousing to distribute their product to customers efficiently." },
+
+  { id: "16s23a", topic: "human_resources", type: "short", marks: 2, src: "2016 HSC, Section II, Q23(a)",
+    stem: "Heather owns a financial planning business with offices in four countries, including Australia.\n\nHeather outsources the cleaning of her Sydney office.\n\nExplain ONE advantage of this strategy.",
+    criteria: ["Identifies one relevant advantage of outsourcing", "Provides how/why it is an advantage for the business", "Makes a relevant statement"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Identifies one relevant advantage of outsourcing", "Provides how/why it is an advantage for the business"] },
+      { marks: "1", criteria: ["Makes a relevant statement"] },
+    ],
+    sample: "Costs could be lower, she only needs to employ someone possibly for a few hours per week and she will have no on-costs." },
+
+  { id: "16s23b", topic: "human_resources", type: "short", marks: 4, src: "2016 HSC, Section II, Q23(b)",
+    stem: "Heather owns a financial planning business with offices in four countries, including Australia.\n\nHeather also outsources all her financial record keeping.\n\nExplain TWO disadvantages of this strategy.",
+    criteria: ["Identifies two relevant disadvantages of outsourcing and why they are a disadvantage for the business", "Identifies one relevant disadvantage of outsourcing and why it is a disadvantage AND sketches in general terms another disadvantage of outsourcing", "Provides one relevant disadvantage of outsourcing and provides why it is a disadvantage OR sketches in general terms two disadvantages of outsourcing", "Makes a relevant statement about outsourcing"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Identifies two relevant disadvantages of outsourcing and why they are a disadvantage for the business"] },
+      { marks: "3", criteria: ["Identifies one relevant disadvantage of outsourcing and why it is a disadvantage AND sketches in general terms another disadvantage of outsourcing"] },
+      { marks: "2", criteria: ["Provides one relevant disadvantage of outsourcing and provides why it is a disadvantage OR sketches in general terms two disadvantages of outsourcing"] },
+      { marks: "1", criteria: ["Makes a relevant statement about outsourcing"] },
+    ],
+    sample: "She may lose control over the record keeping business, as she does not have day-to-day oversight. This could include loss of quality control and security issues.\n\nShe may have problems with communication, for example, cultural misunderstanding and language difficulties." },
+
+  { id: "16s23c", topic: "human_resources", type: "short", marks: 4, src: "2016 HSC, Section II, Q23(c)",
+    stem: "Heather owns a financial planning business with offices in four countries, including Australia.\n\nHeather's workforce is diverse and culturally competent.\n\nWhat are the advantages of this for Heather's business?",
+    criteria: ["Gives two reasons how and/or why Heather's business will benefit from a diverse culturally competent workforce", "Gives one reason how and/or why Heather's business will benefit from a diverse culturally competent workforce and sketches in general terms another benefit", "Gives one reason how and/or why Heather's business will benefit from a diverse culturally competent workforce OR sketches in general terms two benefits", "Sketches in general terms one benefit"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Gives two reasons how and/or why Heather's business will benefit from a diverse culturally competent workforce"] },
+      { marks: "3", criteria: ["Gives one reason how and/or why Heather's business will benefit from a diverse culturally competent workforce and sketches in general terms another benefit"] },
+      { marks: "2", criteria: ["Gives one reason how and/or why Heather's business will benefit from a diverse culturally competent workforce OR sketches in general terms two benefits"] },
+      { marks: "1", criteria: ["Sketches in general terms one benefit"] },
+    ],
+    sample: "Employees will know different languages and have knowledge of different cultures, which could be used constructively to open up markets in other parts of the world. They may also have contacts in other countries that could be used as sources of supplies, finance or to set up branches of the company.\n\nThe business can get ideas and input from employees of different backgrounds. They will bring different training and approaches that could be beneficial to the firm." },
+
+  { id: "16s24a", topic: "operations", type: "short", marks: 4, src: "2016 HSC, Section II, Q24(a)",
+    stem: "A fruit shop has experienced strong growth in its sales of fresh organic fruit since it started to sell online.\n\nDiscuss ONE possible method of inventory management for this business.",
+    criteria: ["Clearly identifies the issues for and/or against one inventory management system for this business", "Outlines one advantage OR one disadvantage of one inventory management system for this business", "Sketches in general terms one method of inventory management", "Makes a relevant statement about inventory"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Clearly identifies the issues for and/or against one inventory management system for this business"] },
+      { marks: "3", criteria: ["Outlines one advantage OR one disadvantage of one inventory management system for this business"] },
+      { marks: "2", criteria: ["Sketches in general terms one method of inventory management"] },
+      { marks: "1", criteria: ["Makes a relevant statement about inventory"] },
+    ],
+    sample: "One method of inventory management is Just-In-Time. The advantage of this for the business is that the business does not need to hold large amounts of stock which could be damaged or perish costing the business money. A disadvantage is that the business may find it difficult to respond to a sudden increase in demand for a product, as they may not have enough supply to meet the order." },
+
+  { id: "16s24b", topic: "operations", type: "short", marks: 3, src: "2016 HSC, Section II, Q24(b)",
+    stem: "A fruit shop has experienced strong growth in its sales of fresh organic fruit since it started to sell online.\n\nExplain why corporate social responsibility should be a key concern in operations management for this business.",
+    criteria: ["Provides how or why corporate social responsibility should be a key consideration in operations management for this business", "Sketches in general terms how corporate social responsibility may affect operations", "Sketches in general terms corporate social responsibility"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides how or why corporate social responsibility should be a key consideration in operations management for this business"] },
+      { marks: "2", criteria: ["Sketches in general terms how corporate social responsibility may affect operations"] },
+      { marks: "1", criteria: ["Sketches in general terms corporate social responsibility"] },
+    ],
+    sample: "Corporate social responsibility is about businesses doing more than just complying with the law and may be expensive for the business. The business should avoid pollution, and degrading the air, water and farmland in its operations management. The business, by supplying goods in an ecologically sustainable manner, will be fulfilling customer expectations about them being a responsible business." },
+
+  { id: "16s25", topic: "operations", type: "short", marks: 6, src: "2016 HSC, Section II, Q25",
+    stem: "With reference to a business you have studied, analyse the relationship between cost and quality in the operations of the business.",
+    criteria: ["Draws out and relates the implications of the relationship between cost and quality with reference to a business", "Provides links between cost and quality with reference to a specific business", "Provides characteristics and features of cost and quality with reference to a business", "Provides links between cost and quality in operations", "Provides characteristics and features of cost and/or quality", "Sketches in general terms cost and/or quality", "Makes reference to cost/quality"],
+    criteriaBands: [
+      { marks: "6", criteria: ["Draws out and relates the implications of the relationship between cost and quality with reference to a business"] },
+      { marks: "5", criteria: ["Provides links between cost and quality with reference to a specific business"] },
+      { marks: "4", criteria: ["Provides characteristics and features of cost and quality with reference to a business", "Provides links between cost and quality in operations"] },
+      { marks: "3", criteria: ["Provides characteristics and features of cost and/or quality"] },
+      { marks: "2", criteria: ["Sketches in general terms cost and/or quality"] },
+      { marks: "1", criteria: ["Makes reference to cost/quality"] },
+    ],
+    sample: "Cost and quality usually have a close, positive relationship in the operations of a business. As the quality of a product increases, usually the cost of producing it also increases, as it requires more expensive inputs and/or more time to produce. An implication of this is that these products tend to have higher prices as businesses pass higher costs onto consumers. For example flights on low cost budget airlines such as Jetstar are cheaper to produce than flights on full-service flights such as those sold by QANTAS. Jetstar is less flexible and has fewer 'extras' such as food, entertainment and therefore provides a lower quality product, which is usually sold at a lower price." },
+
+// ─── 2016 Section III/IV ──────────────────────────────────────────────────────
+
+  { id: "16e26", topic: "finance", topics: ["finance", "marketing"], type: "extended", marks: 20, src: "2016 HSC, Section III, Q26",
+    stem: "A potential new partner is concerned about the accuracy of the financial reports and the effectiveness of current management.\n\nThe potential new partner has asked you to write a business report in which you:\n• explain possible limitations of the financial reports\n• recommend appropriate working capital management strategies for the business\n• evaluate a pricing strategy the business could use.",
+    stimulus: [
+      { type: "paragraph", text: "The table shows data for Lee's Catering, a small business. It has a high profile chef and the food is of excellent quality. It has many bookings for future events." },
+      { type: "table", caption: "Extract from financial reports for Lee's Catering", headers: ["", ""], rows: [["Cash ($)", "1000"], ["Accounts receivable ($)", "10 000"], ["Inventory ($)", "50"], ["Accounts payable ($)", "11 050"], ["Goodwill ($)", "200 000"], ["Current ratio\n(current assets ÷ current liabilities)", "100% (industry average 150%)"], ["Gross profit ratio\n(gross profit ÷ sales)", "30% (industry average 50%)"], ["Expense ratio\n(total expenses ÷ sales)", "60% (industry average 30%)"]] },
+    ],
+    criteria: ["Provides how/why the information in the financial reports for Lee's Catering may be limited", "Provides reasons in favour of appropriate working capital strategies", "Makes a judgement based on criteria regarding a pricing strategy which could be used", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Provides characteristics and features of some possible limitations to financial reports", "Provides reasons in favour of working capital strategies", "Provides reasons for and/or against a particular pricing strategy", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts", "Sketches in general terms some limitations of financial reports", "Provides characteristics and features of a working capital management strategy/strategies", "Provides characteristics and features of a pricing strategy", "Includes features of a business report and uses some business terminology and concepts", "Sketches in general terms features of financial reports", "Sketches in general terms working capital management", "Sketches in general terms a pricing strategy", "May include some features of a business report and uses basic business terminology", "Refers to financial reports and/or working capital and/or pricing", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Provides how/why the information in the financial reports for Lee's Catering may be limited", "Provides reasons in favour of appropriate working capital strategies", "Makes a judgement based on criteria regarding a pricing strategy which could be used", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides characteristics and features of some possible limitations to financial reports", "Provides reasons in favour of working capital strategies", "Provides reasons for and/or against a particular pricing strategy", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Sketches in general terms some limitations of financial reports", "Provides characteristics and features of a working capital management strategy/strategies", "Provides characteristics and features of a pricing strategy", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms features of financial reports", "Sketches in general terms working capital management", "Sketches in general terms a pricing strategy", "May include some features of a business report and uses basic business terminology"] },
+      { marks: "1–4", criteria: ["Refers to financial reports and/or working capital and/or pricing", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Limitations of financial reports" },
+      { type: "list", items: ["Normalised earnings, capitalising, expenses, valuing assets, timing issues, debt repayments, notes to the financial reports"] },
+      { type: "heading", text: "Working capital strategies" },
+      { type: "list", items: ["Control of current assets - cash, receivables, inventories", "Control of current liabilities - payables, loans, overdrafts", "Strategies - leasing, sale and lease back"] },
+      { type: "heading", text: "Pricing strategies" },
+      { type: "list", items: ["Skimming, penetration, loss leaders, price points", "Price and quality interaction"] },
+    ] },
+
+  { id: "16e27", topic: "operations", type: "extended", marks: 20, src: "2016 HSC, Section IV, Q27",
+    stem: "Evaluate the response of operations management to external influences.",
+    criteria: ["Makes a well-reasoned judgement based on criteria regarding how operations management has responded to external influences in the business environment", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes some judgement regarding how operations management has responded to external influences in the business environment", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of operations management and the business environment", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Sketches in general terms operations management and/or influences in the business environment", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to operations management", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Makes a well-reasoned judgement based on criteria regarding how operations management has responded to external influences in the business environment", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes some judgement regarding how operations management has responded to external influences in the business environment", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of operations management and the business environment", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms operations management and/or influences in the business environment", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to operations management", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Influences" },
+      { type: "list", items: ["Globalisation, technology, quality expectations, cost based competition, government policies, legal regulation, environmental sustainability", "Corporate social responsibility - difference between legal compliance and ethical responsibility", "Environmental sustainability and social responsibility"] },
+    ] },
+
+  { id: "16e28", topic: "human_resources", type: "extended", marks: 20, src: "2016 HSC, Section IV, Q28",
+    stem: "Evaluate the response of human resource management to legal and ethical influences.",
+    criteria: ["Makes a well-reasoned judgement based on criteria regarding how human resource management has responded to legal and ethical influences in the business environment", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes some judgement regarding how human resource management has responded to legal and ethical influences in the business environment", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of human resource management and legal and/or ethical influences in the business environment", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts", "Sketches in general terms human resource management and/or influences in the business environment", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to human resource management and/or influences in the business environment", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Makes a well-reasoned judgement based on criteria regarding how human resource management has responded to legal and ethical influences in the business environment", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes some judgement regarding how human resource management has responded to legal and ethical influences in the business environment", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of human resource management and legal and/or ethical influences in the business environment", "May make reference to case study/studies and contemporary business issues", "Communicates using business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms human resource management and/or influences in the business environment", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to human resource management and/or influences in the business environment", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "heading", text: "Key influences" },
+      { type: "heading", text: "Legal" },
+      { type: "list", items: ["Current legal framework", "The employment contract", "Work, health and safety, workers compensation", "Anti-discrimination and equal employment opportunity"] },
+      { type: "heading", text: "Ethics and corporate social responsibility" },
+    ] },
+
 // ─── 2017 Section I ───────────────────────────────────────────────────────────
 
   { id: "17m1", topic: "human_resources", type: "mcq", marks: 1, src: "2017 HSC, Section I, Q1",
