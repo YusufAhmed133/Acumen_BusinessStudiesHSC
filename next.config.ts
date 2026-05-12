@@ -1,5 +1,14 @@
 import type { NextConfig } from "next";
 
+const IS_DEV = process.env.NODE_ENV !== "production";
+const SCRIPT_SRC = [
+  "script-src 'self' 'unsafe-inline'",
+  IS_DEV ? "'unsafe-eval'" : "",
+  "https://www.googletagmanager.com",
+  "https://www.googleadservices.com",
+  "https://googleads.g.doubleclick.net",
+].filter(Boolean).join(" ");
+
 const SECURITY_HEADERS = [
   { key: "X-Frame-Options",         value: "DENY" },
   { key: "X-Content-Type-Options",   value: "nosniff" },
@@ -14,7 +23,7 @@ const SECURITY_HEADERS = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net",
+      SCRIPT_SRC,
       "frame-src https://bid.g.doubleclick.net https://td.doubleclick.net",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://www.google.com https://www.google.com.au https://www.google-analytics.com https://googleads.g.doubleclick.net https://stats.g.doubleclick.net",
