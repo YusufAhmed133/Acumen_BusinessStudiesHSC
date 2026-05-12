@@ -6,6 +6,362 @@ const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
+// ─── 2019 Section I ───────────────────────────────────────────────────────────
+
+  { id: "19m1", topic: "marketing", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q1",
+    stem: "Sam runs a business that designs and sells custom-made, high fashion clothes.\n\nIn which type of market is Sam's business operating?",
+    options: ["Intermediate", "Mass", "Niche", "Resource"],
+    answer: 2, explain: "Custom-made, high fashion clothing targets a specialised segment, which is a niche market." },
+
+  { id: "19m2", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q2",
+    stem: "A business is purchasing a new property.\n\nWhich source of finance would be the most appropriate?",
+    options: ["Shares", "Mortgage", "Debenture", "Letter of credit"],
+    answer: 1, explain: "A mortgage is the most appropriate source of finance for purchasing property." },
+
+  { id: "19m3", topic: "human_resources", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q3",
+    stem: "A business in crisis needs to make immediate and timely decisions in order to survive.\n\nWhich leadership style does a manager of this business need to adopt?",
+    options: ["Autocratic", "Bureaucratic", "Democratic", "Laissez-faire"],
+    answer: 0, explain: "Autocratic leadership allows quick, centralised decision-making during a crisis." },
+
+  { id: "19m4", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q4",
+    stem: "A business requires new manufacturing equipment.\n\nWhich of the following would provide leasing for this equipment?",
+    options: ["Unit trusts", "Property trusts", "Finance companies", "Superannuation funds"],
+    answer: 2, explain: "Finance companies commonly provide leasing finance for equipment." },
+
+  { id: "19m5", topic: "marketing", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q5",
+    stem: "A bakery produces organic bread that is sold in health food stores.\n\nWhich is the most appropriate channel choice for this product?",
+    options: ["Exclusive", "Extensive", "Intensive", "Selective"],
+    answer: 3, explain: "Selling through health food stores is selective distribution because the product is placed through chosen outlets." },
+
+  { id: "19m6", topic: "marketing", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q6",
+    stem: "A biscuit manufacturer reduces the price of its biscuits to below cost in order to attract more customers.\n\nWhich of the following identifies this approach?",
+    options: ["Skimming", "Loss leader", "Price points", "Production leader"],
+    answer: 1, explain: "A loss leader is priced below cost to attract customers." },
+
+  { id: "19m7", topic: "marketing", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q7",
+    stem: "Which term refers to a sales technique disguised as market research?",
+    options: ["Sugging", "Telemarketing", "Implied conditions", "Engaging in fair competition"],
+    answer: 0, explain: "Sugging is selling under the guise of market research." },
+
+  { id: "19m8", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q8",
+    stem: "What effect would a global downturn in the economic outlook have on Australia's unemployment, output and exchange rates?",
+    stimulus: [{ type: "table", headers: ["", "Unemployment", "Output", "Exchange rates"], rows: [["A.", "Increase", "Increase", "Decrease"], ["B.", "Decrease", "Increase", "Increase"], ["C.", "Decrease", "Decrease", "Increase"], ["D.", "Increase", "Decrease", "Decrease"]] }],
+    options: ["Increase / Increase / Decrease", "Decrease / Increase / Increase", "Decrease / Decrease / Increase", "Increase / Decrease / Decrease"],
+    answer: 3, explain: "A global downturn would likely increase unemployment, reduce output and place downward pressure on exchange rates." },
+
+  { id: "19m9", topic: "operations", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q9",
+    stem: "A business reduces product defects by using inspections in the production process.\n\nThis is an example of quality",
+    options: ["control.", "improvement.", "innovation.", "production."],
+    answer: 0, explain: "Inspection during production is quality control." },
+
+  { id: "19m10", topic: "human_resources", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q10",
+    stem: "What is the common sequence for resolving workplace disputes?",
+    options: ["Mediation, negotiation, involvement of courts and tribunals", "Negotiation, mediation, involvement of courts and tribunals", "Involvement of courts and tribunals, negotiation, mediation", "Negotiation, involvement of courts and tribunals, mediation"],
+    answer: 1, explain: "Workplace disputes are generally escalated from negotiation to mediation and then courts or tribunals." },
+
+  { id: "19m11", topic: "operations", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q11",
+    stem: "A sole-trader cleaning business purchases generic products to lower costs and be price competitive.\n\nThis is an example of which strategy?",
+    options: ["Cost leadership", "Economies of scale", "Inventory management", "Goods and service differentiation"],
+    answer: 0, explain: "Lowering input costs to compete on price is cost leadership." },
+
+  { id: "19m12", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q12",
+    stem: "Which of the following allows shareholders of a public company to acquire additional shares at a discount?",
+    options: ["New issues", "Placements", "Private equity", "Unsecured notes"],
+    answer: 1, explain: "A placement can allow existing shareholders to acquire additional shares at a discount." },
+
+  { id: "19m13", topic: "operations", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q13",
+    stem: "The table shows a Gantt chart.\n\nIn which month would this business begin manufacturing the item?",
+    stimulus: [{
+      type: "gantt",
+      caption: "Gantt chart",
+      columns: ["31/1/20", "29/2/20", "31/3/20", "30/4/20"],
+      rows: [
+        { label: "Receive customer order", active: ["31/1/20"] },
+        { label: "Purchase stock", active: ["29/2/20"] },
+        { label: "Prepare tools for manufacture", active: ["29/2/20"] },
+        { label: "Receive raw materials", active: ["31/3/20"] },
+        { label: "Manufacture item", active: [] },
+        { label: "Quality improvement", active: ["30/4/20"] },
+        { label: "Deliver finished item", active: ["30/4/20"] },
+      ],
+    }],
+    options: ["January", "February", "March", "April"],
+    answer: [2, 3], explain: "The official answer key accepts both March and April because the Gantt chart does not shade the manufacture item row clearly." },
+
+  { id: "19m14", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q14",
+    stem: "Which of the following is the correct order for financial planning?",
+    options: ["Developing budgets, determining financial needs, maintaining record systems, identifying financial risks, establishing financial controls", "Determining financial needs, establishing financial controls, identifying financial risks, maintaining record systems, developing budgets", "Determining financial needs, developing budgets, maintaining record systems, identifying financial risks, establishing financial controls", "Developing budgets, maintaining record systems, identifying financial risks, establishing financial controls, determining financial needs"],
+    answer: 2, explain: "The usual sequence is determining financial needs, developing budgets, maintaining record systems, identifying risks and establishing controls." },
+
+  { id: "19m15", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q15",
+    stem: "Use the information to answer Question 15.\n\nWhat is the gearing ratio (total liabilities ÷ total equity) for this business?",
+    stimulus: [
+      { type: "heading", text: "Balance sheet as at 30 June 2019" },
+      { type: "table", headers: ["Current assets", "($)", "Current liabilities", "($)"], rows: [["Cash", "10 000", "Accounts payable", "10 000"], ["Accounts receivable", "5 000", "Overdraft", "5 000"], ["Stock", "8 000", "", ""]] },
+      { type: "table", headers: ["Non-current assets", "($)", "Non-current liabilities", "($)"], rows: [["Plant and equipment", "35 000", "Mortgage", "135 000"], ["Land and buildings", "292 000", "", ""]] },
+      { type: "table", headers: ["", "($)"], rows: [["Total equity - Capital", "184 000"], ["Total equity - Net profit", "16 000"], ["Total", "350 000"]] },
+    ],
+    options: ["0.67 : 1", "0.73 : 1", "0.75 : 1", "0.81 : 1"],
+    answer: 2, explain: "Total liabilities are $150 000 and total equity is $200 000, so gearing is $150 000 ÷ $200 000 = 0.75:1." },
+
+  { id: "19m16", topic: "finance", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q16",
+    stem: "Which independent federal body ensures that businesses adhere to government regulations, maintain appropriate financial information and provide consumer protection?",
+    options: ["Reserve Bank of Australia", "Australian Securities Exchange", "Australian Prudential Regulation Authority", "Australian Securities and Investment Commission"],
+    answer: 3, explain: "ASIC regulates companies, financial information and consumer protection in financial services." },
+
+  { id: "19m17", topic: "human_resources", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q17",
+    stem: "Use the following information to answer Questions 17 and 18.\n\nThe table compares four businesses on an annual basis.\n\nWhich business is likely to compromise work safety in return for an increase in output?",
+    stimulus: [{ type: "table", headers: ["", "A", "B", "C", "D"], rows: [["Absenteeism (average per employee)", "8", "5", "8", "5"], ["Accidents per 500 employees", "4", "2", "2", "4"], ["% of staff turnover", "11", "9", "9", "11"], ["Average output per employee", "10", "14", "10", "14"]] }],
+    options: ["A", "B", "C", "D"],
+    answer: 3, explain: "Business D has high output but also high accidents, indicating work safety may be compromised." },
+
+  { id: "19m18", topic: "human_resources", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q18",
+    stem: "Use the following information to answer Questions 17 and 18.\n\nThe table compares four businesses on an annual basis.\n\nWhich business is likely to be managing its human resources most effectively?",
+    stimulus: [{ type: "table", headers: ["", "A", "B", "C", "D"], rows: [["Absenteeism (average per employee)", "8", "5", "8", "5"], ["Accidents per 500 employees", "4", "2", "2", "4"], ["% of staff turnover", "11", "9", "9", "11"], ["Average output per employee", "10", "14", "10", "14"]] }],
+    options: ["A", "B", "C", "D"],
+    answer: 1, explain: "Business B has lower absenteeism, fewer accidents, lower turnover and higher output." },
+
+  { id: "19m19", topic: "operations", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q19",
+    stem: "Use the following critical path diagram to answer Questions 19 and 20.\n\nWhich tasks need to be completed prior to completing Task D?",
+    stimulus: [{
+      type: "networkDiagram",
+      caption: "Critical path diagram",
+      width: 700,
+      height: 330,
+      nodes: [
+        { id: "A", label: "Task A", x: 70, y: 165, labelX: 70, labelY: 205 },
+        { id: "B", label: "Task B", x: 230, y: 165, labelX: 230, labelY: 205 },
+        { id: "E", label: "Task E", x: 230, y: 60, labelX: 230, labelY: 40 },
+        { id: "F", label: "Task F", x: 430, y: 60, labelX: 430, labelY: 40 },
+        { id: "D", label: "Task D", x: 430, y: 165, labelX: 455, labelY: 205 },
+        { id: "C", label: "Task C", x: 330, y: 285, labelX: 330, labelY: 320 },
+        { id: "G", label: "Task G", x: 620, y: 165, labelX: 620, labelY: 205 },
+      ],
+      edges: [
+        { from: "A", to: "B", label: "1 day", labelY: 150 },
+        { from: "B", to: "E", label: "1 day", labelX: 200, labelY: 118 },
+        { from: "E", to: "F", label: "1 day", labelY: 45 },
+        { from: "F", to: "D", label: "1 day", labelX: 465, labelY: 118 },
+        { from: "B", to: "D", label: "1 day", labelY: 150 },
+        { from: "B", to: "C", label: "3 days", labelX: 260, labelY: 235 },
+        { from: "C", to: "D", label: "2 days", labelX: 400, labelY: 235 },
+        { from: "D", to: "G", label: "1 day", labelY: 150 },
+      ],
+    }],
+    options: ["A, B only", "A, B, C only", "A, B, E, F only", "A, B, C, E, F only"],
+    answer: 3, explain: "All paths leading into Task D require A and B plus C, E and F before D is complete." },
+
+  { id: "19m20", topic: "operations", type: "mcq", marks: 1, src: "2019 HSC, Section I, Q20",
+    stem: "Use the following critical path diagram to answer Questions 19 and 20.\n\nAn improvement in technology reduces the time between Task C and Task D to one day.\n\nWhat is the new length of the critical path?",
+    stimulus: [{
+      type: "networkDiagram",
+      caption: "Critical path diagram",
+      width: 700,
+      height: 330,
+      nodes: [
+        { id: "A", label: "Task A", x: 70, y: 165, labelX: 70, labelY: 205 },
+        { id: "B", label: "Task B", x: 230, y: 165, labelX: 230, labelY: 205 },
+        { id: "E", label: "Task E", x: 230, y: 60, labelX: 230, labelY: 40 },
+        { id: "F", label: "Task F", x: 430, y: 60, labelX: 430, labelY: 40 },
+        { id: "D", label: "Task D", x: 430, y: 165, labelX: 455, labelY: 205 },
+        { id: "C", label: "Task C", x: 330, y: 285, labelX: 330, labelY: 320 },
+        { id: "G", label: "Task G", x: 620, y: 165, labelX: 620, labelY: 205 },
+      ],
+      edges: [
+        { from: "A", to: "B", label: "1 day", labelY: 150 },
+        { from: "B", to: "E", label: "1 day", labelX: 200, labelY: 118 },
+        { from: "E", to: "F", label: "1 day", labelY: 45 },
+        { from: "F", to: "D", label: "1 day", labelX: 465, labelY: 118 },
+        { from: "B", to: "D", label: "1 day", labelY: 150 },
+        { from: "B", to: "C", label: "3 days", labelX: 260, labelY: 235 },
+        { from: "C", to: "D", label: "2 days", labelX: 400, labelY: 235 },
+        { from: "D", to: "G", label: "1 day", labelY: 150 },
+      ],
+    }],
+    options: ["3 days", "5 days", "6 days", "10 days"],
+    answer: 2, explain: "After reducing C to D to one day, the path A-B-C-D-G is 1 + 3 + 1 + 1 = 6 days, the longest path." },
+
+// ─── 2019 Section II ──────────────────────────────────────────────────────────
+
+  { id: "19s21a", topic: "marketing", type: "short", marks: 3, src: "2019 HSC, Section II, Q21(a)",
+    stem: "A business sells luxury cars. The cars are stylish, high performance and include advanced safety features integrating leading edge technology.\n\nDescribe ONE factor influencing customer choice for this business.",
+    criteria: ["Provides characteristics and features of ONE factor influencing customer choice for this business", "Sketches in general terms ONE factor influencing customer choice for this business", "Recognises a factor influencing customer choice for this business"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides characteristics and features of ONE factor influencing customer choice for this business"] },
+      { marks: "2", criteria: ["Sketches in general terms ONE factor influencing customer choice for this business"] },
+      { marks: "1", criteria: ["Recognises a factor influencing customer choice for this business"] },
+    ],
+    sample: "Sociocultural features include the influences exerted by peers, family and the social class of the customer. For this business, customers of a high social class would likely purchase an expensive car that has improved safety and performance aspects of the vehicle. Peers and family would also influence the choice as the customer would want to 'fit in' with their expectations. High-income earners may also be influenced by peers to purchase a high-end vehicle that is a status symbol." },
+
+  { id: "19s21b", topic: "marketing", type: "short", marks: 4, src: "2019 HSC, Section II, Q21(b)",
+    stem: "A business sells luxury cars. The cars are stylish, high performance and include advanced safety features integrating leading edge technology.\n\nExplain the interdependence between marketing and finance for this business.",
+    criteria: ["Clearly provides why and how marketing and finance are interdependent for this business", "Provides why and/or how marketing and finance are interdependent for this business", "Sketches in general terms how marketing and finance are interdependent for this business", "Provides some relevant information about marketing and/or finance"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Clearly provides why and how marketing and finance are interdependent for this business"] },
+      { marks: "3", criteria: ["Provides why and/or how marketing and finance are interdependent for this business"] },
+      { marks: "2", criteria: ["Sketches in general terms how marketing and finance are interdependent for this business"] },
+      { marks: "1", criteria: ["Provides some relevant information about marketing and/or finance"] },
+    ],
+    sample: "Interdependence is the mutual reliance of one function on another in order to meet the goals of the business. For this business, finance will provide marketing with funds to undertake market research and develop a marketing plan to ensure strategies are put in place to attract customers and persuade them to buy the prestigious car. This will generate sales and therefore revenue for finance, who will be responsible for budgeting for the whole business including providing funds to marketing for the research. Together marketing and finance will ensure the business goals are achieved." },
+
+  { id: "19s21c", topic: "marketing", type: "short", marks: 4, src: "2019 HSC, Section II, Q21(c)",
+    stem: "A business sells luxury cars. The cars are stylish, high performance and include advanced safety features integrating leading edge technology.\n\nWhy is it important for this business to conduct market research?",
+    criteria: ["Clearly shows why market research is important for this business", "Shows why market research is important for this business", "Sketches market research in general terms", "Provides some relevant information about market research"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Clearly shows why market research is important for this business"] },
+      { marks: "3", criteria: ["Shows why market research is important for this business"] },
+      { marks: "2", criteria: ["Sketches market research in general terms"] },
+      { marks: "1", criteria: ["Provides some relevant information about market research"] },
+    ],
+    sample: "Market research is the process of collecting, recording and analysing information. It is important as it allows the business to be well informed about the target market's needs and wants and allows this business to implement effective marketing strategies. High end luxury cars would attract a high price. Market research will ensure the marketing strategies are targeted at a high socioeconomic group, in an affluent area. Without accurate research it may be impossible for this business to achieve its marketing objectives of a strong position in the market and increase sales." },
+
+  { id: "19s22a", topic: "finance", type: "short", marks: 2, src: "2019 HSC, Section II, Q22(a)",
+    stem: "Outline ONE ethical issue related to the preparation of financial reports.",
+    criteria: ["Sketches in general terms ONE ethical issue related to the preparation of financial reports", "Recognises ONE ethical issue related to the preparation of financial reports"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms ONE ethical issue related to the preparation of financial reports"] },
+      { marks: "1", criteria: ["Recognises ONE ethical issue related to the preparation of financial reports"] },
+    ],
+    sample: "An ethical issue related to the preparation of financial reports may be that businesses overestimate their revenue and understate their expenditure to give a false impression of their profitability. This false impression gives an inaccurate picture and may encourage investors to invest in a business which appears to be in a stronger financial position than it actually is." },
+
+  { id: "19s22b", topic: "finance", type: "short", marks: 3, src: "2019 HSC, Section II, Q22(b)",
+    stem: "Explain ONE advantage of debt financing.",
+    criteria: ["Provides why and/or how debt finance is an advantage", "Provides characteristics and features of ONE advantage of debt financing", "Recognises ONE advantage of debt financing"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides why and/or how debt finance is an advantage"] },
+      { marks: "2", criteria: ["Provides characteristics and features of ONE advantage of debt financing"] },
+      { marks: "1", criteria: ["Recognises ONE advantage of debt financing"] },
+    ],
+    sample: "Debt financing can provide advantages to a business. An advantage is that interest, fees and charges are tax deductible as they are expenses of the business. By using debt financing, the business pays less in tax, which may lead to greater profits." },
+
+  { id: "19s22c", topic: "finance", type: "short", marks: 3, src: "2019 HSC, Section II, Q22(c)",
+    stem: "Explain ONE disadvantage of equity financing.",
+    criteria: ["Provides why and/or how equity finance is an disadvantage", "Provides characteristics and features of ONE disadvantage of equity financing", "Recognises ONE disadvantage of equity financing"],
+    criteriaBands: [
+      { marks: "3", criteria: ["Provides why and/or how equity finance is an disadvantage"] },
+      { marks: "2", criteria: ["Provides characteristics and features of ONE disadvantage of equity financing"] },
+      { marks: "1", criteria: ["Recognises ONE disadvantage of equity financing"] },
+    ],
+    sample: "A disadvantage associated with using equity financing is that a business uses owner's equity or retained profits to finance its key business functions. Due to this they are unable to claim a tax deduction as no funds are borrowed. As retained profits are re-invested into the business, the investor is unable to invest in other opportunities, which may provide better returns." },
+
+  { id: "19s23a", topic: "human_resources", type: "short", marks: 2, src: "2019 HSC, Section II, Q23(a)",
+    stem: "Outline ONE employer obligation in an employment contract.",
+    criteria: ["Sketches in general terms ONE employer obligation", "Provides some relevant information about employer obligations"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Sketches in general terms ONE employer obligation"] },
+      { marks: "1", criteria: ["Provides some relevant information about employer obligations"] },
+    ],
+    sample: "An employer obligation includes providing work for employees. Employers must adhere to minimum employment standards including paying staff the correct wages, superannuation and leave according to their employment contract." },
+
+  { id: "19s23b", topic: "human_resources", type: "short", marks: 4, src: "2019 HSC, Section II, Q23(b)",
+    stem: "Distinguish between awards and enterprise agreements.",
+    criteria: ["Demonstrates a clear understanding of the differences between awards and enterprise agreements", "Demonstrates an understanding of the differences between awards and enterprise agreements", "Demonstrates some understanding of a difference between awards and enterprise agreements", "OR", "Sketches in general terms awards and enterprise agreements", "Provides some relevant information about awards or enterprise agreements"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Demonstrates a clear understanding of the differences between awards and enterprise agreements"] },
+      { marks: "3", criteria: ["Demonstrates an understanding of the differences between awards and enterprise agreements"] },
+      { marks: "2", criteria: ["Demonstrates some understanding of a difference between awards and enterprise agreements", "OR", "Sketches in general terms awards and enterprise agreements"] },
+      { marks: "1", criteria: ["Provides some relevant information about awards or enterprise agreements"] },
+    ],
+    sample: "An award sets out the legally enforceable minimum terms and conditions that apply to a business or industry. Awards are handed down by Fair Work Australia. Conditions in a modern award are in addition to the minimum conditions in the National Employment Standards.\n\nAn enterprise agreement (EA) is made at the workplace level between an employer and a group of employees about terms and conditions of employment. These may be negotiated with the input of a union. An EA must pass the Better Off Overall Test (BOOT) and expires within four years." },
+
+  { id: "19s23c", topic: "human_resources", type: "short", marks: 5, src: "2019 HSC, Section II, Q23(c)",
+    stem: "Assess the impact of ONE social influence on human resource management.",
+    criteria: ["Makes a clear judgement on the impact of ONE social influence on human resource management", "Makes a judgement on the impact of ONE social influence on human resource management", "Provides characteristics and features of the impact of ONE social influence on human resource management", "Sketches in general terms the impact of ONE social influence on human resource management", "Provides some relevant information"],
+    criteriaBands: [
+      { marks: "5", criteria: ["Makes a clear judgement on the impact of ONE social influence on human resource management"] },
+      { marks: "4", criteria: ["Makes a judgement on the impact of ONE social influence on human resource management"] },
+      { marks: "3", criteria: ["Provides characteristics and features of the impact of ONE social influence on human resource management"] },
+      { marks: "2", criteria: ["Sketches in general terms the impact of ONE social influence on human resource management"] },
+      { marks: "1", criteria: ["Provides some relevant information"] },
+    ],
+    sample: "The management of human resources has been significantly affected by changing work patterns such as the growth in women participating in the workforce. The trend of women re-entering the workforce, has led human resource managers to provide workplaces that offer flexible working hours to ensure work-life balance.\n\nDue to the increased number of women and casualisation in the workforce, businesses have been significantly affected through legislation and expectations. Businesses are required to provide parental, carers and family leave as well as the possibility of rewards such as affordable childcare arrangements at the workplace." },
+
+  { id: "19s24a", topic: "operations", type: "short", marks: 2, src: "2019 HSC, Section II, Q24(a)",
+    stem: "A juice bar is operating in a shopping centre. The juice is served to customers in plastic cups with plastic straws. The high sales volume and quick turnover demand an efficient operations process.\n\nIdentify TWO transforming resources used in this business.",
+    criteria: ["Identifies TWO transforming resources", "Identifies ONE transforming resource"],
+    criteriaBands: [
+      { marks: "2", criteria: ["Identifies TWO transforming resources"] },
+      { marks: "1", criteria: ["Identifies ONE transforming resource"] },
+    ],
+    sample: "Human Resources, Facilities" },
+
+  { id: "19s24b", topic: "operations", type: "short", marks: 4, src: "2019 HSC, Section II, Q24(b)",
+    stem: "A juice bar is operating in a shopping centre. The juice is served to customers in plastic cups with plastic straws. The high sales volume and quick turnover demand an efficient operations process.\n\nHow does variety impact the transformation process of this business?",
+    criteria: ["Shows in detail how variety impacts the transformation process for this business", "Shows how variety impacts the transformation process for this business", "Sketches in general terms the transformation process", "Provides some information about the transformation process"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Shows in detail how variety impacts the transformation process for this business"] },
+      { marks: "3", criteria: ["Shows how variety impacts the transformation process for this business"] },
+      { marks: "2", criteria: ["Sketches in general terms the transformation process"] },
+      { marks: "1", criteria: ["Provides some information about the transformation process"] },
+    ],
+    sample: "Variety refers to the range of products made by the business. With a wide variety of juice being served the business is able to offer greater choice to customers. The variation in the transformation process may include new juice machinery, systems and procedures. This will cost the business money in terms of training and resources, therefore impacting profitability. However, this will enable the business to have a wider target market, leading to more customers, greater sales and improved profitability." },
+
+  { id: "19s24c", topic: "operations", type: "short", marks: 4, src: "2019 HSC, Section II, Q24(c)",
+    stem: "A juice bar is operating in a shopping centre. The juice is served to customers in plastic cups with plastic straws. The high sales volume and quick turnover demand an efficient operations process.\n\nWhy might this business be reluctant to become more socially responsible?",
+    criteria: ["Provides detailed reasons why this business might be reluctant to become more socially responsible", "Provides reasons why this business might be reluctant to become more socially responsible", "Sketches in general terms how social responsibility may affect this business", "Provides some information about social responsibility"],
+    criteriaBands: [
+      { marks: "4", criteria: ["Provides detailed reasons why this business might be reluctant to become more socially responsible"] },
+      { marks: "3", criteria: ["Provides reasons why this business might be reluctant to become more socially responsible"] },
+      { marks: "2", criteria: ["Sketches in general terms how social responsibility may affect this business"] },
+      { marks: "1", criteria: ["Provides some information about social responsibility"] },
+    ],
+    sample: "This business may be reluctant in meeting its social responsibility due to the increased cost in purchasing environmentally friendly products and packaging such as biodegradable straws and cups.\n\nAdditionally, the business will need to find a new supplier for the environmentally friendly straws and cups. The cost of the new packaging may lead to an increase in the price of juice for the customers, possibly resulting in a decrease in sales." },
+
+// ─── 2019 Section III/IV ──────────────────────────────────────────────────────
+
+  { id: "19e25", topic: "finance", topics: ["finance", "human_resources"], type: "extended", marks: 20, src: "2019 HSC, Section III, Q25",
+    stem: "You have been hired as a consultant to write a report for the owners. In your report:\n• discuss methods this business could use in the acquisition and development of staff\n• recommend TWO appropriate working capital management strategies for this business.",
+    stimulus: [
+      { type: "paragraph", text: "A business, Roo's Outback Eatery Pty Ltd, is opening an additional restaurant in NSW. They plan to position the restaurant as an exclusive restaurant specialising in modern Australian food with quality customer service." },
+      { type: "paragraph", text: "The owners require assistance with the following:" },
+      { type: "list", items: ["the acquisition and development of suitable staff", "additional funds for the day-to-day running of the business", "the close monitoring of working capital."] },
+    ],
+    criteria: ["Provides detailed points for and/or against methods this business could use in the acquisition and development of staff", "Provides detailed reasons in favour of TWO appropriate working capital management strategies", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts", "Provides points for and/or against methods this business could use in the acquisition and development of staff", "Provides reasons in favour of TWO appropriate working capital management strategies", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts", "Provides characteristics and features of the methods this business could use in acquisition and/or development of staff", "Provides characteristics and features of working capital management OR reasons for ONE working capital management strategy", "Includes features of a business report and uses some business terminology and concepts", "Sketches in general terms Human Resource Management", "Sketches in general terms a financial strategy/strategies", "May include some features of a business report and uses basic business terminology", "Provides some relevant information about Finance and/or Human Resources Management", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Provides detailed points for and/or against methods this business could use in the acquisition and development of staff", "Provides detailed reasons in favour of TWO appropriate working capital management strategies", "Makes effective use of the information provided, demonstrating extensive knowledge and understanding relevant to the question", "Presents a sustained, logical and cohesive business report integrating relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Provides points for and/or against methods this business could use in the acquisition and development of staff", "Provides reasons in favour of TWO appropriate working capital management strategies", "Makes some use of the information provided, demonstrating some knowledge and understanding relevant to the question", "Presents a logical and cohesive business report using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of the methods this business could use in acquisition and/or development of staff", "Provides characteristics and features of working capital management OR reasons for ONE working capital management strategy", "Includes features of a business report and uses some business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches in general terms Human Resource Management", "Sketches in general terms a financial strategy/strategies", "May include some features of a business report and uses basic business terminology"] },
+      { marks: "1–4", criteria: ["Provides some relevant information about Finance and/or Human Resources Management", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "list", items: ["Acquisition", "Development", "Job design - general or specific tasks", "Recruitment - internal or external, general or specific skills", "Training and Development - current or future skills", "Performance management - development or administration", "Cash-flow statements", "Distribution of payments, discounts for early payments, factoring", "Working capital management", "Control of current assets - cash, receivables, inventories", "Control of current liabilities - payables, loans, overdrafts", "Strategies - leasing, sale and lease back."] },
+    ] },
+
+  { id: "19e26", topic: "marketing", type: "extended", marks: 20, src: "2019 HSC, Section IV, Q26",
+    stem: "Analyse the relationship between market segmentation and marketing strategies.",
+    criteria: ["Draws out and clearly relates the implication of the relationship between market segmentation and marketing strategies", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the relationship between market segmentation and marketing strategies", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of market segmentation or marketing strategies AND sketches marketing strategies or market segmentation", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts", "Sketches market segmentation and/or marketing strategies in general terms", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to Marketing", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Draws out and clearly relates the implication of the relationship between market segmentation and marketing strategies", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the relationship between market segmentation and marketing strategies", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of market segmentation or marketing strategies AND sketches marketing strategies or market segmentation", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches market segmentation and/or marketing strategies in general terms", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to Marketing", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "list", items: ["Market segmentation", "Product/service differentiation and positioning", "Products - goods and/or services", "Branding", "Packaging", "Price including pricing methods - cost, market, competition based", "Pricing strategies - skimming, penetration, loss leaders, price points", "Price and quality interaction", "Promotion", "Elements of the promotion mix - advertising, personal selling and relationship marketing, sales promotions, publicity and public relations", "The communication process - opinion leaders, word of mouth", "Place/distribution", "Distribution channels", "Channel choice - intensive, selective, exclusive", "Physical distribution issues - transport, warehousing, inventory", "People, processes and physical evidence", "E-marketing", "Global marketing", "Global branding", "Standardisation", "Customisation", "Global pricing", "Competitive positioning."] },
+    ] },
+
+  { id: "19e27", topic: "operations", type: "extended", marks: 20, src: "2019 HSC, Section IV, Q27",
+    stem: "Analyse the relationship between performance objectives and operations strategies.",
+    criteria: ["Draws out and clearly relates the implications of the relationship between performance objectives and operations strategies", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts", "Makes evident the relationship between performance objectives and operations strategies", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts", "Provides characteristics and features of performance objectives or operations strategies AND sketches operations strategies or performance objectives", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts", "Sketches performance objective(s) and/or operations strategies in general terms", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts", "Makes limited reference to Operations", "May identify case study/studies", "Uses basic business terminology"],
+    criteriaBands: [
+      { marks: "17–20", criteria: ["Draws out and clearly relates the implications of the relationship between performance objectives and operations strategies", "Applies relevant case study/studies and contemporary business issues", "Presents a sustained, logical and cohesive response and communicates clearly using relevant business terminology and concepts"] },
+      { marks: "13–16", criteria: ["Makes evident the relationship between performance objectives and operations strategies", "Uses relevant case study/studies and contemporary business issues", "Presents a logical and cohesive response using relevant business terminology and concepts"] },
+      { marks: "9–12", criteria: ["Provides characteristics and features of performance objectives or operations strategies AND sketches operations strategies or performance objectives", "Makes reference to case study/studies and/or contemporary business issues", "Communicates using relevant business terminology and concepts"] },
+      { marks: "5–8", criteria: ["Sketches performance objective(s) and/or operations strategies in general terms", "May make reference to case study/studies and/or contemporary business issues", "Communicates using some business terminology and concepts"] },
+      { marks: "1–4", criteria: ["Makes limited reference to Operations", "May identify case study/studies", "Uses basic business terminology"] },
+    ],
+    sample: "",
+    sampleBlocks: [
+      { type: "heading", text: "Answers could include:" },
+      { type: "list", items: ["Performance objectives - quality, speed, dependability, flexibility, customisation, cost", "New product or service design and development", "Supply chain management - logistics, e-commerce, global sourcing", "Outsourcing - advantages and disadvantages", "Technology - leading edge, established", "Inventory management - advantages and disadvantages of holding stock, LIFO, FIFO, JIT", "Quality management - Control, Assurance, Improvement", "Overcoming resistance to change - financial costs, purchasing new equipment, redundancy payments, retraining, reorganising plant layout, inertia", "Global factors - global sourcing, economies of scale, scanning and learning, research and development."] },
+    ] },
+
 // ─── 2020 Section I ───────────────────────────────────────────────────────────
 
   { id: "20m1", topic: "human_resources", type: "mcq", marks: 1, src: "2020 HSC, Section I, Q1",
