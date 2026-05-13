@@ -35,12 +35,12 @@ export function Hero() {
           <h1
             style={{
               fontWeight: 700,
-              fontSize: "clamp(34px, 4.6vw, 68px)",
+              fontSize: "clamp(40px, 5.4vw, 78px)",
               lineHeight: 1.05,
               letterSpacing: "-0.04em",
               margin: "0 0 24px",
               color: "#111111",
-              maxWidth: 520,
+              maxWidth: 560,
             }}
           >
             HSC Business Studies Tutoring in Sydney
@@ -51,24 +51,11 @@ export function Hero() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              marginTop: "0.1em",
+              marginTop: "0.28em",
             }}>
               {HERO_GRADIENT_TEXT}
             </span>
           </h1>
-
-          <p
-            style={{
-              margin: "0 0 36px",
-              maxWidth: 380,
-              fontSize: 18,
-              lineHeight: 1.58,
-              color: "#3D3D3D",
-              fontWeight: 400,
-            }}
-          >
-            Taught by Band 6 graduates who know the HSC Business Studies exam. Available online and in Sydney for Year 11 and Year 12.
-          </p>
 
         </div>
 
