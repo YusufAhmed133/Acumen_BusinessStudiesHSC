@@ -141,7 +141,7 @@ export function Topics() {
       </div>
 
       <style>{`
-        @media (max-width: 560px) {
+        @media (max-width: 360px) {
           .topics-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>

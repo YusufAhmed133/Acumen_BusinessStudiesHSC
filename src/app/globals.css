@@ -107,8 +107,6 @@ button { font-family: inherit; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  -webkit-text-stroke: 0.5px #2A4F94;
-  paint-order: stroke fill;
   filter: drop-shadow(0 22px 46px rgba(10, 10, 10, 0.055));
   opacity: 0.98;
   user-select: none;
@@ -158,6 +156,19 @@ button { font-family: inherit; }
 
 /* ── Focus ───────────────────────────────────────────────── */
 :focus-visible { outline: 2px solid #0A0A0A; outline-offset: 2px; }
+
+/* ── Mobile section padding + layout overrides ───────────────── */
+@media (max-width: 860px) {
+  #syllabus, #pricing, #faq, #resources, #practice {
+    padding-top: 52px !important;
+    padding-bottom: 60px !important;
+  }
+  #syllabus > div, #pricing > div, #faq > div, #resources > div, #practice > div {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  #practice > div { padding-left: 20px !important; padding-right: 20px !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

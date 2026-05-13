@@ -192,7 +192,7 @@ export function ResourcesTeaser() {
                   overflow: "hidden",
                 }}
               >
-                <PackCover pack={pack} />
+                <div className="pack-cover-wrap"><PackCover pack={pack} /></div>
                 <div style={{ padding: "16px 16px 18px" }}>
                   <div style={{ fontSize: 13.5, fontWeight: 600, color: "#111111", lineHeight: 1.35, letterSpacing: "-0.01em", marginBottom: 14 }}>
                     {pack.title}
@@ -251,6 +251,7 @@ export function ResourcesTeaser() {
       <style>{`
         @media (max-width: 860px) {
           .packs-grid { grid-template-columns: 1fr 1fr !important; }
+          .pack-cover-wrap { display: none !important; }
         }
         @media (max-width: 480px) {
           .packs-grid { grid-template-columns: 1fr !important; }

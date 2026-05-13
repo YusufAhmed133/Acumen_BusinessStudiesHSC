@@ -280,7 +280,7 @@ export function PracticeDemo() {
                   </div>
                 </div>
 
-                <div data-demo="margin" style={{ padding: "24px 20px", background: "#F8F4E8" }}>
+                <div data-demo="margin" className="practice-marker-margin" style={{ padding: "24px 20px", background: "#F8F4E8" }}>
                   <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5C5C5C", marginBottom: 12 }}>
                     Marker margin
                   </div>
@@ -352,14 +352,13 @@ export function PracticeDemo() {
         @media (max-width: 760px) {
           .practice-video {
             aspect-ratio: auto !important;
-            min-height: 480px !important;
+            min-height: 380px !important;
           }
           .demo-cols { grid-template-columns: 1fr !important; }
+          .practice-marker-margin { display: none !important; }
         }
         @media (max-width: 520px) {
-          .practice-video {
-            min-height: 460px !important;
-          }
+          .practice-video { min-height: 360px !important; }
           .practice-screen > div:nth-child(2) {
             padding-left: 12px !important;
             padding-right: 12px !important;
