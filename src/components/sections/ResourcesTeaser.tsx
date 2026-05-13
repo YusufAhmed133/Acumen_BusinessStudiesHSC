@@ -190,11 +190,32 @@ export function ResourcesTeaser() {
                   border: "1px solid rgba(0,0,0,0.08)",
                   borderRadius: 8,
                   overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <div className="pack-cover-wrap"><PackCover pack={pack} /></div>
-                <div style={{ padding: "16px 16px 18px" }}>
-                  <div style={{ fontSize: 13.5, fontWeight: 600, color: "#111111", lineHeight: 1.35, letterSpacing: "-0.01em", marginBottom: 14 }}>
+                <div className="pack-card-body" style={{ padding: "16px 16px 18px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <div className="pack-topic-badge" style={{ display: "none" }}>
+                    <div style={{
+                      height: 4,
+                      borderRadius: 2,
+                      background: pack.coverAccent,
+                      marginBottom: 10,
+                      opacity: 0.7,
+                    }} />
+                    <div style={{
+                      fontSize: 10,
+                      fontWeight: 700,
+                      letterSpacing: "0.16em",
+                      textTransform: "uppercase",
+                      color: pack.coverAccent,
+                      marginBottom: 6,
+                    }}>
+                      {pack.topic}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: 13.5, fontWeight: 600, color: "#111111", lineHeight: 1.35, letterSpacing: "-0.01em", marginBottom: 14, flex: 1 }}>
                     {pack.title}
                   </div>
                   <button
@@ -250,11 +271,12 @@ export function ResourcesTeaser() {
 
       <style>{`
         @media (max-width: 860px) {
-          .packs-grid { grid-template-columns: 1fr 1fr !important; }
-          .pack-cover-wrap { display: none !important; }
-        }
-        @media (max-width: 480px) {
-          .packs-grid { grid-template-columns: 1fr !important; }
+          .packs-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+          .pack-cover-wrap { display: block !important; }
+          .pack-card-body { display: flex !important; flex-direction: column !important; padding: 12px 12px 14px !important; }
+          .pack-topic-badge { display: none !important; }
+          .pack-card-body > div:first-of-type { font-size: 11px !important; margin-bottom: 8px !important; }
+          .pack-card-body button { padding: 6px 10px !important; font-size: 10.5px !important; }
         }
       `}</style>
     </section>
