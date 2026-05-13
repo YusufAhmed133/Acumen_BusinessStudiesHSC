@@ -1,5 +1,4 @@
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
-import { HeroCountdown } from "@/components/sections/HeroCountdown";
 
 const HERO_GRADIENT_TEXT = "Taught by Band 6 Graduates";
 const HERO_GRADIENT = "linear-gradient(135deg, #9FDDB4 0%, #F2CF73 31%, #EDA9AD 64%, #A9C8F3 100%)";
@@ -71,7 +70,6 @@ export function Hero() {
             Taught by Band 6 graduates who know the HSC Business Studies exam. Available online and in Sydney for Year 11 and Year 12.
           </p>
 
-          <HeroCountdown />
         </div>
 
         <div id="enquire">

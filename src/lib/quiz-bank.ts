@@ -2,7 +2,9 @@ export { TOPICS_MAP } from "./quiz-types";
 export type { TopicKey, McqQuestion, ShortQuestion, Question } from "./quiz-types";
 import type { Question } from "./quiz-types";
 
-const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([]);
+const FORMAT_AUDIT_EXCLUDED_IDS = new Set<string>([
+  "23m20", // NESA 2023 MG: "A & D* — This question is not suitable for exam preparation"
+]);
 
 const RAW_QUIZ_BANK: Question[] = [
 
@@ -41,7 +43,7 @@ const RAW_QUIZ_BANK: Question[] = [
   { id: "16m7", topic: "marketing", type: "mcq", marks: 1, src: "2016 HSC, Section I, Q7",
     stem: "A person purchases his clothing from a discount store because he is a low-income earner.\n\nWhat factor is influencing his consumer choice?",
     options: ["Economic", "Legal", "Psychological", "Sociocultural"],
-    answer: 3, explain: "The official answer key identifies this as a sociocultural influence." },
+    answer: 0, explain: "Income level is an economic factor influencing consumer choice; purchasing from a discount store due to being a low-income earner is driven by financial/economic circumstances." },
 
   { id: "16m8", topic: "operations", topics: ["operations", "marketing"], type: "mcq", marks: 1, src: "2016 HSC, Section I, Q8",
     stem: "A business plans to increase its stock to be ready for the grand opening of five new stores.\n\nThis shows the interdependence between which business functions?",
@@ -1917,8 +1919,8 @@ const RAW_QUIZ_BANK: Question[] = [
     options: ["Questionnaires and industry reports", "Industry reports and internet sources", "Personal interviews and questionnaires", "Internet sources and personal interviews"],
     answer: 2, explain: "Personal interviews and questionnaires are both primary, collected first-hand. Industry reports and internet sources are secondary data." },
 
-  { id: "22m4", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q4",
-    stem: "A watch manufacturer uses price-skimming strategies and provides a lifetime warranty on their products. What would most likely have influenced the implementation of these strategies?",
+  { id: "22m4", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q4",
+    stem: "A watch manufacturer uses price-skimming strategies and provides a lifetime warranty on their products.\n\nWhat would most likely have influenced the implementation of these strategies?",
     options: ["Legal compliance", "Quality expectations", "Ethical responsibility", "Cost-based competition"],
     answer: 1, explain: "Quality expectations drive both premium pricing (price skimming) and a lifetime warranty, both signal and guarantee product durability." },
 
@@ -1928,28 +1930,28 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 3, explain: "Psychographic segmentation divides by psychological traits, lifestyle, values, personality, and motivation. Demographic uses age/income; geographic uses location." },
 
   { id: "22m6", topic: "human_resources", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q6",
-    stem: "All staff in a business participate equally in a profit-sharing scheme. Which row of the table correctly identifies this reward strategy?",
+    stem: "All staff in a business participate equally in a profit-sharing scheme.\n\nWhich row of the table correctly identifies this reward strategy?",
     stimulus: [{ type: "table", headers: ["", "Reward", "Staff"], rows: [["A.", "Monetary", "Group"], ["B.", "Monetary", "Individual"], ["C.", "Non-monetary", "Group"], ["D.", "Non-monetary", "Individual"]] }],
     options: ["Monetary / Group", "Monetary / Individual", "Non-monetary / Group", "Non-monetary / Individual"],
     answer: 0, explain: "Profit-sharing is a monetary (cash/financial) reward distributed equally across all staff, making it a group reward, not tied to individual performance." },
 
   { id: "22m7", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q7",
-    stem: "A large clothing manufacturer in NSW wants to reduce input costs. Which strategy would achieve this objective?",
+    stem: "A large clothing manufacturer in NSW wants to reduce input costs.\n\nWhich strategy would achieve this objective?",
     options: ["Increasing product variety", "Increasing employee training", "Implementing global sourcing", "Implementing sustainable packaging"],
     answer: 2, explain: "Global sourcing accesses lower-cost inputs from international suppliers, directly reducing input costs. Training and variety increase costs; sustainable packaging may raise them." },
 
   { id: "22m8", topic: "human_resources", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q8",
-    stem: "A business has implemented a training program in the use of new machinery on the factory floor for its employees. What is the main reason for this training program?",
+    stem: "A business has implemented a training program in the use of new machinery on the factory floor for its employees.\n\nWhat is the main reason for this training program?",
     options: ["To prevent accidents", "To reduce absenteeism", "To reduce staff turnover", "To improve corporate culture"],
     answer: 0, explain: "WH&S obligations require training employees in safe use of machinery. The primary reason for machinery-specific training is accident prevention, satisfying the legal duty of care." },
 
   { id: "22m9", topic: "human_resources", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q9",
-    stem: "An employee has been bullied at work and has lodged a complaint. What initial action should the employer take to resolve this dispute?",
+    stem: "An employee has been bullied at work and has lodged a complaint.\n\nWhat initial action should the employer take to resolve this dispute?",
     options: ["Arbitration", "Conciliation", "Mediation", "Negotiation"],
     answer: 3, explain: "Negotiation is the first, least formal step, the parties attempt direct resolution. Mediation, conciliation, and arbitration involve third parties and escalate in formality." },
 
   { id: "22m10", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q10",
-    stem: "A printing business uses chemicals in its production process. Which of the following factors has a legal regulation that affects the operations management of this business?",
+    stem: "A printing business uses chemicals in its production process.\n\nWhich of the following factors has a legal regulation that affects the operations management of this business?",
     options: ["Superannuation", "Code of conduct", "Union membership", "Environmental protection"],
     answer: 3, explain: "Environmental protection laws regulate chemical waste disposal and directly affect operations. Superannuation and union membership are HR/legal matters; codes of conduct are internal ethical frameworks." },
 
@@ -1959,7 +1961,7 @@ const RAW_QUIZ_BANK: Question[] = [
     options: ["Production decreased; price maintained", "Production maintained; price increased", "Production increased; price increased", "Production increased; price maintained"],
     answer: [2, 3], explain: "The official marking guideline accepts C and D for this question." },
 
-  { id: "22m12", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q12",
+  { id: "22m12", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q12",
     stem: "Which of the following is an example of service differentiation?",
     options: ["A car manufacturer supplies cars with premium tinted windows.", "A chemist issues a patient with medication in exchange for a script.", "A shoe store assistant spends varying amounts of time with customers.", "A salesperson provides a receipt to a customer who has purchased a bed."],
     answer: 2, explain: "Service differentiation means varying the service experience. Spending varying time with different customers adapts the service to individual needs. The other options are standard goods transactions." },
@@ -1970,32 +1972,32 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 2, explain: "An improved economic outlook boosts consumer spending (demand for exports) and low interest rates reduce borrowing costs for expansion, both conditions support global expansion." },
 
   { id: "22m14", topic: "finance", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q14",
-    stem: "A private investment company accepts money from clients. The owner illegally uses this money for their own personal use. Which government body would take legal action against the owner of this company?",
+    stem: "A private investment company accepts money from clients. The owner illegally uses this money for their own personal use.\n\nWhich government body would take legal action against the owner of this company?",
     options: ["Australian Taxation Office", "Australian Securities Exchange", "Australian Prudential Regulation Authority", "Australian Securities and Investments Commission"],
     answer: 3, explain: "ASIC regulates investment companies and enforces laws against financial fraud such as misappropriation of client funds. APRA regulates banks/insurance; ASX operates the stock exchange." },
 
-  { id: "22m15", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q15",
-    stem: "Heidi has a small farm that has a variety of animals, including chickens. She would like to sell the excess chicken eggs to customers. Which distribution method would best support her situation?",
+  { id: "22m15", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q15",
+    stem: "Heidi has a small farm that has a variety of animals, including chickens. She would like to sell the excess chicken eggs to customers.\n\nWhich distribution method would best support her situation?",
     options: ["Producer → consumer", "Producer → retailer → consumer", "Producer → wholesaler → consumer", "Producer → agent → retailer → consumer"],
     answer: 0, explain: "A small farm selling directly to local customers uses the shortest channel. Longer channels involve intermediaries that take margin and are unsuitable for small-scale perishable items." },
 
   { id: "22m16", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q16",
     stem: "Which of the following could be a disadvantage of using a price penetration strategy for a business?",
-    options: ["A large number of products are sold quickly", "The business has problems in trying to raise prices later", "New competitors find it more difficult to enter the market", "Customers are discouraged from purchasing the product immediately"],
+    options: ["A large number of products are sold quickly.", "The business has problems in trying to raise prices later.", "New competitors find it more difficult to enter the market.", "Customers are discouraged from purchasing the product immediately."],
     answer: 1, explain: "Price penetration attracts price-sensitive customers at a low price; raising prices later risks losing those customers. The other options describe advantages or characterise price skimming." },
 
   { id: "22m17", topic: "marketing", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q17",
-    stem: "A florist purchases flowers to create flower arrangements. What type of market does the florist operate in?",
+    stem: "A florist purchases flowers to create flower arrangements.\n\nWhat type of market does the florist operate in?",
     options: ["Consumer", "Industrial", "Mass", "Resource"],
     answer: 1, explain: "The florist buys flowers as inputs for their business product, this is a business-to-business (industrial) market. Consumer markets sell to individuals for personal use." },
 
   { id: "22m18", topic: "finance", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q18",
-    stem: "A business owns a $2 million building with a $500 000 mortgage. They decide to sell the building and lease it back from the new owners over five years. What is the likely purpose of this financial strategy?",
+    stem: "A business owns a $2 million building with a $500 000 mortgage. They decide to sell the building and lease it back from the new owners over five years.\n\nWhat is the likely purpose of this financial strategy?",
     options: ["Reduce liquidity", "Reduce cash flow", "Improve profitability", "Improve working capital"],
     answer: 3, explain: "Sale and lease-back converts a fixed asset into cash, immediately improving working capital. It generates a cash inflow (not reduces it) and does not directly increase profitability." },
 
   { id: "22m19", topic: "operations", type: "mcq", marks: 1, src: "2022 HSC, Section I, Q19",
-    stem: "A large cake business is going to offer a contract to another business to make their cake decorations. Which business functions would provide input into the contract details?",
+    stem: "A large cake business is going to offer a contract to another business to make their cake decorations.\n\nWhich business functions would provide input into the contract details?",
     options: ["Finance, operations and marketing", "Finance, marketing and human resources", "Operations, human resources and finance", "Operations, marketing and human resources"],
     answer: 2, explain: "Outsourcing a production input involves: operations (specifications/quality), finance (cost/payment terms), and HR (workforce implications). Marketing is not directly involved in a supplier contract." },
 
@@ -2230,7 +2232,7 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 1, explain: "The primary purpose of rewards in HRM is to recognise and incentivise employee contribution, motivating performance and building satisfaction." },
 
   { id: "23m2", topic: "operations", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q2",
-    stem: "A florist designs floral displays for weddings to suit the colour preferences of individual couples. Which of the following would be the main performance objective being targeted by this florist?",
+    stem: "A florist designs floral displays for weddings to suit the colour preferences of individual couples.\n\nWhich of the following would be the main performance objective being targeted by this florist?",
     options: ["Customisation", "Flexibility", "Quality", "Speed"],
     answer: 0, explain: "Customisation means tailoring products to individual specifications. Designing to each couple's colour preferences is customisation. Flexibility refers to adapting to volume changes, not individual tailoring." },
 
@@ -2240,17 +2242,17 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 0, explain: "Relationship marketing focuses on building ongoing loyal customer relationships rather than one-off transactions. Creating long-term loyalty is its defining outcome." },
 
   { id: "23m4", topic: "human_resources", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q4",
-    stem: "An employee receives an electrical burn while working. The employee requires hospital treatment and is unable to return to work for three months. As a result of this injury, what support is this employee entitled to?",
+    stem: "An employee receives an electrical burn while working. The employee requires hospital treatment and is unable to return to work for three months.\n\nAs a result of this injury, what support is this employee entitled to?",
     options: ["Mediation", "Payment in advance", "Workers compensation", "Training and development"],
     answer: 2, explain: "Workers compensation provides wage replacement and medical costs for employees injured at work, a legal entitlement under WH&S legislation." },
 
   { id: "23m5", topic: "marketing", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q5",
-    stem: "A business wants to quickly achieve a large market share for a product. Which marketing strategy would most likely be used?",
+    stem: "A business wants to quickly achieve a large market share for a product.\n\nWhich marketing strategy would most likely be used?",
     options: ["Branding", "Skimming", "Penetration", "Price points"],
     answer: 2, explain: "Price penetration uses a low entry price to rapidly capture market share by attracting price-sensitive customers. Skimming targets early adopters with a high price, growing share slowly." },
 
   { id: "23m6", topic: "human_resources", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q6",
-    stem: "A mattress manufacturer reduced the working hours of its factory workers due to a decrease in demand. Which influence on human resources is most likely to have led to this?",
+    stem: "A mattress manufacturer reduced the working hours of its factory workers due to a decrease in demand.\n\nWhich influence on human resources is most likely to have led to this?",
     options: ["Economic", "Legal", "Operations", "Social"],
     answer: 0, explain: "A decrease in demand is an economic influence, the economic cycle affects business output and therefore staffing needs directly." },
 
@@ -2260,7 +2262,7 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 3, explain: "The correct marketing planning order: (1) situational analysis (SWOT), (2) market research, (3) establish objectives, (4) identify target markets. The process begins with understanding the current situation." },
 
   { id: "23m8", topic: "finance", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q8",
-    stem: "An export company based in Sydney sells Australian-made art to the Asian market. Which form of payment has the lowest level of risk for the exporter?",
+    stem: "An export company based in Sydney sells Australian-made art to the Asian market.\n\nWhich form of payment has the lowest level of risk for the exporter?",
     options: ["Clean payment", "Letter of credit", "Bill of exchange", "Payment in advance"],
     answer: 3, explain: "Payment in advance means the buyer pays before receiving goods, the exporter receives funds before shipping, eliminating non-payment risk. Clean payment (open account) carries the highest exporter risk." },
 
@@ -2270,7 +2272,7 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 3, explain: "Training staff in manufacturing processes involves operations (the process to be learned) and human resources (who manages training and development programs)." },
 
   { id: "23m10", topic: "marketing", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q10",
-    stem: "An energy drink business uses a celebrity to promote its products online. Which marketing strategy is being used?",
+    stem: "An energy drink business uses a celebrity to promote its products online.\n\nWhich marketing strategy is being used?",
     options: ["Loss leaders", "Opinion leaders", "Personal selling", "Sales promotion"],
     answer: 1, explain: "Using a celebrity to promote products is opinion leader marketing, leveraging the celebrity's influence and credibility with their audience." },
 
@@ -2280,12 +2282,12 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 0, explain: "The Fair Work Commission is Australia's national workplace tribunal that approves enterprise agreements and resolves disputes. AHRC handles human rights/discrimination; ASIC regulates financial services." },
 
   { id: "23m12", topic: "finance", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q12",
-    stem: "An Australian theme park wants to implement a new point-of-sale system that allows improved tracking of stock levels. The system will cost $185 000 to establish. Which long-term source of finance would be most appropriate for this system?",
+    stem: "An Australian theme park wants to implement a new point-of-sale system that allows improved tracking of stock levels. The system will cost $185 000 to establish.\n\nWhich long-term source of finance would be most appropriate for this system?",
     options: ["Derivatives", "Hedging", "Leasing", "Overdraft"],
     answer: 2, explain: "Leasing allows the business to use the equipment without a large upfront capital outlay. Derivatives and hedging are risk management tools, not sources of finance. An overdraft is short-term and unsuitable for $185 000 capital investment." },
 
   { id: "23m13", topic: "marketing", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q13",
-    stem: "A customer returns a recently purchased 5G mobile phone to the place of purchase as the phone was faulty. Under consumer law, why must the business refund the customer the cost of the mobile phone?",
+    stem: "A customer returns a recently purchased 5G mobile phone to the place of purchase as the phone was faulty.\n\nUnder consumer law, why must the business refund the customer the cost of the mobile phone?",
     options: ["It is ethical to replace defective goods.", "It is within the implied conditions of the contract.", "It is important to meet corporate social responsibility.", "It can be considered deceptive and misleading advertising."],
     answer: 1, explain: "Consumer law implies that goods must be of acceptable quality. A faulty phone breaches this implied condition, entitling the buyer to a remedy, a legal obligation, not merely ethical." },
 
@@ -2296,7 +2298,7 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 1, explain: "A stronger AUD makes imports cheaper (more AUD buys more foreign goods) but makes exports more expensive for US buyers (they need more USD to buy AUD-priced goods)." },
 
   { id: "23m15", topic: "operations", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q15",
-    stem: "A large construction company has decided to focus their operations on design and innovation. Which of the following best describes this operations management strategy?",
+    stem: "A large construction company has decided to focus their operations on design and innovation.\n\nWhich of the following best describes this operations management strategy?",
     options: ["Outsourcing", "Cost leadership", "Supply chain development", "Goods/services differentiation"],
     answer: 3, explain: "Focusing on design and innovation to create unique output is goods/services differentiation, competing by being distinctive rather than cheapest." },
 
@@ -2332,7 +2334,7 @@ const RAW_QUIZ_BANK: Question[] = [
     answer: 2, explain: "After task AB is complete, tasks BE, BF, and BC can all start simultaneously from node B, they all only require A→B to be finished, with no dependency on each other." },
 
   { id: "23m18", topic: "operations", type: "mcq", marks: 1, src: "2023 HSC, Section I, Q18",
-    stem: "Task EC is delayed and takes an additional 7 days. By how many days will the length of the critical path change?",
+    stem: "Task EC is delayed and takes an additional 7 days.\n\nBy how many days will the length of the critical path change?",
     stimulus: [{
       type: "networkDiagram",
       nodes: [
@@ -2387,7 +2389,12 @@ const RAW_QUIZ_BANK: Question[] = [
 // ─── 2023 Section II ──────────────────────────────────────────────────────────
 
   { id: "23s21a", topic: "operations", type: "short", marks: 2, src: "2023 HSC, Section II, Q21(a)",
-    stem: "An Australian tyre manufacturer is expanding its business. In order to reduce operating costs and increase sales and profit, rubber will be sourced from the global market. The business wants to maintain quality outputs and achieve economies of scale. Outline ONE potential issue this business could face in relation to both cost and quality of outputs.",
+    stem: "Outline ONE potential issue this business could face in relation to both cost and quality of outputs.",
+    stimulus: [
+      { type: "paragraph", text: "An Australian tyre manufacturer is expanding its business. In order to reduce operating costs and increase sales and profit, rubber will be sourced from the global market." },
+      { type: "paragraph", text: "The business wants to:" },
+      { type: "list", items: ["maintain quality outputs", "achieve economies of scale."] },
+    ],
     criteria: ["Outlines a potential issue this business could face in relation to both cost and quality of outputs", "Provides some relevant information"],
     criteriaBands: [
       { marks: "2", criteria: ["Outlines a potential issue this business could face in relation to both cost and quality of outputs"] },
@@ -2396,7 +2403,7 @@ const RAW_QUIZ_BANK: Question[] = [
     sample: "The business can reduce the costs of inputs when they source globally, cheaper inputs such as rubber, may result in lower quality tyres." },
 
   { id: "23s21b", topic: "operations", type: "short", marks: 3, src: "2023 HSC, Section II, Q21(b)",
-    stem: "An Australian tyre manufacturer wants to achieve economies of scale through global rubber sourcing. Explain the benefits of achieving economies of scale for both the business and consumers.",
+    stem: "Explain the benefits of achieving economies of scale for both the business and consumers.",
     criteria: ["Explains the benefits of achieving economies of scale for both the business and consumers", "Describes the benefit(s) of achieving economies of scale for the business and/or consumers", "Provides some relevant information"],
     criteriaBands: [
       { marks: "3", criteria: ["Explains the benefits of achieving economies of scale for both the business and consumers"] },
@@ -2406,7 +2413,7 @@ const RAW_QUIZ_BANK: Question[] = [
     sample: "Economies of scale will provide this business with cost advantages by increasing the volume of its production, allowing the business to lower the price of the finished product. Consumers will benefit from the reduced price and the business will then increase sales and profits in the long term." },
 
   { id: "23s21c", topic: "operations", type: "short", marks: 5, src: "2023 HSC, Section II, Q21(c)",
-    stem: "The owners of the tyre manufacturing business have purchased leading-edge technology to help achieve economies of scale. Explain why both staff and management might be resistant to this change.",
+    stem: "The owners of the tyre manufacturing business have purchased leading-edge technology to help achieve economies of scale.\n\nExplain why both staff and management might be resistant to this change.",
     criteria: ["Provides a thorough explanation of why staff and management in this business might be resistant to this change", "Provides a sound explanation of why staff and management in this business might be resistant to this change", "Demonstrates some understanding of why staff and/or management in this business might be resistant to this change", "Identifies why staff and/or management in this business might be resistant to this change", "Provides some relevant information"],
     criteriaBands: [
       { marks: "5", criteria: ["Provides a thorough explanation of why staff and management in this business might be resistant to this change"] },
@@ -2468,7 +2475,7 @@ const RAW_QUIZ_BANK: Question[] = [
     sampleBlocks: [{ type: "heading", text: "Answers could include:" }, { type: "list", items: ["Post-maturity"] }] },
 
   { id: "23s23b", topic: "marketing", type: "short", marks: 3, src: "2023 HSC, Section II, Q23(b)",
-    stem: "A cereal manufacturer in decline is considering catering for health-conscious consumers in Australia and eventually expanding into the global market. How could a niche market approach increase sales for this cereal manufacturer?",
+    stem: "How could a niche market approach increase sales for this cereal manufacturer?",
     criteria: ["Demonstrates a clear understanding of how the niche market approach could increase sales for this manufacturer", "Demonstrates features of a niche market and/or how this approach could increase sales for the manufacturer", "Provides some relevant information"],
     criteriaBands: [
       { marks: "3", criteria: ["Demonstrates a clear understanding of how the niche market approach could increase sales for this manufacturer"] },
@@ -2478,7 +2485,7 @@ const RAW_QUIZ_BANK: Question[] = [
     sample: "A niche market approach would allow the manufacturer to meet the needs of health-conscious customers by offering them a healthy range of cereals such as low sugar or sugar-free cereals. This targeted approach would allow the manufacturer to increase their sales by differentiating their product against competitors, achieve repeat sales and create customer loyalty." },
 
   { id: "23s23c", topic: "marketing", type: "short", marks: 5, src: "2023 HSC, Section II, Q23(c)",
-    stem: "A cereal manufacturer is considering expanding into the global market, targeting health-conscious consumers. Justify ONE global marketing strategy this cereal manufacturer could use to expand into the global market.",
+    stem: "Justify ONE global marketing strategy this cereal manufacturer could use to expand into the global market.",
     criteria: ["Provides comprehensive support for the use of ONE global marketing strategy to expand into this global market", "Provides sound support for the use of ONE global marketing strategy to expand into this global market", "Demonstrates some understanding of the use of ONE global marketing strategy with some reference to this global market", "Demonstrates some understanding of global marketing strategy", "Provides some relevant information"],
     criteriaBands: [
       { marks: "5", criteria: ["Provides comprehensive support for the use of ONE global marketing strategy to expand into this global market"] },
@@ -2662,7 +2669,7 @@ const RAW_QUIZ_BANK: Question[] = [
   { id: "24m14", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q14",
     stem: "The table shows the cash flow information for a business.\n\nWhat is the closing cash balance for September?",
     stimulus: [{ type: "table", headers: ["", "Jul", "Aug", "Sep"], rows: [["Opening balance ($)", "40 000", "", ""], ["Cash in ($)", "30 000", "10 000", "22 000"], ["Cash out ($)", "20 000", "13 000", "15 000"]] }],
-    options: ["$7 000", "$47 000", "$54 000", "$150 000"],
+    options: ["$7000", "$47 000", "$54 000", "$150 000"],
     answer: 2, explain: "Jul closing = 40+30−20 = $50 000. Aug closing = 50+10−13 = $47 000. Sep closing = 47+22−15 = $54 000." },
 
   { id: "24m15", topic: "finance", type: "mcq", marks: 1, src: "2024 HSC, Section I, Q15",
@@ -3052,7 +3059,7 @@ const RAW_QUIZ_BANK: Question[] = [
     stem: "A travel agency is focused on expanding its sales in several countries. The business provided the following financial information.\n\nWhat does the expense ratio for 2024 indicate for this business?",
     stimulus: [
       { type: "table", headers: ["", "2023", "2024"], rows: [["Sales", "600 000", "700 000"], ["Total expenses", "140 000", "210 000"], ["Net profit", "160 000", "170 000"], ["Expense ratio", "23.3%", "?"], ["Debt to equity ratio", "0.6 : 1", "1 : 1"], ["Return on equity ratio", "8%", "8.5%"]] },
-      { type: "table", caption: "Industry averages", headers: ["", "2023", "2024"], rows: [["Expense ratio", "23%", "20%"], ["Debt to equity ratio", "0.6 : 1", "0.6 : 1"], ["Return on equity ratio", "11%", "12%"]] },
+      { type: "table", caption: "INDUSTRY AVERAGES", headers: ["", "2023", "2024"], rows: [["Expense ratio", "23%", "20%"], ["Debt to equity ratio", "0.6 : 1", "0.6 : 1"], ["Return on equity ratio", "11%", "12%"]] },
       { type: "note", text: "Expense ratio = total expenses ÷ sales × 100" },
     ],
     criteria: ["Shows an understanding of what the expense ratio for 2024 indicates for this business", "Provides some relevant information"],
@@ -3066,7 +3073,7 @@ const RAW_QUIZ_BANK: Question[] = [
     stem: "A travel agency is focused on expanding its sales in several countries. The business provided the following financial information.\n\nHow can undertaking a comparative ratio analysis improve this business’s financial outcome?",
     stimulus: [
       { type: "table", headers: ["", "2023", "2024"], rows: [["Sales", "600 000", "700 000"], ["Total expenses", "140 000", "210 000"], ["Net profit", "160 000", "170 000"], ["Expense ratio", "23.3%", "?"], ["Debt to equity ratio", "0.6 : 1", "1 : 1"], ["Return on equity ratio", "8%", "8.5%"]] },
-      { type: "table", caption: "Industry averages", headers: ["", "2023", "2024"], rows: [["Expense ratio", "23%", "20%"], ["Debt to equity ratio", "0.6 : 1", "0.6 : 1"], ["Return on equity ratio", "11%", "12%"]] },
+      { type: "table", caption: "INDUSTRY AVERAGES", headers: ["", "2023", "2024"], rows: [["Expense ratio", "23%", "20%"], ["Debt to equity ratio", "0.6 : 1", "0.6 : 1"], ["Return on equity ratio", "11%", "12%"]] },
       { type: "note", text: "Expense ratio = total expenses ÷ sales × 100" },
     ],
     criteria: ["Demonstrates a comprehensive understanding of how comparative ratio analysis can be used to improve the financial outcomes of the business", "Demonstrates a sound understanding of how comparative ratio analysis can be used to improve financial outcomes of the business", "Shows some understanding of how comparative ratio analysis can be used", "Provides some relevant information"],
@@ -3082,7 +3089,7 @@ const RAW_QUIZ_BANK: Question[] = [
     stem: "A travel agency is focused on expanding its sales in several countries. The business provided the following financial information.\n\nExplain how TWO global market influences could affect the solvency of this business.",
     stimulus: [
       { type: "table", headers: ["", "2023", "2024"], rows: [["Sales", "600 000", "700 000"], ["Total expenses", "140 000", "210 000"], ["Net profit", "160 000", "170 000"], ["Expense ratio", "23.3%", "?"], ["Debt to equity ratio", "0.6 : 1", "1 : 1"], ["Return on equity ratio", "8%", "8.5%"]] },
-      { type: "table", caption: "Industry averages", headers: ["", "2023", "2024"], rows: [["Expense ratio", "23%", "20%"], ["Debt to equity ratio", "0.6 : 1", "0.6 : 1"], ["Return on equity ratio", "11%", "12%"]] },
+      { type: "table", caption: "INDUSTRY AVERAGES", headers: ["", "2023", "2024"], rows: [["Expense ratio", "23%", "20%"], ["Debt to equity ratio", "0.6 : 1", "0.6 : 1"], ["Return on equity ratio", "11%", "12%"]] },
       { type: "note", text: "Expense ratio = total expenses ÷ sales × 100" },
     ],
     criteria: ["Explains how TWO global market influences could affect the solvency of this business", "Outlines TWO global market influences that affect the solvency of this business", "Outlines ONE global market influence", "Identifies TWO global market influences", "Provides some relevant information"],
