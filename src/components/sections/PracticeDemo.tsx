@@ -352,17 +352,17 @@ export function PracticeDemo() {
         @media (max-width: 760px) {
           .practice-video {
             aspect-ratio: auto !important;
-            min-height: 620px !important;
+            min-height: 480px !important;
           }
           .demo-cols { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 520px) {
           .practice-video {
-            min-height: 700px !important;
+            min-height: 460px !important;
           }
           .practice-screen > div:nth-child(2) {
-            padding-left: 16px !important;
-            padding-right: 16px !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
           }
         }
       `}</style>
