@@ -142,10 +142,11 @@ export function Topics() {
       </div>
 
       <style>{`
+        .topics-grid { align-items: stretch; }
+        .topics-grid > .reveal { display: flex; flex-direction: column; }
+        .topics-grid > .reveal > div { flex: 1; }
         @media (max-width: 860px) {
-          .topics-grid { align-items: stretch; }
-          .topics-grid > .reveal { height: 100%; display: flex; flex-direction: column; }
-          .topics-grid > .reveal > div { flex: 1; padding: 20px 16px 18px !important; }
+          .topics-grid > .reveal > div { padding: 20px 16px 18px !important; }
           .topics-grid > .reveal > div h3 { font-size: 17px !important; margin-bottom: 14px !important; }
           .topics-grid > .reveal > div a { padding: 7px 12px !important; font-size: 11.5px !important; }
         }
