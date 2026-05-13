@@ -107,6 +107,8 @@ button { font-family: inherit; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-stroke: 0.5px #2A4F94;
+  paint-order: stroke fill;
   filter: drop-shadow(0 22px 46px rgba(10, 10, 10, 0.055));
   opacity: 0.98;
   user-select: none;
