@@ -101,8 +101,9 @@ export function EnquiryForm() {
         throw new Error(data?.error ?? "Something went wrong. Please call us on 0470 665 141.");
       }
       const analyticsWindow = window as Window & {
-        gtag?: (command: "event", eventName: string, params?: Record<string, string>) => void;
+        gtag?: (command: "event", eventName: string, params?: Record<string, unknown>) => void;
       };
+      analyticsWindow.gtag?.("event", "conversion", { send_to: "AW-18150257568/GokiCJHM9KkcEKDn285D" });
       analyticsWindow.gtag?.("event", "enquiry_submitted", { year_group: f.year });
       setSubmitted({
         parent: f.parent.trim(),

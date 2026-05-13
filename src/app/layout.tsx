@@ -201,17 +201,17 @@ export default function RootLayout({
                   window.gtag('js', new Date());
                   window.gtag('config', id);
                 }
-                function schedule(){
-                  window.setTimeout(function(){
-                    if ('requestIdleCallback' in window) {
-                      window.requestIdleCallback(loadTag, { timeout: 2500 });
-                    } else {
-                      loadTag();
-                    }
-                  }, 6500);
+                function onInteraction(){
+                  ['mousedown','keydown','touchstart','scroll'].forEach(function(e){
+                    window.removeEventListener(e, onInteraction, {capture:true});
+                  });
+                  loadTag();
                 }
-                if (document.readyState === 'complete') schedule();
-                else window.addEventListener('load', schedule, { once: true });
+                ['mousedown','keydown','touchstart','scroll'].forEach(function(e){
+                  window.addEventListener(e, onInteraction, {once:true, capture:true, passive:true});
+                });
+                // fallback: load after 4s even with no interaction
+                window.setTimeout(loadTag, 4000);
               })();
             `,
           }}
