@@ -43,9 +43,9 @@ export function Hero() {
           >
             HSC Business Studies Tutoring in Sydney
             <span style={{ display: "block", fontSize: "0.72em", marginTop: "0.28em" }}>
-              <span style={{ color: "#F2CF73" }}>Taught by </span>
-              <span style={{ color: "#EDA9AD" }}>Band 6 </span>
-              <span style={{ color: "#9FDDB4" }}>Graduates</span>
+              <span style={{ color: "#A66E12" }}>Taught by </span>
+              <span style={{ color: "#923333" }}>Band 6 </span>
+              <span style={{ color: "#1F6B40" }}>Graduates</span>
             </span>
           </h1>
 
