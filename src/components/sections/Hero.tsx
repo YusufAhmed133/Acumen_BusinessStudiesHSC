@@ -42,10 +42,10 @@ export function Hero() {
             }}
           >
             HSC Business Studies Tutoring in Sydney
-            <span style={{ display: "block", fontSize: "0.72em", marginTop: "0.28em", lineHeight: 1.5 }}>
-              <span style={{ background: "#FBE6BD", color: "#5A3F0A", borderRadius: 8, padding: "2px 10px", marginRight: 6, display: "inline-block" }}>Taught by</span>
-              <span style={{ background: "#F4CFCF", color: "#5C1818", borderRadius: 8, padding: "2px 10px", marginRight: 6, display: "inline-block" }}>Band 6</span>
-              <span style={{ background: "#CFEAD9", color: "#0E3A1C", borderRadius: 8, padding: "2px 10px", display: "inline-block" }}>Graduates</span>
+            <span style={{ display: "block", fontSize: "0.72em", marginTop: "0.28em" }}>
+              <span style={{ color: "#FBE6BD", WebkitTextStroke: "0.5px #A66E12", paintOrder: "stroke fill" }}>Taught by </span>
+              <span style={{ color: "#F4CFCF", WebkitTextStroke: "0.5px #923333", paintOrder: "stroke fill" }}>Band 6 </span>
+              <span style={{ color: "#CFEAD9", WebkitTextStroke: "0.5px #1F6B40", paintOrder: "stroke fill" }}>Graduates</span>
             </span>
           </h1>
 
