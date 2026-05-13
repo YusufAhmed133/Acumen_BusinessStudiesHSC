@@ -1,7 +1,5 @@
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
 
-const HERO_GRADIENT_TEXT = "Taught by Band 6 Graduates";
-const HERO_GRADIENT = "linear-gradient(135deg, #F5B8BC 0%, #EDA9AD 60%, #E89498 100%)";
 
 export function Hero() {
   return (
@@ -44,16 +42,10 @@ export function Hero() {
             }}
           >
             HSC Business Studies Tutoring in Sydney
-            <span style={{
-              display: "block",
-              fontSize: "0.72em",
-              background: HERO_GRADIENT,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              marginTop: "0.28em",
-            }}>
-              {HERO_GRADIENT_TEXT}
+            <span style={{ display: "block", fontSize: "0.72em", marginTop: "0.28em" }}>
+              <span style={{ color: "#C8920A" }}>Taught by </span>
+              <span style={{ color: "#D4606A" }}>Band 6 </span>
+              <span style={{ color: "#3D9E72" }}>Graduates</span>
             </span>
           </h1>
 
