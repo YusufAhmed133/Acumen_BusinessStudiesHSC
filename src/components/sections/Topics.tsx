@@ -5,7 +5,7 @@ const TOPICS = [
   { key: "operations",  label: "Operations",       num: "01", accent: "#1B6038", tint: "#DFF5E6" },
   { key: "marketing",   label: "Marketing",         num: "02", accent: "#9A6300", tint: "#FFF0C4" },
   { key: "finance",     label: "Finance",           num: "03", accent: "#1E4B99", tint: "#E3EEFF" },
-  { key: "human_resources", label: "Human Resources",   num: "04", accent: "#8B2929", tint: "#FFE3E3" },
+  { key: "human_resources", label: "Human Resources", num: "04", accent: "#8B2929", tint: "#FFE3E3" },
 ] as const;
 
 export function Topics() {
@@ -87,6 +87,7 @@ export function Topics() {
                     letterSpacing: "-0.02em",
                     color: t.accent,
                     margin: "0 0 24px",
+                    flex: 1,
                   }}
                 >
                   {t.label}
@@ -141,6 +142,13 @@ export function Topics() {
       </div>
 
       <style>{`
+        @media (max-width: 860px) {
+          .topics-grid { align-items: stretch; }
+          .topics-grid > .reveal { height: 100%; display: flex; flex-direction: column; }
+          .topics-grid > .reveal > div { flex: 1; padding: 20px 16px 18px !important; }
+          .topics-grid > .reveal > div h3 { font-size: 17px !important; margin-bottom: 14px !important; }
+          .topics-grid > .reveal > div a { padding: 7px 12px !important; font-size: 11.5px !important; }
+        }
         @media (max-width: 360px) {
           .topics-grid { grid-template-columns: 1fr !important; }
         }
