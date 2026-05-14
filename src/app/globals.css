@@ -92,28 +92,7 @@ button { font-family: inherit; }
   }
 }
 
-/* ── Hero background letter, pseudo-element excluded from LCP candidates ── */
-.hero-section::before {
-  content: "A";
-  position: absolute;
-  left: 38%;
-  top: 50%;
-  transform: translateY(-50%) rotateZ(-5deg);
-  font-size: clamp(280px, 32vw, 480px);
-  font-weight: 800;
-  line-height: 0.85;
-  letter-spacing: -0.06em;
-  background: linear-gradient(135deg, #C4DAFF 0%, #A9C8F3 60%, #89B8F0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 22px 46px rgba(10, 10, 10, 0.055));
-  opacity: 0.98;
-  user-select: none;
-  pointer-events: none;
-  z-index: 0;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-}
+
 
 /* ── Skip link ───────────────────────────────────────────── */
 .skip-link {
@@ -168,6 +147,32 @@ button { font-family: inherit; }
     padding-right: 20px !important;
   }
   #practice > div { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
+@media (max-width: 860px) {
+  .sticky-mobile-cta { display: block !important; }
+
+  #book-form { scroll-margin-top: 12px; }
+
+  .enquiry-form-shell {
+    padding: 20px 18px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+  }
+  .enquiry-form-shell input,
+  .enquiry-form-shell textarea,
+  .enquiry-form-shell select {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+  }
+  .enquiry-form-shell textarea {
+    min-height: 70px !important;
+  }
+  .enquiry-form-shell button[type="submit"] {
+    padding: 13px 16px !important;
+    font-size: 14px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
