@@ -182,10 +182,10 @@ export async function POST(request: NextRequest) {
     source: payload.source,
   }));
 
-  const ok = emailSent && leadId !== null;
+  const ok = emailSent || leadId !== null;
   if (!ok) {
     return NextResponse.json(
-      { error: "We couldn't save your details or send the email. Please email hello@acumenhsc.com.au" },
+      { error: "Something went wrong. Please call us on 0470 665 141 or email hello@acumenhsc.com.au" },
       { status: 503 }
     );
   }

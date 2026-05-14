@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { SECTION_ROUTE_MAP } from "@/lib/section-routes";
 
 const PACKS = [
   {
@@ -246,30 +244,11 @@ export function ResourcesTeaser() {
           ))}
         </div>
 
-        <Reveal delay={340}>
-          <div style={{ marginTop: 32 }}>
-            <Link
-              href={SECTION_ROUTE_MAP.enquire.href}
-              prefetch={false}
-              style={{
-                display: "inline-block",
-                padding: "13px 24px",
-                borderRadius: 8,
-                background: "#C9EFD3",
-                color: "#0A2E1A",
-                textDecoration: "none",
-                fontSize: 14,
-                fontWeight: 600,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Book a trial to discuss resources →
-            </Link>
-          </div>
-        </Reveal>
       </div>
 
       <style>{`
+        .packs-grid > * { height: 100%; }
+        .packs-grid > * > div { height: 100%; }
         @media (max-width: 860px) {
           .packs-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
           .pack-cover-wrap { display: block !important; }

@@ -162,7 +162,7 @@ function PriceCard({
       {/* CTA */}
       <div style={{ padding: "12px 20px" }}>
         <Link
-          href={SECTION_ROUTE_MAP.enquire.href}
+          href="#book-form"
           prefetch={false}
           style={{
             display: "block",

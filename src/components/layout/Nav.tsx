@@ -139,7 +139,7 @@ export function Nav() {
                   </li>
                 ))}
                 <li style={{ marginTop: 12 }}>
-                  <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch style={{ ...pill, display: "block", textAlign: "center" }}>
+                  <Link href="/#book-form" prefetch style={{ ...pill, display: "block", textAlign: "center" }}>
                     Book a free trial lesson →
                   </Link>
                 </li>
