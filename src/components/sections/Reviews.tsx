@@ -63,7 +63,7 @@ export function Reviews() {
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
-      <div style={{ padding: "48px 28px 0" }} className="reviews-header">
+      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "48px 28px 0" }} className="reviews-header">
         <h2 style={{ fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 44px)", lineHeight: 1.06, letterSpacing: "-0.04em", margin: 0, color: "#111111" }}>
           Reviews
         </h2>
