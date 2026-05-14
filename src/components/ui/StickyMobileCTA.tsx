@@ -4,22 +4,36 @@ import Link from "next/link";
 
 export function StickyMobileCTA() {
   const [pastHero, setPastHero] = useState(false);
+  const [atBook, setAtBook] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById("top");
-    if (!hero) return;
-    const obs = new IntersectionObserver(
+    const book = document.getElementById("book");
+
+    const heroObs = new IntersectionObserver(
       ([e]) => setPastHero(!e.isIntersecting),
       { threshold: 0.15 }
     );
-    obs.observe(hero);
-    return () => obs.disconnect();
+    const bookObs = new IntersectionObserver(
+      ([e]) => setAtBook(e.isIntersecting),
+      { threshold: 0.1 }
+    );
+
+    if (hero) heroObs.observe(hero);
+    if (book) bookObs.observe(book);
+
+    return () => {
+      heroObs.disconnect();
+      bookObs.disconnect();
+    };
   }, []);
+
+  const show = pastHero && !atBook;
 
   return (
     <div
       className="sticky-mobile-cta"
-      aria-hidden={!pastHero}
+      aria-hidden={!show}
       style={{
         display: "none",
         position: "fixed",
@@ -29,14 +43,14 @@ export function StickyMobileCTA() {
         zIndex: 90,
         padding: "10px 16px calc(10px + env(safe-area-inset-bottom))",
         background: "linear-gradient(to top, rgba(255,255,255,0.97) 60%, rgba(255,255,255,0))",
-        transform: pastHero ? "translateY(0)" : "translateY(110%)",
+        transform: show ? "translateY(0)" : "translateY(110%)",
         transition: "transform 300ms cubic-bezier(.2,.7,.2,1)",
-        pointerEvents: pastHero ? "auto" : "none",
+        pointerEvents: show ? "auto" : "none",
       }}
     >
       <Link
-        href="#enquire"
-        tabIndex={pastHero ? 0 : -1}
+        href="#book-form"
+        tabIndex={show ? 0 : -1}
         style={{
           display: "block",
           textAlign: "center",
