@@ -10,6 +10,8 @@ import { Reviews } from "@/components/sections/Reviews";
 import { ResourcesTeaser } from "@/components/sections/ResourcesTeaser";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { CanonicalizeSectionHash } from "@/components/ui/CanonicalizeSectionHash";
+import { EnquiryForm } from "@/components/sections/EnquiryForm";
+import { StickyMobileCTA } from "@/components/ui/StickyMobileCTA";
 
 const PracticeDemo = dynamic(() => import("@/components/sections/PracticeDemo").then((m) => m.PracticeDemo));
 
@@ -133,6 +135,42 @@ export default function HomePage() {
       <Reviews />
       <ResourcesTeaser />
       <FaqSection />
+      <section
+        id="book"
+        className="mobile-book-section"
+        style={{
+          display: "none",
+          background: "#ffffff",
+          borderTop: "1px solid rgba(0,0,0,0.06)",
+          padding: "52px 20px 72px",
+        }}
+      >
+        <h2
+          style={{
+            fontWeight: 700,
+            fontSize: "clamp(24px, 6vw, 34px)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.04em",
+            margin: "0 0 24px",
+            color: "#111111",
+          }}
+        >
+          Book a free trial lesson
+        </h2>
+        <p className="book-subline" style={{ fontSize: 14, color: "#5C5C5C", margin: "0 0 28px", lineHeight: 1.5 }}>
+          No card required · First lesson free · Reply within 24 hours
+        </p>
+        <div id="book-form">
+          <EnquiryForm />
+        </div>
+      </section>
+      <StickyMobileCTA />
+      <style>{`
+        @media (max-width: 860px) {
+          .mobile-book-section { display: block !important; }
+          .book-subline { display: none !important; }
+        }
+      `}</style>
     </>
   );
 }
