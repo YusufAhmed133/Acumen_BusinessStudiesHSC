@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 export function StickyMobileCTA() {
   const [pastHero, setPastHero] = useState(false);
@@ -48,7 +47,7 @@ export function StickyMobileCTA() {
         pointerEvents: show ? "auto" : "none",
       }}
     >
-      <Link
+      <a
         href="#book-form"
         tabIndex={show ? 0 : -1}
         style={{
@@ -66,7 +65,7 @@ export function StickyMobileCTA() {
         }}
       >
         Book a free trial lesson →
-      </Link>
+      </a>
     </div>
   );
 }

@@ -139,7 +139,6 @@ export default function HomePage() {
         id="book"
         className="mobile-book-section"
         style={{
-          display: "none",
           background: "#ffffff",
           borderTop: "1px solid rgba(0,0,0,0.06)",
           padding: "52px 20px 72px",
@@ -163,8 +162,9 @@ export default function HomePage() {
       </section>
       <StickyMobileCTA />
       <style>{`
+        .mobile-book-section { display: none; }
         @media (max-width: 860px) {
-          .mobile-book-section { display: block !important; }
+          .mobile-book-section { display: block; }
         }
       `}</style>
     </>

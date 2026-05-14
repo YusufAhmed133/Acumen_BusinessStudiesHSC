@@ -161,9 +161,8 @@ function PriceCard({
 
       {/* CTA */}
       <div style={{ padding: "12px 20px" }}>
-        <Link
+        <a
           href="#book-form"
-          prefetch={false}
           style={{
             display: "block",
             textAlign: "center",
@@ -178,7 +177,7 @@ function PriceCard({
           }}
         >
           Book a free trial lesson →
-        </Link>
+        </a>
         <div
           style={{
             marginTop: 6,
