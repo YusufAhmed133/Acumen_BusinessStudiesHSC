@@ -173,8 +173,6 @@ button { font-family: inherit; }
 @media (max-width: 860px) {
   .sticky-mobile-cta { display: block !important; }
 
-  #book-form { scroll-margin-top: 12px; }
-
   .enquiry-form-shell {
     padding: 20px 18px !important;
     gap: 10px !important;

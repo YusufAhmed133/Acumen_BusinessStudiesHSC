@@ -47,26 +47,6 @@ export function Hero() {
               <span style={{ color: "#4DAA78" }}>Graduates</span>
             </span>
           </h1>
-
-          {/* mobile-only CTA — form lives at #book below FAQ */}
-          <div className="hero-mobile-cta-block" style={{ display: "none" }}>
-            <a
-              href="#book-form"
-              style={{
-                display: "inline-block",
-                padding: "15px 28px",
-                borderRadius: 999,
-                background: "#C9EFD3",
-                color: "#0A2E1A",
-                fontWeight: 700,
-                fontSize: 16,
-                letterSpacing: "-0.01em",
-                textDecoration: "none",
-              }}
-            >
-              Book a free trial lesson →
-            </a>
-          </div>
         </div>
 
         <div className="hero-form-col" id="enquire">
@@ -78,11 +58,9 @@ export function Hero() {
         @media (max-width: 860px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
-            padding: 56px 20px 52px !important;
-            gap: 0 !important;
+            padding: 44px 20px 52px !important;
+            gap: 32px !important;
           }
-          .hero-form-col { display: none !important; }
-          .hero-mobile-cta-block { display: block !important; }
           .hero-h1 { font-size: clamp(36px, 9.5vw, 52px) !important; line-height: 1.02 !important; }
         }
       `}</style>
