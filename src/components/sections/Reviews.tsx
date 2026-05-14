@@ -71,21 +71,21 @@ export function Reviews() {
               aria-hidden={i >= REVIEWS.length}
               style={{
                 flexShrink: 0,
-                width: "min(320px, calc(100vw - 56px))",
+                width: "min(260px, calc(100vw - 56px))",
                 boxSizing: "border-box",
-                padding: "28px 26px",
-                borderRadius: 16,
+                padding: "20px 18px",
+                borderRadius: 14,
                 background: "#F9F9F7",
                 border: "1px solid rgba(0,0,0,0.07)",
-                margin: "24px 0",
+                margin: "20px 0",
               }}
             >
               {STARS}
               <p
                 style={{
-                  margin: "12px 0 16px",
-                  fontSize: 14,
-                  lineHeight: 1.6,
+                  margin: "10px 0 12px",
+                  fontSize: 12.5,
+                  lineHeight: 1.55,
                   color: "#1A1A1A",
                   fontStyle: "italic",
                 }}
@@ -134,6 +134,9 @@ export function Reviews() {
         @media (prefers-reduced-motion: reduce) {
           .review-track { animation: none !important; }
           .review-track > :nth-child(n+7) { display: none !important; }
+        }
+        @media (max-width: 860px) {
+          #reviews { padding: 0 0 28px !important; }
         }
       `}</style>
     </section>
