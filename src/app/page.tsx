@@ -157,9 +157,6 @@ export default function HomePage() {
         >
           Book a free trial lesson
         </h2>
-        <p className="book-subline" style={{ fontSize: 14, color: "#5C5C5C", margin: "0 0 28px", lineHeight: 1.5 }}>
-          No card required · First lesson free · Reply within 24 hours
-        </p>
         <div id="book-form">
           <EnquiryForm />
         </div>
@@ -168,8 +165,7 @@ export default function HomePage() {
       <style>{`
         @media (max-width: 860px) {
           .mobile-book-section { display: block !important; }
-          .book-subline { display: none !important; }
-        }
+}
       `}</style>
     </>
   );
