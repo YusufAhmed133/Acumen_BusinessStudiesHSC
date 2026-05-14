@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -184,38 +185,13 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(){
-                var id = 'AW-18150257568';
-                function loadTag(){
-                  if (window.__acumenGtagLoaded) return;
-                  window.__acumenGtagLoaded = true;
-                  window.dataLayer = window.dataLayer || [];
-                  window.gtag = function(){ window.dataLayer.push(arguments); };
-                  var s = document.createElement('script');
-                  s.async = true;
-                  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
-                  document.head.appendChild(s);
-                  window.gtag('js', new Date());
-                  window.gtag('config', id);
-                }
-                function onInteraction(){
-                  ['mousedown','keydown','touchstart','scroll'].forEach(function(e){
-                    window.removeEventListener(e, onInteraction, {capture:true});
-                  });
-                  loadTag();
-                }
-                ['mousedown','keydown','touchstart','scroll'].forEach(function(e){
-                  window.addEventListener(e, onInteraction, {once:true, capture:true, passive:true});
-                });
-                // fallback: load after 4s even with no interaction
-                window.setTimeout(loadTag, 4000);
-              })();
-            `,
-          }}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18150257568"
         />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18150257568');`}
+        </Script>
       </body>
     </html>
   );
