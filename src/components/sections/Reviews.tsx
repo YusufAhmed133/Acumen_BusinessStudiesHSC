@@ -100,7 +100,7 @@ export function Reviews() {
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: "#3A3A3A", letterSpacing: "0.01em" }}>{r.name}</span>
-                {r.school && <span style={{ fontSize: 11, fontWeight: 500, color: "#8A8A8A", letterSpacing: "0.02em" }}>{r.school}</span>}
+                {r.school && <span style={{ fontSize: 11, fontWeight: 500, color: "#6B6B6B", letterSpacing: "0.02em" }}>{r.school}</span>}
               </div>
             </div>
           ))}

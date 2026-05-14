@@ -4,7 +4,7 @@ import { SECTION_ROUTES } from "@/lib/section-routes";
 const SITE_URL = "https://acumenhsc.com.au";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const contentUpdated = new Date("2026-05-10");
+  const contentUpdated = new Date("2026-05-14");
   return [
     { url: SITE_URL,                       lastModified: contentUpdated, changeFrequency: "weekly",  priority: 1   },
     ...SECTION_ROUTES.map((route) => ({

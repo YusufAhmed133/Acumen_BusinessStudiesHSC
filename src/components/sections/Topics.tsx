@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 const TOPICS = [
   { key: "operations",  label: "Operations",       num: "01", accent: "#1B6038", tint: "#DFF5E6" },
-  { key: "marketing",   label: "Marketing",         num: "02", accent: "#9A6300", tint: "#FFF0C4" },
+  { key: "marketing",   label: "Marketing",         num: "02", accent: "#885A00", tint: "#FFF0C4" },
   { key: "finance",     label: "Finance",           num: "03", accent: "#1E4B99", tint: "#E3EEFF" },
   { key: "human_resources", label: "Human Resources", num: "04", accent: "#8B2929", tint: "#FFE3E3" },
 ] as const;
@@ -68,6 +68,7 @@ export function Topics() {
                   }}
                 />
                 <div
+                  aria-hidden="true"
                   style={{
                     fontWeight: 700,
                     fontSize: "clamp(54px, 4.8vw, 78px)",
