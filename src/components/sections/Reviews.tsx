@@ -63,6 +63,14 @@ export function Reviews() {
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}
     >
+      <div style={{ padding: "48px 28px 0" }} className="reviews-header">
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#6B6B6B", marginBottom: 12 }}>
+          Reviews
+        </div>
+        <h2 style={{ fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 44px)", lineHeight: 1.06, letterSpacing: "-0.04em", margin: 0, color: "#111111" }}>
+          What parents and students say
+        </h2>
+      </div>
       <div className="review-ticker">
         <div className="review-track">
           {DOUBLED.map((r, i) => (
@@ -136,6 +144,7 @@ export function Reviews() {
           .review-track > :nth-child(n+7) { display: none !important; }
         }
         @media (max-width: 860px) {
+          .reviews-header { padding: 36px 20px 0 !important; }
           #reviews { padding: 0 0 28px !important; }
         }
       `}</style>
