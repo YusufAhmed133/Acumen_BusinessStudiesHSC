@@ -47,6 +47,7 @@ function PriceCard({
 }) {
   return (
     <div
+      className="price-card"
       style={{
         borderRadius: 18,
         border: "1.5px solid rgba(0,0,0,0.1)",
@@ -126,6 +127,7 @@ function PriceCard({
             Term option
           </div>
           <span
+            className="price-save-badge"
             style={{
               fontSize: 10,
               fontWeight: 700,
@@ -206,6 +208,7 @@ export function Pricing() {
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 28px" }}>
         <Reveal>
           <h2
+            className="pricing-h2"
             style={{
               fontWeight: 700,
               fontSize: "clamp(32px, 3.8vw, 56px)",
@@ -292,8 +295,26 @@ export function Pricing() {
           .pricing-cards { grid-template-columns: 1fr !important; }
           .inclusions-grid { grid-template-columns: 1fr 1fr !important; }
         }
+        @media (max-width: 860px) {
+          .pricing-h2 { font-size: clamp(28px, 8vw, 42px) !important; margin-bottom: 28px !important; }
+          .pricing-cards { gap: 14px !important; }
+          .price-card { border-radius: 14px !important; }
+          .price-card > div:nth-child(1) { padding: 7px 16px !important; }
+          .price-card > div:nth-child(2) { padding: 14px 16px 12px !important; }
+          .price-card > div:nth-child(3) { padding: 10px 16px 12px !important; }
+          .price-card > div:nth-child(4) { padding: 10px 16px 12px !important; }
+          .price-save-badge { font-size: 9px !important; padding: 3px 6px !important; }
+          .inclusions-grid { grid-template-columns: 1fr 1fr !important; gap: 0 20px !important; }
+          .inclusions-grid > div { padding-top: 16px !important; }
+        }
         @media (max-width: 560px) {
           .inclusions-grid { grid-template-columns: 1fr !important; }
+          .inclusions-grid > div { padding-top: 14px !important; }
+          .inclusions-grid p { font-size: 12px !important; }
+        }
+        @media (max-width: 480px) {
+          .inclusions-grid { grid-template-columns: 1fr !important; }
+          .inclusions-grid > div { padding-top: 14px !important; }
         }
       `}</style>
     </section>

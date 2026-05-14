@@ -19,6 +19,7 @@ const ITEMS = [...SCHOOLS, ...SCHOOLS];
 export function Trust() {
   return (
     <section
+      className="trust-section"
       style={{
         background: "#ffffff",
         padding: "32px 0",
@@ -65,6 +66,7 @@ export function Trust() {
           {ITEMS.map((s, i) => (
             <span
               key={`${i}-${s.name}`}
+              className="trust-ticker-item"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -73,6 +75,7 @@ export function Trust() {
               }}
             >
               <span
+                className="trust-logo"
                 style={{
                   position: "relative",
                   display: "inline-block",
@@ -88,10 +91,11 @@ export function Trust() {
                   height={36}
                   loading="lazy"
                   decoding="async"
+                  className="trust-logo-img"
                   style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />
               </span>
-              <span style={{
+              <span className="trust-school-name" style={{
                 fontSize: 13,
                 fontWeight: 500,
                 color: "#1A1A1A",
@@ -104,6 +108,15 @@ export function Trust() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 860px) {
+          .trust-section { padding: 20px 0 !important; }
+          .trust-ticker-item { padding: 0 16px !important; }
+          .trust-logo { width: 38px !important; height: 24px !important; flex: 0 0 38px !important; }
+          .trust-logo-img { width: 38px !important; height: 24px !important; }
+          .trust-school-name { font-size: 11px !important; }
+        }
+      `}</style>
     </section>
   );
 }

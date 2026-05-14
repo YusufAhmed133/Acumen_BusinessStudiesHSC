@@ -170,9 +170,14 @@ export function PracticeDemo() {
     >
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 28px", position: "relative" }}>
         <Reveal>
-          <h2 style={{ fontWeight: 700, fontSize: "clamp(32px, 3.8vw, 56px)", lineHeight: 1.05, letterSpacing: "-0.04em", margin: "0 0 48px", color: "#ffffff" }}>
-            Practice
-          </h2>
+          <div className="practice-h2-wrap">
+            <h2 style={{ fontWeight: 700, fontSize: "clamp(32px, 3.8vw, 56px)", lineHeight: 1.05, letterSpacing: "-0.04em", margin: "0 0 48px", color: "#ffffff" }}>
+              Practice
+            </h2>
+            <p className="practice-subtitle-mobile" style={{ display: "none", fontSize: 15, color: "rgba(255,255,255,0.6)", margin: "0 0 36px", lineHeight: 1.5 }}>
+              349 real HSC questions, indexed by syllabus dot point.
+            </p>
+          </div>
         </Reveal>
 
         <Reveal>
@@ -333,6 +338,7 @@ export function PracticeDemo() {
             <Link
               href="/practice"
               prefetch={false}
+              className="practice-see-all-cta"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 padding: "13px 26px", borderRadius: 8,
@@ -353,12 +359,16 @@ export function PracticeDemo() {
           .practice-video {
             aspect-ratio: auto !important;
             min-height: 380px !important;
+            border-radius: 6px !important;
           }
           .demo-cols { grid-template-columns: 1fr !important; }
           .practice-marker-margin { display: none !important; }
+          .practice-h2-wrap h2 { margin-bottom: 12px !important; }
+          .practice-subtitle-mobile { display: block !important; }
+          .practice-see-all-cta { display: block !important; text-align: center !important; width: 100% !important; box-sizing: border-box !important; }
         }
         @media (max-width: 520px) {
-          .practice-video { min-height: 360px !important; }
+          .practice-video { min-height: 340px !important; }
           .practice-screen > div:nth-child(2) {
             padding-left: 12px !important;
             padding-right: 12px !important;

@@ -96,6 +96,10 @@ export function FaqSection() {
           color: #1F6B40 !important;
           transform: rotate(45deg);
         }
+        @media (max-width: 860px) {
+          .faq-item summary span:first-child { font-size: 16px !important; }
+          .faq-item summary { padding: 18px 0 18px 16px !important; }
+        }
       `}</style>
     </section>
   );
