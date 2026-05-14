@@ -46,7 +46,7 @@ export function Nav() {
         justifyContent: "space-between",
         gap: 24,
       }}>
-        <Link href="/" prefetch={false} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+        <Link href="/" prefetch style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
           <MarkBug size={30} />
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <span style={{
@@ -73,7 +73,7 @@ export function Nav() {
 
         <nav style={{ display: "flex", gap: 28, alignItems: "center" }} className="hidden-mobile" aria-label="Main navigation">
           {LINKS.map(({ href, label }) => (
-            <Link key={label} href={href} prefetch={false} style={{
+            <Link key={label} href={href} prefetch style={{
               fontSize: 14,
               fontWeight: 500,
               color: "#1A1A1A",
@@ -86,7 +86,7 @@ export function Nav() {
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch={false} style={pill} className="hidden-mobile">
+          <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch style={pill} className="hidden-mobile">
             Book a free trial lesson →
           </Link>
 
@@ -125,7 +125,7 @@ export function Nav() {
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 2 }}>
                 {LINKS.map(({ href, label }) => (
                   <li key={label}>
-                    <Link href={href} prefetch={false} style={{
+                    <Link href={href} prefetch style={{
                       display: "block",
                       padding: "11px 4px",
                       fontSize: 16,
@@ -139,7 +139,7 @@ export function Nav() {
                   </li>
                 ))}
                 <li style={{ marginTop: 12 }}>
-                  <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch={false} style={{ ...pill, display: "block", textAlign: "center" }}>
+                  <Link href={SECTION_ROUTE_MAP.enquire.href} prefetch style={{ ...pill, display: "block", textAlign: "center" }}>
                     Book a free trial lesson →
                   </Link>
                 </li>

@@ -15,7 +15,7 @@ export function Footer() {
         gap: 32,
         flexWrap: "wrap",
       }}>
-        <Link href="/" prefetch={false} style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
+        <Link href="/" prefetch style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
           <MarkBug size={44} />
           <div>
             <span style={{
@@ -59,7 +59,7 @@ export function Footer() {
             SECTION_ROUTE_MAP.resources,
             SECTION_ROUTE_MAP.faq,
           ].map(({ href, label }) => (
-            <Link key={href + label} href={href} prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>
+            <Link key={href + label} href={href} prefetch style={{ color: "inherit", textDecoration: "none" }}>
               {label}
             </Link>
           ))}
@@ -82,8 +82,8 @@ export function Footer() {
       }}>
         <span>© Acumen HSC, Sydney NSW</span>
         <span style={{ display: "flex", gap: 20 }}>
-          <Link href="/privacy" prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
-          <Link href="/terms" prefetch={false} style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
+          <Link href="/privacy" prefetch style={{ color: "inherit", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" prefetch style={{ color: "inherit", textDecoration: "none" }}>Terms</Link>
           <a href="tel:0470665141" style={{ color: "inherit", textDecoration: "none" }}>0470 665 141</a>
         </span>
       </div>
