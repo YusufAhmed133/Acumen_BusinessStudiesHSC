@@ -64,11 +64,8 @@ export function Reviews() {
       }}
     >
       <div style={{ padding: "48px 28px 0" }} className="reviews-header">
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#6B6B6B", marginBottom: 12 }}>
-          Reviews
-        </div>
         <h2 style={{ fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 44px)", lineHeight: 1.06, letterSpacing: "-0.04em", margin: 0, color: "#111111" }}>
-          What parents and students say
+          Reviews
         </h2>
       </div>
       <div className="review-ticker">
