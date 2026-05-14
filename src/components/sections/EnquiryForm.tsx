@@ -175,13 +175,6 @@ export function EnquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} className="enquiry-form-shell" style={formShell}>
-      <div style={{
-        fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
-        textTransform: "uppercase", color: "#5C5C5C",
-      }}>
-        Free trial enquiry, 1 business day reply
-      </div>
-
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
         <Field label="Parent name">
           <input required value={f.parent} onChange={(e) => set("parent", e.target.value)} style={inp} />
